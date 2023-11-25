@@ -1,0 +1,783 @@
+<div *ngIf="predio">
+
+  <div class="generalrow" style="margin-top: 25px">
+    <div class="col-1">
+      <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+        <div style="display: table-cell; vertical-align: middle">
+          <div style="text-align: center" class="predio_title">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+
+      <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+        <div style="display: table-cell; vertical-align: middle">
+          <div class="titlechapterAp">Predio {{predio.property_name}}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="contenido" class="contents-app" style="padding: 0px 50px 0px 50px">
+
+    <div class="dropdown-divider"></div>
+
+    <div class="generalrow">
+      <div class="col-sm">
+        <div style="text-align: center; font-size: 18px; font-weight: bold; padding: 50px">Detalles del Predio
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 20px">
+      <div class="col-md col-sm-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 15px">Estado del Predio</div>
+      </div>
+      <div class="col-md col-sm-12">
+        <div
+          style="text-align: center; font-size: 18px; font-weight: bold; padding: 15px; background-color: #0c5593; border-radius: 15px; color: white">
+          {{predio.sub_type_name}}
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="generalrow" style="margin-bottom: 10px"
+      *ngIf="isAdministrativo && !predio.potential_assigned || isJuridico && !predio.potential_assigned">
+      <div class="col-md col-sm">
+        <label for="btnSelect">Seleccionar Predio</label>
+        <button id="btnSelect" type="button" class="btn btn-success" style="width: 100%; cursor: pointer;"
+          (click)="selectPredio()">
+          Tomar Predio
+        </button>
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px">
+      <div class="col-sm">
+        <label for="nombrePredio">Nombre del Predio</label>
+        <input type="text" class="form-control simpleinput" id="nombrePredio" placeholder="Nombre del Predio"
+          name="nombrePredio" [(ngModel)]="predio.property_name" >
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px">
+      <div class="col-sm">
+        <label for="nombrePredio">Fecha firma del acuerdo</label>
+        <input type="text" class="form-control simpleinput" id="nombrePredio" name="nombrePredio"
+          [(ngModel)]="predio.sign" >
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px">
+      <div class="col-sm">
+        <label for="nombrePredio">Embalse</label>
+        <input type="text" class="form-control simpleinput" id="nombrePredio" name="nombrePredio"
+          [(ngModel)]="predio.embalse" >
+      </div>
+
+      <div class="col-sm">
+        <label for="nombrePredio">Municipio</label>
+        <input type="text" class="form-control simpleinput" id="nombrePredio" name="nombrePredio"
+          [(ngModel)]="predio.municipality" >
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="col-sm">
+        <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 50px">Coordenadas en grados
+          decimales
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px">
+      <div class="col-sm">
+        <label for="nombrePredio">Latitud</label>
+        <input type="number" class="form-control simpleinput" id="latitud" placeholder="Nombre del Predio"
+          name="nombrePredio" [(ngModel)]="predio.lat" [value]="predio.lat">
+      </div>
+
+      <div class="col-sm">
+        <label for="nombrePredio">Longitud</label>
+        <input type="number" class="form-control simpleinput" id="longitud" placeholder="Nombre del Predio"
+          name="nombrePredio" [(ngModel)]="predio.lng" [value]="predio.lng" >
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 25px" *ngIf="isAdministrativo">
+      <div class="col-sm">
+        <button type="button" class="btn btn-primary" style="width: 100%; cursor: pointer;"
+          (click)="getPredioDmsCoordinates()">
+          Convertir a coordenadas en grados, minutos y segundos
+        </button>
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="col-sm">
+        <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 50px">Coordenadas en grados, minutos
+          y segundos
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px" *ngIf="predio.degrees">
+      <div class="col-sm">
+        <label for="nombrePredio">Grados N</label>
+        <input type="number" class="form-control simpleinput" id="hours-n" placeholder="Nombre del Predio"
+          name="nombrePredio" [(ngModel)]="predio.degrees.north.d" [value]="predio.degrees.north.d"
+          >
+      </div>
+
+      <div class="col-sm">
+        <label for="nombrePredio">Minutos N</label>
+        <input type="number" class="form-control simpleinput" id="minutes-n" placeholder="Nombre del Predio"
+          name="nombrePredio" [(ngModel)]="predio.degrees.north.m" [value]="predio.degrees.north.m"
+          >
+      </div>
+
+      <div class="col-sm">
+        <label for="nombrePredio">Segundos N</label>
+        <input type="number" class="form-control simpleinput" id="seconds-n" placeholder="Nombre del Predio"
+          name="nombrePredio" [(ngModel)]="predio.degrees.north.s" [value]="predio.degrees.north.s"
+          >
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px" *ngIf="predio.degrees">
+      <div class="col-sm">
+        <label for="nombrePredio">Grados O</label>
+        <input type="number" class="form-control simpleinput" id="hours-o" placeholder="Nombre del Predio"
+          name="nombrePredio" [(ngModel)]="predio.degrees.west.d" [value]="predio.degrees.west.d"
+          >
+      </div>
+
+      <div class="col-sm">
+        <label for="nombrePredio">Minutos O</label>
+        <input type="number" class="form-control simpleinput" id="minutes-o" placeholder="Nombre del Predio"
+          name="nombrePredio" [(ngModel)]="predio.degrees.west.m" [value]="predio.degrees.west.m"
+          >
+      </div>
+
+      <div class="col-sm">
+        <label for="nombrePredio">Segundos O</label>
+        <input type="number" class="form-control simpleinput" id="seconds-o" placeholder="Nombre del Predio"
+          name="nombrePredio" [(ngModel)]="predio.degrees.west.s" [value]="predio.degrees.west.s"
+          >
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 25px" *ngIf="isAdministrativo">
+      <div class="col-sm">
+        <button type="button" class="btn btn-primary" style="width: 100%; cursor: pointer;"
+          (click)="getPredioDDCoordinates()">
+          Convertir a coordenadas en grados decimales
+        </button>
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px" *ngIf="isAdministrativo">
+      <div class="col-sm">
+        <button type="button" class="btn btn-success" style="width: 100%; cursor: pointer;"
+          (click)="uploadCoordenadas()">
+          Actualizar Coordenadas
+        </button>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="generalrow" *ngIf="mapError" style="margin-bottom: 10px">
+      <div class="col-sm">
+        <div style="text-align: center; border: dashed 2px #ffb6c0; padding: 20px; border-radius: 20px"> Ha ocurrido un
+          error al inicializar el mapa o no permitida la geolocalización.
+          Por favor verifique, realice los cambios pertinentes e intente nuevamente.
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow" *ngIf="!mapError" style="margin-bottom: 10px">
+      <div class="col-sm">
+        <label for="map">Con el cursor selecciona sobre la dirección del predio</label>
+        <div id="map" class="mapcontainer"></div>
+      </div>
+    </div>
+
+
+    <div
+      *ngIf="isAdministrativo && predio.potential_assigned || isJuridico && predio.potential_assigned || isCoordinador">
+
+      <div class="dropdown-divider"></div>
+
+      <div class="generalrow">
+        <div class="generalrow">
+          <div class="col-sm">
+            <div class="header-module">
+              <h3 class="title-module">Comentarios</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="comments-container" *ngFor="let comment of predio.comments">
+          <div class="generalrow">
+            <div class="user-comment col-12 col-md-5 col-lg-4 col-xl-3"> Usuario: {{comment.user_name}}</div>
+            <div class="date-comment col-12 col-md-5 col-lg-4 col-xl-3"> Fecha: {{getDateWithHour(comment.created_at)}}
+            </div>
+            <div class="commentstext col-12">
+              <div>{{comment.description}}</div>
+            </div>
+          </div>
+
+          <div class="dropdown-divider"></div>
+
+          <div class="generalrow">
+
+          </div>
+
+        </div>
+
+        <div class="generalrow">
+
+          <div class="col-sm">
+            <textarea class="form-control simpleinput" rows="3" name="task_comments"
+              placeholder="Agrega algún comentario a la tarea" [(ngModel)]="comentario"></textarea>
+          </div>
+
+        </div>
+
+        <div class="generalrow">
+
+          <div class="col-sm">
+            <button class="send" (click)="insertComment(); $event.stopPropagation();">Enviar</button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+      <ng-container>
+
+        <div class="generalrow">
+          <div class="col-sm">
+            <div style="text-align: center; font-size: 18px; font-weight: bold; padding: 50px">Documentos cargados del
+              predio
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="predio.load_documents" style="margin-bottom: 25px">
+
+
+          <div class="generalrow" style="margin-bottom: 25px">
+            <div class="col-sm">
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-end">
+                  Carta de Intención
+                  <div class="badge">
+
+                    <span *ngIf="predio.load_documents.letter.state" class="badge-success badge-pill"><i
+                        class="fa fa-check" aria-hidden="true"></i></span>
+                    <!-- <span *ngIf="!predio.load_documents.letter.state" class="badge-danger badge-pill"><i
+                        class="fa fa-ban" aria-hidden="true"></i></span> -->
+
+                    <!-- <span *ngIf="predio.load_documents.letter.state"
+                      routerLink="../../../app/ver-carta-intencion/{{predio.load_documents.letter.info.potential_property_id}}"
+                      class="badge-primary badge-pill" style="cursor: pointer"><i class="fa fa-eye"
+                        aria-hidden="true"></i> Ver </span> -->
+
+                    <span
+                      routerLink="../../../app/ver-carta-intencion/{{predio.load_documents.letter.info.potential_property_id}}"
+                      class="badge-primary badge-pill" style="cursor: pointer"><i class="fa fa-eye"
+                        aria-hidden="true"></i> Ver </span>
+                  </div>
+
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Encuesta
+                  <div class="badge">
+
+                    <span *ngIf="predio.load_documents.poll.state" class="badge-success badge-pill"><i
+                        class="fa fa-check" aria-hidden="true"></i></span>
+                    <span *ngIf="!predio.load_documents.poll.state" class="badge-danger badge-pill"><i class="fa fa-ban"
+                        aria-hidden="true"></i></span>
+
+                    <span *ngIf="predio.load_documents.poll.state"
+                      routerLink="../../../app/survey/{{predio.load_documents.poll.info.potential_property_id}}"
+                      class="badge-primary badge-pill" style="cursor: pointer"><i class="fa fa-eye"
+                        aria-hidden="true"></i> Ver </span>
+                  </div>
+
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Documentos de tenencia del predio
+                  <span *ngIf="predio.load_documents.ct.state" class="badge badge-success badge-pill"><i
+                      class="fa fa-check" aria-hidden="true"></i></span>
+                  <span *ngIf="!predio.load_documents.ct.state" class="badge badge-danger badge-pill"><i
+                      class="fa fa-ban" aria-hidden="true"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Documentos de identidad
+                  <span *ngIf="predio.load_documents.cc.state" class="badge badge-success badge-pill"><i
+                      class="fa fa-check" aria-hidden="true"></i></span>
+                  <span *ngIf="!predio.load_documents.cc.state" class="badge badge-danger badge-pill"><i
+                      class="fa fa-ban" aria-hidden="true"></i></span>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+
+        </ng-container>
+
+      </ng-container>
+
+      <ng-container *ngIf="listDocumentsPredio">
+
+        <div class="generalrow"
+          *ngIf="listDocumentsPredio.cc && listDocumentsPredio.cc.length > 0 || listDocumentsPredio.ct && listDocumentsPredio.ct.length > 0">
+          <div class="col-sm">
+            <div style="text-align: center; font-size: 18px; font-weight: bold; padding: 50px">Listado de Documentos
+            </div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="listDocumentsPredio.cc && listDocumentsPredio.cc.length > 0">
+
+
+          <div class="generalrow" *ngFor="let cedulas of listDocumentsPredio.cc"
+            style="padding: .75rem 1.25rem; background-color: #fff; border: 1px solid rgba(0,0,0,.125);">
+            <div class="col-md col-sm">
+              Documento de identidad
+              <span class="generalrow"
+                style="font-weight: bold; padding-left: 14px;">{{cedulas.name.substr(cedulas.name.indexOf('_') +
+                1)}}</span>
+            </div>
+            <div class="col-md-2 col-sm-12" style="text-align: center">
+              <button type="button" class="btn btn-success" style="cursor: pointer;">
+                <i class="far fa-calendar-alt"></i> {{cedulas.created_at}}
+              </button>
+            </div>
+            <div class="col-md-1 col-sm-12" style="text-align: center">
+
+              <a href="{{(cedulas.type === 'doc') ? URL_BASE_FILES : URL_BASE_IMAGES}}{{cedulas.name}}" target="_blank"
+                style="background-color: transparent; width: auto;" download>
+
+                <button onclick="" type="button" class="btn btn-primary" style="cursor: pointer">
+                  <i class="fas fa-eye"></i>
+                  Ver
+                </button>
+
+              </a>
+
+            </div>
+            <div class="col-md-1 col-sm-12" style="text-align: center" *ngIf="!isJuridico">
+              <button type="button" class="btn btn-danger" style="cursor: pointer;"
+                (click)="eliminarDoc(cedulas.id, cedulas.type)">
+                <i class="far fa-trash-alt"></i> Eliminar
+              </button>
+            </div>
+          </div>
+
+        </ng-container>
+
+        <ng-container *ngIf="listDocumentsPredio.ct && listDocumentsPredio.ct.length > 0">
+
+
+          <div class="generalrow" *ngFor="let certificado of listDocumentsPredio.ct"
+            style="padding: .75rem 1.25rem; background-color: #fff; border: 1px solid rgba(0,0,0,.125);">
+            <div class="col-md col-sm">
+              Documento de tenencia del predio
+              <span class="generalrow"
+                style="font-weight: bold; padding-left: 14px;">{{certificado.name.substr(certificado.name.indexOf('_') +
+                1)}}</span>
+            </div>
+            <div class="col-md-2 col-sm-12" style="text-align: center">
+              <button type="button" class="btn btn-success" style="cursor: pointer;">
+                <i class="far fa-calendar-alt"></i> {{certificado.created_at}}
+              </button>
+            </div>
+            <div class="col-md-1 col-sm-12" style="text-align: center">
+
+              <a href="{{(certificado.type === 'doc') ? URL_BASE_FILES : URL_BASE_IMAGES}}{{certificado.name}}"
+                target="_blank" style="background-color: transparent; width: auto;" download>
+
+                <button onclick="" type="button" class="btn btn-primary" style="cursor: pointer">
+                  <i class="fas fa-eye"></i>
+                  Ver
+                </button>
+
+              </a>
+
+            </div>
+            <div class="col-md-1 col-sm-12" style="text-align: center" *ngIf="!isJuridico">
+              <button type="button" class="btn btn-danger" style="cursor: pointer;"
+                (click)="eliminarDoc(certificado.id, certificado.type)">
+                <i class="far fa-trash-alt"></i> Eliminar
+              </button>
+            </div>
+          </div>
+
+        </ng-container>
+
+        <div style="margin-bottom: 25px"></div>
+
+      </ng-container>
+
+      <ng-container>
+        <!--CEDULA CIUDADANIA-->
+        <div style="background-color: #f1f1f1; padding: 25px; border-radius: 20px; margin-bottom: 25px">
+          <!-- 24 = Programación de Monitoreos y Mantenimientos -->
+          <div class="generalrow">
+            <div class="col-sm">
+              <div class="header-module">
+                <h3 class="title-module">Cargar documentos de identidad</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="generalrow">
+            <div class="col-sm">
+              <cuenca-drag-and-drop-predio [idPredio]="idPredio" [typeFile]="'cc'"
+                (notify)="messageUploadFile($event)"></cuenca-drag-and-drop-predio>
+            </div>
+          </div>
+
+        </div>
+
+      </ng-container>
+
+      <ng-container>
+        <!--CERTIFICADO TRADICION-->
+        <div style="background-color: #f1f1f1; padding: 25px; border-radius: 20px; margin-bottom: 25px">
+          <!-- 24 = Programación de Monitoreos y Mantenimientos -->
+          <div class="generalrow">
+            <div class="col-sm">
+              <div class="header-module">
+                <h3 class="title-module">Cargar documentos de tenencia del predio</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="generalrow">
+            <div class="col-sm">
+              <cuenca-drag-and-drop-predio [idPredio]="idPredio" [typeFile]="'ct'"
+                (notify)="messageUploadFile($event)"></cuenca-drag-and-drop-predio>
+            </div>
+          </div>
+
+        </div>
+
+      </ng-container>
+
+      <div class="generalrow">
+        <div class="col-sm">
+          <div class="header-module">
+            <h3 class="title-module">Datos de propiedad del predio</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <label for="nombrePredio">Nombre del propietario</label>
+          <input class="form-control simpleinput" id="property_owner" 
+            placeholder="Nombre del propietario" name="nombrePredio" [(ngModel)]="propertyOwnership.owner">
+        </div>
+
+        <div class="col-sm">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="male"
+              [(ngModel)]="propertyOwnership.gender"  checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Hombre
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="female"
+              [(ngModel)]="propertyOwnership.gender" >
+            <label class="form-check-label" for="exampleRadios2">
+              Mujer
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <label for="nombrePredio">Folio de matrícula(s) inmobiliaria(s) número</label>
+          <input class="form-control simpleinput" id="realEstateRegistrationNumber"
+            placeholder="Folio de matrícula(s) inmobiliaria(s) número" name="nombrePredio"
+            [(ngModel)]="propertyOwnership.realEstateRegistrationNumber" >
+        </div>
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <label for="nombrePredio">Escritura pública número</label>
+          <input class="form-control simpleinput" id="titleDeed" placeholder="Escritura pública número"
+            name="nombrePredio" [(ngModel)]="propertyOwnership.titleDeed.number"
+            >
+        </div>
+
+        <div class="col-sm">
+          <label for="nombrePredio">Día</label>
+          <input class="form-control simpleinput" id="day" placeholder="Día" name="nombrePredio"
+            [(ngModel)]="propertyOwnership.titleDeed.day" >
+        </div>
+
+        <div class="col-sm">
+          <label for="nombrePredio">Mes</label>
+          <input class="form-control simpleinput" id="month" placeholder="Mes" name="nombrePredio"
+            [(ngModel)]="propertyOwnership.titleDeed.month" >
+        </div>
+
+        <div class="col-sm">
+          <label for="nombrePredio">Año</label>
+          <input class="form-control simpleinput" id="year" placeholder="Año" name="nombrePredio"
+            [(ngModel)]="propertyOwnership.titleDeed.year" >
+        </div>
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <label for="nombrePredio">Notaría número</label>
+          <input class="form-control simpleinput" id="notary" placeholder="Notaría número" name="nombrePredio"
+            [(ngModel)]="propertyOwnership.notary.number" >
+        </div>
+
+        <div class="col-sm">
+          <label for="nombrePredio">Notaría de (lugar)</label>
+          <input class="form-control simpleinput" id="notaryCity" placeholder="Notaría de (lugar)" name="nombrePredio"
+            [(ngModel)]="propertyOwnership.notary.city" >
+        </div>
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <label for="nombrePredio">Superficie total del predio</label>
+          <input class="form-control simpleinput" id="propertyArea" placeholder="Superficie total del predio"
+            name="nombrePredio" [(ngModel)]="propertyOwnership.propertyArea"
+            >
+        </div>
+      </div>
+
+
+      <div class="generalrow" style="margin-bottom: 10px"
+        *ngIf="predio.check_state && isAdministrativo && (predio.sub_type == 2 || predio.sub_type == 5)">
+        <div class="col-sm">
+
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+            (click)="sendPredioStart()">
+            Enviar predio
+          </button>
+
+          <button *ngIf="predio.sub_type !== 5" type="button" class="btn btn-danger"
+            style="float: right; cursor: pointer; margin-right: 20px" (click)="backPredio()">
+            Regresar predio
+          </button>
+
+        </div>
+      </div>
+
+      <div class="plain-arrow">
+        <label for="receiver" class="subtitle-item">Enviar a</label>
+        <!-- <input class="form-control simpleinput" id="receiver" placeholder="Introduzca el correo electrónico"
+            name="selected_email" [(ngModel)]="recUserId" type="email"> -->
+        <select [(ngModel)]="recUserId" class="custom-select form-control gradblue" name="selected_email" id="receiver">
+          <option [value]="0" selected>Seleccione un Email</option>
+          <option *ngFor="let user of allusers" [ngValue]="user.id">{{user.email}}</option>
+        </select>
+      </div>
+      <div class="dropdown-divider"></div>
+
+      <!-- <div class="generalrow" style="margin-bottom: 10px"
+        *ngIf="predio.check_state && isCoordinador && (predio.sub_type == 1 || predio.sub_type == 7)">
+        <div class="col-sm">
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+            (click)="sendPredioStart()">
+            Enviar
+          </button>
+        </div>
+      </div> -->
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+            (click)="sendPredioStart()">
+            Enviar
+          </button>
+        </div>
+      </div>
+
+      <!-- <div class="generalrow" style="margin-bottom: 10px"
+        *ngIf="predio.check_state && isJuridico && (predio.sub_type == 3 || predio.sub_type == 6)">
+        <div class="col-sm">
+
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+            (click)="sendPredioEnd()">
+            Finalizar Registro de Predio
+          </button>
+
+          <button type="button" class="btn btn-danger" style="float: right; cursor: pointer; margin-right: 20px"
+            (click)="backPredio()">
+            Regresar
+          </button>
+
+        </div>
+      </div> -->
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+            (click)="sendPredioEnd()">
+            Finalizar Registro de Predio
+          </button>
+
+          <button type="button" class="btn btn-danger" style="float: right; cursor: pointer; margin-right: 20px"
+            (click)="backPredio()">
+            Regresar
+          </button>
+
+        </div>
+      </div>
+
+      <div class="generalrow">
+        <button type="button" class="btn btn-success" (click)="addOwner()">Agregar
+        </button>
+      </div>
+
+      <table class="table">
+        <thead class="items-table">
+          <tr>
+            <th scope="col">Datos de los propietarios</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of arrPropertyOwnership; let i = index">
+            <td colspan="2">
+              <div class="accordion" id="accordionExample">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" type="button" data-toggle="collapse"
+                        [attr.data-target]="'#collapseOne' + i" aria-expanded="false" aria-controls="collapseOne">
+                        {{data.owner}}
+                      </button>
+                    </h5>
+                  </div>
+
+                  <div [id]="'collapseOne' + i" class="collapse show" aria-labelledby="headingOne55"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                      <div class="generalrow" style="margin-bottom: 10px">
+                        <div class="col-sm">
+                          <label for="nombrePredio">Nombre del propietario</label>
+                          <input class="form-control simpleinput" id="property_owner"
+                            placeholder="Nombre del propietario" name="nombrePredio" 
+                            [(ngModel)]="data.owner">
+                        </div>
+
+                        <div class="col-sm">
+                          <input type="radio" value="male" name="gender" [(ngModel)]="data.gender" >
+                          Hombre
+                          <input type="radio" value="female" name="gender" [(ngModel)]="data.gender" >
+                          Mujer
+                        </div>
+                      </div>
+
+                      <div class="generalrow" style="margin-bottom: 10px">
+                        <div class="col-sm">
+                          <label for="nombrePredio">Folio de matrícula(s) inmobiliaria(s) número</label>
+                          <input class="form-control simpleinput" id="realEstateRegistrationNumber"
+                            placeholder="Folio de matrícula(s) inmobiliaria(s) número" name="nombrePredio"
+                            [(ngModel)]="data.realEstateRegistrationNumber" >
+                        </div>
+                      </div>
+
+                      <div class="generalrow" style="margin-bottom: 10px">
+                        <div class="col-sm">
+                          <label for="nombrePredio">Escritura pública número</label>
+                          <input class="form-control simpleinput" id="titleDeed" placeholder="Escritura pública número"
+                            name="nombrePredio" [(ngModel)]="data.titleDeed.number" >
+                        </div>
+
+                        <div class="col-sm">
+                          <label for="nombrePredio">Día</label>
+                          <input class="form-control simpleinput" id="day" placeholder="Día" name="nombrePredio"
+                            [(ngModel)]="data.titleDeed.day" >
+                        </div>
+
+                        <div class="col-sm">
+                          <label for="nombrePredio">Mes</label>
+                          <input class="form-control simpleinput" id="month" placeholder="Mes" name="nombrePredio"
+                            [(ngModel)]="data.titleDeed.month" >
+                        </div>
+
+                        <div class="col-sm">
+                          <label for="nombrePredio">Año</label>
+                          <input class="form-control simpleinput" id="year" placeholder="Año" name="nombrePredio"
+                            [(ngModel)]="data.titleDeed.year" >
+                        </div>
+                      </div>
+
+                      <div class="generalrow" style="margin-bottom: 10px">
+                        <div class="col-sm">
+                          <label for="nombrePredio">Notaría número</label>
+                          <input class="form-control simpleinput" id="notary" placeholder="Notaría número"
+                            name="nombrePredio" [(ngModel)]="data.notary.number" >
+                        </div>
+
+                        <div class="col-sm">
+                          <label for="nombrePredio">Notaría de (lugar)</label>
+                          <input class="form-control simpleinput" id="notaryCity" placeholder="Notaría de (lugar)"
+                            name="nombrePredio" [(ngModel)]="data.notary.city" >
+                        </div>
+                      </div>
+
+                      <div class="generalrow" style="margin-bottom: 10px">
+                        <div class="col-sm">
+                          <label for="nombrePredio">Superficie total del predio</label>
+                          <input class="form-control simpleinput" id="propertyArea"
+                            placeholder="Superficie total del predio" name="nombrePredio"
+                            [(ngModel)]="data.propertyArea" >
+                        </div>
+                      </div>
+
+                      <div class="dropdown-divider"></div>
+
+                      <div>
+                        <button type="button" class="btn btn-danger btn-lg btn-block" (click)="deleteOwner(i)">Eliminar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="generalrow" style="margin-bottom: 10px; margin-top: 15px;" *ngIf="isAdministrativo || isJuridico">
+        <div class="col-sm">
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+            (click)="savePropertyOwnership()">
+            Guardar datos de propiedad del predio
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,171 @@
+<div id="contenido" class="contents-app" style="padding: 0px 50px 0px 50px">
+  <div class="row">
+    <div class="col-sm">
+      <div style="text-align: center; font-size: 18px; font-weight: bold; padding: 50px">Editar Tarea {{task.title}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-12 col-md-6 col-lg-6 plain-arrow">
+      <label for="labelselect1" class="subtitle-item">Selecciona un Procedimiento</label>
+      <select [(ngModel)]="task.procedure" class="custom-select form-control gradblue" name="selected_project"
+              id="labelselect1" disabled>
+        <option *ngFor="let option of procedures" [ngValue]="option">{{option.name}}</option>
+      </select>
+    </div>
+
+  </div>
+
+  <!--<div class="row">
+
+    <div class="col-12 col-md-6 col-lg-6 plain-arrow">
+      <label for="labelselect1" class="subtitle-item">Selecciona una actividad</label>
+      <li *ngFor="let activity of activities">
+        <label class="container"><label for="{{activity.id}}">{{activity.name}}</label>
+          <input type="radio" id="{{activity.id}}" value="{{activity}}" name="activity" (click)="getTaskTypes(activity)" disabled>
+          <span class="checkmark"></span>
+        </label>
+      </li>
+    </div>
+
+  </div>-->
+
+  <div class="row" style="margin-bottom: 10px">
+
+    <div class="col-sm" style=" display: flex; align-items: center; align-items: center">
+      <label class="custom-control custom-checkbox" id="openTask" style="margin-top: 35px">
+        <input type="checkbox" class="custom-control-input" [(ngModel)]="task.open" name="isOpen" disabled>
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Es de tipo abierta?</span>
+      </label>
+    </div>
+
+  </div>
+
+  <div class="row" *ngIf="!task.open">
+    <div class="col-12 col-md-6 col-lg-6 plain-arrow">
+      <div *ngIf="taskTypes" class="plain-arrow">
+        <label for="labelselect2" class="subtitle-item">Selecciona Tipo de Tarea</label>
+        <select [(ngModel)]="task.taskType" class="custom-select form-control gradblue" name="selected_task_type"
+                id="labelselect2" disabled>
+          <option *ngFor="let option of taskTypes" [ngValue]="option">{{option.name}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="showExtraFields">
+
+    <div class="row" style="margin-bottom: 10px">
+
+      <div class="col-sm">
+        <label for="fInicio" class="subtitle-item">Fecha de Inicio</label>
+        <input [(ngModel)]="task.startdate" id="fInicio" aria-describedby="fInicio" class="form-control simpleinput"
+               type="date" name="task_starting_date">
+      </div>
+
+      <div class="col-sm" *ngIf="!task.option_date">
+        <label for="fFin">Fecha de entrega</label>
+        <input [(ngModel)]="task.deadline" id="fFin" class="form-control simpleinput" type="date" name="task_deadline">
+      </div>
+
+      <div class="col-sm" style=" display: flex; align-items: center; align-items: center">
+        <label class="custom-control custom-checkbox" id="noTiene" style="margin-top: 35px">
+          <input type="checkbox" [(ngModel)]="task.option_date" name="has_deadline" class="custom-control-input">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">No tiene fecha de finalización</span>
+        </label>
+      </div>
+
+
+    </div>
+
+    <div class="row" style="margin-bottom: 10px">
+
+      <div class="col-sm">
+        <label for="descrip">Descripción</label>
+        <textarea class="form-control simpleinput" [(ngModel)]="task.description" rows="3" name="task_description"
+                  id="descrip" placeholder="Ingresa la Descripción de la Tarea">Ingrese la descripcion</textarea>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row" style="margin-bottom: 10px"
+       *ngIf="showRoleAndUserSelector || task.sub_type.id + '' === '1' || task.sub_type.id + '' === '4'">
+
+    <div class="col-md-12 col-sm-12 plain-arrow">
+      <label for="rol" class="subtitle-item">Rol</label>
+      <select [(ngModel)]="task.role.id" class="custom-select form-control gradblue" name="selected_role"
+              (change)="getUsers()" id="rol">
+        <option *ngFor="let option of roles" [ngValue]="option.id">{{option.name}}</option>
+      </select>
+    </div>
+
+  </div>
+
+  <hr/>
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-sm-12 col-md-12">
+      <div *ngIf="users.length>0">
+
+        <div class="subtitle-item">Usuarios</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-sm-12 col-md-12">
+      <div *ngIf="users.length>0">
+
+        <div style="text-align: left; font-weight: bold; color: white; padding: 5px; border-radius: 10px;"
+             *ngFor="let usuario of users; let i = index" class="custom-select form-control gradblue">
+          <input type="checkbox" class="checkbox" [id]="'usuario' + usuario.id" [(ngModel)]="usersSelected[i]"
+                 (ngModelChange)="editUserArray(usersSelected[i], i, usuario.id)">
+          <label class="form-check-label" [for]="'usuario' + usuario.id">{{usuario.name}}</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" data-toggle="modal"
+              data-target="#cModal">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="cModal" tabindex="-1" role="dialog" aria-labelledby="exLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exLabel">Está Seguro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          En caso de modificar el listado de los usuarios, la tarea de aquellos usuarios sacados de la lista de
+          incluidos será removida del sistema.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="updateTask()">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

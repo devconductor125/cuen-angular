@@ -1,0 +1,57 @@
+<div class="generalrow">
+  <div class="container-grid">
+    <a *ngFor="let image of point.images">
+      <figure>
+        <img [src]="URL_IMG + image.name" alt="" (click)="popUpImage(image)">
+      </figure>
+    </a>
+  </div>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="cn" style="width: 100%; height: 100%">
+      <div style="height: 100%; width: 100%">
+        <!-- Boton cerrar -->
+          <span class="close" (click)="closeModal()">&times;</span>
+
+          <!-- Imagen -->
+          <img class="modal-content" id="img01">
+
+          <!-- Caption -->
+          <div id="caption"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMENTARIOS -->
+
+  <div class="dropdown-divider"></div>
+
+
+  <div style="background-color: #f1f1f1; padding: 25px; border-radius: 20px">
+    <div class="generalrow">
+      <div class="col-sm">
+        <div class="header-module">
+          <h3 class="title-module">Comentarios</h3>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let comment of comments;" style="background-color: #FFF; margin: 10px; padding: 10px">
+      <div class="generalrow" style="margin-left: 10px; margin-right: 10px; font-size: 12px">
+        <div class="col-sm"> Fecha: {{getDateWithHour(comment.created_at)}}</div>
+        <!--<div class="col-sm"> Usuario: {{comment.user_name}}</div>-->
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+      <div class="generalrow">
+        <div class="col-sm">
+          <div style="text-align: center; font-size: 14px; font-weight: bold;">{{comment.description}}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

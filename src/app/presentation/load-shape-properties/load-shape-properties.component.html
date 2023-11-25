@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-1">
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div style="text-align: center" class="upload_title">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm">
+
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div class="titlechapterAp"> Cargar Capa de Gestión Predial</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<a class="mainbtn darkblue create-new-procedure" routerLink="/app/predio-potencial" *ngIf="isCoordinador || isSeguimiento" style="margin-bottom: 20px">Crear Predio Potencial</a>
+
+<div class="contents-app">
+  <!--CONTRATISTAS-->
+
+  <div class="row" style="padding: 5px; background-color: #dee7eb; border-radius: 20px">
+
+    <div class="col-sm">
+      <cuenca-shape-uploader-properties #shapeFileUploader [componentId]="shapeFileUploader"
+                             (notify)='onFilesUploaded($event)'></cuenca-shape-uploader-properties>
+    </div>
+
+  </div>
+
+</div>

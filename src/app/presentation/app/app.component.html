@@ -1,0 +1,9 @@
+<router-outlet></router-outlet>
+
+<!--ALERTAS-->
+<div [className]="alertaClase" role="alert">
+  <strong>{{message.title}} </strong> {{message.msg}}.
+  <button type="button" class="close" (click)="dismissAlert()" style="outline: none; padding-left: 10px">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

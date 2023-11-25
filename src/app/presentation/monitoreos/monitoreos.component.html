@@ -1,0 +1,67 @@
+<div class="main-container">
+
+  <div class="generalrowrow">
+    <div class="col-12 col-md-4 col-lg-4 left">
+      <div>
+        <label for="type" class="label_encuesta">Tipo</label>
+        <select id="type" class="form-control" [(ngModel)]="monitoreo.type">
+          <option [value]="monitoreo.type">Seleccione</option>
+          <option *ngFor="let type of types_monitoreos" [ngValue]="type.id">{{type.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4 col-lg-4 left">
+      <div>
+        <label for="fInicio">Fecha de Inicio</label>
+        <input id="fInicio" class="form-control" type="date" name="mon_initial" [(ngModel)]="monitoreo.date_start">
+      </div>
+    </div>
+    <div class="col-12 col-md-4 col-lg-4 left">
+      <div>
+        <label for="fFinal">Fecha Final</label>
+        <input id="fFinal" class="form-control" type="date" name="mon_final" [(ngModel)]="monitoreo.date_deadline">
+      </div>
+    </div>
+  </div>
+
+  <div class="generalrow">
+    <div class="main-container">
+      <label for="comments">Comentario</label>
+      <textarea id="comments" class="form-control" type="date" name="comentarios" [(ngModel)]="monitoreo.comment" placeholder="Inserte un Comentario"></textarea>
+    </div>
+  </div>
+
+  <div class="generalrow">
+    <div class="main-container">
+      <button type="button" class="mainbtn plaingreenlight right margintop" style="cursor: pointer; " (click)="insertarMonitoreo()">Insertar</button>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow">
+    <div class="subtitle-item">Listado de Monitoreos Registrados</div>
+  </div>
+
+  <div *ngIf="monitoreos.length === 0">
+    <div class="generalrow">
+      <div class="fullsize mainbtn plainredlight left">No se han Registrado Monitoreos</div>
+    </div>
+  </div>
+
+
+  <div *ngIf="monitoreos.length > 0">
+    <div class="left col-12 col-md-4 col-lg-4"  *ngFor="let monitoreo of monitoreos; let i = index">
+      <div class="module-box-container contentpadding">
+        <div class="textmonitoring">Tipo: {{monitoreo.type_monitoring}}</div>
+        <div class="textmonitoring">Fecha de Inicio: {{monitoreo.date_start}}</div>
+        <div class="textmonitoring">Fecha Final: {{monitoreo.date_deadline}}</div>
+        <button type="button" class="mainbtn plainredlight right margintop" style="cursor: pointer;" (click)="removeItem(i, monitoreo.id)">Eliminar</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

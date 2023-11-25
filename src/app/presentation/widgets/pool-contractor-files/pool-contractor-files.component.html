@@ -1,0 +1,35 @@
+<div style="background-color: white; border: solid 2px whitesmoke; padding: 25px; border-radius: 20px">
+
+  <div class="generalrow" *ngIf="listTypeFile.length > 0">
+
+    <div class="col-sm-12 col-md-12">
+      <label for="tipoArchivo">Tipo de Archivo</label>
+      <!--[(ngModel)]="contractor.type_person"-->
+      <select [(ngModel)]="fileContractor.type_file" class="custom-select form-control gradblue" name="person_type"
+              id="tipoArchivo">
+        <option [value]="0">Seleccione</option>
+        <option *ngFor="let typeFile of listTypeFile" [value]="typeFile.id">{{typeFile.name}}</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm-12 col-md-12">
+      <input class="btn btn-success" #input type="file" (change)="onChange($event)" id="files" style="width:100%"/>
+    </div>
+
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px" *ngIf="fileList.length > 0">
+    <div class="col-sm">
+      <button type="button" class="btn btn-outline-primary" style="width: 100%; cursor: pointer;"
+              (click)="uploadFiles()">Insertar Documento
+      </button>
+    </div>
+  </div>
+
+  <div class="dropdown-divider" *ngIf="fileList.length > 0"></div>
+
+</div>

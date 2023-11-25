@@ -1,0 +1,110 @@
+<div>
+
+  <div class="title-section">
+    <div class="col-1 float-left">
+      <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+        <div style="display: table-cell; vertical-align: middle">
+          <div style="text-align: center" class="task_title">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5 float-left">
+
+      <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+        <div style="display: table-cell; vertical-align: middle">
+          <div class="titlechapterAp">Detalle de capital semilla</div>
+        </div>
+      </div>
+
+    </div>
+    <a class="mainbtn darkblue create-new-procedure"
+       data-toggle="modal"
+       data-target="#modalCreateAndEdit" (click)="setVarCreate()">Crear capital semilla</a>
+  </div>
+
+  <div class="contents-app">
+
+    <div class="taskprojcontainer">
+      <div class="title-taskmodule gradblue">Listado de detalles de capital semilla</div>
+      <table class="table tabletask table-hover">
+        <thead class="items-table">
+        <tr>
+          <th scope="col">Centro</th>
+          <th scope="col">%Participacion</th>
+          <th scope="col">NIT</th>
+          <th scope="col">Aportante</th>
+          <th scope="col">Fecha/h de Creación</th>
+          <th scope="col">Inicial USD</th>
+          <th scope="col">USD</th>
+          <th scope="col">Inicial Pesos</th>
+          <th scope="col">Pesos</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <ng-container *ngFor="let seedCapital of arrSeedCapital['data']">
+
+          <tr data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <th scope="col">{{seedCapital.codeCenter}}</th>
+            <th scope="col">{{seedCapital.percent | number}}%</th>
+            <th scope="col">{{seedCapital.nit}}</th>
+            <th scope="col">{{seedCapital.associated.name}}</th>
+            <th scope="col">{{seedCapital.created_at}}</th>
+            <th scope="col">{{seedCapital.valueUsdOrigin}}</th>
+            <th scope="col">{{seedCapital.valueUsd}}</th>
+            <th scope="col">{{seedCapital.valueCoOrigin}}</th>
+            <th scope="col">{{seedCapital.valueCo}}</th>
+            <th scope="col">
+
+              <button type="button"
+                      class="btn btn-info"
+                      style="cursor:pointer;"
+                      data-toggle="modal"
+                      data-target="#modalCreateAndEdit"
+                      aria-expanded="false"
+                      (click)="setVarEdit(seedCapital)"
+                      aria-controls="modalCreateAndEdit">
+                <i class="fas fa-info-circle" style="color: white"></i>
+              </button>
+
+            </th>
+          </tr>
+
+        </ng-container>
+        <tr *ngIf="arrSeedCapital['totalUsd']"
+            data-toggle="collapse"
+            href="#collapseExample"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample">
+          <th scope="col"></th>
+          <th scope="col">100%</th>
+          <th scope="col"></th>
+          <th scope="col">TOTAL CAPITAL SEMILLA</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col">{{arrSeedCapital['totalUsd'] | number}}</th>
+          <th scope="col"></th>
+          <th scope="col">{{arrSeedCapital['totalCo'] | number}}</th>
+          <th scope="col"></th>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<!--modal income-->
+<div>
+  <div class="modal fade" tabindex="-1" role="dialog" id="modalCreateAndEdit" aria-labelledby="modalDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <app-create-edit-seed-capital [modelSeddCapital]="objSeedCapital"
+                                    [bollCreate]="boolCreateSeedCapital"
+                                    (updateList)="getAllSeedCapital()"></app-create-edit-seed-capital>
+    </div>
+  </div>
+</div>

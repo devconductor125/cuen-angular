@@ -1,0 +1,50 @@
+<div class="title-section">
+  <div class="predio_title"></div>
+  <div class="titlechapterAp">Crear predio potencial</div>
+
+</div>
+
+
+<div class="generalrow">
+  <div class="row">
+    <div class="subtitle-item">Registrar un Predio Potencial</div>
+  </div>
+
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <label for="nombrePredio">Nombre del Predio</label>
+      <input type="text" class="form-control simpleinput" id="nombrePredio"  placeholder="Nombre del Predio" name="nombrePredio" [(ngModel)]="predio.name">
+    </div>
+
+    <div class="col-4">
+      <label for="psaPredio">PSA</label>
+      <br>
+      <input type="checkbox" id="psaPredio"  placeholder="Psa" name="psaPredio" [(ngModel)]="predio.psa">
+      <label for="psaPredio"> Pago por Servicios Ambientales</label>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" *ngIf="mapError" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <div style="text-align: center; border: dashed 2px #ffb6c0; padding: 20px; border-radius: 20px"> Ha ocurrido un error al inicializar el mapa o no permitida la geolocalización.
+        Por favor verifique, realice los cambios pertinentes e intente nuevamente.</div>
+    </div>
+  </div>
+
+  <div class="generalrow" *ngIf="!mapError" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <label for="map">Con el cursor selecciona sobre la dirección del predio</label>
+      <div id="map" class="mapcontainer"></div>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <button type="button" class="mainbtn plaingreenlight right margintop" style="cursor: pointer;" (click)="createP()">Guardar</button>
+    </div>
+  </div>
+
+</div>

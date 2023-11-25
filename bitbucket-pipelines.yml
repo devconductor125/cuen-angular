@@ -1,0 +1,13 @@
+pipelines:
+  branches:
+    development:
+      - step:
+          script:
+            - ssh root@167.99.60.160 ls -l /var/www
+            - sudo login cuencaverdefront
+            - 1jEGWLiQyprjfwV
+            - cd project/
+            - git pull
+            - ng build --prod --aot
+            - cd
+            - cp htaccess project/dist/.htaccess

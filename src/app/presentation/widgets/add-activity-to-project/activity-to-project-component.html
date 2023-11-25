@@ -1,0 +1,93 @@
+<div class="row subtitleComponent" style="border-radius: 10px; padding: 5px">
+
+  <div class="col-md-1 col-sm-12">
+    Proyecto<br>
+  </div>
+
+  <div class="col-md col-sm-12" style="text-align: left">
+    Nombre del Proyecto<br>
+  </div>
+
+</div>
+
+<ng-container *ngIf="listActivities.length>0">
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row subtitleComponent" style="border-radius: 10px; padding: 5px">
+
+    <div class="col-sm-7 col-sm-7">
+      Actividad<br>
+    </div>
+
+    <div class="col-md-3 col-sm-5" style="text-align: center">
+      Fecha<br>
+    </div>
+
+  </div>
+
+  <div class="row subtitleComponent"
+       *ngFor="let activity of listActivities"
+       style="background-color: #f6f6f6; border-radius: 10px; padding: 5px">
+
+    <div class="col-sm-7 col-sm-7">
+      <h4>{{activity.name}}</h4>
+    </div>
+
+    <div class="col-md-3 col-sm-5" style="text-align: center">
+      <div class="btn_style_ap blue-dark" style="cursor: default">{{activity.created_at}}</div>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+</ng-container>
+
+<ng-container *ngIf="listActivities.length===0">.
+  <div class="dropdown-divider"></div>
+
+  <div class="row subtitleComponent" style="background-color: #f6f6f6; border-radius: 10px; padding: 5px">
+
+    <div class="col-sm-12 col-md" style="text-align: center">
+      <h4 class="subtitle-item">No se han Registrado Actividades al Proyecto Seleccionado</h4>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+</ng-container>
+
+<div class="generalrow subtitleComponent">
+
+  <div class="col-12 col-sm-12 col-md-12" style="background-color: #f6f6f6; border-radius: 10px; padding: 5px">
+    <label for="selectRol">Seleccione el rol</label>
+    <select class="form-control"
+            [(ngModel)]="idRol"
+            id="selectRol">
+      <option [value]="0" selected>Seleccione un rol</option>
+      <option *ngFor="let rol of listRols"
+              [value]="rol.id">{{rol.name}}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-12" style="background-color: #f6f6f6; border-radius: 10px; padding: 5px">
+    <label for="labelselect0" class="subtitle-item">Agregue una nueva Actividad</label>
+    <input type="text"
+           id="labelselect0"
+           class="form-control"
+           [(ngModel)]="activity.name"
+           placeholder="Nombre del Proyecto"/>
+  </div>
+
+</div>
+
+<div class="generalrow subtitleComponent">
+
+  <div class="offset-md-10 col-md-2 col-sm-12">
+    <div class="btn btn-success" (click)="regActivity()">Registrar Actividad</div>
+  </div>
+
+</div>
+

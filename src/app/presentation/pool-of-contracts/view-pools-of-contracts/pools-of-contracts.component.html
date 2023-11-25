@@ -1,0 +1,121 @@
+<div class="title-section">
+  <div class="pool_title"></div>
+  <div class="titlechapterAp">Procesos contractuales</div>
+  <button class="mainbtn plainbluedark right"
+          (click)="viewFieldsDate()"
+          *ngIf="isCoordinador">Ver reporte de ejecución</button>
+  <a class="mainbtn plainbluedark createbtn right"
+     routerLink="/app/create-pools-of-contracts"
+     *ngIf="isCoordinador || isComunicaciones">Crear proceso contractual</a>
+</div>
+
+<div class="generalrow"
+     *ngIf="boolFilterExcel">
+  <div class="col">
+    <label for="exampleInputEmail1">Desde</label>
+    <input type="date"
+           class="form-control"
+           id="exampleInputEmail1"
+           aria-describedby="emailHelp"
+           [(ngModel)]="srtDateFrom"
+           placeholder="Enter email">
+  </div>
+  <div class="col">
+    <label for="exampleInputEmail1">Hasta</label>
+    <input type="date"
+           class="form-control"
+           id="dataTo"
+           aria-describedby="emailHelp"
+           [(ngModel)]="srtDateTo"
+           placeholder="Enter email">
+  </div>
+  <div class="col">
+    <button class="mainbtn plainbluedark createbtn right"
+            (click)="downloadExcel()">generar</button>
+  </div>
+</div>
+
+<div>
+  <div class="generalrow">
+    <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow">
+
+      <label for="labelselectFiltro" class="subtitle-item">Filtro por</label>
+      <select [(ngModel)]="selectedFilter"
+              class="custom-select form-control gradblue"
+              name="roles"
+              id="labelselectFiltro">
+        <option value="0">Seleccione un filtro</option>
+        <option value="1">Nombre</option>
+        <option value="2">Fecha de creación</option>
+      </select>
+
+    </div>
+  </div>
+
+  <div class="generalrow" *ngIf="selectedFilter != 0">
+    <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 1">
+      <label for="idName">Por nombre</label>
+      <input type="text"
+             class="form-control simpleinput"
+             id="idName"
+             aria-describedby="idCardNumber"
+             placeholder="nombre"
+             name="idName">
+    </div>
+    <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 2">
+      <label for="dateInit">Fecha inicio</label>
+      <input type="date"
+             class="form-control simpleinput"
+             id="dateInit"
+             aria-describedby="idCardNumber"
+             name="idName">
+
+      <label for="dateEnd">Fecha final</label>
+      <input type="date"
+             class="form-control simpleinput"
+             id="dateEnd"
+             aria-describedby="idCardNumber">
+    </div>
+  </div>
+
+  <div class="generalrow btnFiltro" *ngIf="selectedFilter != 0">
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-info">
+        Filtrar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!--BOLSAS DE CONTRATACIÓN-->
+<div class="generalrow">
+  <div class="subtitle-item">Procesos contractuales</div>
+
+  <div class="taskprojcontainer maintablecontainer">
+    <div class="title-taskmodule gradblue">Listado de procesos contractuales</div>
+
+    <table class="table">
+      <thead class="items-table">
+      <tr>
+        <th scope="col">Nombre de proceso</th>
+        <th scope="col">Fecha Creación</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr scope="row" *ngFor="let pool of pools">
+        <td >{{pool.name}}</td>
+        <td >{{ (pool.created_at != null) ? getDateWithoutHour(pool.created_at) : ''}}</td>
+        <td >
+          <a class="linebtn linebluelight right margintop marginbuttom" routerLink="/app/view-pools-of-contracts/{{pool.id}}">Ver</a>
+          <a class="mainbtn plainorange right marginbuttom"
+             routerLink="/app/edit-pools-of-contracts/{{pool.id}}" *ngIf="isCoordinador || isJuridico">Editar</a>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

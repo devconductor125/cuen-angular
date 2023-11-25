@@ -1,0 +1,97 @@
+<div class="card">
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col">
+
+        <label for="labelselectFiltro" class="subtitle-item">Programa</label>
+        <select [(ngModel)]="selectedProgram"
+                class="custom-select form-control gradblue"
+                name="roles"
+                id="labelselectFiltro">
+          <option value="0">Seleccione un programa</option>
+          <option value="1">A-CULTURA DEL AGUA</option>
+          <option value="2">B - GESTION INTEGRAL DEL RECURSO HIDRICO</option>
+        </select>
+
+      </div>
+    </div>
+
+    <div class="row" *ngIf="selectedProgram != 0">
+      <div class="col">
+        <label for="selectProject" class="subtitle-item">Proyecto</label>
+        <select [(ngModel)]="selectedProject"
+                class="custom-select form-control gradblue"
+                name="roles"
+                id="selectProject">
+          <option value="0">Seleccione un proyecto</option>
+          <option value="1">A-Planeación para fortalecer la gobernanza del Agua</option>
+          <option value="2">B - Educacion capacitación y comunicaciones</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="row" *ngIf="selectedProject != 0">
+      <div class="col">
+        <label for="selectActivity"
+               class="subtitle-item">Actividad</label>
+        <select [(ngModel)]="selectedActivity"
+                class="custom-select form-control gradblue"
+                name="roles"
+                id="selectActivity">
+          <option value="0">Seleccione una actividad</option>
+          <option value="1">A-Realizar encuentro con Actores</option>
+          <option value="2">A-Plan de Comunicaciones</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="card-body" *ngIf="selectedActivity != 0">
+    <div class="row">
+      <div class="title-taskmodule gradblue">Listado de acciones</div>
+    </div>
+    <div class="row">
+      <table class="table tabletask table-hover">
+        <thead class="items-table">
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th scope="row">01 Encuentros con actores - Realización de 20 actividades</th>
+          <td>
+            <a class="mainbtn bluebtn seemore-module" routerLink="/app/actions-financial-edit">Editar</a>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">01 - Recurso Humano
+          </th>
+          <td>
+            <a class="mainbtn bluebtn seemore-module" routerLink="/app/actions-financial-edit">Editar</a>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            02 - Costos Directos
+          </th>
+          <td>
+            <a class="mainbtn bluebtn seemore-module" routerLink="/app/actions-financial-edit">Editar</a>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            01 Programa de Educacion Ambiental
+          </th>
+          <td>
+            <a class="mainbtn bluebtn seemore-module" routerLink="/app/actions-financial-edit">Editar</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

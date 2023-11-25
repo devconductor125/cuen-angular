@@ -1,0 +1,47 @@
+<div class="title-section">
+  <div class="procedures_title"></div>
+  <div class="titlechapterAp">Procedimientos</div>
+  <a class="mainbtn plainbluedark right createbtn" routerLink="/app/create-procedures"
+     *ngIf="isCoordinador || isCoordinadorGuardacuenca || isComunicaciones">Crear procedimiento</a>
+</div>
+
+<!--PROCEDIMIENTOS-->
+<div class="generalrow ">
+  <ul class="list-procedures">
+    <li class="proyect-item col-6 col-md-4 col-lg-4 col-xl-3 fadeInUp animated" *ngFor="let procedure of procedures">
+      <div class="title-taskmodule gradblue">{{procedure.name}}</div>
+      <div class="blockmodule">
+        <div class="titlegraph">{{procedure.status}}</div>
+
+        <div class="dates-chart">
+          <h3 class="descrip-chart">Pasos Ejecutados</h3>
+        </div>
+
+        <div class="alineacion">
+
+          <div class="chart-container-procedures">
+            <cuenca-round-progress
+              [current]="procedure.subTypeStep"
+              [max]="procedure.subTypeTotal"
+              [color]="procedure.progressBarColor"
+              [background]="'#eaeaea'"
+              [radius]="125"
+              [stroke]="35"
+              [duration]="procedure.animationDuration"
+              [animation]="'easeInOutBack'"
+              [animationDelay]="procedure.animationDelay"
+              [rounded]="true"
+              [clockwise]="true"
+              [responsive]="true">
+            </cuenca-round-progress>
+          </div>
+
+        </div>
+        <a class="linebtn linebluelight fullsize" routerLink="/app/view-procedures/{{procedure.id}}">Ver</a>
+        <a class="mainbtn plainbluedark fullsize"
+           routerLink="/app/edit-procedures/{{procedure.id}}"
+           *ngIf="isCoordinador || isCoordinadorGuardacuenca || isComunicaciones">Editar</a>
+      </div>
+    </li>
+  </ul>
+</div>

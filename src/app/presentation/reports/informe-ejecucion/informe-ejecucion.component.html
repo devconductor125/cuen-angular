@@ -1,0 +1,469 @@
+<div class="container wrap" style="margin-top: 25px;">
+
+  <div class="row">
+    <div class="col-12">
+      <button (click)="printDiv()" class="print_btn"><i class="fas fa-print" style="margin-right: 5px"></i> Imprimir Informe de Ejecución</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm" style="text-align: left; font-size: 16px; font-weight: bold">
+      <div>Visualización de Informe de Ejecución</div>
+    </div>
+  </div>
+
+  <div id="a-imprimir"> <!--/// Imprimir-->
+
+    <!-- 1 HOJA -->
+    <div class="imprimir">
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img src="../../../../assets/images/logo_doc.JPG" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            FORMATO DILIGENCIAMIENTO EJECUCIÓN <br>
+            GESTIÓN PREDIAL
+          </div>
+        </div>
+      </div>
+<!--//////// INF GENERAL-->
+      <div class="row vertical-align">
+        <div class="col-1" style="text-align: center;">
+          <div class="title-header">
+            I<br>N<br>F<br> -<br> G<br>E<br>N<br>E<br>R<br>A<br>L<br>
+          </div>
+        </div>
+        <div class="col-11" style="text-align: center">
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              EMBALSE
+            </div>
+            <div class="col-8 title_form_label bordertable">
+              RIO GRANDE II
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              MUNICIPIO
+            </div>
+            <div class="col-8 title_form_label bordertable">
+              BELMIRA
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              VEREDA
+            </div>
+            <div class="col-8 title_form_label bordertable">
+              PLAYAS LA MONTAÑA
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              NOMBRE DE PREDIO
+            </div>
+            <div class="col-8 title_form_label bordertable">
+              LA ZARZA 3
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              FECHA CARTA DE INTENCIÓN
+            </div>
+            <div class="col-8 title_form_label bordertable">
+              dd/mm/yyyy
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              FECHA DE MEDICIÓN
+            </div>
+            <div class="col-8 title_form_label bordertable">
+              <div class="row table-inner">
+                <div class="col-6 bordertable">
+                  INICIO
+                </div>
+                <div class="col-6 bordertable">
+                  TERMINACIÓN
+                </div>
+              </div>
+              <div class="row table-inner">
+                <div class="col-6 bordertable">
+                  dd/mm/yyyy
+                </div>
+                <div class="col-6 bordertable">
+                  dd/mm/yyyy
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              FECHA VERIFICACIÓN MEDICIÓN
+            </div>
+            <div class="col-8 title_form_label bordertable">
+              <div class="row table-inner">
+                <div class="col-6 bordertable">
+                  INICIO
+                </div>
+                <div class="col-6 bordertable">
+                  TERMINACIÓN
+                </div>
+              </div>
+              <div class="row table-inner">
+                <div class="col-6 bordertable">
+                  dd/mm/yyyy
+                </div>
+                <div class="col-6 bordertable">
+                  dd/mm/yyyy
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              FECHA EJECUCIÓM MEDICIÓN
+            </div>
+            <div class="col-8 title_form_label bordertable">
+              <div class="row table-inner">
+                <div class="col-6 bordertable">
+                  INICIO
+                </div>
+                <div class="col-6 bordertable">
+                  TERMINACIÓN
+                </div>
+              </div>
+              <div class="row table-inner">
+                <div class="col-6 bordertable">
+                  dd/mm/yyyy
+                </div>
+                <div class="col-6 bordertable">
+                  dd/mm/yyyy
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              RESPONSABLE MEDICION
+            </div>
+            <div class="col-8 title_form_label bordertable">
+
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              RESPONSABLE VERIFICACIÓN
+            </div>
+            <div class="col-8 title_form_label bordertable">
+
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-3 title_form bordertable">
+              RESPONSABLE EJECUCIÓN
+            </div>
+            <div class="col-8 title_form_label bordertable">
+
+            </div>
+          </div>
+        </div>
+      </div>
+<!--//////// INF MEDICION-->
+      <div class="row vertical-align">
+        <div class="col-1" style="text-align: center;">
+          <div class="title-header">
+            I<br>N<br>F<br> -<br> M<br>E<br>D<br>I<br>C<br>I<br>Ó<br>N<br>
+          </div>
+        </div>
+        <div class="col-11" style="text-align: center">
+          <!--HEADER-->
+          <div class="row">
+            <div class="col-11 bordertable">
+              <div class="row">
+                <div class="col-1 title_form_d">
+                  Nº ZONA
+                </div>
+                <div class="col-2 title_form_d">
+                  ACCIONES
+                </div>
+                <div class="col-2 title_form_d">
+                  AISLAMIENTO
+                </div>
+                <div class="col-2 title_form_d">
+                  AREA
+                </div>
+                <div class="col-1 title_form_d">
+                  ESTACIONES
+                </div>
+                <div class="col-2 title_form_d">
+                  PIE DE AMIGO
+                </div>
+                <div class="col-2 title_form_d">
+                  OBSERVACIONES
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--SUB HEADER-->
+          <div class="row">
+            <div class="col-11">
+              <div class="row">
+                <div class="col-1">
+
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                  <div class="row">
+                    <div class="col-4 title_form_d bordertable">
+                      Ini
+                    </div>
+                    <div class="col-4 title_form_d bordertable">
+                      Fin
+                    </div>
+                    <div class="col-4 title_form_d bordertable">
+                      Mat
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="row table-inner">
+                    <div class="col-6 title_form_d bordertable">
+                      Inicio
+                    </div>
+                    <div class="col-6 title_form_d bordertable">
+                      Fin
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1">
+
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--DATOS -->
+          <div class="row" style="min-height: 80px">
+            <div class="col-11 bordertable">
+              <div class="row">
+                <div class="col-1 title_form_label">
+                  1
+                </div>
+                <div class="col-2 title_form_label">
+                  AISLAMIENTO DE BOSQUE DE NACIMIENTO
+                </div>
+                <div class="col-2">
+                  <div class="row">
+                    <div class="col-4 title_form_label rightalign">
+127,5
+                    </div>
+                    <div class="col-4 title_form_label rightalign">
+458,9
+                    </div>
+                    <div class="col-4 title_form_label rightalign">
+Liso
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="row">
+                    <div class="col-6 title_form_label rightalign">
+458,9
+                    </div>
+                    <div class="col-6 title_form_label rightalign">
+15,9
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1 title_form_label">
+                  Estaciones
+                </div>
+                <div class="col-2 title_form_label">
+                  Pie
+                </div>
+                <div class="col-2 title_form_label">
+                  Observaciones
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="min-height: 80px">
+            <div class="col-11 bordertable">
+              <div class="row">
+                <div class="col-1 title_form_label">
+                  1
+                </div>
+                <div class="col-2 title_form_label">
+                  AISLAMIENTO DE BOSQUE DE NACIMIENTO
+                </div>
+                <div class="col-2">
+                  <div class="row">
+                    <div class="col-4 title_form_label rightalign">
+127,5
+                    </div>
+                    <div class="col-4 title_form_label rightalign">
+458,9
+                    </div>
+                    <div class="col-4 title_form_label rightalign">
+Liso
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="row">
+                    <div class="col-6 title_form_label rightalign">
+458,9
+                    </div>
+                    <div class="col-6 title_form_label rightalign">
+15,9
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1 title_form_label">
+                  Estaciones
+                </div>
+                <div class="col-2 title_form_label">
+                  Pie
+                </div>
+                <div class="col-2 title_form_label">
+                  Observaciones
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="min-height: 80px">
+            <div class="col-11 bordertable">
+              <div class="row">
+                <div class="col-1 title_form_label">
+                  1
+                </div>
+                <div class="col-2 title_form_label">
+                  AISLAMIENTO DE BOSQUE DE NACIMIENTO
+                </div>
+                <div class="col-2">
+                  <div class="row">
+                    <div class="col-4 title_form_label rightalign">
+127,5
+                    </div>
+                    <div class="col-4 title_form_label rightalign">
+458,9
+                    </div>
+                    <div class="col-4 title_form_label rightalign">
+Liso
+                    </div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="row">
+                    <div class="col-6 title_form_label rightalign">
+458,9
+                    </div>
+                    <div class="col-6 title_form_label rightalign">
+15,9
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1 title_form_label">
+                  Estaciones
+                </div>
+                <div class="col-2 title_form_label">
+                  Pie
+                </div>
+                <div class="col-2 title_form_label">
+                  Observaciones
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+    <!-- Cierre 1 HOJA -->
+
+    <!-- 2 HOJA -->
+    <div class="imprimir">
+
+      <!--//////// INF GENERAL-->
+      <div class="row vertical-align page-break">
+        <div class="col-1" style="text-align: center;">
+          <div class="title-header">
+            I<br>M<br>Á<br>G<br>E<br>N<br>E<br>S<br> -<br> P<br>R<br>E<br>D<br>I<br>O<br>
+          </div>
+        </div>
+        <div class="col-10" style="text-align: center">
+          <!--Divisor-->
+          <div class="row">
+            <div class="col-2 title_form bordertable">
+              Nº Zona
+            </div>
+            <div class="col-10 title_form bordertable">
+              Fotografías
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row" style="height: 150px">
+            <div class="col-2 title_form bordertable">
+
+            </div>
+            <div class="col-10 title_form_label bordertable">
+
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row" style="height: 150px">
+            <div class="col-2 title_form bordertable">
+
+            </div>
+            <div class="col-10 title_form_label bordertable">
+
+            </div>
+          </div>
+          <!--Divisor-->
+          <div class="row" style="height: 150px">
+            <div class="col-2 title_form bordertable">
+
+            </div>
+            <div class="col-10 title_form_label bordertable">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      </div>
+
+    <!-- /////// Imprimir-->
+  </div>
+
+
+</div>

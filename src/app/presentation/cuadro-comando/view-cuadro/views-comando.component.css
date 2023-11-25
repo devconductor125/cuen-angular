@@ -1,0 +1,198 @@
+.btn_edit {
+  background-color: #0073D1;
+  padding: 5px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  min-width: 100px;
+}
+.btn_traslate {
+  background-color: #07396c;
+  padding: 5px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  min-width: 100px;
+}
+.btn_filter {
+  background-color: #05a100;
+  padding: 9px 5px 9px 5px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 22px;
+}
+select:focus{
+  color: #FFFFFF;
+}
+
+.actividades-container{
+  width: 100%;
+}
+/*////CHECK BOX STYLE*/
+.boxes > ul {
+  width: 100%;
+  list-style: none;
+}
+.boxes > ul > li {
+  border: dotted 1px #aaa;
+  padding:7px;
+  margin: 5px;
+  background-color: #FFFFFF;
+}
+select:focus{
+  color: #FFFFFF;
+}
+
+/*radioes styles*/
+input[type="radio"] { display: none; }
+
+input[type="radio"] + label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 20px;
+  font: 14px/20px 'Open Sans', Arial, sans-serif;
+  color: #333;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  font-weight: bold;
+}
+
+input[type="radio"] + label:last-child { margin-bottom: 0; }
+
+input[type="radio"] + label:before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #6cc0e5;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: .6;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+input[type="radio"]:checked + label:before {
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+.newaport{
+  margin: 30px 10px 0px 0px;
+}
+.filtrar{
+  float: right;
+  margin: 40px 0px 0px 0px;
+  width: 100%;
+  padding: 3px 0px;
+}
+.filter-container{
+  margin: 5px 0px 15px 0px;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .newaport{
+    margin: 15px 0px;
+  }
+  .titleinterncontainer{
+    width: 100%;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
+/*TODOS LOS DERECHOS RESERVADOS CORPORACION CUENCA VERDE - DISENADO DESARROLLADO E IMPLEMENTADO POR B1G DIGITAL - MARCA DE RORLO SAS*/

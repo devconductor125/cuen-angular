@@ -1,0 +1,18 @@
+<div class="budget-module col-sm-12">
+  <div class="title-blue-module budget">Presupuesto Coordinacion</div>
+  <small style="color: white;">{{totals['rol']}}</small>
+  <div class="chart-container">
+        <canvas [id]="'donutBudget' + strId"></canvas>
+  </div>
+  <a class="lineboxbtn"> Inversión Total: $ {{totals['inversion_total'] | number : '1.1-2'}}</a>
+  <div class="highlines-container">
+    <div class="item1">
+      <div class="lineitem1"> </div>
+      <div class="name-line">Disponible</div>
+    </div>
+    <div class="item1">
+      <div class="lineitem2"> </div>
+      <div class="name-line">Comprometido</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+.guarda-cuencas-main-container {
+  max-width: 50%;
+  margin: 50px;
+}
+
+.guarda-cuenca-item {
+  cursor: pointer;
+  cursor: hand;
+}
+.listguarda-container{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  padding: 0px 0px;
+}
+.list-guarda{
+  display: block;
+  float: left;
+  width: 100%;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  list-style: none;
+}
+.guarda-item{
+  display: block;
+  float: left;
+  height: auto;
+}
+.guarda-container{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  padding: 7px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  border-radius: 18px;
+  background-image: linear-gradient(-42deg, #0073d1 0%, #03b2e8 100%);
+}
+.linkguarda{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+}
+.profile-guarda{
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 70px;
+  -moz-border-radius: 70px;
+  border-radius: 70px;
+  border: 2px solid #b0df50;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-image: url('../../../assets/images/planet-intro.png');
+  margin: 7px auto;
+}
+.name-guarda{
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+  font-family: 'robotobold';
+  color: #003764;
+  text-align: center;
+  font-size: 1.2em;
+}
+.title-guarda-module{
+  float: left;
+  display: block;
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  text-align: center;
+  font-family: 'robotobold';
+  color: #0B5CC6;
+  margin-bottom: 5px;
+  font-size: 1em;
+}
+.title-guarda-module span{
+  font-family: 'robotoregular';
+  font-size: 0.9em;
+}
+.cuota{
+  width: 100%;
+  height: 30px;
+  text-align: center;
+  margin: 7px 0px;
+  font-size: 1.3em;
+}
+.input-container{
+  width: 100%;
+}
+.save{
+  width: 100%;
+  margin: 5px 0px;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .list-guarda{
+    padding: 0px 10px;
+  }
+
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

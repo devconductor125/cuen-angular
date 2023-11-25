@@ -1,0 +1,144 @@
+<div class="titlechapter intern" *ngIf="task">{{mapTitle}}
+</div>
+<a class="bigbtncontainer" *ngIf="task">
+  <div class="textbigbtn">{{mapSubTitle}}</div>
+  <div class="arrowbigbtn"></div>
+</a>
+
+<div class="generalrow" *ngIf="task">
+  <div class="col-sm">
+    <button type="button" class="mainbtn plainbluedark right margintop" style="cursor: pointer;"
+            routerLink="/app/view-tasks/{{task.id}}">
+      Ir a la tarea
+    </button>
+  </div>
+</div>
+
+<div class="contents-app">
+  <!--PROYECT INFO-->
+  <div class="generalrow">
+    <div id="map" class="mapcontainer">
+    </div>
+    <div class="controls-container">
+      <div class="conventions-info col-lg-6 col-md-6 col-sm-12">
+        <div class="subtitle">Convenciones</div>
+        <ul class="list-conventions">
+          <li class="convention" *ngFor="let convention of mapConventions">
+            <div class="graphcont">
+              <div class="line" [style.backgroundColor]="convention.color" *ngIf="!convention.isPoint"></div>
+              <div class="circle green" [style.backgroundColor]="convention.color" *ngIf="convention.isPoint"></div>
+            </div>
+            <div class="name-convention">{{convention.name}}</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="controls col-lg-6 col-md-6 col-sm-12"
+           *ngIf="canLoadNewShape">
+
+        <div class="row" style="padding: 5px">
+
+          <div class="col-sm">
+            <a class="mainbtn darkgreen downmap" (click)="cleanMap()">Limpiar mapa</a>
+          </div>
+
+        </div>
+
+        <div class="row" style="padding: 5px">
+
+          <div class="col-sm">
+            <a class="mainbtn gradblue downmap" (click)="convertToShapeFile()">Descarga mapa</a>
+          </div>
+
+        </div>
+
+        <div class="row" style="padding: 5px; background-color: #dee7eb; border-radius: 20px">
+
+          <div class="col-sm">
+            <cuenca-shape-uploader #shapeFileUploader [componentId]="shapeFileUploader"
+                                   (notify)='onFilesUploaded($event)'></cuenca-shape-uploader>
+          </div>
+
+        </div>
+
+        <div class="row" style="padding: 5px">
+
+          <div class="col-sm"
+               *ngIf="canSendMap">
+            <a class="mainbtn darkred sendinfo" (click)="uploadMap()">Enviar mapa</a>
+          </div>
+
+          <button *ngIf="canApproveTask"
+                  class="mainbtn darkgreen taskbtn"
+                  style="cursor: pointer;"
+                  (click)="approveTask()">
+            Aprobar
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="generalrow" style="padding: 5px" *ngIf="formData">
+
+        <div class="col-sm">
+          <a class="mainbtn gradblue downmap" (click)="downloadFormData()">Descarga imágenes</a>
+        </div>
+
+      </div>
+
+      <div class="controls col-12"
+           *ngIf="canViewComments">
+
+        <!--COMENTARIOS SIG - SUB TIPO MINUTA-->
+
+        <div class="dropdown-divider"></div>
+
+        <div style="background-color: #f1f1f1; padding: 25px; border-radius: 20px">
+          <div class="row">
+            <div class="col-sm">
+              <div class="header-module">
+                <h3 class="title-module">Comentarios</h3>
+              </div>
+            </div>
+          </div>
+
+          <div *ngFor="let comment of comments;" style="background-color: #FFF; margin: 10px; padding: 10px">
+            <div class="row" style="margin-left: 10px; margin-right: 10px; font-size: 12px">
+              <div class="col-sm"> Fecha: {{getDateWithHour(comment.created_at)}}</div>
+              <div class="col-sm"> Usuario: {{comment.user_name}}</div>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <div class="row">
+              <div class="col-sm">
+                <div style="text-align: center; font-size: 14px; font-weight: bold;">{{comment.description}}</div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row">
+
+            <div class="col-sm">
+              <textarea class="form-control simpleinput" rows="3" name="task_comments"
+                        placeholder="Agrega algún comentario a la tarea" [(ngModel)]="comment"></textarea>
+            </div>
+
+          </div>
+
+          <div class="row">
+
+            <div class="col-sm">
+              <button class="send" (click)="insertComment(); $event.stopPropagation();">Enviar</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

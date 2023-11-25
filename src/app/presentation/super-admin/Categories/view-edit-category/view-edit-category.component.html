@@ -1,0 +1,52 @@
+<div id="contenido" class="contents-app" style="padding: 50px 50px 50px 50px">
+
+  <div class="row" style="margin-bottom: 25px">
+    <div class="col-10 title" style="text-align: center; font-weight: bold">
+      REGISTRAR CATEGORÍA
+    </div>
+
+    <div class="col-2 title" style="text-align: center; font-weight: bold">
+      <div class="col-sm" *ngIf="boolViewEdit">
+        <button type="button" class="btn btn-primary" style="float: right; cursor: pointer;" (click)="setVarEdit()">
+          Editar
+        </button>
+      </div>
+      <div class="col-sm" *ngIf="!boolViewEdit">
+        <button type="button" class="btn btn-danger" style="float: right; cursor: pointer;" (click)="setVarEdit()">
+          cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="labelselect0" class="subtitle-item">Nombre</label>
+      <input type="text"
+             id="labelselect0"
+             class="form-control"
+             [(ngModel)]="dataCategory.name"
+             [disabled]="boolViewEdit"
+             placeholder="Nombre de la Categoría"/>
+    </div>
+
+  </div>
+
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row"
+       *ngIf="!boolViewEdit">
+    <div class="col-sm">
+      <button type="button"
+              class="btn btn-success"
+              style="float: right; cursor: pointer;"
+              (click)="guardar()">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+
+</div>

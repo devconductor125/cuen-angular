@@ -1,0 +1,24 @@
+<div class="generalrow">
+  <div class="col">
+    <li class="list-boxes " *ngFor="let associated of arrAssociates">
+      <input class="procedureinput" type="checkbox" id="{{associated.budget + '_' + associated.associated_id}}" value="{{associated.associated_id}}"
+             name="budget"
+             [checked]="associated.selected"
+             (change)="associated.selected = !associated.selected" style="cursor: pointer">
+      <label class="labelform bluesub" for="{{associated.budget + '_' + associated.associated_id}}">{{associated.asociated_name}}</label>
+      <input class="form-control form-control-sm margintop marginbuttom" [(ngModel)]="associated.value" type="number"
+             placeholder="Valor" *ngIf="associated.selected" (input)="calculateAssociatesTotal()">
+    </li>
+  </div>
+  <div class="col">
+    <span>Total asociados: {{associatesTotal | number:'1.2-2'}}</span>
+    <span>Disponible: {{(strValue - associatesTotal) | number:'1.2-2'}}</span>
+    <input class="form-control form-control-sm margintop marginbuttom" [(ngModel)]="strValue" type="number"
+           placeholder="Valor" disabled>
+  </div>
+  <div class="col">
+    <button type="button" class="mainbtn plainbluedark right margintop marginbuttom" (click)="fnAddAssociated()">
+      Agregar
+    </button>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<div id="contenido" class="contents-app">
+  <div class="title-section">
+    <div class="add_title"></div>
+    <div class="titlechapterAp">Nuevo proceso contractual</div>
+  </div>
+
+  <div class="generalrow">
+    <div class="col-sm bagcontainer">
+      <label for="poolName">Nombre del proceso</label>
+      <input type="text" class="form-control simpleinput" id="poolName" aria-describedby="poolName"
+             placeholder="Nombre del proceso" [(ngModel)]="poolOfContracts.name"
+             name="poolName">
+    </div>
+  </div>
+
+  <div class="genrealrow">
+    <div class="subtitle-item">Modalidad de contratación</div>
+    <!--[(ngModel)]="contractor.type_person"-->
+    <select [(ngModel)]="poolOfContracts.contract_id" class="custom-select form-control gradblue" name="person_type"
+            id="tipoContrato">
+      <option [value]="0">Seleccione</option>
+      <option *ngFor="let typeContract of listTypeContract" [value]="typeContract.id">{{typeContract.name}}</option>
+    </select>
+  </div>
+
+  <div class="generalrow">
+    <div class="procediments-container">
+      <div class="subtitle-item">Procedimientos</div>
+      <div class="actividades-container line-inputs">
+        <div class="boxes">
+          <ul>
+            <li class="module-box-container boxprocediments" *ngFor="let procedure of procedures">
+              <div>
+                <input class="procedureinput" type="checkbox" id="{{procedure.id}}" value="{{procedure}}"
+                       name="procedure"
+                       [checked]="procedure.selected" (change)="procedure.selected = !procedure.selected">
+                <label class="labelform" for="{{procedure.id}}">{{procedure.name}}</label>
+                <div class="generalrow">
+                  <div class="pool-subtitle">Presupuesto</div>
+                  <ul class="sublist">
+                    <li class="list-boxes " *ngFor="let budget of procedure.budget">
+                      <input class="procedureinput" type="checkbox" id="{{procedure.id + '_' + budget.id}}" value="{{budget}}" name="budget"
+                             [checked]="budget.selected"
+                             (change)="budget.selected = !budget.selected; checkProcedureSelected(procedure);">
+                      <label class="labelform bluesub" for="{{procedure.id + '_' + budget.id}}">{{budget.action + ' ' +
+                        budget.material}}</label>
+                    </li>
+                    <li class="list-boxes " *ngFor="let openTask of procedure.task_opens">
+                      <input class="procedureinput" type="checkbox" id="{{procedure.id + '_' + openTask.id}}" value="{{openTask}}"
+                             name="budget"
+                             [checked]="openTask.selected"
+                             (change)="openTask.selected = !openTask.selected; checkProcedureSelected(procedure);">
+                      <label class="labelform bluesub" for="{{procedure.id + '_' + openTask.id}}">Tarea abierta: {{openTask.description}}</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <button type="button" class="mainbtn plaingreenlight right margintop" style="cursor: pointer;"
+              (click)="savePoolOfContracts()">Guardar
+      </button>
+    </div>
+  </div>
+
+</div>

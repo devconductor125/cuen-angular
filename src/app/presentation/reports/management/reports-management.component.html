@@ -1,0 +1,743 @@
+<ng-container>
+        <div class="main-container">
+          <div class="title-section">
+            <div class="icon-section reports col-1 col-md-1 col-lg-1"> </div>
+            <div class="titlechapterAp col-9 col-md-8 col-lg-8">Reportes Gerencia</div>
+          </div>
+        <!--MODULE PEOPLE CUENCA VERDE 2 COLES FULL AND MID 1 MOBILE-->
+
+          <!--GESTION POR MUNICIPIO-->
+
+          <div class="subtitle">Líneas y programas estratégicos</div>
+
+          <div class="datacontainer col-12 col-md-12 col-lg-12" *ngFor="let lineas of dataReportGerencial?.lineas_y_programas_estrategicos">
+            <div class="databox gradblue">
+              <div class="title-datablue smalltitle">{{lineas.name}}</div>
+            </div>
+          </div>
+
+          <!--DATOS CORPORACION-->
+
+          <hr/>
+
+          <div class="subtitle">Datos del personal de la corporacion</div>
+          <!--EMPLOYEES-->
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox bg-contract">
+              <div class="title-databox">Tipo de contratacion</div>
+              <div class="graph-container">
+                <canvas id="doughnutPeople"></canvas>
+              </div>
+              <div class="convention-container">
+                <ul class="list-convens">
+                  <li class="convent-item">
+                    <div class="bullet-convention green"></div>
+                    <div class="name-convention">Empleadas</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention blue"></div>
+                    <div class="name-convention">Prestacion de servicios</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention orange"></div>
+                    <div class="name-convention">Vinculadas</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--GENERE-->
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox bg-people">
+              <div class="title-databox">Genero del personal</div>
+              <div class="graph-container">
+                <canvas id="doughnutGenre"></canvas>
+              </div>
+              <div class="convention-container">
+                <ul class="list-convens">
+                  <li class="convent-item">
+                    <div class="bullet-convention blue"></div>
+                    <div class="name-convention">Mujeres</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention green"></div>
+                    <div class="name-convention">Hombres</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        <!--MODULE INVESTMENT BY PARTNER-->
+
+          <hr/>
+
+          <div class="subtitle">Datos Inversiones en la Corporacion</div>
+          <!--TOTAL INVERTION-->
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue">
+              <div class="title-datablue">Total inversion Aliados y Asociados</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.corporacion_cuencaverde.total_inversion_aliados_asociados | number : '3.2-2'}}</div>
+            </div>
+          </div>
+          <!--INVERTION BY PARTNER-->
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="table-container">
+              <div class="title-taskmodule gradblue">Inversiones por asociado</div>
+              <div class="maintablecontainer">
+                <table class="table">
+                  <tr class="items-table">
+                    <th>Empresa</th>
+                    <th>Valor aporte</th>
+                  </tr>
+                  <tr *ngFor="let aporte of dataReportGerencial?.corporacion_cuencaverde.inversion_por_asociado">
+                    <th>{{aporte.name}}</th>
+                    <th>$ {{aporte.inversion | number : '3.2-2'}}</th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+          <!--INVERTION BY LINE-->
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox bg-money databox-long">
+              <div class="title-databox">Inversiones por linea</div>
+              <div class="graph-container" >
+                <canvas id="doughnutInvestment"></canvas>
+              </div>
+              <div class="convention-container">
+                <ul class="list-convens">
+                  <li class="convent-item" *ngFor="let linea of inversionLineaLabel; let i = index">
+                    <div class="bullet-convention" [style.backgroundColor]="inversionLineaColor[i]"></div>
+                    <div class="name-convention">{{linea}}</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!--INVERTION BY PARTNER-->
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="table-container">
+              <div class="title-taskmodule gradblue">Inversiones por Aliado</div>
+              <div class="maintablecontainer">
+                <table class="table">
+                  <tr class="items-table">
+                    <th>Empresa</th>
+                    <th>Valor aporte</th>
+                  </tr>
+                  <tr>
+                    <th>EMP</th>
+                    <th>$999.999.999.999</th>
+                  </tr>
+                  <tr>
+                    <th>Municipio de medellin</th>
+                    <th>$999.999.999.999</th>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <!--CULTURA DEL AGUA-->
+
+          <div class="subtitle">Cultura del Agua</div>
+
+          <div class="subtitle">Encuentro con Actores</div>
+
+          <div class="datacontainer col-12 col-md-4 col-lg-4">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Talleres</div>
+              <div class="number-datablue">{{dataReportGerencial?.cultura_del_agua.encuentros_con_actores.talleres}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-4 col-lg-4">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Personas Impactadas</div>
+              <div class="number-datablue">{{dataReportGerencial?.cultura_del_agua.encuentros_con_actores.personas}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-4 col-lg-4">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Inversión</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.cultura_del_agua.encuentros_con_actores.inversion | number : '1.2-2'}} </div>
+            </div>
+          </div>
+
+
+          <div class="subtitle">Experiencias de Educación Ambiental</div>
+
+              <div class="datacontainer col-12 col-md-4 col-lg-4">
+                <div class="databox gradblue datamin">
+                  <div class="title-datablue smalltitle">Experiencias</div>
+                  <div class="number-datablue">{{dataReportGerencial?.cultura_del_agua.experiencias_de_educacion_ambiental.experiencias}}</div>
+                </div>
+              </div>
+
+              <div class="datacontainer col-12 col-md-4 col-lg-4">
+                <div class="databox gradblue datamin">
+                  <div class="title-datablue smalltitle">Personas Impactadas</div>
+                  <div class="number-datablue">{{dataReportGerencial?.cultura_del_agua.experiencias_de_educacion_ambiental.personas}}</div>
+                </div>
+              </div>
+
+              <div class="datacontainer col-12 col-md-4 col-lg-4">
+                <div class="databox gradblue datamin">
+                  <div class="title-datablue smalltitle">Árboles</div>
+                  <div class="number-datablue">{{dataReportGerencial?.cultura_del_agua.experiencias_de_educacion_ambiental.arboles}} </div>
+                </div>
+              </div>
+
+
+          <div class="subtitle">Plan de Comunicaciones</div>
+
+          <div class="datacontainer col-12 col-md-12 col-lg-12">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Inversión</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.cultura_del_agua.plan_comunicaciones.inversion | number: '1.2-2'}}</div>
+            </div>
+          </div>
+
+          <div class="subtitle">Adicionales</div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Guardacuencas Vinculados</div>
+              <div class="number-datablue">{{dataReportGerencial?.cultura_del_agua.guardacuencas}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Inversión Total</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.cultura_del_agua.inversion || 0 | number : '1.2-2' }} </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+        <!--MODULE CONTRIBUTIONS-->
+        <!--MODULE WATER CULTURE-->
+        <!--MODULE INTEGRALMANAGEMENT OF WATER AND BIODIVERSITY-->
+          <!--MODULE INTEGRALMANAGEMENT OF WATER AND BIODIVERSITY-->
+          <div class="subtitle">Gestion integral del recurso hidrico y la biodiversidad</div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox bg-leaves">
+              <div class="title-databox">Hectareas de conservacion</div>
+              <div class="graph-container">
+                <canvas id="pieConservation"></canvas>
+              </div>
+              <div class="convention-container">
+                <ul class="list-convens">
+                  <li class="convent-item">
+                    <div class="bullet-convention green"></div>
+                    <div class="name-convention">RSC Luiciana</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention blue"></div>
+                    <div class="name-convention">Pago por servicios ambientales</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention orange"></div>
+                    <div class="name-convention">Acuerdos de Intervencion</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue">
+              <div class="title-datablue">Total hectareas conservadas</div>
+              <div class="number-datablue">{{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.total_hectareas_conservadas | number : '1.0-0'}} HA</div>
+              <div class="title-datablue">Total hectareas impactadas</div>
+              <div class="number-datablue">{{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.total_hectareas_impactadas | number : '1.0-0'}} HA</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Municipios con acciones de conservacion</div>
+              <div class="number-datablue">{{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.municipios}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Hectareas con mantenimientos de áreas de conservación</div>
+              <div class="number-datablue">{{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.hectareas | number : '1.2-2'}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Familias beneficiadas</div>
+              <div class="number-datablue">{{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.familias_beneficiadas}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Arboles nativos sembrados</div>
+              <div class="number-datablue">{{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.siembra_arboles_nativos}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Biodiversidad de especies sembradas</div>
+              <div class="number-datablue">{{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.diversidad_especies}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Nacimientos protegidos</div>
+              <div class="number-datablue">{{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.nacimientos_en_proteccion}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue">Hectareas de nacimientos protegidos</div>
+              <div class="number-datablue">{{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.hectarea_de_nacimientos}} HA</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue">Inversion realizada</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.estrategias_de_conservacion.hectareas_de_conservacion.inversion | number : '1.2-2'}}</div>
+            </div>
+          </div>
+        <!--MODULE ACHIEVMENTS PREDIAL-->
+
+          <div class="subtitle">Logros Gestion Predial</div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox bg-money databox-long">
+              <div class="title-databox">Logros en hectareas gestion predial</div>
+              <div class="graph-container" >
+                <canvas id="doughnutAchievments"></canvas>
+              </div>
+              <div class="convention-container">
+                <ul class="list-convens">
+                  <li class="convent-item">
+                    <div class="bullet-convention green"></div>
+                    <div class="name-convention">Hectareas impactadas</div>
+                  </li>
+                  <li class="convent-item ">
+                    <div class="bullet-convention blue"></div>
+                    <div class="name-convention">Hectareas intervenidas</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention orange"></div>
+                    <div class="name-convention">Hectareas de Bosque restaurado</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention light-blue"></div>
+                    <div class="name-convention">Hectareas de Bosque de ribera protegido</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-4 col-md-4 col-lg-4">{{dataReportGerencial?.estrategias_de_conservacion.logro_gestion_predial.acuerdos_de_intervencion}}</div>
+              <div class="title-datablue titleleft col-7 col-md-7 col-lg-8">Acuerdos de conservacion</div>
+            </div>
+          </div>
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-6 col-md-5 col-lg-5">{{dataReportGerencial?.estrategias_de_conservacion.logro_gestion_predial.metros_lineales | number : '1.2-2'}}</div>
+              <div class="title-datablue titleleft col-5 col-md-7 col-lg-7">Metros lineales de ribera recuperada</div>
+            </div>
+          </div>
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-4 col-md-4 col-lg-4">{{dataReportGerencial?.estrategias_de_conservacion.logro_gestion_predial.nacimientos_agua_protegido}}</div>
+              <div class="title-datablue titleleft col-7 col-md-7 col-lg-8">Nacimientos de agua protegidos</div>
+            </div>
+          </div>
+
+        <!--  RIO GRANDE-->
+
+          <div class="subtitle">Logros Gestion Predial Embalse de RIO GRANDE II</div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox bg-money databox-long">
+              <div class="title-databox">Logros en hectareas RIO GRANDE II</div>
+              <div class="graph-container" >
+                <canvas id="doughnutRioGrandeII"></canvas>
+              </div>
+              <div class="convention-container">
+                <ul class="list-convens">
+                  <li class="convent-item">
+                    <div class="bullet-convention green"></div>
+                    <div class="name-convention">Hectareas impactadas</div>
+                  </li>
+                  <li class="convent-item ">
+                    <div class="bullet-convention blue"></div>
+                    <div class="name-convention">Hectareas intervenidas</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention orange"></div>
+                    <div class="name-convention">Hectareas de Bosque restaurado</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention light-blue"></div>
+                    <div class="name-convention">Hectareas de Bosque de ribera protegido</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-4 col-md-4 col-lg-4">{{dataReportGerencial?.estrategias_de_conservacion.logro_gestion_predial_rio_grande.acuerdos_de_intervencion}}</div>
+              <div class="title-datablue titleleft col-7 col-md-7 col-lg-8">Acuerdos de conservacion</div>
+            </div>
+          </div>
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-6 col-md-5 col-lg-5">{{dataReportGerencial?.estrategias_de_conservacion.logro_gestion_predial_rio_grande.metros_lineales | number : '1.2-2'}}</div>
+              <div class="title-datablue titleleft col-5 col-md-7 col-lg-7">Metros lineales de ribera recuperada</div>
+            </div>
+          </div>
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-4 col-md-4 col-lg-4">{{dataReportGerencial?.estrategias_de_conservacion.logro_gestion_predial_rio_grande.nacimientos_agua_protegido}}</div>
+              <div class="title-datablue titleleft col-7 col-md-7 col-lg-8">Nacimientos de agua protegidos</div>
+            </div>
+          </div>
+
+
+          <!--  LA FE-->
+
+          <div class="subtitle">Logros Gestion Predial Embalse de LA FE</div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox bg-money databox-long">
+              <div class="title-databox">Logros en hectareas LA FE</div>
+              <div class="graph-container" >
+                <canvas id="doughnutLaFe"></canvas>
+              </div>
+              <div class="convention-container">
+                <ul class="list-convens">
+                  <li class="convent-item">
+                    <div class="bullet-convention green"></div>
+                    <div class="name-convention">Hectareas impactadas</div>
+                  </li>
+                  <li class="convent-item ">
+                    <div class="bullet-convention blue"></div>
+                    <div class="name-convention">Hectareas intervenidas</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention orange"></div>
+                    <div class="name-convention">Hectareas de Bosque restaurado</div>
+                  </li>
+                  <li class="convent-item">
+                    <div class="bullet-convention light-blue"></div>
+                    <div class="name-convention">Hectareas de Bosque de ribera protegido</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-4 col-md-4 col-lg-4">{{dataReportGerencial?.estrategias_de_conservacion.logro_gestion_predial_la_fe.acuerdos_de_intervencion}}</div>
+              <div class="title-datablue titleleft col-7 col-md-7 col-lg-8">Acuerdos de conservacion</div>
+            </div>
+          </div>
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-6 col-md-5 col-lg-5">{{dataReportGerencial?.estrategias_de_conservacion.logro_gestion_predial_la_fe.metros_lineales | number : '1.2-2'}}</div>
+              <div class="title-datablue titleleft col-5 col-md-7 col-lg-7">Metros lineales de ribera recuperada</div>
+            </div>
+          </div>
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-4 col-md-4 col-lg-4">{{dataReportGerencial?.estrategias_de_conservacion.logro_gestion_predial_la_fe.nacimientos_agua_protegido}}</div>
+              <div class="title-datablue titleleft col-7 col-md-7 col-lg-8">Nacimientos de agua protegidos</div>
+            </div>
+          </div>
+
+
+
+          <!--GESTION RECURSO HIDRICO // DATOS GESTION RECURSO HIDRICO SANEAMIENTO BASICO INTEGRAL -->
+
+          <div class="subtitle">Gestión del Recurso Hídrico</div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox bg-money databox-long">
+              <div class="title-databox">Saneamiento Básico Integral</div>
+              <div class="graph-container" >
+                <canvas id="doughnutSaneamientoBasico"></canvas>
+              </div>
+              <div class="convention-container">
+                <ul class="list-convens">
+                  <li class="convent-item">
+                    <div class="bullet-convention green"></div>
+                    <div class="name-convention">Mantenimiento Stard</div>
+                  </li>
+                  <li class="convent-item ">
+                    <div class="bullet-convention blue"></div>
+                    <div class="name-convention">Instalación Stard</div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-4 col-md-4 col-lg-4">{{dataReportGerencial?.gestion_recurso_hidrico.saneamiento_basico_integral.personas_beneficiadas}}</div>
+              <div class="title-datablue titleleft col-7 col-md-7 col-lg-8">Personas Beneficiadas</div>
+            </div>
+          </div>
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-6 col-md-5 col-lg-5">{{dataReportGerencial?.gestion_recurso_hidrico.saneamiento_basico_integral.toneladas}}</div>
+              <div class="title-datablue titleleft col-5 col-md-7 col-lg-7">(toneladas) Contaminación Evitada</div>
+            </div>
+          </div>
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-4 col-md-4 col-lg-4">{{dataReportGerencial?.gestion_recurso_hidrico.saneamiento_basico_integral.mantenimiento_stard}}</div>
+              <div class="title-datablue titleleft col-7 col-md-7 col-lg-8">Mantenimiento STARD</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-6 col-lg-6">
+            <div class="databox gradblue ">
+              <div class="number-datablue numberleft col-4 col-md-4 col-lg-4">$ {{dataReportGerencial?.gestion_recurso_hidrico.saneamiento_basico_integral.inversion | number : '1.2-2'}}</div>
+              <div class="title-datablue titleleft col-7 col-md-7 col-lg-8">Inversión</div>
+            </div>
+          </div>
+
+          <div class="subtitle">Control de Erosión y Restauración de Cauce</div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-43">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Revegetalización (Metros Lineales)</div>
+              <div class="number-datablue">{{dataReportGerencial?.gestion_recurso_hidrico.control_erosion_y_restauracion.metros_lineales_revegetalizados}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-4">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Remoción y reubicación de escombros (Metros Lineales)</div>
+              <div class="number-datablue">{{dataReportGerencial?.gestion_recurso_hidrico.control_erosion_y_restauracion.remocion_escombros}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-4 col-lg-4">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue">Inversión</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.gestion_recurso_hidrico.control_erosion_y_restauracion.inversion  | number : '1.2-2'}} </div>
+            </div>
+          </div>
+
+          <div class="subtitle">Prácticas de Producción Sostenible</div>
+
+                <div class="subtitle">Prevención de la Deforestación</div>
+
+                <div class="datacontainer col-12 col-md-4 col-lg-4">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Estufas Eficientes</div>
+                    <div class="number-datablue">{{dataReportGerencial?.practicas_produccion_sostenible.prevencion_deforestacion.estufas_eficientes}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-4 col-lg-4">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Huertos Leñeros</div>
+                    <div class="number-datablue">{{dataReportGerencial?.practicas_produccion_sostenible.prevencion_deforestacion.huertos_lenieros}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-4 col-lg-4">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue">Inversión</div>
+                    <div class="number-datablue">{{dataReportGerencial?.practicas_produccion_sostenible.prevencion_deforestacion.inversion  | number : '1.2-2'}} </div>
+                  </div>
+                </div>
+
+                <div class="subtitle">Ganadería Sostenible y Buenas Prácticas</div>
+
+                <div class="datacontainer col-12 col-md-3 col-lg-3">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Bebederos Ahorradores</div>
+                    <div class="number-datablue">{{dataReportGerencial?.practicas_produccion_sostenible.ganaderia_sostenible.bebederos_ahorradores}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-3 col-lg-3">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Tanques de Almacenamiento</div>
+                    <div class="number-datablue">{{dataReportGerencial?.practicas_produccion_sostenible.ganaderia_sostenible.tanques_almacenamiento}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-3 col-lg-3">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue">Cercos Vivos (Metros Lineales)</div>
+                    <div class="number-datablue">{{dataReportGerencial?.practicas_produccion_sostenible.ganaderia_sostenible.cercos_vivos  | number : '1.2-2'}} </div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-3 col-lg-3">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Árboles Dispersos</div>
+                    <div class="number-datablue">{{dataReportGerencial?.practicas_produccion_sostenible.ganaderia_sostenible.arboles_dispersos}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-6 col-lg-6">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Pasos de Ganado</div>
+                    <div class="number-datablue">{{dataReportGerencial?.practicas_produccion_sostenible.ganaderia_sostenible.pasos_ganado}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-6 col-lg-6">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue">Inversión</div>
+                    <div class="number-datablue">$ {{dataReportGerencial?.practicas_produccion_sostenible.ganaderia_sostenible.inversion  | number : '1.2-2'}} </div>
+                  </div>
+                </div>
+
+
+
+          <div class="subtitle">Gestión de la Información y Conocimiento</div>
+
+          <div class="datacontainer col-12 col-md-4 col-lg-4">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Fondo del Agua</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.gestion_informacion_conocimiento.sistema_informacion_inversion | number : '1.2-2'}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-4 col-lg-4">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Fondo de Acción</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.gestion_informacion_conocimiento.fondo_accion_inversion | number : '1.2-2'}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-4 col-lg-4">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue">Protección de Hectáreas</div>
+              <div class="number-datablue">{{dataReportGerencial?.gestion_informacion_conocimiento.proteccion_hectareas}} </div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+          <div class="databox gradblue datamin">
+            <div class="title-datablue smalltitle">Escuelas</div>
+            <div class="number-datablue">{{dataReportGerencial?.gestion_informacion_conocimiento.escuelas}}</div>
+          </div>
+        </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue smalltitle">Rehabilitación STARD</div>
+              <div class="number-datablue">{{dataReportGerencial?.gestion_informacion_conocimiento.rehabilitacion_stard}}</div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue">Potabilización</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.gestion_informacion_conocimiento.solucion_potabilizacion  | number : '1.2-2'}} </div>
+            </div>
+          </div>
+
+          <div class="datacontainer col-12 col-md-3 col-lg-3">
+            <div class="databox gradblue datamin">
+              <div class="title-datablue">Inversión</div>
+              <div class="number-datablue">$ {{dataReportGerencial?.gestion_informacion_conocimiento.cta_inversion  | number : '1.2-2'}} </div>
+            </div>
+          </div>
+
+          <!--GESTION POR MUNICIPIO-->
+
+          <div class="subtitle">Gestión por Municipio</div>
+
+          <ng-container *ngFor="let municipio of inversionMunicipios">
+
+                <div class="subtitle">{{municipio.name}}</div>
+
+                <div class="datacontainer col-12 col-md-4 col-lg-4">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Acuerdos de Intervención</div>
+                    <div class="number-datablue">{{municipio.data.acuerdos_intervencion}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-4 col-lg-4">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Hectáreas Impactadas</div>
+                    <div class="number-datablue">{{municipio.data.hectareas_impactadas | number: '1.0-0'}} HA</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-4 col-lg-4">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue">Hectáreas Intervenidas</div>
+                    <div class="number-datablue">{{municipio.data.hectareas_intervenidas | number: '1.0-0'}} HA</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-4 col-lg-4">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Metros lineales ribera ecuperada</div>
+                    <div class="number-datablue">{{municipio.data.metros_lineales_ribera | number: '1.0-0'}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-4 col-lg-4">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue smalltitle">Encuentro con actores y socializaciones</div>
+                    <div class="number-datablue">{{municipio.data.encuentro_actores}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-4 col-lg-4">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue">Mantenimiento de STARD</div>
+                    <div class="number-datablue">{{municipio.data.mantenimiento_stard}}</div>
+                  </div>
+                </div>
+
+                <div class="datacontainer col-12 col-md-12 col-lg-12">
+                  <div class="databox gradblue datamin">
+                    <div class="title-datablue">Inversión</div>
+                    <div class="number-datablue">$ {{municipio.data.inversion  | number : '1.2-2'}} </div>
+                  </div>
+                </div>
+
+          </ng-container>
+
+
+
+
+        </div>
+</ng-container>

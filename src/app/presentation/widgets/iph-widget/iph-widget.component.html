@@ -1,0 +1,40 @@
+<div class="card">
+  <div class="card-body">
+    <div class="col">
+      <small>{{strNameBasin}}</small>
+    </div>
+    <div class="row">
+
+      <div class=" col-12 col-md-12 col-lg-6" style="margin-bottom: 10px;">
+          <div class="databox gradblue">
+            <div class="title-datablue">Meta por año</div>
+            <div class="number-datablue">$ {{ objData['totalHa']| number : '3.2-2'}}</div>
+          </div>
+      </div>
+
+      <div class="budget-module col-12 col-md-12 col-lg-6">
+        <div class="title-blue-module budget">Ejecución mensual</div>
+        <div class="chart-container">
+          <canvas [id]="'donutBudget' + strId"></canvas>
+        </div>
+        <a class="lineboxbtn">Total: $100</a>
+        <div class="highlines-container">
+          <div class="item1">
+            <div class="lineitem1"> </div>
+            <div class="name-line">Restauración</div>
+          </div>
+          <div class="item1">
+            <div class="lineitem2"> </div>
+            <div class="name-line">Bosques</div>
+          </div>
+
+          <div class="item1">
+            <div class="lineitem3"> </div>
+            <div class="name-line">Practicas</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+#a-imprimir{
+  padding: 50px;
+}
+.title-header {
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.parag{
+  text-align: justify;
+  text-justify: inter-word;
+}
+table{
+  padding: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+th{
+  text-align: center;
+  font-weight: bold;
+  border: solid 2px black;
+}
+td{
+  text-align: left;
+  border: solid 1px black;
+}
+.center{
+  text-align: center;
+}
+.noborder td{
+  border: solid 1px white;
+}
+.print_btn{
+  float: right;
+  padding: 10px 15px;
+  background-color: #0B5CC6;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  border-radius: 10px;
+  border: solid 1px #4d565e;
+}
+
+.print_btn:hover{
+  background-color: #4188c6;
+}
+
+.noMostrar{
+  display: none;
+}

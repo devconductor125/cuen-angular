@@ -1,0 +1,485 @@
+<div id="contenido" class="contents-app">
+  <div class="title-section">
+    <div class="pool_title"></div>
+    <div class="titlechapterAp">Editar Proceso contractual: {{poolOfContracts.name}}</div>
+
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <label for="poolName" class="subtitle-item">Nombre de Proceso </label>
+      <input type="text" class="form-control simpleinput" id="poolName" aria-describedby="poolName"
+             placeholder="Nombre del proceso" [(ngModel)]="poolOfContracts.name"
+             name="poolName" disabled>
+    </div>
+  </div>
+
+  <div class="col-sm">
+    <label for="selectContractor" class="subtitle-item" *ngIf="poolOfContracts.contractor">Contratista</label>
+    <label for="selectContractor" class="subtitle-item" *ngIf="!poolOfContracts.contractor">El proceso no tiene un
+      contratista asignado</label>
+    <select [(ngModel)]="poolOfContracts.contractor" class="custom-select form-control gradblue" name="contractor"
+            id="selectContractor" *ngIf="isCoordinador || isJuridico" [disabled]="poolHasAnAssignedContractor">
+      <option [value]="null">Seleccione un contratista</option>
+      <option *ngFor="let contractor of seguimiento" [ngValue]="contractor">{{contractor.name}}
+      </option>
+    </select>
+  </div>
+
+  <div *ngIf="poolOfContracts.contractor && poolOfContracts.other_camps" style="margin-top: 25px">
+
+    <div class="generalrow">
+      <div class="col">
+        <label for="inputNumContract">Número de contrato</label>
+        <input type="text"
+               id="inputNumContract"
+               class="form-control"
+               [(ngModel)]="poolOfContracts.other_camps.numContact"
+               placeholder="Número de contrato"
+               [disabled]="!isJuridico">
+      </div>
+      <div class="col">
+        <label for="inputNumContract">Objeto</label>
+        <input type="text"
+               class="form-control"
+               [(ngModel)]="poolOfContracts.other_camps.object"
+               placeholder="Objeto"
+               [disabled]="!isJuridico">
+      </div>
+    </div>
+    <div class="generalrow">
+      <div class="col">
+        <label for="inputState">Tipo de Contrato</label>
+        <select id="inputState"
+                [(ngModel)]="poolOfContracts.other_camps.tipeContarct"
+                class="form-control selectcontact" [disabled]="!isJuridico">
+          <option [value]="'0'" selected>Tipo de Contrato</option>
+          <option [value]="'1'">Prestación de servicios</option>
+          <option [value]="'2'">Orden de Servicios</option>
+          <option [value]="'3'">Orden de Compra</option>
+          <option [value]="'4'">Contrato de Transporte</option>
+        </select>
+      </div>
+      <div class="col">
+        <label for="inputTipoDeContrato">Valor Total (IVA incluido)</label>
+        <input type="text"
+               id="inputTipoDeContrato"
+               class="form-control"
+               placeholder="Valor Total (IVA incluido)"
+               [(ngModel)]="poolOfContracts.other_camps.totalIva"
+               [disabled]="!isJuridico">
+      </div>
+    </div>
+
+    <div class="generalrow">
+
+      <div class="col">
+        <label for="inputFormPago"
+               type="number">Forma de pago</label>
+        <input type="text"
+               id="inputFormPago"
+               [(ngModel)]="poolOfContracts.other_camps.formPay"
+               [disabled]="!isJuridico"
+               class="form-control"
+               placeholder="Forma de pago">
+      </div>
+
+
+      <div class="col">
+        <label type="number">Valor mensual</label>
+        <div class="generalrow">
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="radio"
+                     name="renovation"
+                     id="aplica"
+                     value="aplica"
+                     [(ngModel)]="poolOfContracts.other_camps.valueMonth"
+                     checked
+                     [disabled]="!isJuridico">
+              <label class="form-check-label"
+                     for="aplica">
+                Aplica
+              </label>
+            </div>
+          </div>
+
+
+          <div class="col">
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="radio"
+                     name="renovation"
+                     id="noAplica"
+                     value="noAplica"
+                     [(ngModel)]="poolOfContracts.other_camps.valueMonth"
+                     [disabled]="!isJuridico">
+              <label class="form-check-label" for="noAplica">
+                No aplica
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="col">
+        <label for="inputPlaceExcecution">Lugar de ejecución</label>
+        <input type="text"
+               id="inputPlaceExcecution"
+               class="form-control"
+               placeholder="Lugar de ejecución"
+               [(ngModel)]="poolOfContracts.other_camps.placeExecution"
+               [disabled]="!isJuridico">
+      </div>
+      <div class="col">
+        <label for="inputTermInitial" type="number">Plazo inicial</label>
+        <input type="text"
+               id="inputTermInitial"
+               class="form-control"
+               [(ngModel)]="poolOfContracts.other_camps.termInit"
+               placeholder="Plazo inicial"
+               [disabled]="!isJuridico">
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="col">
+        <label for="dateSubscription">Fecha de suscripción</label>
+        <input type="date"
+               id="dateSubscription"
+               class="form-control"
+               [(ngModel)]="poolOfContracts.other_camps.dateSuscription"
+               placeholder="Fecha de suscripción"
+               [disabled]="!isJuridico">
+      </div>
+      <div class="col">
+        <label for="inputDateInit" type="number">Fecha de inicio</label>
+        <input type="date"
+               id="inputDateInit"
+               class="form-control"
+               [(ngModel)]="poolOfContracts.other_camps.dateInit"
+               placeholder="Fecha de inicio"
+               [disabled]="!isJuridico">
+      </div>
+
+      <div class="col">
+        <label for="inputDateEnd">Fecha de terminación</label>
+        <input type="date"
+               id="inputDateEnd"
+               class="form-control"
+               [(ngModel)]="poolOfContracts.other_camps.dateEnd"
+               placeholder="Fecha de terminación"
+               [disabled]="!isJuridico">
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="col">
+        <div class="form-check">
+          <input class="form-check-input"
+                 type="radio"
+                 name="renovation"
+                 id="other"
+                 (change)="addDate()"
+                 value="other"
+                 [(ngModel)]="poolOfContracts.other_camps.renovation.other"
+                 checked
+                 [disabled]="!isJuridico">
+          <label class="form-check-label"
+                 for="other">
+            Otro sí
+          </label>
+        </div>
+      </div>
+      <div *ngIf="boolOtroSi"
+           class="col form-group">
+        <label for="exampleFormControlInput1">Fecha</label>
+        <input type="date"
+               class="form-control"
+               [(ngModel)] ="strDateOtroSi"
+               id="exampleFormControlInput1">
+      </div>
+
+
+      <div class="col">
+        <div class="form-check">
+          <input class="form-check-input"
+                 type="radio"
+                 name="renovation"
+                 id="requireRenovation"
+                 value="requireRenovation"
+                 (change)="addDate()"
+                 [(ngModel)]="poolOfContracts.other_camps.renovation.other"
+                 [disabled]="!isJuridico">
+          <label class="form-check-label" for="requireRenovation">
+            Requiere renovar garantía
+          </label>
+        </div>
+      </div>
+
+      <div class="card" style="width: 18rem;" *ngIf="poolOfContracts.other_camps?.arrOtherDates?.length > 0">
+        <div class="card-header">
+          Fechas seleccionadas
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let data of poolOfContracts.other_camps.arrOtherDates">{{data.date}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="generalrow">
+
+      <div class="col">
+        <label for="inputTermEnd">Plazo final</label>
+        <input type="date"
+               id="inputTermEnd"
+               class="form-control"
+               placeholder="Plazo final"
+               [(ngModel)]="poolOfContracts.other_camps.termEnd"
+               [disabled]="!isJuridico">
+      </div>
+      <div class="col">
+        <label for="inputGarantiasTomadas">Garantías tomadas</label>
+        <select id="inputGarantiasTomadas"
+                class="form-control selectcontact"
+                [(ngModel)]="guaranteeSelected"
+                (change)="selectedGuarante()"
+                [disabled]="!isJuridico">
+          <option *ngFor="let data of listGuaranties" [value]="data.value">{{data.name}}</option>
+        </select>
+      </div>
+      <div class="card" style="width: 50rem;" *ngIf="poolOfContracts.other_camps.guararntee.length > 0">
+        <div class="card-header">
+          garantías seleccionadas
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"
+              *ngFor="let data of poolOfContracts.other_camps.guararntee; let i = index">
+            {{data.name}}
+            <button type="button"
+                    class="btn btn-danger" (click)="deleteGuarantee(i)">Eliminar</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <br>
+    <div class="generalrow">
+      <div class="col">
+        <div class="form-check">
+          <input class="form-check-input"
+                 type="radio"
+                 name="supervisor"
+                 id="supervisor"
+                 value="supervisor"
+                 [(ngModel)]="poolOfContracts.other_camps.supervisor"
+                 checked
+                 [disabled]="!isJuridico">
+          <label class="form-check-label"
+                 for="supervisor">
+            Supervisor
+          </label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-check">
+          <input class="form-check-input"
+                 type="radio"
+                 name="supervisor"
+                 id="solicitante"
+                 value="solicitante"
+                 [(ngModel)]="poolOfContracts.other_camps.supervisor"
+                 [disabled]="!isJuridico">
+          <label class="form-check-label" for="solicitante">
+            Solicitante
+          </label>
+        </div>
+      </div>
+
+      <div class="col" *ngIf="poolOfContracts.other_camps.supervisor">
+        <div class="col">
+          <label for="idNameSupervisorSolicitante">Nombre Supervisor/Solicitante</label>
+          <input type="text"
+                 id="idNameSupervisorSolicitante"
+                 class="form-control"
+                 placeholder="Nombre"
+                 [(ngModel)]="poolOfContracts.other_camps.nombreSupervisorSolicitante"
+                 [disabled]="!isJuridico">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="generalrow nopad" style="margin-top: 25px" *ngIf="isJuridico">
+      <div class="col-sm">
+        <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-success"
+                id="saveContractor"
+                (click)="assignContractor()">Asignar contratista seleccionado al proceso
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="generalrow"
+       *ngIf="poolOfContracts.contractor && poolOfContracts.contractor.toString() !== '0' && activitiesValueByContractor.length > 0">
+    <div style="margin-top: 50px">
+      <div class="procediments-container">
+        <div class="subtitle-item">Valores de contratista por acción</div>
+        <div class="actividades-container line-inputs">
+          <div class="boxes">
+            <ul>
+              <li class="module-box-container boxprocediments" *ngFor="let action of activitiesValueByContractor">
+                <div>
+                  <label class="labelform">{{action.action_name + ' ' + action.material_name}}</label>
+                  <div class="generalrow">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="Valor"
+                           [(ngModel)]="action.action_value"
+                           [disabled]="!isCoordinador">
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div *ngIf="actionsByPool && actionsByPool.length > 0 && isCoordinador">
+          <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-success"
+                  id="contractorActionValue"
+                  (click)="saveContractorActionsValues()">Guardar valores de contratista por acción
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow" *ngIf="poolOfContracts.contractor && poolOfContracts.contractor.toString() !== '0'">
+      <div style="margin-top: 50px">
+        <div class="procediments-container">
+          <div class="subtitle-item">Valores por acción por asociado</div>
+          <div class="subtitle-item" *ngIf="!actionsByPool || actionsByPool.length === 0">El proceso no tiene acciones
+            de
+            contratista
+            agregadas
+          </div>
+          <div class="actividades-container line-inputs" *ngIf="actionsByPool && actionsByPool.length > 0">
+            <div class="boxes">
+              <ul>
+                <li class="module-box-container boxprocediments" *ngFor="let action of actionsByPool">
+                  <div>
+                    <label class="labelform">{{action.action_name + ' ' + action.material_name}}</label>
+                    <div class="generalrow">
+                      <div class="pool-subtitle">Valor actual de la acción {{action.action_value}}</div>
+                      <div class="pool-subtitle" *ngIf="action.new_action_value && action.new_action_value > 0">Nuevo valor de la acción {{action.new_action_value}}</div>
+                      <ul class="sublist">
+                        <li class="list-boxes " *ngFor="let contribution of action.contributions">
+                          <label class="labelform bluesub">{{contribution.associated_name}}</label>
+                          <input type="number"
+                                 class="form-control"
+                                 placeholder="Valor"
+                                 (input)="calculateNewActionValue(action, $event.target.value)"
+                                 [(ngModel)]="contribution.contribution_value"
+                                 [disabled]="!isCoordinador">
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="generalrow nopad" *ngIf="actionsByPool && actionsByPool.length > 0 && isCoordinador">
+        <div class="col-sm">
+          <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-success"
+                  id="contarctorAactionsChanges"
+                  (click)="saveActionsValuesByPoolChanges()">Guardar valores por acción por asociado
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="generalrow" *ngIf="poolOfContracts.contractor && poolOfContracts.contractor.toString() !== '0'">
+      <div style="margin-top: 50px; margin-bottom: 50px">
+        <div class="subtitle-item">Costos imprevistos del proceso</div>
+        <label for="inputImprevisto">Valor</label>
+        <input type="number"
+               id="inputImprevisto"
+               class="form-control"
+               placeholder="valor"
+               [(ngModel)]="valueImprevisto"
+               [disabled]="!isCoordinador">
+      </div>
+      <div style="margin-top: 50px; margin-bottom: 50px">
+        <div class="col-sm">
+          <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-success" id="imprevistor"
+                  (click)="saveImprevistos()" *ngIf="isCoordinador">Guardar imprevistos
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow" *ngIf="procedures">
+      <div class="procediments-container">
+        <div class="subtitle-item" *ngIf="filteredProcedures && filteredProcedures.length !== 0">Agregar acciones al
+          proceso
+        </div>
+        <div class="subtitle-item" *ngIf="filteredProcedures && filteredProcedures.length === 0">No hay acciones
+          disponibles
+        </div>
+        <div class="actividades-container line-inputs">
+          <div class="boxes">
+            <ul>
+              <li class="module-box-container boxprocediments" *ngFor="let procedure of filteredProcedures">
+                <div>
+                  <input class="procedureinput" type="checkbox" id="{{procedure.id}}" value="{{procedure}}"
+                         name="procedure"
+                         [checked]="procedure.selected"
+                         (change)="procedure.selected = !procedure.selected"
+                         [disabled]="!isCoordinador">
+                  <label class="labelform" for="{{procedure.id}}">{{procedure.name}}</label>
+                  <div class="generalrow">
+                    <div class="pool-subtitle">Presupuesto</div>
+                    <ul class="sublist">
+                      <li class="list-boxes " *ngFor="let budget of procedure.budget">
+                        <input class="procedureinput" type="checkbox" id="{{procedure.id + '_' + budget.id}}"
+                               value="{{budget}}" name="budget"
+                               [checked]="budget.selected"
+                               (change)="budget.selected = !budget.selected; checkProcedureSelected(procedure);">
+                        <label class="labelform bluesub" for="{{procedure.id + '_' + budget.id}}">{{budget.action + ' '
+                          +
+                          budget.material}}</label>
+                      </li>
+                      <li class="list-boxes " *ngFor="let openTask of procedure.task_opens">
+                        <input class="procedureinput" type="checkbox" id="{{procedure.id + '_' + openTask.id}}"
+                               value="{{openTask}}"
+                               name="budget"
+                               [checked]="openTask.selected"
+                               (change)="openTask.selected = !openTask.selected; checkProcedureSelected(procedure);">
+                        <label class="labelform bluesub" for="{{procedure.id + '_' + openTask.id}}">Tarea abierta:
+                          {{openTask.description}}</label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="generalrow nopad" style="margin-bottom: 25px" *ngIf="isCoordinador">
+        <div class="col-sm">
+          <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-success"
+                  id="addnewActionsToPool"
+                  (click)="addNewActionsToPool()">Agregar nuevas acciones al proceso
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

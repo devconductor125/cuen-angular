@@ -1,0 +1,9 @@
+<div>
+      <a>
+        <input class="btn btn-success" #input type="file" (change)="onChange($event, input)" id="files" style="width:auto"/>
+      </a>
+
+  <div class="dropdown-divider"></div>
+
+      <a *ngIf="fileList.length > 0" (click)="uploadFiles()" type="button" class="btn btn-success">Cargar registros</a>
+</div>

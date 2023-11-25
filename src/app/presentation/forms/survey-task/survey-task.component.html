@@ -1,0 +1,1583 @@
+<div class="wrap container" *ngIf="survey">
+
+  <div class="row">
+    <div class="col-12">
+
+
+      <button (click)="printDiv()" class="print_btn"><i class="fas fa-print" style="margin-right: 5px"></i>
+        Imprimir Encuesta
+      </button>
+
+      <button type="button" class="print_btn"
+              style="float: right; cursor: pointer; background-color: green; margin-right: 10px"
+              (click)="updateSurvey()" *ngIf="isAdministrativo">
+        Actualizar
+      </button>
+
+    </div>
+  </div>
+
+  <div id="a-imprimir">
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Encuesta para Levantamiento
+          de Información
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <label for="fecha_visita" class="label_encuesta">Fecha de Visita</label>
+          <p type="text" class="form-control" id="fecha_visita" readonly>{{fechaVisita}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown-divider"></div>
+
+    <div class="row">
+      <div class="col-6">
+        <div>
+          <label for="nombre_predio" class="label_encuesta">Nombre del Predio</label>
+          <input type="text" class="form-control" [(ngModel)]="survey.property_name" id="nombre_predio"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="vinculacion_predio" class="label_encuesta">Vinculación con el Predio</label>
+          <input type="text" class="form-control" id="vinculacion_predio" [(ngModel)]="survey.property_correlation"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <div>
+          <label for="nombre_contacto" class="label_encuesta">Nombre de Contacto</label>
+          <input type="text" class="form-control" id="nombre_contacto" [(ngModel)]="survey.contact.contact_name"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          <label for="cedula_contacto" class="label_encuesta">Cédula de Ciudadanía</label>
+          <input type="text" class="form-control" id="cedula_contacto"
+                 [(ngModel)]="survey.contact.contact_id_card_number" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+      <div class="col-2">
+        <div>
+          <label for="socio_colanta" class="label_encuesta">Socio Colanta</label>
+          <select class="form-control" [(ngModel)]="survey.property_colanta_partner" id="socio_colanta"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-2">
+        <div>
+          <label for="comer_leche" class="label_encuesta">Comercializadora de Leche</label>
+          <select class="form-control" [(ngModel)]="survey.property_milk_merchant" id="comer_leche"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <div>
+          <label for="telefono_colanta" class="label_encuesta">Teléfono</label>
+          <input type="text" class="form-control" id="telefono_colanta"
+                 [(ngModel)]="survey.contact.contact_land_line_number" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          <label for="celular_colanta" class="label_encuesta">Celular</label>
+          <input type="text" class="form-control" id="celular_colanta"
+                 [(ngModel)]="survey.contact.contact_mobile_number" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          <label for="email_colanta" class="label_encuesta">Email</label>
+          <input type="text" class="form-control" id="email_colanta" [(ngModel)]="survey.contact.email"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="row">
+      <div class="col-6">
+        <div>
+          <label for="inmueble2" class="label_encuesta">Inmueble</label>
+
+          <select class="form-control" [(ngModel)]="survey.property_type.value" id="inmueble2"
+                  [disabled]="!isAdministrativo">
+            <option [ngValue]="0">No Seleccionado</option>
+            <option [ngValue]="1">Residencial</option>
+            <option [ngValue]="2">Comercial</option>
+            <option [ngValue]="3">Otro</option>
+          </select>
+
+          <input type="text" *ngIf="survey.property_type.value === 3" class="form-control" id="inmuebkle_otro"
+                 [(ngModel)]="survey.property_type.other" placeholder="Otro Inmueble" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="nombre_establecimiento" class="label_encuesta">Nombre de Establecimiento</label>
+          <input type="text" class="form-control" id="nombre_establecimiento" [(ngModel)]="survey.property_retail_name"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <label for="inmueble_direccion" class="label_encuesta">Dirección</label>
+          <input type="text" class="form-control" id="inmueble_direccion" [(ngModel)]="survey.address"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div>
+          <label for="inmueble_nit" class="label_encuesta">NIT</label>
+          <input type="text" class="form-control" id="inmueble_nit" [(ngModel)]="survey.nit"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="municipio_establecimiento" class="label_encuesta">Municipio</label>
+
+          <select class="form-control" [(ngModel)]="survey.municipality" id="municipio_establecimiento"
+                  [disabled]="!isAdministrativo">
+            <option [value]="0">Seleccione el Municipio</option>
+            <option *ngFor="let municipio of municipality" [ngValue]="municipio.name">{{municipio.name}}</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <div>
+          <label for="inmueble_zona" class="label_encuesta">Zona</label>
+          <input type="text" class="form-control" id="inmueble_zona" [(ngModel)]="survey.zone"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="corregimiento_establecimiento" class="label_encuesta">Corregimiento</label>
+          <input type="text" class="form-control" id="corregimiento_establecimiento" [(ngModel)]="survey.township"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="vereda_establecimiento" class="label_encuesta">Vereda</label>
+          <input type="text" class="form-control" id="vereda_establecimiento" [(ngModel)]="survey.lane"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div>
+          <label for="inmueble_sector" class="label_encuesta">Sector</label>
+          <input type="text" class="form-control" id="inmueble_sector" [(ngModel)]="survey.property_sector"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="microcuencas_establecimiento" class="label_encuesta">MicroCuenca</label>
+          <input type="text" class="form-control" id="microcuencas_establecimiento" [(ngModel)]="survey.micro_basin"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div>
+          <label for="fuentes_hidricas" class="label_encuesta">Fuente(s) Hídrica(s)</label>
+          <input type="text" class="form-control" id="fuentes_hidricas" [(ngModel)]="survey.hydrological_source"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="embalses" class="label_encuesta">Embalse</label>
+          <input type="text" class="form-control" id="embalses" [(ngModel)]="survey.property_reservoir"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+
+    <div class="row page-break">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Situación Jurídica del
+          Predio
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <div>
+          <label for="tenencia" class="label_encuesta">Tenencia(Papeles en Regla)</label>
+
+          <select class="form-control" [(ngModel)]="survey.property_legal_status.tenant_status" id="tenencia"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="posesion" class="label_encuesta">Posesión</label>
+
+          <select class="form-control" [(ngModel)]="survey.property_legal_status.possession" id="posesion"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="sucesion" class="label_encuesta">Sucesión</label>
+
+          <select class="form-control" [(ngModel)]="survey.property_legal_status.sussession" id="sucesion"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <label for="observaciones" class="label_encuesta">Observaciones</label>
+          <input type="text" class="form-control" id="observaciones" [(ngModel)]="survey.property_legal_status.comments"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Ecosistemas Naturales
+          presentes en el Predio
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <div>
+          <label for="bosque_ribera" class="label_encuesta">Bosque de Ribera</label>
+
+          <select class="form-control" [(ngModel)]="survey.natural_ecosystems_in_the_property.riverbank_forest"
+                  id="bosque_ribera" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="area_ribera" class="label_encuesta">Area de Ribera</label>
+
+          <select class="form-control" [(ngModel)]="survey.natural_ecosystems_in_the_property.riverbank_area"
+                  id="area_ribera" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="bosque_ladera" class="label_encuesta">Bosque Ladera</label>
+
+          <select class="form-control" [(ngModel)]="survey.natural_ecosystems_in_the_property.mountainside_forest"
+                  id="bosque_ladera" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <label for="nacimientos" class="label_encuesta">Nacimientos</label>
+
+          <select class="form-control" [(ngModel)]="survey.natural_ecosystems_in_the_property.spring" id="nacimientos"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Estado de la Fuente Hídrica
+          (%)
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <div>
+          <label for="protegida" class="label_encuesta">Protegida (%)</label>
+          <select class="form-control" [(ngModel)]="survey.natural_ecosystems_in_the_property.protected_source"
+                  id="protegida" [disabled]="!isAdministrativo">
+            <option [value]="null">N/A</option>
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div>
+          <label for="desprotegida" class="label_encuesta">Desprotegida (%)</label>
+          <input type="text" class="form-control" id="desprotegida"
+                 [(ngModel)]="survey.natural_ecosystems_in_the_property.un_protected" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+      <div class="col-3">
+        <div>
+          <label for="contaminada" class="label_encuesta">Contaminada (%)</label>
+          <input type="text" class="form-control" id="contaminada"
+                 [(ngModel)]="survey.natural_ecosystems_in_the_property.contaminated" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+      <div class="col-3">
+        <div>
+          <label for="erosionada" class="label_encuesta">Erosion (%)</label>
+          <input type="text" class="form-control" id="erosionada"
+                 [(ngModel)]="survey.natural_ecosystems_in_the_property.erosion" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Importancia Estratégica del
+          Predio
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+          <label for="conectividad_ecologica" class="label_encuesta">Conectividad Ecológica</label>
+
+          <select class="form-control" [(ngModel)]="survey.strategic_importance_of_the_property.ecological_connectivity"
+                  id="conectividad_ecologica" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="mejoramiento_agua" class="label_encuesta">Mejoramiento de la Calidad del Agua</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.strategic_importance_of_the_property.water_quality_improvement"
+                  id="mejoramiento_agua" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <div>
+          <label for="fuente_agua" class="label_encuesta">Fuente de agua para el abastecimiento (Municipal, Veredal
+            Institución Educativa, Privado)</label>
+
+          <select class="form-control" [(ngModel)]="survey.strategic_importance_of_the_property.supply_source"
+                  id="fuente_agua" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="agua_productivo" class="label_encuesta">Fuente de Agua para uso Productivo</label>
+
+          <select class="form-control" [(ngModel)]="survey.strategic_importance_of_the_property.productive_water_source"
+                  id="agua_productivo" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4">
+        <div>
+          <label for="regulacion_hidrica" class="label_encuesta">Regulación Hídrica</label>
+
+          <select class="form-control" [(ngModel)]="survey.strategic_importance_of_the_property.water_regulation"
+                  id="regulacion_hidrica" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          <label for="conservacion_bio" class="label_encuesta">Conservación de la Biodiversidad</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.strategic_importance_of_the_property.biodiversity_conservation"
+                  id="conservacion_bio" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          <label for="captura_carbono" class="label_encuesta">Captura de Carbono</label>
+
+          <select class="form-control" [(ngModel)]="survey.strategic_importance_of_the_property.sequestered_carbon"
+                  id="captura_carbono" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="row">
+        <div class="col-4">
+          <div>
+            <label for="bosque_conservacion" class="label_encuesta">Bosque en Alto Grado de Conservación</label>
+
+            <select class="form-control"
+                    [(ngModel)]="survey.strategic_importance_of_the_property.high_degree_of_conservation_forest"
+                    id="bosque_conservacion" [disabled]="!isAdministrativo">
+              <option [value]="true">SI</option>
+              <option [value]="false">NO</option>
+            </select>
+
+          </div>
+        </div>
+        <div class="col-4">
+          <div>
+            <label for="certif_carbono" class="label_encuesta">Certificación Venta Bonos de Carbono</label>
+
+            <select class="form-control"
+                    [(ngModel)]="survey.strategic_importance_of_the_property.carbon_bonds_sale_certification"
+                    id="certif_carbono" [disabled]="!isAdministrativo">
+              <option [value]="true">SI</option>
+              <option [value]="false">NO</option>
+            </select>
+
+          </div>
+        </div>
+        <div class="col-4">
+          <div>
+            <label for="psa" class="label_encuesta">PSA</label>
+
+            <select class="form-control" [(ngModel)]="survey.strategic_importance_of_the_property.psa" id="psa"
+                    [disabled]="!isAdministrativo">
+              <option [value]="true">SI</option>
+              <option [value]="false">NO</option>
+            </select>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Información SocioEconómica
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-4">
+        <div>
+          <label for="estrato_socioeconomico" class="label_encuesta">Estrato SocioEconómico</label>
+          <input type="text" class="form-control" id="estrato_socioeconomico"
+                 [(ngModel)]="survey.socio_economic_information.socioeconomic_layer" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="grupos_familiares" class="label_encuesta">Grupos Familiares</label>
+          <input type="text" class="form-control" id="grupos_familiares"
+                 [(ngModel)]="survey.socio_economic_information.number_of_family_groups" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="numero_viviendas" class="label_encuesta">Número de Viviendas</label>
+          <input type="text" class="form-control" id="numero_viviendas"
+                 [(ngModel)]="survey.socio_economic_information.housing_units" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-4">
+        <div>
+          <label for="personas" class="label_encuesta">Personas</label>
+          <input type="text" class="form-control" id="personas"
+                 [(ngModel)]="survey.socio_economic_information.housing_units_population"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="sisben" class="label_encuesta">SISBEN</label>
+
+          <select class="form-control" [(ngModel)]="survey.socio_economic_information.sisben" id="sisben"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="nivel" class="label_encuesta">Nivel</label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-4">
+        <div>
+          <label for="caja" class="label_encuesta">Tiene Caja de Compensación Familiar</label>
+
+          <select class="form-control" [(ngModel)]="cajaCompensacion" id="caja" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-sm" *ngIf="cajaCompensacion">
+        <div>
+          <label for="comp_si" class="label_encuesta">Sí</label>
+          <input type="text" class="form-control" id="comp_si"
+                 [(ngModel)]="survey.socio_economic_information.family_compensation_fund_name "
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-sm" *ngIf="!cajaCompensacion">
+        <div>
+          <label for="comp_no" class="label_encuesta">No</label>
+          <input type="text" class="form-control" id="comp_no"
+                 [(ngModel)]="survey.socio_economic_information.why_has_hasnt_family_compensation_fund"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Forma de Acceso</div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-3">
+        <div>
+          <label for="via_primaria" class="label_encuesta">Vía Primaria</label>
+
+          <select class="form-control" [(ngModel)]="survey.ways_of_access.primary_road" id="via_primaria"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div>
+          <label for="via_secundaria" class="label_encuesta">Vía Secundaria</label>
+
+          <select class="form-control" [(ngModel)]="survey.ways_of_access.secondary_road" id="via_secundaria"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div>
+          <label for="via_terciaria" class="label_encuesta">Vía Terciaria</label>
+
+          <select class="form-control" [(ngModel)]="survey.ways_of_access.third_class_road" id="via_terciaria"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div>
+          <label for="via_herradura" class="label_encuesta">Camino de Herradura</label>
+
+          <select class="form-control" [(ngModel)]="survey.ways_of_access.unpaved_road" id="via_herradura"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-12">
+        <div>
+          <label for="vivienda_vehiculo" class="label_encuesta">Es posible llegar a la vivienda en vehículo?</label>
+
+          <select class="form-control" [(ngModel)]="survey.ways_of_access.can_be_reached_by_car" id="vivienda_vehiculo"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="dropdown-divider"></div>
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Actividad Económica del
+          Predio
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-2">
+        <div>
+          <label for="ganaderia_leche" class="label_encuesta">Ganadería Leche</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.dairy_cattle"
+                  id="ganaderia_leche" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div>
+          <label for="ganaderia_doble" class="label_encuesta">Ganadería Doble Propósito</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.dual_purpose_cattle"
+                  id="ganaderia_doble" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div>
+          <label for="agricultura" class="label_encuesta">Agricultura</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.agriculture"
+                  id="agricultura" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div>
+          <label for="avicultura" class="label_encuesta">Avicultura</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.poultry_farming"
+                  id="avicultura" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="porcicultura" class="label_encuesta">Porcicultura</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.porcine_farming"
+                  id="porcicultura" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-4">
+        <div>
+          <label for="comercial" class="label_encuesta">Comercial</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.commercial" id="comercial"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="recreativo" class="label_encuesta">Recreativo</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.recreational"
+                  id="recreativo" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="residencial" class="label_encuesta">Residencial</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.residential"
+                  id="residencial" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+          <label for="certificacion_buenas" class="label_encuesta">Certificación de Buenas Prácticas (Rain Forest, Sello
+            Verde)</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.economic_activity_in_the_property.good_practices_certification"
+                  id="certificacion_buenas" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="autoconsumo" class="label_encuesta">Autoconsumo</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.self_consumption"
+                  id="autoconsumo" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="dropdown-divider"></div>
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: left; font-size: 14px; font-weight: bold; padding: 15px">Métodos del Laboreo</div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-4">
+        <div>
+          <label for="mecanizado" class="label_encuesta">Mecanizado</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.machining" id="mecanizado"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          <label for="manual" class="label_encuesta">Manual</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.handwork" id="manual"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          <label for="quimico" class="label_encuesta">Químico</label>
+
+          <select class="form-control" [(ngModel)]="survey.economic_activity_in_the_property.chemical" id="quimico"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row" *ngIf="survey.economic_activity_in_the_property.other">
+
+      <div class="col-12">
+        <div>
+          <label for="otro_mecan" class="label_encuesta">Otro</label>
+
+          <input type="text" class="form-control" id="otro_mecan"
+                 [(ngModel)]="survey.economic_activity_in_the_property.other" [disabled]="!isAdministrativo">
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+          <label for="area_total" class="label_encuesta">Área Total de Predio</label>
+          <input type="text" class="form-control" id="area_total"
+                 [(ngModel)]="survey.economic_activity_in_the_property.property_area" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="area_producc" class="label_encuesta">Área en Producción</label>
+          <input type="text" class="form-control" id="area_producc"
+                 [(ngModel)]="survey.economic_activity_in_the_property.production_area" [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+          <label for="coor" class="label_encuesta">Coordenadas Geográficas</label>
+          <p type="text" class="form-control" id="coor" readonly> Coordenadas Geográficas</p>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div>
+          <label for="latitud" class="label_encuesta">Latitud (N)</label>
+          <input type="text" class="form-control" id="latitud"
+                 [(ngModel)]="survey.economic_activity_in_the_property.latitude" [disabled]="true">
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div>
+          <label for="longitud" class="label_encuesta">Longitud (W)</label>
+          <input type="text" class="form-control" id="longitud"
+                 [(ngModel)]="survey.economic_activity_in_the_property.longitude" [disabled]="true">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Necesidades Básicas</div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-4">
+        <div>
+          <label for="red_alc" class="label_encuesta">Red de Alcantarillado</label>
+
+          <select class="form-control" [(ngModel)]="survey.basic_needs.sewerage_system" id="red_alc"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="red_acue" class="label_encuesta">Red de Acueducto</label>
+
+          <select class="form-control" [(ngModel)]="survey.basic_needs.aqueduct_network" id="red_acue"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="energia" class="label_encuesta">Energía</label>
+
+          <select class="form-control" [(ngModel)]="survey.basic_needs.electrical_network" id="energia"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Características de los
+          Vertimientos
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+
+          <label for="tipo_vert" class="label_encuesta">Tipo de Vertimiento</label>
+
+          <select class="form-control" [(ngModel)]="tipoVert" id="tipo_vert" (change)="selectTipoVert()"
+                  [disabled]="!isAdministrativo">
+            <option [value]="0">No Seleccionado</option>
+            <option [value]="1">Puntual</option>
+            <option [value]="2">No Puntual (Distribuida)</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="perio_vert" class="label_encuesta">Periodicidad del Vertimiento</label>
+
+          <select class="form-control" [(ngModel)]="selectPerio" id="perio_vert" (change)="selectPeriocidad()"
+                  [disabled]="!isAdministrativo">
+            <option [value]="0">No Seleccionado</option>
+            <option [value]="1">Continuo</option>
+            <option [value]="2">Intermitente</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+          <label for="horas_vert" class="label_encuesta">Horas de Vertimiento</label>
+
+          <select class="form-control" [(ngModel)]="horaVert" id="horas_vert" (change)="selectHoraVert()"
+                  [disabled]="!isAdministrativo">
+            <option [value]="0">No Seleccionado</option>
+            <option [value]="1">24 Horas</option>
+            <option [value]="2">Entre 24 y 12 Horas</option>
+            <option [value]="3">Menor a 12 Horas</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div>
+          <label for="fuente_vert" class="label_encuesta">Fuente Vertimiento</label>
+          <p type="text" class="form-control" id="fuente_vert" readonly>Fuente Vertimiento</p>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div>
+          <label for="sistema_trat" class="label_encuesta">Sistema de Tratamiento AR</label>
+          <p type="text" class="form-control" id="sistema_trat" placeholder="Sistema de Tratamiento AR" readonly></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+          <label for="lugar_vert" class="label_encuesta">Lugar de Vertimientos</label>
+
+          <select class="form-control" [(ngModel)]="lugarVert" id="lugar_vert" (change)="selectLugarVert()"
+                  [disabled]="!isAdministrativo">
+            <option [value]="0">No Seleccionado</option>
+            <option [value]="1">Fuente Hídrica</option>
+            <option [value]="2">Suelo</option>
+            <option [value]="3">Red de Alcantarillado Municipal</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="permiso_vert" class="label_encuesta">Permiso de Vertimientos</label>
+
+          <select class="form-control" [(ngModel)]="permisoVert" id="permiso_vert" (change)="selectPermisoVert()"
+                  [disabled]="!isAdministrativo">
+            <option [value]="0">No Seleccionado</option>
+            <option [value]="1">No</option>
+            <option [value]="2">Si</option>
+            <option [value]="3">En trámite</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+          <label for="permiso_aguas" class="label_encuesta">Permiso de Concesión de Aguas</label>
+
+          <select class="form-control" [(ngModel)]="permisoConc" id="permiso_aguas" (change)="selectPermisoConc()"
+                  [disabled]="!isAdministrativo">
+            <option [value]="0">No Seleccionado</option>
+            <option [value]="1">No</option>
+            <option [value]="2">Si</option>
+            <option [value]="3">En Trámite</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="estado_trat" class="label_encuesta">Estado del Sistema de Tratamiento</label>
+
+          <select class="form-control" [(ngModel)]="estadoTrat" id="estado_trat" (change)="selectPermisoConc()"
+                  [disabled]="!isAdministrativo">
+            <option [value]="0">No Seleccionado</option>
+            <option [value]="1">Regular</option>
+            <option [value]="2">Malo</option>
+            <option [value]="3">Bueno</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+          <label for="fecha_ult" class="label_encuesta">Fecha del Último mantenimiento al sistema de tratamiento</label>
+
+          <select class="form-control" [(ngModel)]="ultimoMant" id="fecha_ult" (change)="selectUltMant()"
+                  [disabled]="!isAdministrativo">
+            <option [value]="0">No Seleccionado</option>
+            <option [value]="1">No Recuerda</option>
+            <option [value]="2">Nunca</option>
+            <option [value]="3">1-2 Años</option>
+            <option [value]="4">2-3 Años</option>
+            <option [value]="5">3-4 Años</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="quien_trat" class="label_encuesta">Quién realiza el mantenimiento al sistema de
+            tratamiento</label>
+          <p type="text" class="form-control" id="quien_trat" placeholder="Quién?" readonly></p>
+          <p type="text" class="form-control" id="fecha_ult" placeholder="Fecha"
+             *ngIf="survey.shedding_characteristics.who_does_the_sewerage_system_maintenance.contractor" readonly>
+            Contrato</p>
+          <p type="text" class="form-control" id="fecha_ult" placeholder="Fecha"
+             *ngIf="survey.shedding_characteristics.who_does_the_sewerage_system_maintenance.owner" readonly>
+            Propietario</p>
+          <p type="text" class="form-control" id="fecha_ult" placeholder="Fecha"
+             *ngIf="survey.shedding_characteristics.who_does_the_sewerage_system_maintenance.other" readonly>Otro</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-6">
+        <div>
+          <label for="fijo_contacto" class="label_encuesta">Teléfono Fijo de Contacto</label>
+          <input type="text" class="form-control" id="fijo_contacto"
+                 [(ngModel)]="survey.shedding_characteristics.who_does_the_sewerage_system_maintenance.land_line_number"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+          <label for="celular_contacto" class="label_encuesta">Celular de Contacto</label>
+          <input type="text" class="form-control" id="celular_contacto"
+                 [(ngModel)]="survey.shedding_characteristics.who_does_the_sewerage_system_maintenance.mobile_number"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="row">
+      <div class="col-sm">
+        <div style="text-align: left; font-size: 14px; font-weight: bold; padding: 15px">Manejo de provechamiento de
+          residuos sólidos domésticos
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-2">
+        <div>
+          <label for="separa" class="label_encuesta">Separación</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.domestic_solid_waste_harvesting_handling.separation"
+                  id="separa" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div>
+          <label for="quema" class="label_encuesta">Quema</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.domestic_solid_waste_harvesting_handling.burning"
+                  id="quema" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div>
+          <label for="reciclaje" class="label_encuesta">Reciclaje</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.domestic_solid_waste_harvesting_handling.recycling"
+                  id="reciclaje" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div>
+          <label for="aprov" class="label_encuesta">Aprovechamiento</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.domestic_solid_waste_harvesting_handling.harnessing"
+                  id="aprov" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="ninguno" class="label_encuesta">Ninguno</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.domestic_solid_waste_harvesting_handling.none"
+                  id="ninguno" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: left; font-size: 14px; font-weight: bold; padding: 15px">Si hay actividades
+          agropecuarias en el predio, que tipo de productos aplica en las labores
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md">
+        <div>
+          <label for="pest" class="label_encuesta">Pesticidas</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.are_there_agricultural_activities_in_the_property.pesticides"
+                  id="pest" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-md">
+        <div>
+          <label for="abquimicos" class="label_encuesta">Abonos Químicos</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.are_there_agricultural_activities_in_the_property.chemical_fertilizers"
+                  id="abquimicos" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-md">
+        <div>
+          <label for="aborganicos" class="label_encuesta">Abonos Orgánicos</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.are_there_agricultural_activities_in_the_property.organic_fertilizers"
+                  id="aborganicos" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-md"
+           *ngIf="survey.shedding_characteristics.are_there_agricultural_activities_in_the_property.fertilizers_brands">
+        <div>
+          <label for="otros_prod" class="label_encuesta">Otros</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.are_there_agricultural_activities_in_the_property.fertilizers_description"
+                  id="otros_prod" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="dropdown-divider"></div>
+
+
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: left; font-size: 14px; font-weight: bold; padding: 15px">¿Cuál fue el manejo de los
+          residuos químicos agrícolas y/o ganaderos, tales como recipientes de fertilizantes, bolsas, vacunas y todos
+          los demas
+          residuos asociados a éstas practicas?
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-4">
+        <div>
+          <label for="sep_entr" class="label_encuesta">Separación y Entrega a entidades Recolectoras</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.chemical_and_or_cattle_raising_handling.separation_and_delivery_to_a_collecting_entity"
+                  id="sep_entr" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="quema_2" class="label_encuesta">Quema</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.chemical_and_or_cattle_raising_handling.burning"
+                  id="quema_2" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="entierro" class="label_encuesta">Entierro</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.chemical_and_or_cattle_raising_handling.burying"
+                  id="entierro" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-5">
+        <div>
+          <label for="no_sep" class="label_encuesta">No separación y entrega a saneamiento municipal</label>
+
+          <select class="form-control"
+                  [(ngModel)]="survey.shedding_characteristics.chemical_and_or_cattle_raising_handling.delivery_to_a_collecting_entity_without_separation"
+                  id="no_sep" [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+      <div class="col-7">
+        <div>
+          <label for="otro_Sep" class="label_encuesta">Otro</label>
+
+          <input type="text" class="form-control" id="otro_Sep"
+                 [(ngModel)]="survey.shedding_characteristics.chemical_and_or_cattle_raising_handling.other_describe"
+                 [disabled]="!isAdministrativo">
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="dropdown-divider"></div>
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">¿El predio ha sufrido alguna
+          afectación ambiental?
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-4">
+        <div>
+          <label for="afect_erosion" class="label_encuesta">Erosión</label>
+
+          <select class="form-control" [(ngModel)]="survey.environmental_damage.wetland_desiccation" id="afect_erosion"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="desec_hu" class="label_encuesta">Desecación de Humedales</label>
+
+          <select class="form-control" [(ngModel)]="survey.environmental_damage.wetland_desiccation" id="desec_hu"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div>
+          <label for="tala" class="label_encuesta">Tala de Nativos</label>
+
+          <select class="form-control" [(ngModel)]="survey.environmental_damage.natives_logging" id="tala"
+                  [disabled]="!isAdministrativo">
+            <option [value]="true">SI</option>
+            <option [value]="false">NO</option>
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-12">
+        <div>
+          <label for="otro_afec" class="label_encuesta">Otros</label>
+
+          <input type="text" class="form-control" id="otro_afec" [(ngModel)]="survey.environmental_damage.others"
+                 [disabled]="!isAdministrativo">
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="row">
+      <div class="col-12">
+        <div style="text-align: center; font-size: 14px; font-weight: bold; padding: 50px">Observaciones</div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-12">
+        <div>
+          <label for="observ" class="label_encuesta">Observaciones</label>
+          <input type="text" class="form-control" id="observ" [disabled]="true">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="dropdown-divider"></div>
+  </div>
+
+</div>

@@ -1,0 +1,116 @@
+<div id="contenido" class="contents-app" style="padding: 0px 50px 0px 50px">
+  <div class="generalrow">
+    <div class="col-sm">
+      <div style="text-align: center; font-size: 18px; font-weight: bold; padding: 50px">Registrar Nuevo Aporte</div>
+    </div>
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm plain-arrow">
+      <label for="labelselect1">Selecciona un Programa</label>
+      <select [(ngModel)]="procedure.program" class="custom-select form-control gradblue" name="programs"
+              (change)="getProgramProjects(procedure.program)" id="labelselect1">
+        <option *ngFor="let option of programs" [ngValue]="option">{{option.name}}</option>
+      </select>
+    </div>
+    <div class="col-sm plain-arrow">
+      <label for="labelselect2" *ngIf="projects">Selecciona un Proyecto</label>
+      <select [(ngModel)]="procedure.project" class="custom-select form-control gradblue" name="projects"
+              (change)="getProjectActivities(procedure.project)" *ngIf="projects">
+        <option *ngFor="let option of projects" [ngValue]="option" id="labelselect2">{{option.name}}</option>
+      </select>
+    </div>
+
+  </div>
+
+
+  <div class="generalrow" style="padding-left: 30px; padding-right: 30px; padding-top: 30px">
+
+    <div *ngIf="activities" style="font-size: 14px; font-weight: bold"> Actividades </div>
+
+    <div class="actividades-container line-inputs" *ngIf="activities">
+
+      <div class="boxes">
+        <ul>
+          <li *ngFor="let option of activities">
+            <label class="container"><label for="{{option.id}}">{{option.name}}</label>
+              <input type="radio" id="{{option.id}}" value="{{option}}" name="activity" (click)="setObjectActive(option)">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+  <div class="generalrow">
+    <div class="col-sm">
+      <div style="text-align: left; font-size: 14px; font-weight: bold; padding: 15px">Datos del Aporte</div>
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm plain-arrow">
+      <label for="labelselect01">Selecciona un Asociado</label>
+    <select [(ngModel)]="aporte.asociado_id" class="custom-select form-control gradblue" name="programs" id="labelselect01">
+      <option [value]="0">Seleccione un Asociado</option>
+      <option *ngFor="let option of asociado" [ngValue]="option.id">{{option.name}}</option>
+    </select>
+    </div>
+    <div class="col-sm">
+
+    </div>
+  </div>
+  <div class="dropdown-divider"></div>
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm plain-arrow">
+      <label for="labelselect01">Selecciona el año</label>
+    <select [(ngModel)]="aporte.year"
+            class="custom-select form-control gradblue"
+            name="programs"
+            id="selectYear">
+      <option [value]="0">Selecciona el año</option>
+      <option *ngFor="let option of arrYear"
+              [ngValue]="option.value">{{option.name}}</option>
+    </select>
+    </div>
+    <div class="col-sm">
+
+    </div>
+  </div>
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm plain-arrow">
+      <label for="tipoAporte">Tipo de Aporte</label>
+      <select [(ngModel)]="aporte.type" class="custom-select form-control gradblue" name="programs" id="tipoAporte">
+        <option [value]="0">Seleccione un Tipo de Aporte</option>
+        <option *ngFor="let option of tipoAporte" [ngValue]="option.id">{{option.name}}</option>
+      </select>
+    </div>
+    <div class="col-sm" *ngIf="aporte.type === '1' || aporte.type === '3'">
+      <label for="aporteAsociado">Aporte de Asociado ($)</label>
+      <input type="text" class="form-control simpleinput" id="aporteAsociado" aria-describedby="nombreProyecto" placeholder="Aporte del Asociado" [(ngModel)]="aporte.aporte" (ngModelChange)="formatSpecific($event, 1)">
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" style="margin-bottom: 50px" *ngIf="aporte.type === '2' || aporte.type === '3'">
+    <div class="col">
+      <cuenca-especies (notify)='getArrayEspecies($event)' [listadoE]="null"></cuenca-especies>
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 50px">
+    <div class="col-sm">
+      <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" (click)="saveAporte()">Guardar</button>
+    </div>
+  </div>
+
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,180 @@
+<div class="generalrow">
+
+
+        <div class="title-section" *ngIf="!boolInModal">
+          <div class="col-10 float-left">
+
+            <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+              <div style="display: table-cell; vertical-align: middle">
+                <div style="text-align: center" class="task_title"></div>
+                <div class="titlechapterAp">Cargar Detalles de Presupuesto</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="contents-app" *ngIf="listProgram.length > 0">
+          <div class="row">
+
+            <div class="col-sm col-md">
+              <label for="activities">Selecciona un Programa</label>
+              <!--[(ngModel)]="contractor.type_person"-->
+              <select [(ngModel)]="createDetail.program" class="custom-select form-control gradblue" name="proyecto"
+                      id="proyecto" (change)="setProgram($event.target.value)">
+                <option [value]="0">Seleccione</option>
+                <option *ngFor="let program of listProgram" [value]="program.id">{{program.name}}</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="contents-app" *ngIf="listProject.length > 0">
+          <div class="row">
+
+            <div class="col-sm col-md">
+              <label for="activities">Selecciona un Proyecto</label>
+              <!--[(ngModel)]="contractor.type_person"-->
+              <select [(ngModel)]="createDetail.project" class="custom-select form-control gradblue" name="program"
+                      id="program" (change)="setProject($event.target.value)">
+                <option [value]="0">Seleccione</option>
+                <option *ngFor="let project of listProject" [value]="project.id">{{project.name}}</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="contents-app" *ngIf="listActivitiesFinancial.length > 0">
+
+          <div class="row">
+
+            <div class="col-sm col-md">
+              <label for="activities">Selecciona la Actividad</label>
+              <!--[(ngModel)]="contractor.type_person"-->
+              <select [(ngModel)]="createDetail.activity" class="custom-select form-control gradblue" name="person_type"
+                      id="activities" (change)="setActions($event.target.value)">
+                <option [value]="0">Seleccione</option>
+                <option *ngFor="let listActivity of listActivitiesFinancial" [value]="listActivity.activite_id">{{listActivity.activite_name}}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <hr *ngIf="listActionsFinancial.length > 0"/>
+
+          <div class="row" *ngIf="listActionsFinancial.length > 0">
+
+            <div class="col-sm col-md">
+              <label for="associated">Selecciona el Asociado</label>
+              <!--[(ngModel)]="contractor.type_person"-->
+              <select [(ngModel)]="createDetail.associated" class="custom-select form-control gradblue" name="person_type"
+                      id="associated">
+                <option [value]="0">Seleccione</option>
+                <option *ngFor="let listAssociated of listAssociatedFinancial" [ngValue]="listAssociated">{{listAssociated.associate_name}}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <hr *ngIf="listActionsFinancial.length > 0"/>
+
+          <div class="row" *ngIf="listActionsFinancial.length > 0">
+
+            <div class="col-sm col-md">
+              <label for="actions">Selecciona la Acción</label>
+              <!--[(ngModel)]="contractor.type_person"-->
+              <select [(ngModel)]="createDetail.action" class="custom-select form-control gradblue" name="person_type"
+                      id="actions" (change)="setDetails($event.target.value)">
+                <option [value]="0">Seleccione</option>
+                <option *ngFor="let listAction of listActionsFinancial" [value]="listAction.action_id">{{listAction.action_name}}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <hr *ngIf="listDetailsFinancial.length > 0"/>
+
+          <div class="row" *ngIf="listDetailsFinancial.length > 0">
+
+            <div class="col-sm col-md">
+              <label for="details">Selecciona el Detalle</label>
+              <!--[(ngModel)]="contractor.type_person"-->
+              <select [(ngModel)]="createDetail.detail" class="custom-select form-control gradblue" name="person_type"
+                      id="details" (change)="setValue($event.target.value)">
+                <option [value]="0">Seleccione</option>
+                <option *ngFor="let listDetail of listDetailsFinancial" [value]="listDetail.id">{{listDetail.name}}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <hr *ngIf="createDetail.detail + '' !== '0' && createDetail.associated + '' !== '0'"/>
+
+          <ng-container *ngIf="createDetail.detail + '' !== '0' && createDetail.associated + '' !== '0'">
+
+
+            <div class="row" >
+
+              <div class="col-sm col-md">
+                <label for="valueIngreso">Ingrese el valor ($)</label>
+                <input class="form-control"
+                       id="valueIngreso" [(ngModel)]="createDetail.value"
+                       (ngModelChange)="formatSpecific($event, 1)"/>
+              </div>
+
+              <div class="col-sm col-md"
+                   *ngIf="!boolInModal">
+                <label for="dateIngreso">Año</label>
+                <select class="form-control"
+                        [(ngModel)]="createDetail.year"
+                        id="dateIngreso">
+                  <option [value]="'0'">Seleccione el año</option>
+                  <option *ngFor="let year of arrYear"
+                          [value]="year.name">{{year.name}}</option>
+                </select>
+              </div>
+
+            </div>
+
+          </ng-container>
+
+
+
+          <hr/>
+
+          <div class="row"
+               *ngIf="!boolInModal"
+               style="margin-bottom: 10px">
+            <div class="col-sm">
+              <button type="button" class="btn btn-outline-primary" style="width: 100%; cursor: pointer;"
+                      (click)="sendDetail()">Insertar Detalle
+              </button>
+            </div>
+          </div>
+
+          <div class="row"
+               style="margin-bottom: 10px"
+               *ngIf="boolInModal">
+            <div class="col-sm">
+              <button type="button"
+                      class="btn btn-outline-primary"
+                      style="width: 100%; cursor: pointer;"
+                      data-dismiss="modal">cancelar
+              </button>
+            </div>
+
+            <div class="col-sm">
+              <button type="button"
+                      class="btn btn-outline-primary"
+                      style="width: 100%; cursor: pointer;"
+                      (click)="sendDetail()">Reasignar
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+
+</div>

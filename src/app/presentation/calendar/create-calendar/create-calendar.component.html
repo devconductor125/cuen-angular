@@ -1,0 +1,107 @@
+<div id="contenido" class="contents-app">
+  <div class="title-section">
+    <div class="title-base add_title"></div>
+    <div class="titlechapterAp">Registrar Monitoreo o Mantenimiento</div>
+  </div>
+
+<div class="generalrow">
+
+  <div class="col-sm">
+    <label class="subtitle-item">Titulo</label>
+      <input type="text" class="form-control" [(ngModel)]="monitoreo.title" placeholder="Título del Monitoreo o Mantenimiento"/>
+  </div>
+
+  <div class="col-sm plain-arrow">
+    <label for="type" class="subtitle-item">Tipo</label>
+    <select id="type" class="form-control custom-select gradblue" [(ngModel)]="monitoreo.type">
+      <option [value]="0">Seleccione</option>
+      <option *ngFor="let type of types_monitoreos" [ngValue]="type.id + ''">{{type.name}}</option>
+    </select>
+  </div>
+
+</div>
+
+<div class="generalrow">
+  <div class="col-sm plain-arrow">
+    <label for="labelselect10" class="subtitle-item">Selecciona un Procedimiento</label>
+    <select [(ngModel)]="monitoreo.procedure" class="custom-select form-control gradblue" name="selected_project" id="labelselect10" (change)="getGeoJson()">
+      <option [value]="'0'">Seleccione el Procedimiento</option>
+      <option *ngFor="let procedure of procedures" [ngValue]="procedure.id + ''">{{procedure.name}}</option>
+    </select>
+  </div>
+</div>
+
+<cuenca-mapa-calendar (notify)='clickInMap($event)' *ngIf="monitoreo.procedure && monitoreo.procedure !== '0'"></cuenca-mapa-calendar>
+
+<div style="margin-bottom: 10px" *ngIf="acciones.length > 0">
+  <div class="generalrow" style="background-color: #dcedfb; color: #333; padding: 10px; border-radius: 15px" *ngFor="let accion of acciones" id="selected">
+    <div class="col-sm">
+      {{accion.action_name}}
+    </div>
+    <div class="col-sm">
+      {{accion.material_name}}
+    </div>
+  </div>
+</div>
+
+<div class="generalrow" style="margin-bottom: 10px">
+
+  <div class="col-sm plain-arrow">
+    <label for="rol0" class="subtitle-item" >Rol</label>
+    <select [(ngModel)]="monitoreo.role" class="custom-select form-control gradblue" name="selected_role"
+            (change)="getUsers()" id="rol0">
+      <option [value]="0">Seleccione un Rol</option>
+      <option *ngFor="let option of roles" [ngValue]="option.id">{{option.name}}</option>
+    </select>
+  </div>
+
+  <div class="col-sm">
+    <div class="plain-arrow" *ngIf="users.length>0">
+      <label for="usuario" class="subtitle-item">Usuario</label>
+      <select [(ngModel)]="monitoreo.usuario" class="custom-select form-control gradblue" name="selected_user"
+              [disabled]="users.length === 0" id="usuario">
+        <option [value]="0">Seleccione un Usuario</option>
+        <option *ngFor="let option of users" [ngValue]="option.id">{{option.name}}</option>
+      </select>
+    </div>
+  </div>
+
+</div>
+
+<div class="generalrow">
+  <div class="col-12 col-md-6 col-lg-6 left">
+    <label for="labelselect1000">Fecha Inicio</label>
+    <div class="form-control" id="labelselect1000">
+      <input type="date" style="width: 100%; text-align: center; padding: 5px; border-radius: 5px; font-weight: bold" [(ngModel)]="monitoreo.start"/>
+    </div>
+  </div>
+  <div class="col-12 col-md-6 col-lg-6 left">
+    <label for="labelselect20">Fecha Fin</label>
+    <div class="form-control" id="labelselect20">
+      <input type="date" style="width: 100%; text-align: center; padding: 5px; border-radius: 5px; font-weight: bold" [(ngModel)]="monitoreo.end"/>
+    </div>
+  </div>
+</div>
+
+<div class="generalrow">
+  <div class="col-sm">
+    <label for="labelselect30">Comentario</label>
+    <div class="form-control" id="labelselect30">
+      <textarea type="text" style="width: 100%; padding: 5px; border-radius: 5px; font-weight: bold" placeholder="Comentario del Monitoreo o Mantenimiento" [(ngModel)]="monitoreo.comentario">{{monitoreo.comentario}}</textarea>
+    </div>
+  </div>
+</div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow">
+    <div class="col-sm">
+      <button type="button" class="mainbtn plaingreenlight right margintop" style=" cursor: pointer;" (click)="guardar()">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+
+
+</div>

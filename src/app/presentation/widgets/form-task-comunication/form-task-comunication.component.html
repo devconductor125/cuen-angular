@@ -1,0 +1,212 @@
+<div class="dropdown-divider"></div>
+
+<div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm-12 col-md-12">
+      <div class="subtitle-item">Listado de Tareas Registradas</div>
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px" *ngIf="listFormData.length === 0">
+    <div class="col-sm-12 col-md-12">
+      <div class="subtitle-item" style="text-align: center">No se han registrado eventos</div>
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px" style="font-size: 10px; font-weight: lighter"
+       *ngIf="listFormData.length > 0">
+    <div class="col-sm-12 col-md">
+      <div class="subtitle-item">Nombre de Evento</div>
+    </div>
+    <div class="col-sm-12 col-md" style="font-size: 10px; font-weight: lighter">
+      <div class="subtitle-item">Fecha</div>
+    </div>
+    <div class="col-sm-12 col-md">
+    </div>
+  </div>
+
+  <ng-container *ngIf="listFormData.length > 0">
+    <div class="generalrow" style="margin-bottom: 10px" *ngFor="let formData of listFormData">
+      <div class="col-sm-12 col-md-12">
+        <cuenca-form-edit-task-comunication [formData]="formData" [listAssociated]="listAssociated" [task]="taskId"
+                                            style="width: 100%"
+                                            (notify)='messageRegisterForm($event)'></cuenca-form-edit-task-comunication>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
+
+<div class="dropdown-divider"></div>
+
+<div style="margin-top: 100px">
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm-12 col-md-12">
+      <div class="subtitle-item">Formulario Tarea de Comunicaciones</div>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="basin" class="subtitle-item">Cuenca</label>
+      <input class="form-control" id="basin" type="text" [(ngModel)]="formData.basin"/>
+    </div>
+
+    <div class="col-sm">
+      <label for="minicipality" class="subtitle-item">Municipio</label>
+      <input class="form-control" id="minicipality" type="text" [(ngModel)]="formData.municipality"/>
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="sidewalk" class="subtitle-item">Vereda</label>
+      <input class="form-control" id="sidewalk" type="text" [(ngModel)]="formData.sidewalk"/>
+    </div>
+
+    <div class="col-sm">
+      <label for="objetive_group" class="subtitle-item">Grupo Objetivo</label>
+      <select [(ngModel)]="formData.objective_group" class="custom-select form-control gradblue" name="objetive_group"
+              id="objetive_group">
+        <option [value]="0">Seleccione</option>
+        <option>Adultos</option>
+        <option>Adultos - Jóvenes</option>
+        <option>Adultos - Estudiantes</option>
+        <option>Estudiantes</option>
+        <option>Estudiantes - Niños</option>
+        <option>Jóvenes</option>
+        <option>Niños</option>
+        <option>Tercera Edad</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="date" class="subtitle-item">Fecha</label>
+      <input [(ngModel)]="formData.date" id="date" aria-describedby="date" class="form-control simpleinput"
+             type="date" name="date">
+    </div>
+
+    <!--
+        <div class="col-sm">
+          <label for="associated" class="subtitle-item">Asociado</label>
+          <select [(ngModel)]="formData.associated_name" class="custom-select form-control gradblue" name="associated" id="associated">
+            <option [value]="0">Seleccione</option>
+            <option *ngFor="let associated of listAssociated">{{associated.associated_name}}</option>
+          </select>
+        </div>
+    -->
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="number_attendees" class="subtitle-item">Numero de Asistentes</label>
+      <input [(ngModel)]="formData.number_attendees" id="number_attendees" min="0" class="form-control simpleinput"
+             type="number" name="number_attendees">
+    </div>
+
+    <div class="col-sm">
+      <label for="number_trees" class="subtitle-item">Numero de Árboles</label>
+      <input [(ngModel)]="formData.number_trees" id="number_trees" min="0" class="form-control simpleinput"
+             type="number" name="number_trees">
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm plain-arrow">
+      <label for="experence_consolidated" class="subtitle-item">Tipo de Experiencia Consolidado</label>
+      <select [(ngModel)]="formData.experence_consolidated" class="custom-select form-control gradblue"
+              name="experence_consolidated" id="experence_consolidated">
+        <option [value]="0">Seleccione</option>
+        <option>Experiencia</option>
+        <option>Socialización</option>
+      </select>
+    </div>
+
+    <div class="col-sm plain-arrow">
+      <label for="experence_type" class="subtitle-item">Tipo de Experiencia</label>
+      <select [(ngModel)]="formData.experence_type" class="custom-select form-control gradblue" name="experence_type"
+              id="experence_type">
+        <option [value]="0">Seleccione</option>
+        <option>Mesa Ambiental</option>
+        <option>Recorrido</option>
+        <option>Semana del Medio Ambiente</option>
+        <option>Siembra</option>
+        <option>Siembra Experiencial</option>
+        <option>Socialización</option>
+        <option>Socialización Acción Comunal</option>
+        <option>Socialización CTA</option>
+        <option>Socialización GRUPO EPC</option>
+        <option>Socialización Evento AgroColanta</option>
+        <option>Socialización Evento Cultural</option>
+        <option>Taller Ambiental</option>
+        <option>Taller Educativo Siembra</option>
+        <option>Taller Socialización</option>
+        <option>Toma AgroColanta</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="event_name" class="subtitle-item">Descripción del evento</label>
+      <input [(ngModel)]="formData.event_name" id="event_name" class="form-control simpleinput"
+             type="text" name="event_name">
+    </div>
+
+    <div class="col-sm plain-arrow">
+      <label for="asistent_list" class="subtitle-item">Lista de Asistencia</label>
+      <select [(ngModel)]="formData.asistent_list" class="custom-select form-control gradblue" name="asistent_list"
+              id="asistent_list">
+        <option [value]="0">Seleccione</option>
+        <option>Si</option>
+        <option>No</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+    <div class="col-sm plain-arrow">
+      <label for="registry_photographic" class="subtitle-item">Registro Fotográfico</label>
+      <select [(ngModel)]="formData.registry_photographic" class="custom-select form-control gradblue"
+              name="registry_photographic" id="registry_photographic">
+        <option [value]="0">Seleccione</option>
+        <option value="Si">Si</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+  <!--*ngIf="formData.registry_photographic === 'Si'"-->
+  <cuenca-drag-and-drop-form-comunication #filesBox (notify)='getListImages($event)'></cuenca-drag-and-drop-form-comunication>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" (click)="createForm()"
+              [disabled]="isDisabled">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</div>

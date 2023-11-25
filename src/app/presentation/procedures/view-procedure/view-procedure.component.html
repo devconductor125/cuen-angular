@@ -1,0 +1,219 @@
+<div class="contents-app">
+  <div *ngIf="procedure && procedure.name && tasks">
+    <div class="main-container contentpadding">
+      <div class="module-box-container datainfo-container">
+        <div class="blockcontainer col-12 col-md-6 col-lg-6" style="border-right: 1px solid #000000">
+          <div class="procedure-title fullsize">Nombre del Procedimiento:</div>
+          <div class="procedure-name">{{procedure.name}}</div>
+        </div>
+        <div class="blockcontainer col-12 col-md-6 col-lg-6">
+          <div class="description-procedure">Descripción:</div>
+          <div class="procedure-name">{{procedure.description}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-container">
+
+      <div class="generalrow">
+        <div class="subtitle-item">Actividades a Realizar</div>
+      </div>
+
+      <ng-container *ngFor="let actividad of procedure.activities">
+
+        <div class="col-12 col-md-6 col-lg-6 left">
+          <div class="activitiesbox">
+            <ng-container>
+              <div class="procedure-name infoact"><span style="color: #0c5593">Actividad: </span> {{actividad.name}}</div>
+            </ng-container>
+          </div>
+        </div>
+
+      </ng-container>
+
+    </div>
+
+
+    <div class="contents-app">
+      <!--INFO PROCEDURE-->
+      <div class="predioproyect col-12 col-md-6 col-lg-7 col-xl-8">
+
+        <!--PADRE-->
+        <div class="table-container" *ngIf="procedure.parent_procedure.name">
+          <div class="header-module">
+            <h3 class="title-module">Procedimiento Padre</h3>
+          </div>
+          <table class="table">
+            <thead class="items-table">
+            <tr>
+              <th scope="col">Nombre del Procedimiento</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td scope="row">{{procedure.parent_procedure.name}}</td>
+              <td scope="row">
+                <a class="mainbtn bluebtn verall"
+                   routerLink="/app/view-procedures/{{procedure.parent_procedure.id}}">Ver</a>
+              </td>
+            </tr>
+            </tbody>
+
+          </table>
+        </div>
+
+        <!--HIJOS-->
+        <div class="table-container" *ngIf="procedure.nest_procedure.length > 0">
+          <div class="header-module">
+            <h3 class="title-module">Procedimientos Anidados</h3>
+          </div>
+          <table class="table">
+            <thead class="items-table">
+            <tr>
+              <th scope="col">Nombre del Procedimiento</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let anidado of procedure.nest_procedure">
+              <td scope="row">{{anidado.name}}</td>
+              <td scope="row">
+                <a class="mainbtn bluebtn verall" routerLink="/app/view-procedures/{{anidado.id}}">Ver</a>
+              </td>
+            </tr>
+            </tbody>
+
+          </table>
+        </div>
+
+
+        <div class="module-box-container">
+          <div class="header-module">
+            <h3 class="title-module">Predios</h3>
+          </div>
+          <table class="table">
+            <thead class="items-table">
+            <tr>
+              <th scope="col">Nombre del predio</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngIf="predioId">
+              <th scope="row">{{predio}}</th>
+              <td>
+                <a class="mainbtn bluebtn" routerLink="/app/view-potencial/{{predioId}}">Ver</a>
+              </td>
+            </tr>
+            </tbody>
+
+            <tbody *ngIf="!predioId">
+            <tr>
+              <td><i class="fas fa-exclamation-circle" style="color: red"></i> Sin predio</td>
+            </tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+      <!--STATUS PROJECT-->
+      <div class="statusproyect col-12 col-md-6 col-lg-5 col-xl-4">
+        <div class="statusejectcont">
+          <div class="title-module-micro">Estado de ejecucion</div>
+          <div class="percentmicro">
+            <div class="percetnumber">{{ percentage | number : '1.0-0'}}%</div>
+            <div class="percentlinecont">
+              <div class="basepercent"></div>
+              <div class="percentline" [ngStyle]="{'width':percentage + '%'}"></div>
+            </div>
+          </div>
+        </div>
+        <div class="budgetproyect" *ngIf="budgetP">
+          <div class="title-module-micro">Presupuesto asignado</div>
+          <div class="number-budget">$ {{budgetP.total_comand | number:'1.2-5'}}</div>
+          <div class="title-module-micro">Presupuesto ejecutado</div>
+          <div class="number-budget">$ {{budgetP.total_execute | number:'1.2-5'}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents-app">
+      <div class="infoproyect col-12 col-md-12 col-lg-7 col-xl-8">
+        <div class="taskpreview">
+          <div class="module-box-container">
+            <div class="header-module">
+              <h3 class="title-module">Tareas</h3>
+              <a class="mainbtn plainbluedark right" routerLink="/app/create-tasks/{{procedure.id}}">Crear Tarea</a>
+              <a class="linebtn linebluelight right marginright" routerLink="/app/tasks/">Ver todas</a>
+            </div>
+            <div class="maintablecontainer">
+              <table class="table" *ngIf="tasks.length > 0">
+                <thead class="items-table">
+                <tr>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Rol</th>
+                  <th scope="col">Usuario</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Fecha</th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let task of tasks">
+                  <th scope="row">{{task.task_sub_type_name}}</th>
+                  <td>{{task.user_role}}</td>
+                  <td>{{task.user_name}}</td>
+                  <td>
+                    <div class="status pending">{{task.task_status_name}}</div>
+                  </td>
+                  <td style="text-align: center">{{getDateWithoutHour(task.created_at)}}</td>
+                  <td style="text-align: right">
+                    <a class="mainbtn bluebtn seemore-module" routerLink="/app/view-tasks/{{task.id}}" *ngIf="!task.task_open_sub_type_id">Ver</a>
+                    <a class="mainbtn bluebtn seemore-module" routerLink="/app/tarea-open/{{task.id + (task.task_open_sub_type_id ? '_open' : '')}}" *ngIf="task.task_open_sub_type_id">Ver</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div *ngIf="tasks.length === 0">
+                No hay tareas Registradas
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="predioproyect col-12 col-md-12 col-lg-5 col-xl-4 people">
+        <div class="peopleproyect">
+          <div class="title-module-micro">Involucrados en el proyecto</div>
+          <ul class="listpersonsproyect" *ngIf="intervention.length > 0">
+            <li class="people-proyect">
+              <div>
+                <div class="row">
+                  <div class="subtit-project col-sm">Rol</div>
+                  <div class="subtit-project col-sm">Usuario</div>
+                </div>
+              </div>
+            </li>
+            <li class="people-proyect" *ngFor="let interventor of intervention">
+              <div>
+                <div class="row">
+                  <div class="role-dev col-sm">{{interventor.role_name}}</div>
+                  <div class="role-dev col-sm">{{interventor.name_with_last_names}}</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="listpersonsproyect" *ngIf="intervention.length === 0">
+            <li class="people-proyect">
+              <div>Sin Intenventores</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

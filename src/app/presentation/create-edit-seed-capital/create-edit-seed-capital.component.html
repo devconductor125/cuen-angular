@@ -1,0 +1,115 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Información Completa</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" *ngIf="modelSeddCapital">
+
+    <div *ngIf="!bollCreate">
+      <div class="row">
+        <div class="col-sm col-md">
+          <label for="dateCrate">Fecha creación</label>
+          <input class="form-control"
+                 type="text"
+                 [(ngModel)]="modelSeddCapital.created_at"
+                 id="dateCrate" disabled/>
+        </div>
+
+        <div class="col-sm col-md">
+          <label for="dateEdit">Fecha Edición</label>
+          <input class="form-control"
+                 type="text"
+                 [(ngModel)]="modelSeddCapital.updated_at"
+                 disabled
+                 id="dateEdit"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm col-md">
+          <label for="valueOriginUsd">Valor inicial USD</label>
+          <input class="form-control"
+                 type="text"
+                 [(ngModel)]="modelSeddCapital.valueUsdOrigin"
+                 id="valueOriginUsd" disabled/>
+        </div>
+
+        <div class="col-sm col-md">
+          <label for="valueOriginCo">Valor inicial CO</label>
+          <input class="form-control"
+                 type="text"
+                 [(ngModel)]="modelSeddCapital.valueCoOrigin"
+                 id="valueOriginCo" disabled/>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row" >
+
+      <div class="col-sm col-md">
+        <label for="code">NIT</label>
+        <input class="form-control"
+               id="code"
+               type="text"
+               [(ngModel)]="modelSeddCapital.nit" disabled/>
+      </div>
+
+      <div class="col-sm col-md">
+        <label for="exampleFormControlSelect1">Aportante</label>
+        <select class="form-control"
+                id="exampleFormControlSelect1"
+                (change)="changeNit()"
+                [(ngModel)]="modelSeddCapital.associated.id">
+          <option [value]="null">Seleccionar asociado</option>
+          <option *ngFor="let associated of arrAssociated"
+                  [ngValue]="associated.id">{{associated.name}}</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="row" >
+
+      <div class="col-sm col-md">
+        <label for="value">Valor en USD</label>
+        <input class="form-control"
+               type="text"
+               id="value"
+               (ngModelChange)="formatSpecific($event, 1)"
+               [(ngModel)]="modelSeddCapital.valueUsd"/>
+      </div>
+
+      <div class="col-sm col-md">
+        <label for="valuePeso">Valor en pesos</label>
+        <input class="form-control"
+               type="text"
+               (ngModelChange)="formatSpecific($event, 2)"
+               [(ngModel)]="modelSeddCapital.valueCo"
+               id="valuePeso"/>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm col-md">
+        <label for="codeCenter">Centro</label>
+        <input class="form-control"
+               type="text"
+               [(ngModel)]="modelSeddCapital.codeCenter"
+               id="codeCenter"/>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal">Cerrar</button>
+    <button type="button"
+            class="btn btn-primary"
+            (click)="saveSeedCapital()"
+            data-dismiss="modal">Guardar</button>
+  </div>
+</div>

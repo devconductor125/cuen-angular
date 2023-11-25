@@ -1,0 +1,27 @@
+<div class="wrap container">
+
+      <div class="row">
+        <div class="col-12">
+
+
+          <button type="button" class="btn btn-warning" id="formato1"
+                  style="float: left; cursor: pointer; margin-right: 10px"
+                  *ngIf="isAdministrativo" (click)="format('1')" [disabled]="disabledFormat1" [hidden]="disabledFormat1">
+            Cambiar a Formato Viejo
+          </button>
+
+          <button type="button" class="btn btn-warning" id="formato2"
+                  style="float: left; cursor: pointer;"
+                  *ngIf="isAdministrativo" (click)="format('2')" [disabled]="disabledFormat2" [hidden]="disabledFormat2">
+            Cambiar a Formato Nuevo
+          </button>
+
+        </div>
+      </div>
+
+  <hr *ngIf="isAdministrativo" />
+
+      <cuenca-survey-format-one [surveyID]="idPredio" *ngIf="formatSurvey + '' === '1'"></cuenca-survey-format-one>
+      <cuenca-survey-format-two [surveyID]="idPredio" *ngIf="formatSurvey + '' === '2'"></cuenca-survey-format-two>
+
+</div>

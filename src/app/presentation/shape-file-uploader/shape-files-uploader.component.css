@@ -1,0 +1,7 @@
+.btn_s {
+  font-size: 12px;
+}
+
+btn_s > button {
+  background-color: #1d2124;
+}

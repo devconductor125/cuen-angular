@@ -1,0 +1,122 @@
+<ng-container>
+  <div class="header-module">
+    <h3 class="title-module">Tareas pendientes</h3>
+    <a class="mainbtn plainbluelight right" routerLink="/app/tasks">Ver todas</a>
+  </div>
+  <div class="maintablecontainer">
+    <table class="table">
+      <thead class="items-table">
+      <tr>
+        <th scope="col">Tipo</th>
+        <th scope="col">Predio</th>
+        <th scope="col">Procedimiento</th>
+        <th scope="col">Asignado</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+
+      <tbody *ngIf="tareas.length > 0">
+      <ng-container *ngFor="let tarea of tareas; index as i">
+        <tr *ngIf="i < 10">
+          <th>{{tarea.task_type_name}}</th>
+          <td>{{tarea.potential_detail ? tarea.potential_detail.name : 'n/a'}}</td>
+          <td>{{tarea.process ? tarea.process.name : 'n/a'}}</td>
+          <td>{{tarea.users ? tarea.users.email : 'n/a'}}</td>
+          <td>
+            <!--SEGUN EL TIPO DE TAREA-->
+            <a class="linebtn linebluelight right" routerLink="/app/view-tasks/{{tarea.id}}" *ngIf="tarea.type + '' === 'medicion'">Ver</a>
+            <a class="linebtn linebluelight right" routerLink="/app/tarea-open/{{tarea.id}}_open" *ngIf="tarea.type + '' === 'abierta'">Ver</a>
+            <a class="linebtn linebluelight right" routerLink="/app/view-tarea-ejecucion/{{tarea.id}}" *ngIf="tarea.type + '' === 'ejecucion'">Ver</a>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+
+      <tbody *ngIf="tareas.length === 0">
+      <tr>
+        <td><i class="fas fa-exclamation-circle" style="color: red"></i> Sin tareas pendientes</td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</ng-container>
+
+<!-- TAREAR EN PREDIOS -->
+
+<ng-container>
+  <div *ngIf="predios.length > 0">
+    <div class="header-module">
+      <h3 class="title-module">Tareas en Predios</h3>
+      <a class="mainbtn bluebtn verall" routerLink="/app/list-predios">Ver todas</a>
+    </div>
+    <div class="maintablecontainer">
+      <table class="table">
+        <thead class="items-table">
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Estado</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <ng-container *ngFor="let predio of predios; index as i">
+          <tr *ngIf="i < 5">
+            <th scope="row">{{predio.property_name}}</th>
+            <td>{{predio.subtype}}
+              <!--<div class="status pending"></div>-->
+            </td>
+            <td>
+              <a class="linebtn linebluelight right" routerLink="/app/view-potencial/{{predio.id}}">Ver</a>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+
+        <tbody *ngIf="predios.length === 0">
+        <tr>
+          <td><i class="fas fa-exclamation-circle" style="color: red"></i> Sin tareas en predios</td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container>
+  <div *ngIf="prediosNoProcedure.length > 0">
+    <div class="header-module">
+      <h3 class="title-module">Predios sin medición</h3>
+    </div>
+    <div class="maintablecontainer">
+      <table class="table">
+        <thead class="items-table">
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <ng-container *ngFor="let predio of prediosNoProcedure; index as i">
+          <tr *ngIf="i < 5">
+            <th scope="row">{{predio.property_name}}</th>
+            <td>
+              <a class="linebtn linebluelight right" routerLink="/app/create-procedures/{{predio.id}}">Crear procedimiento</a>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+
+        <tbody *ngIf="prediosNoProcedure.length === 0">
+        <tr>
+          <td><i class="fas fa-exclamation-circle" style="color: red"></i> No hay predios disponibles</td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,134 @@
+<div id="contenido" class="contents-app">
+  <div class="generalrow">
+    <div class="col-sm">
+      <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 10px">Registrar Aporte en Especies</div>
+    </div>
+  </div>
+
+  <div class="generalrow" style="background-color: white; border-radius: 15px; padding: 25px;">
+    <div class="col-sm">
+      <label for="cantidad">Cantidad</label>
+      <input type="number" class="form-control simpleinput" id="cantidad" aria-describedby="cantidadMeta" placeholder="Cantidad" [(ngModel)]="especie.quantity">
+    </div>
+    <div class="col-sm">
+    <label for="unidadPrecio">Precio por Unidad ($)</label>
+    <input type="text" class="form-control simpleinput" id="unidadPrecio" aria-describedby="unidadMeta" placeholder="Unidad" [(ngModel)]="especie.price_unit" (ngModelChange)="formatSpecific($event, 1)">
+    </div>
+    <div class="col-sm">
+      <label for="descripcion">Descripción</label>
+      <input type="text" class="form-control simpleinput" id="descripcion" aria-describedby="descripcionMeta" placeholder="Descripción" [(ngModel)]="especie.description">
+    </div>
+
+  </div>
+
+  <div class="generalrow" style="margin-top: 10px">
+    <div class="col-sm">
+      <button type="button" class="btn btn-success" style="float: right; cursor: pointer; background-color: #0B5CC6" (click)="insertarEspecie()">Registrar Especie</button>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow">
+    <div class="col-12">
+      <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 10px">Listado de Aportes Registrados</div>
+    </div>
+  </div>
+
+  <div *ngIf="listadoEspecies.length === 0">
+    <div class="generalrow">
+      <div class="col-12" style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; background-color: rgba(255,6,0,0.15); border-radius: 15px">
+        No se han Registrado Especies a aportar
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="listadoEspecies.length > 0">
+    <div class="generalrow" style="background-color: rgba(255,255,255,0.51); border-radius: 15px">
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 10px">
+          Cantidad
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 10px">
+          Precio por Unidad
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 10px">
+          Descripción
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 10px">
+          Sub Total
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 10px">
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow" *ngFor="let especie of listadoEspecies; let i = index">
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">
+          {{especie.quantity}}
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">
+          {{especie.price_unit.replace('.', '') | number : '3.2-2'}}
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">
+          {{especie.description}}
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">
+          $ {{(especie.quantity * especie.price_unit.replace('.', '')) | number:'3.2-5'}}
+        </div>
+      </div>
+      <div class="col-sm">
+        <div>
+          <button type="button" class="btn btn-danger" style="float: right; cursor: pointer; margin-top: 10px" (click)="removeItem(i, especie.id)">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">
+          TOTAL
+        </div>
+      </div>
+      <div class="col-sm">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">
+          $ {{getTotal() | number:'3.2-5'}}
+        </div>
+      </div>
+      <div class="col-sm">
+        <div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>
+<router-outlet></router-outlet>

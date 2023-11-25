@@ -1,0 +1,148 @@
+<div class="contents-app">
+  <div class="title-section">
+    <div class="title-base newitem"></div>
+    <div class="titlechapterAp">Nuevo procedimiento</div>
+  </div>
+
+  <div class="main-container" *ngIf="programs">
+    <div class="subtitle-item">Selecciona los programas</div>
+    <div class="actividades-container line-inputs">
+      <div class="boxes">
+        <ul>
+          <li *ngFor="let program of programs">
+            <input type="checkbox" id="{{program.id}}" value="{{program}}" name="program" [checked]="program.selected" (change)="getProjects(program)">
+            <label for="{{program.id}}">{{program.name}}</label>
+            <div class="row" *ngIf="program.projects" style="margin-left: 50px;">
+              <div class="pool-subtitle">Selecciona los proyectos</div>
+              <ul class="sublist">
+                <li class="list-boxes " *ngFor="let project of program.projects">
+                  <input type="checkbox" id="{{'project_' + project.id}}" value="{{project}}" name="project"
+                         [checked]="project.selected"
+                         (change)="getActivities(project)">
+                  <label for="{{'project_' + project.id}}">{{project.name}}</label>
+                  <div class="row" *ngIf="project.activities" style="margin-left: 50px;">
+                    <div class="pool-subtitle">Selecciona las actividades</div>
+                    <ul class="sublist">
+                      <li class="list-boxes " *ngFor="let activity of project.activities">
+                        <input type="checkbox" id="{{'activity_' + activity.id}}" value="{{activity}}" name="activity"
+                               [checked]="activity.selected"
+                               (change)="setObjectActive(activity)">
+                        <label for="{{'activity_' + activity.id}}">{{activity.name}}</label>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+  <div class="main-container">
+    <div class="subtitle-item">Datos del Procedimiento</div>
+  </div>
+
+  <div class="main-container" *ngIf="userRoles">
+
+    <div class="col-12 col-md-6 col-lg-6 plain-arrow">
+      <label for="labelselect1" class="subtitle-item">Selecciona un Predio</label>
+      <select [(ngModel)]="procedure.property" class="custom-select form-control gradblue" name="selected_property"
+              id="labelselect1" (change)="generateProcedureName()" [disabled]="isComunicaciones">
+        <option [value]="0">Seleccione</option>
+        <option [ngValue]="null">Sin predio</option>
+        <option *ngFor="let predio of prediosReales" [ngValue]="predio">{{predio.property_name}}</option>
+      </select>
+    </div>
+
+    <div class="main-container">
+      <div class="col-sm" style=" display: flex; align-items: center; align-items: center">
+        <label class="custom-control custom-checkbox" id="isErosive" style="margin-top: 10px" *ngIf="procedure.property">
+          <input type="checkbox" class="custom-control-input" [(ngModel)]="procedure.isHidricoErosivo" name="has_deadline">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Es recurso hídrico o proceso erosivo?</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-6 plain-arrow" *ngIf="(!procedure.property && !isComunicaciones) || procedure.isHidricoErosivo">
+      <label for="labelselect10" class="subtitle-item">Selecciona el Tipo</label>
+      <select [(ngModel)]="procedure.type_process" class="custom-select form-control gradblue" name="selected_property"
+              id="labelselect10" [disabled]="isComunicaciones">
+        <option [value]="0">Seleccione</option>
+        <option value="erosion">PROCESOS EROSIVOS</option>
+        <option value="hidrico">MONITOREO FUENTES HIDRICAS</option>
+      </select>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-6 plain-arrow" *ngIf="!procedure.property && isComunicaciones">
+      <label for="labelselect10" class="subtitle-item">Tipo de acción</label>
+      <select class="custom-select form-control gradblue" name="selected_property"
+              id="labelselect11" [disabled]="isComunicaciones">
+        <option [value]="0" *ngIf="isComunicaciones">COMUNICACIONES</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="main-container">
+    <div class="col-sm">
+      <label for="nombreProyecto" class="subtitle-item">Nombre del Procedimiento</label>
+      <input type="text" class="form-control simpleinput" id="nombreProyecto" aria-describedby="nombreProyecto"
+             placeholder="Nombre del Procedimiento" [(ngModel)]="procedure.name"
+             name="projectName">
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="col-sm">
+      <label for="descProyecto" class="subtitle-item">Descripción del Procedimiento</label>
+      <textarea class="form-control simpleinput" id="descProyecto" rows="3" [(ngModel)]="procedure.description"
+                placeholder="Ingresa la Descripción del Procedimiento" name="projectDescription"></textarea>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="main-container">
+    <div class="subtitle-item">Anidar a otro Procedimiento</div>
+  </div>
+
+  <div class="main-container">
+    <div class="col-sm" style=" display: flex; align-items: center; align-items: center">
+      <label class="custom-control custom-checkbox" id="noTiene" style="margin-top: 10px">
+        <input type="checkbox" class="custom-control-input" [(ngModel)]="procedure.nest_procedure" name="has_deadline">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Anidar</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="dropdown-divider" *ngIf="procedure.nest_procedure"></div>
+
+  <div class="main-container" *ngIf="procedure.nest_procedure">
+
+    <div class="col-12 col-md-12 col-lg-12 plain-arrow">
+      <label for="labelselect1" class="subtitle-item">Selecciona el Procedimiento Padre</label>
+      <select [(ngModel)]="procedure.parent_procedure" class="custom-select form-control gradblue"
+              name="selected_property" id="parentProcedure">
+        <option [value]="0">Seleccione</option>
+        <option *ngFor="let parent of parentProcedures" [ngValue]="parent.id">{{parent.name}}</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="main-container">
+    <div class="col-sm">
+      <button type="button" class="mainbtn plainbluelight right" style="float: right; cursor: pointer;" (click)="saveProcedure()">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</div>

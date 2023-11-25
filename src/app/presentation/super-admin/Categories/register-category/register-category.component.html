@@ -1,0 +1,30 @@
+<div id="contenido" class="contents-app" style="padding: 50px 50px 50px 50px">
+
+  <div class="row" style="margin-bottom: 25px">
+    <div class="col-12 title" style="text-align: center; font-weight: bold">
+      REGISTRAR CATEGORÍA
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="labelselect0" class="subtitle-item">Nombre</label>
+      <input type="text" id="labelselect0" class="form-control" [(ngModel)]="categoryRegister.name" placeholder="Nombre de la Categoría"/>
+    </div>
+
+  </div>
+
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-sm">
+      <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" (click)="guardar()">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,6 @@
+.hoverClass {
+  padding: 20px;
+}
+.hoverClass:hover {
+  background-color: rgba(214, 214, 214, 0.35);
+}

@@ -1,0 +1,87 @@
+<div class="title-section">
+  <div class="dashboard_title"></div>
+  <div class="titlechapterAp">Dashboard</div>
+</div>
+<!--
+<div class="col-1 float-left">
+  <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+    <div style="display: table-cell; vertical-align: middle">
+
+    </div>
+  </div>
+</div>
+<div class="col-10 float-left">
+
+  <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+    <div style="display: table-cell; vertical-align: middle">
+
+    </div>
+  </div>
+
+</div>-->
+
+<!--ALERTS MODULE-->
+<div id="contenido" class="contents-app">
+
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+      <div class="module-box-container fadeInUp animated">
+        <cuenca-tasks-list></cuenca-tasks-list>
+      </div>
+
+    </div>
+
+    <div *ngIf="isDireccion; then budgetsByDirection; else budgetByCoordination">
+    </div>
+    <ng-template #budgetsByDirection>
+      <div class="col-sm-6 col-md-6 col-lg-6"
+           style="margin-top: 10px;"
+           *ngFor="let budget of arrTotals; let i = index">
+
+        <div class="fadeInRight animated">
+          <cuenca-budget-tracker [totals]="budget"
+                                 [strId]="i"></cuenca-budget-tracker>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #budgetByCoordination>
+      <div class="col-sm-6 col-md-6 col-lg-6" >
+
+        <div *ngFor="let budget of arrTotals; let i = index">
+          <div  *ngIf="isComunicaciones" style="margin-bottom: 10px;"
+                class="col-sm-6 col-md-6 col-lg-12 fadeInRight animated">
+            <cuenca-budget-tracker *ngIf="budget?.rol == 'Coordinador de comunicaciones'"
+                                   [totals]="budget"
+                                   [strId]="'1'"></cuenca-budget-tracker>
+          </div>
+
+          <div class="col-sm-6 col-md-6 col-lg-6" *ngIf="isCoordinadorRecursoHidrico || isApoyoCoordinadorRecursoHidrico" style="margin-bottom: 10px;"
+               class="fadeInRight animated">
+            <cuenca-budget-tracker *ngIf="budget?.rol == 'Coordinación recurso hidrico'"
+                                   [totals]="budget"
+                                   [strId]="'1'"></cuenca-budget-tracker>
+          </div>
+
+
+          <div class="col-sm-6 col-md-6 col-lg-6" *ngIf="isCoordinadorRestauracion || isApoyoCoordinadorRestauracion"
+               style="margin-bottom: 10px;"
+               class="fadeInRight animated">
+            <cuenca-budget-tracker [totals]="budget"
+                                   *ngIf="budget?.rol == 'Apoyo de coordinación de restauracion y buenas practicas'"
+                                   [strId]="'1'"></cuenca-budget-tracker>
+          </div>
+        </div>
+
+      </div>
+
+    </ng-template>
+
+
+  </div>
+  <div class="row">
+    <cuenca-procedures-list style="width: 100%; margin-right: 30px;"></cuenca-procedures-list>
+  </div>
+
+</div>
+

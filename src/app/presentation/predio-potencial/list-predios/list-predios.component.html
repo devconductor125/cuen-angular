@@ -1,0 +1,172 @@
+<div class="title-section">
+  <div class="predio_title"></div>
+  <div class="titlechapterAp">Predios potenciales</div>
+  <a class="mainbtn plainbluedark right createbtn" routerLink="/app/predio-potencial" *ngIf="isCoordinador || isSeguimiento" style="margin-bottom: 20px">Crear Predio Potencial</a>
+
+</div>
+
+<div>
+  <div class="generalrow">
+
+    <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow">
+
+      <label for="labelselectFiltro" class="subtitle-item">Filtro por</label>
+      <select [(ngModel)]="selectedFilter"
+              class="custom-select form-control gradblue"
+              name="roles"
+              id="labelselectFiltro">
+        <option value="0">Seleccione un filtro</option>
+        <option value="1">Id</option>
+        <option value="2">Embalse</option>
+        <option value="3">Municipio</option>
+        <option value="4">Predio</option>
+        <option value="5">Fecha creaión</option>
+      </select>
+
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 1">
+
+      <label for="idCardNumberid">Por id</label>
+      <input type="number"
+             class="form-control simpleinput"
+             id="idCardNumberid"
+             aria-describedby="idCardNumber"
+             placeholder="id"
+             name="idCardNumber">
+
+    </div>
+    <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 2">
+
+      <label for="idCardEmbalse">Por embalse</label>
+      <input type="text"
+             class="form-control simpleinput"
+             id="idCardEmbalse"
+             aria-describedby="idCardNumber"
+             placeholder="nombre embalse"
+             name="idCardNumber">
+
+    </div>
+    <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 3">
+
+      <label for="idCardMunicipio">Por municipio</label>
+      <input type="text"
+             class="form-control simpleinput"
+             id="idCardMunicipio"
+             aria-describedby="idCardNumber"
+             placeholder="nombre municipio"
+             name="idCardNumber">
+
+    </div>
+    <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 4">
+
+      <label for="predioName">Por predio</label>
+      <input type="text"
+             class="form-control simpleinput"
+             id="predioName"
+             placeholder="Predio"
+             name="procedimiento">
+
+    </div>
+    <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 5">
+
+      <label for="idDateInitFilter">Fecha inicial</label>
+      <input type="date"
+             class="form-control simpleinput"
+             id="idDateInitFilter"
+             aria-describedby="idCardNumber"
+             placeholder="Fecha inicio"
+             name="idCardNumber">
+      <label for="idDateEndFilter">Fecha final</label>
+      <input type="date"
+             class="form-control simpleinput"
+             id="idDateEndFilter"
+             aria-describedby="idCardNumber"
+             placeholder="Fecha fin"
+             name="idCardNumber">
+
+    </div>
+
+  </div>
+
+  <div class="generalrow btnFiltro" *ngIf="selectedFilter != 0">
+    <div class="col-sm-4">
+      <button type="button" class="btn btn-info">
+        Filtrar
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div class="contents-app">
+  <!--CONTRATISTAS-->
+
+  <div class="maintablecontainer">
+    <div class="title-taskmodule gradblue">Listado de Predios</div>
+    <table class="table tabletask table-hover">
+      <thead class="items-table">
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Embalse</th>
+        <th scope="col">Municipio</th>
+        <th scope="col">Nombre del Predio</th>
+        <th scope="col">Fecha Creación</th>
+        <th scope="col">Firma del acuerdo</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let predio of predios">
+        <th scope="row">{{predio.id}}</th>
+        <th scope="row">{{predio.embalse}}</th>
+        <th scope="row">{{predio.municipality}}</th>
+        <th scope="row">{{predio.property_name}}</th>
+        <td>{{getDateWithoutHour(predio.created_at)}}</td>
+        <td *ngIf="predio.sign == 'N/A'; else signDate">{{predio.sign}}</td>
+        <ng-template #signDate>
+          <td>{{predio.sign}}</td>
+        </ng-template>
+        <td>
+
+          <div class="row">
+            <div class="col-sm col-md">
+              <a class="linebtn linebluelight right margintop marginbuttom" routerLink="/app/view-potencial/{{predio.id}}">Ver</a>
+            </div>
+            <div class="col-sm col-md" *ngIf="isCoordinadorGuardacuenca || isCoordinador || isAdministrativo">
+              <a class="mainbtn plainredlight right marginbuttom margintop"  data-toggle="modal" data-target="#cModal" (click)="setDelete(predio.id);">Eliminar</a>
+            </div>
+          </div>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="cModal" tabindex="-1" role="dialog" aria-labelledby="exLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exLabel">Está Seguro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          En caso de eliminar el predio, la información será removida del sistema permanentemente.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="deletePredio()">Continuar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

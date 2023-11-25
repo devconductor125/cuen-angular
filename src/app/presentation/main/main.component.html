@@ -1,0 +1,76 @@
+<div class="side-nav-container" id="sideNav">
+  <div class="side-menu-container">
+    <div class="logo-app-mobile"></div>
+    <a class="close-nav" (click)="closeNav()" href="javascript:void(0)">&times;</a>
+    <div class="profile-user-mobile">
+      <div class="profilepicture"></div>
+      <div class="name-user-mobile">Juan Camilo Morris</div>
+      <div class="pos-user-mobile">Director desarrollo</div>
+    </div>
+    <ul class="menu-mobile">
+      <li class="item-menu-mobile" *ngFor="let link of links"><a class="link-menu-mobile"
+                                                                 [class.selected-mobile]="link === selectedLink"
+                                                                 routerLink="/app/{{link.route}}"
+                                                                 (click)="linkClick(link)">{{link.name}}</a></li>
+    </ul>
+    <a class="logocorp-mobile"></a>
+  </div>
+</div>
+<div id="myCanvasNav" class="overlay3" (click)="closeNav()" style="width: 0%; opacity: 0;"></div>
+
+<div class="main-container" id="main">
+  <!--HEADER MENU-->
+  <div class="header-mobile">
+    <a class="open-menu" (click)="openNav()"></a>
+    <a class="logo-mobile-app"> </a>
+  </div>
+  <!--OFF CANVAS MENU-->
+  <div class="content-container col-12 col-md-9 col-lg-8 col-xl-9">
+    <!--UP BAR -->
+    <div class="upbar-content">
+      <div class="searchbar-container">
+        <div class="formsearch-container">
+          <div class="ico-search"></div>
+          <form class="searchform">
+            <input class="searchinput" type="text" placeholder="Buscar..."
+                   (input)="onSearch($event.target.value)"
+                   (keypress)="onKeyPress($event)"
+                   [(ngModel)]="query"
+                   name="query">
+          </form>
+        </div>
+      </div>
+      <ul class="control-items-container">
+        <li class="item-control-upbar"><a class="link-config exit" (click)="logOutClick()"></a></li>
+        <!-- <li class="item-control-upbar"><a class="link-config config "></a></li>
+         <li class="item-control-upbar"><a class="link-config notifi"></a></li>-->
+      </ul>
+    </div>
+    <div class="router-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <!--BASE LEFT-->
+  <div class="left-base-menu col-3 col-md-3 col-lg-4 col-xl-3">
+    <a class="logo-app-desktop"> </a>
+  </div>
+
+  <!--MAIN MENU-->
+  <div class="main-menu-desktop col-3 col-md-3 col-lg-4 col-xl-3" *ngIf="profile">
+    <div class="userinfo-container">
+      <div class="pict-user"></div>
+      <div class="name-user-container">
+        <div class="name-user"><a style="color: #44f2ff">Usuario</a> {{profile.name}}</div>
+        <div class="role-user"><a style="color: #44f2ff">Cargo</a> {{profile.roleName}}</div>
+      </div>
+    </div>
+    <ul class="list-items-menu">
+      <li class="item-menu-container" *ngFor="let link of links">
+        <a class="link-menu" [ngClass]="link.iconClass" [class.selected]="link === selectedLink"
+           routerLink="/app/{{link.route}}" (click)="linkClick(link)">{{link.name}}</a>
+      </li>
+    </ul>
+  </div>
+ <!-- <div class="cuenca-logo"></div>-->
+</div>
+<!--SCRIPTS-->

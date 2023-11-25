@@ -1,0 +1,65 @@
+<!--
+<div class="titlechapter intern">Nueva tarea</div>
+<div class="contents-app">
+  &lt;!&ndash;CREATE&ndash;&gt;
+  <div class="generalrow">
+    <form class="form-gen">
+      <div class="line-inputs">
+        <div class="input-container col-8">
+          <input class="simpleinput" type="text" placeholder="Nombre de la tarea">
+        </div>
+        <div class="input-container col-4">
+          <select [(ngModel)]="selectedTaskType" class="select-element gradblue" name="selectedTaskType">
+            <option *ngFor="let option of taskTypes" [ngValue]="option">{{option.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="line-inputs">
+        <div class="cont-form col-3">
+          <div class="title-forms">Fecha de inicio</div>
+          <div class="input-container">
+            <input [(ngModel)]="task.startingDate" class="simpleinput" type="date" name="taskStartingDate">
+          </div>
+        </div>
+        <div class="cont-form col-3">
+          <div class="title-forms">Fecha de fin</div>
+          <div class="input-container">
+            <input [(ngModel)]="task.deadline" class="simpleinput" type="date" name="taskDeadline">
+          </div>
+        </div>
+        <div class="cont-form col-4">
+          <input class="checkform" type="checkbox" [(ngModel)]="task.hasDeadline" name="hasDeadline">
+          <div class="text-check">No tiene fecha de finalización
+          </div>
+        </div>
+      </div>
+      <div class="line-inputs">
+        <div class="title-forms">Descripcion</div>
+        <div class="input-container col-12">
+          <textarea class="simpleinput textenter" [(ngModel)]="task.description" name="taskDescription">Ingrese la descripcion</textarea>
+        </div>
+      </div>
+      <div class="line-inputs">
+        <div class="title-forms">Rol</div>
+        <div class="input-container col-6">
+          <select [(ngModel)]="selectedRole" class="select-element gradblue" name="selectedRole" (change)="getUsers()">
+            <option *ngFor="let option of roles" [ngValue]="option">{{option.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="line-inputs">
+        <div class="title-forms">Usuario</div>
+        <div class="input-container col-6">
+          <select [(ngModel)]="selectedUser" class="select-element gradblue" name="selectedUser"
+                  [disabled]="users.length === 0">
+            <option *ngFor="let option of users" [ngValue]="option">{{option.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="line-inputs">
+        <a class="mainbtn darkred save" (click)="createTask()">Guardar</a>
+      </div>
+    </form>
+  </div>
+</div>
+-->

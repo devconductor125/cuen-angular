@@ -1,0 +1,627 @@
+<div id="contenido" class="contents-app" style="padding: 0px 50px 0px 50px; margin-top: 25px;" *ngIf="budgets && listAsociadosPerProcess && listOriginResources">
+
+
+
+  <div class="row">
+    <div class="col-12">
+      <button (click)="printDiv()" class="print_btn"><i class="fas fa-print" style="margin-right: 5px"></i> Imprimir Presupuesto</button>
+    </div>
+  </div>
+
+  <div id="a-imprimir"> <!--/// Imprimir-->
+
+    <!-- 1 HOJA -->
+    <div class="imprimir">
+
+              <div class="row Mostrar">
+                <div class="col-sm">
+                  <div style="text-align: center; font-size: 18px; font-weight: bold; padding: 50px">Detalle del Presupuesto Final</div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm title-bud">
+                  Presupuesto
+                </div>
+              </div>
+
+
+              <!-- ACTIVIDADES DE RESTAURACIÓN -->
+
+              <ng-container *ngIf="budgets.activities_restoration">
+
+                  <div class="dropdown-divider"></div>
+
+                        <div class="row">
+                          <div class="col-sm title-bud">
+                            Actividades de Restauración
+                          </div>
+                        </div>
+
+                  <div class="dropdown-divider"></div>
+
+                        <div class="row" *ngIf="budgets.activities_restoration.length > 0">
+                          <div class="col-5 title-bud">
+                            Actividad Propuesta
+                          </div>
+                          <div class="col-sm title-bud">
+                            Unidad
+                          </div>
+                          <div class="col-sm title-bud">
+                            Unidad ($)
+                          </div>
+                          <div class="col-sm title-bud">
+                            Cantidad
+                          </div>
+                          <div class="col-sm title-bud" style="text-align: right">
+                            Valor
+                          </div>
+                        </div>
+
+                        <div class="row table-hover-ap" style="padding: 5px" *ngFor="let record of budgets.activities_restoration">
+                          <div class="col-5 content-bud-normal">
+                            {{record.action_name}}
+                          </div>
+                          <div class="col-sm content-bud-normal" style="text-align: left">
+                            {{record.units}}
+                          </div>
+                          <div class="col-sm content-bud-normal" style="text-align: left">
+                            $ {{record.value_unit | number:'1.2-2'}}
+                          </div>
+                          <div class="col-sm content-bud-normal" style="text-align: left">
+                            {{record.length | number:'1.2-2'}}
+                          </div>
+                          <div class="col-sm content-bud" style="text-align: right">
+                            $ {{record.value | number:'1.2-2'}}
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+                          <div class="col-8 content-bud-foot">
+                            VALOR ACTIVIDADES DE RESTAURACIÓN
+                          </div>
+                          <div class="col-4 content-bud-foot" style="text-align: right; font-size: 18px">
+                            $ {{budgets.value_total_restoration | number:'1.2-2'}}
+                          </div>
+                        </div>
+
+              </ng-container>
+
+
+
+              <!-- MANTENIMIENTOS DE ACCIONES DE CONSERVACION -->
+
+
+              <ng-container *ngIf="budgets.activities_manteniment">
+
+                  <div class="dropdown-divider"></div>
+
+                        <div class="row">
+                          <div class="col-sm title-bud">
+                            Mantenimiento de Acciones de Conservación
+                          </div>
+                        </div>
+
+                  <div class="dropdown-divider"></div>
+
+                        <div class="row" *ngIf="budgets.activities_manteniment.length > 0">
+                          <div class="col-5 title-bud">
+                            Actividad Propuesta
+                          </div>
+                          <div class="col-2 title-bud">
+                            Unidad
+                          </div>
+                          <div class="col-2 title-bud">
+                            Unidad ($)
+                          </div>
+                          <div class="col-2 title-bud">
+                            Cantidad
+                          </div>
+                          <div class="col-3 title-bud" style="text-align: right">
+                            Valor
+                          </div>
+                        </div>
+
+                        <div class="row table-hover-ap" style="padding: 5px" *ngFor="let record of budgets.activities_manteniment">
+                          <div class="col-5 content-bud-normal">
+                            {{record.action_name}}
+                          </div>
+                          <div class="col-2 content-bud-normal" style="text-align: left">
+                            {{record.units}}
+                          </div>
+                          <div class="col-2 content-bud-normal" style="text-align: left">
+                            $ {{record.value_unit | number:'1.2-2'}}
+                          </div>
+                          <div class="col-2 content-bud-normal" style="text-align: left">
+                            {{record.length | number:'1.2-2'}}
+                          </div>
+                          <div class="col-3 content-bud" style="text-align: right">
+                            $ {{record.value | number:'1.2-2'}}
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+                          <div class="col-8 content-bud-foot">
+                            VALOR ACTIVIDADES DE MANTENIMIENTO DE ACCIONES DE CONSERVACIÓN
+                          </div>
+                          <div class="col-4 content-bud-foot" style="text-align: right; font-size: 18px">
+                            $ {{budgets.value_total_manteniment  | number:'1.2-2'}}
+                          </div>
+                        </div>
+
+              </ng-container>
+
+
+
+              <!-- ACTIVIDADES DE BUENAS PRACTICAS -->
+
+              <ng-container *ngIf="budgets.activities_practices">
+
+                  <div class="dropdown-divider"></div>
+
+                        <div class="row">
+                          <div class="col-sm title-bud">
+                            Actividades de Buenas Prácticas
+                          </div>
+                        </div>
+
+                  <div class="dropdown-divider"></div>
+
+                        <div class="row"  *ngIf="budgets.activities_practices.length > 0">
+                          <div class="col-5 title-bud">
+                            Actividad Propuesta
+                          </div>
+                          <div class="col-2 title-bud">
+                            Unidad
+                          </div>
+                          <div class="col-2 title-bud">
+                            Unidad ($)
+                          </div>
+                          <div class="col-2 title-bud">
+                            Cantidad
+                          </div>
+                          <div class="col-3 title-bud" style="text-align: right">
+                            Valor
+                          </div>
+                        </div>
+
+                        <div class="row table-hover-ap" style="padding: 5px" *ngFor="let record of budgets.activities_practices">
+                          <div class="col-5 content-bud-normal">
+                            {{record.action_name}}
+                          </div>
+                          <div class="col-2 content-bud-normal" style="text-align: left">
+                            {{record.units}}
+                          </div>
+                          <div class="col-2 content-bud-normal" style="text-align: left">
+                            $ {{record.value_unit | number:'1.2-2'}}
+                          </div>
+                          <div class="col-2 content-bud-normal" style="text-align: left">
+                            {{record.length | number:'1.2-2'}}
+                          </div>
+                          <div class="col-3 content-bud" style="text-align: right">
+                            $ {{record.value | number:'1.2-2'}}
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+                          <div class="col-8 content-bud-foot">
+                            VALOR ACTIVIDADES DE BUENAS PRÁCTICAS
+                          </div>
+                          <div class="col-4 content-bud-foot" style="text-align: right; font-size: 18px">
+                            $ {{budgets.value_total_practices | number:'1.2-2'}}
+                          </div>
+                        </div>
+
+              </ng-container>
+
+
+              <div class="dropdown-divider"></div>
+
+              <ng-container>
+
+                      <div class="row" style="padding: 5px; font-weight: bold; background-color: #CFD8DC">
+                        <div class="col-8 content-bud-foot">
+                          SUBTOTAL ACUERDO
+                        </div>
+                        <div class="col-4 content-bud-foot" style="text-align: right">
+                          $ {{budgets.agreement_subtotal | number:'1.2-2'}}
+                        </div>
+                      </div>
+
+                      <div class="row" style="padding: 5px; font-weight: bold; background-color: #e7f0f4">
+                        <div class="col-8 content-bud-foot">
+                          ADMINISTRACIÓN 20%
+                        </div>
+                        <div class="col-4 content-bud-foot" style="text-align: right">
+                          $ {{budgets.agreement_administration | number:'1.2-2'}}
+                        </div>
+                      </div>
+
+                      <div class="row" style="padding: 5px; font-weight: bold; background-color: #CFD8DC">
+                        <div class="col-8 content-bud-foot">
+                          UTILIDAD 5%
+                        </div>
+                        <div class="col-4 content-bud-foot" style="text-align: right">
+                          $ {{budgets.agreement_utility | number:'1.2-2'}}
+                        </div>
+                      </div>
+
+                      <div class="row" style="padding: 5px; font-weight: bold; background-color: #e7f0f4">
+                        <div class="col-8 content-bud-foot">
+                          IVA 19% SOBRE EL 5% DE UTILIDAD
+                        </div>
+                        <div class="col-4 content-bud-foot" style="text-align: right">
+                          $ {{budgets.agreement_iva | number:'1.2-2'}}
+                        </div>
+                      </div>
+
+                      <div class="row"
+                           style="padding: 5px; font-weight: bold; background-color: #bddcce; margin-top: 10px; border: solid 1px #333">
+                        <div class="col-8 total-foot">
+                          TOTAL ACUERDO
+                        </div>
+                        <div class="col-4 total-foot" style="text-align: right">
+                          $ {{budgets.agreement_total | number:'1.2-2'}}
+                        </div>
+                      </div>
+
+              </ng-container>
+
+
+              <!-- MUNICIPIO -->
+
+              <ng-container *ngIf="budgets.activities_restoration">
+
+                  <div class="dropdown-divider"></div>
+
+                        <div class="row">
+                          <div class="col-sm title-bud">
+                            Municipio: {{budgets.municipality}}
+                          </div>
+
+                          <div class="col-sm title-bud">
+                            Prioridad: {{budgets.property_priority}}
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-sm title-bud">
+                            Fuente Hídrica Cerca: {{budgets.basin_name}}
+                          </div>
+                        </div>
+
+                  <div class="dropdown-divider"></div>
+
+                        <div class="row">
+                          <div class="col-7 title-bud">
+                            Acciones
+                          </div>
+                          <div class="col-3 title-bud">
+                            Cerco (Metros Lineales)
+                          </div>
+                          <div class="col-2 title-bud">
+                            Tipo de Aislamiento
+                          </div>
+                        </div>
+
+                        <div class="row table-hover-ap" style="padding: 5px" *ngFor="let record of budgets.activities_restoration">
+                          <div class="col-7 content-bud-normal">
+                            {{record.action_name}}
+                          </div>
+                          <div class="col-3 content-bud-normal">
+                            {{record.area_referent}}
+                          </div>
+                          <div class="col-2 content-bud-normal">
+                            {{record.aislament}}
+                          </div>
+                        </div>
+
+              </ng-container>
+
+
+              <!-- ZONIFICACIÓN PROPUESTA -->
+
+              <ng-container *ngIf="budgets.activities_restoration">
+
+
+                  <div class="dropdown-divider"></div>
+
+                        <div class="row">
+                          <div class="col-7 title-bud">
+                            Zonificación propuesta Áreas de Conservación
+                          </div>
+                          <div class="col-3 title-bud">
+                            Areas
+                          </div>
+                          <div class="col-2 title-bud">
+                            %
+                          </div>
+                        </div>
+
+                        <div class="row table-hover-ap" style="padding: 5px" *ngFor="let record of budgets.conservation_area">
+                          <div class="col-7 content-bud-normal">
+                            {{record.action}}
+                          </div>
+                          <div class="col-3 content-bud-normal">
+                            {{record.area  | number:'1.2-2'}}
+                          </div>
+                          <div class="col-2 content-bud-normal">
+                            {{record.percentage  | number:'1.2-2'}}
+                          </div>
+                        </div>
+
+                        <div class="row" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+                          <div class="col-7 content-bud-foot">
+                            TOTAL
+                          </div>
+                          <div class="col-3 content-bud-foot" style="font-size: 18px">
+                            {{budgets.total_conservation_area | number:'1.2-2'}}
+                          </div>
+                          <div class="col-2 content-bud-foot" style="font-size: 18px">
+                            {{budgets.percentage_total_conservation_area | number:'1.2-2'}} %
+                          </div>
+                        </div>
+
+
+              </ng-container>
+
+
+              <!-- ORIGEN DE LOS RFECURSOS -->
+
+              <ng-container>
+
+
+                  <div class="dropdown-divider"></div>
+
+                  <div class="row">
+                    <div class="col-7 title-bud">
+                      Origen de los Recursos
+                    </div>
+                  </div>
+
+                  <div class="dropdown-divider"></div>
+
+                  <div class="row">
+                    <div class="col-7 title-bud">
+                      Descripción
+                    </div>
+                    <div class="col-5 title-bud" style="text-align: right">
+                      Valor
+                    </div>
+                  </div>
+
+                <!--ACTIVA-->
+                <ng-container>
+
+                              <div class="row" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+                                <div class="col-7 content-bud-foot">
+                                  ACCIONES DE RESTAURACIÓN ACTIVA (establecimiento y enriquecimiento)
+                                </div>
+
+
+                                <div class="col-5 content-bud-foot Mostrar" style="text-align: right">
+                                  $ {{budgets.value_total_restoration | number:'1.2-2'}}
+                                </div>
+                              </div>
+
+                              <div class="row" style="border: solid 1px gray" *ngIf="listOriginResources.origin_restoration.length > 0">
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  Entidad
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  Monto
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  20%
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  5%
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  19%
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: left">
+
+                                </div>
+                              </div>
+
+                              <div class="row" style="background-color: #8d9ba8" *ngIf="listOriginResources.origin_restoration.length === 0 && budgets.value_total_restoration > 0">
+                                <div class="col-12 title-bud" style="text-align: left">
+                                  No se han registrado asociados
+                                </div>
+                              </div>
+
+                              <div class="row" style="background-color: #8d9ba8" *ngIf="budgets.value_total_restoration <= 0">
+                                <div class="col-12 title-bud" style="text-align: left">
+                                  No se han registrado acciones
+                                </div>
+                              </div>
+
+                              <div class="row" style="background-color: #e0effd; border-bottom: solid 1px gray;" *ngFor="let origin of listOriginResources.origin_restoration">
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  {{origin.associated_name}}
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  $ {{origin.value | number:'1.2-2'}}
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  $ {{origin.value_20 | number:'1.2-2'}}
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  $ {{origin.value_5 | number:'1.2-2'}}
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: left">
+                                  $ {{origin.value_19 | number:'1.2-2'}}
+                                </div>
+                                <div class="col-2 title-bud" style="text-align: right">
+                                  $ {{origin.value_total | number:'1.2-2'}}
+                                </div>
+                            </div>
+
+                </ng-container>
+
+                <div class="dropdown-divider"></div>
+
+                <!--PASIVA-->
+                <ng-container>
+                  <div class="row" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+                    <div class="col-7 content-bud-foot">
+                      ACCIONES DE RESTAURACIÓN PASIVA
+                    </div>
+                    <div class="col-5 content-bud-foot Mostrar" style="text-align: right">
+                      $ {{budgets.value_total_manteniment | number:'1.2-2'}}
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="row" style="border: solid 1px gray" *ngIf="listOriginResources.origin_manteniment.length > 0">
+                    <div class="col-2 title-bud" style="text-align: left">
+                      Entidad
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      Monto
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      20%
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      5%
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      19%
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+
+                    </div>
+                  </div>
+
+                  <div class="row" style="background-color: #8d9ba8" *ngIf="listOriginResources.origin_manteniment.length === 0 && budgets.value_total_manteniment > 0">
+                    <div class="col-12 title-bud" style="text-align: left">
+                      No se han registrado asociados
+                    </div>
+                  </div>
+
+                  <div class="row" style="background-color: #8d9ba8" *ngIf="budgets.value_total_manteniment === 0">
+                    <div class="col-12 title-bud" style="text-align: left">
+                      No se han registrado acciones
+                    </div>
+                  </div>
+
+                  <div class="row" style="background-color: #e0effd; border-bottom: solid 1px gray;" *ngFor="let origin of listOriginResources.origin_manteniment">
+                    <div class="col-2 title-bud" style="text-align: left">
+                      {{origin.associated_name}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      $ {{origin.value | number:'1.2-2'}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      $ {{origin.value_20 | number:'1.2-2'}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      $ {{origin.value_5 | number:'1.2-2'}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      $ {{origin.value_19 | number:'1.2-2'}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: right">
+                      $ {{origin.value_total | number:'1.2-2'}}
+                    </div>
+                  </div>
+
+
+
+                </ng-container>
+
+                <div class="dropdown-divider"></div>
+
+                <!--BUENAS PRACTICAS-->
+                <ng-container>
+                  <div class="row" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+                    <div class="col-7 content-bud-foot">
+                      BUENAS PRACTICAS Y SANEAMIENTO
+                    </div>
+                    <div class="col-5 content-bud-foot Mostrar" style="text-align: right">
+                      $ {{budgets.value_total_practices | number:'1.2-2'}}
+                    </div>
+                  </div>
+
+                  <div class="row" style="border: solid 1px gray" *ngIf="listOriginResources.origin_practices.length > 0">
+                    <div class="col-2 title-bud" style="text-align: left">
+                      Entidad
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      Monto
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      20%
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      5%
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      19%
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+
+                    </div>
+                  </div>
+
+                  <div class="row" style="background-color: #e0effd; border-bottom: solid 1px gray;" *ngFor="let origin of listOriginResources.origin_practices">
+                    <div class="col-2 title-bud" style="text-align: left">
+                      {{origin.associated_name}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      $ {{origin.value | number:'1.2-2'}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      $ {{origin.value_20 | number:'1.2-2'}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      $ {{origin.value_5 | number:'1.2-2'}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: left">
+                      $ {{origin.value_19 | number:'1.2-2'}}
+                    </div>
+                    <div class="col-2 title-bud" style="text-align: right">
+                      $ {{origin.value_total | number:'1.2-2'}}
+                    </div>
+                  </div>
+
+                  <div class="row" style="background-color: #8d9ba8" *ngIf="listOriginResources.origin_practices.length === 0 && budgets.value_total_practices > 0">
+                    <div class="col-12 title-bud" style="text-align: left">
+                      No se han registrado asociados
+                    </div>
+                  </div>
+
+                  <div class="row" style="background-color: #8d9ba8" *ngIf="budgets.value_total_practices === 0">
+                    <div class="col-12 title-bud" style="text-align: left">
+                      No se han registrado acciones
+                    </div>
+                  </div>
+
+                </ng-container>
+
+
+                <!--TOTAL-->
+                <div class="row"
+                     style="padding: 5px; font-weight: bold; background-color: #bddcce; margin-top: 10px; border: solid 1px #333">
+                  <div class="col-8 total-foot">
+                    TOTAL
+                  </div>
+                  <div class="col-4 total-foot" style="text-align: right">
+                    $ {{listOriginResources.origin_value_total | number:'1.2-2'}}
+                  </div>
+                </div>
+
+
+              </ng-container>
+
+            </div>
+
+  <!-- 1 HOJA-->
+  </div>
+<!--IMPRIMIR-->
+
+</div>

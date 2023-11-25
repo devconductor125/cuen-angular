@@ -1,0 +1,6 @@
+<label class="mainbtn gradblue downmap" style="cursor: pointer; cursor: hand; margin-top: 15px;" for="shape-file-input">Selecciona
+  el shape</label>
+<span style="text-align: center;" *ngFor="let fileName of filesNamesList">{{fileName}}</span>
+<input id="shape-file-input" #input type="file" (change)="onChange($event, input)" multiple class="btn_s"
+       style="visibility: hidden"/>
+<a class="mainbtn darkgreen upmap" style=" margin-bottom: 15px;" (click)="uploadFiles()">Cargar shape en el mapa</a>

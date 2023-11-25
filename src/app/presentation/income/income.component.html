@@ -1,0 +1,87 @@
+<div>
+
+  <div class="title-section">
+    <div class="col-1 float-left">
+      <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+        <div style="display: table-cell; vertical-align: middle">
+          <div style="text-align: center" class="task_title">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5 float-left">
+
+      <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+        <div style="display: table-cell; vertical-align: middle">
+          <div class="titlechapterAp">Detalle de ingresos</div>
+        </div>
+      </div>
+
+    </div>
+    <a class="mainbtn darkblue create-new-procedure"
+       data-toggle="modal"
+       data-target="#modalCreateAndEdit"
+       (click)="setVarCreate()">Crear nuevo ingreso</a>
+  </div>
+
+  <div class="contents-app">
+
+    <div class="taskprojcontainer">
+      <div class="title-taskmodule gradblue">Listado de Detalles de ingresos Registrados</div>
+      <table class="table tabletask table-hover">
+        <thead class="items-table">
+        <tr>
+          <th scope="col">Código centro</th>
+          <th scope="col">Ingreso</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Valor inicial</th>
+          <th scope="col">Fecha creación</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <ng-container *ngFor="let income of arrIncomes">
+
+          <tr data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <th scope="col">{{income.code}}</th>
+            <th scope="col">{{income.name}}</th>
+            <th scope="col">${{income.value}}</th>
+            <th scope="col">${{income.valueOrigin}}</th>
+            <th scope="col">{{income.created_at}}</th>
+            <th scope="col">
+
+              <button type="button"
+                      class="btn btn-info"
+                      style="cursor:pointer;"
+                      data-toggle="modal"
+                      data-target="#modalCreateAndEdit"
+                      aria-expanded="false"
+                      (click)="setEditIncome(income)"
+                      aria-controls="modalCreateAndEdit">
+                <i class="fas fa-info-circle" style="color: white"></i>
+              </button>
+
+            </th>
+          </tr>
+
+        </ng-container>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<!--modal income-->
+<div>
+  <div class="modal fade" tabindex="-1" role="dialog" id="modalCreateAndEdit" aria-labelledby="modalDetailsLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <app-create-an-edit-income [disableFields]="createIncome"
+                                 [objDataEdit]="setDataIncome"
+                                 (resetListIncome)="getAllIncomes()"></app-create-an-edit-income>
+    </div>
+  </div>
+</div>

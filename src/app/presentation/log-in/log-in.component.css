@@ -1,0 +1,169 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  width: 100%;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin-heading{
+  display: block;
+  float: left;
+  width: 100%;
+  text-align: center;
+  font-family: 'robotoregular';
+  color: #0073D1;
+  font-size: 1em;
+  padding: 20px 0px;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.outer {
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: radial-gradient(ellipse at bottom, #1db9e9, #eaf0f2 50% );
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+  background-image: url('../../../assets/images/login-world-bg.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+.inner {
+  width: 500px; /*whatever width you want*/
+
+}
+.form-login{
+  background-color: #FFFFFF !important;
+  -webkit-border-radius: 30px !important;
+  -moz-border-radius: 30px !important;
+  border-radius: 30px !important;
+  border: 2px solid #0073d1 !important;
+  font-family: 'robotomedium' !important;
+  color: #0073d1 !important;
+  height: 50px !important;
+  background-repeat: no-repeat;
+  background-position: 7px 4px;
+  padding: 0px 0px 0px 57px !important;
+  margin-bottom: 20px !important;
+}
+.form-login::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #0073d1 !important;
+}
+.form-login:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #0073d1 !important;
+}
+
+.form-login::-ms-input-placeholder { /* Microsoft Edge */
+  color: #0073d1 !important;
+}
+/*.form-login:focus{
+  background-color: rgba(0,0,0,0) !important;
+}*/
+.form-login:-webkit-autofill,
+.form-login:-webkit-autofill:hover,
+.form-login:-webkit-autofill:focus,
+.form-login:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #0073d1 !important;
+}
+.user{
+  background-image: url('../../../assets/images/ico-login-user.png');
+}
+
+.passw{
+  background-image: url('../../../assets/images/ico-login-pass.png');
+  background-position: 9px 7px;
+}
+
+.btnlogin{
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  background-image: linear-gradient(-42deg, #0073d1 0%, #03b2e8 100%);
+}
+.logo-footer-login{
+  display: block;
+  width: 90%;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  height: 50px;
+  background-image: url('../../../assets/images/logo-cuenca-color.svg');
+  background-size: contain;
+  background-color: #FFFFFF;
+  background-position: 50% 50%;
+  margin: 20px auto;
+  background-repeat: no-repeat;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .form-signin{
+    max-width: 100%;
+  }
+  .inner{
+    width: 100%;
+  }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}

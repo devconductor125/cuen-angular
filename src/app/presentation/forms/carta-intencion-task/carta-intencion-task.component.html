@@ -1,0 +1,277 @@
+<div class="container wrap" style="margin-top: 25px;" *ngIf="cartaIntencion">
+
+  <div class="row">
+    <div class="col-12">
+      <button (click)="printDiv()" class="print_btn"><i class="fas fa-print" style="margin-right: 5px"></i> Imprimir Carta</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm" style="text-align: left; font-size: 16px; font-weight: bold">
+      <div>Visualización de Carta de intención</div>
+    </div>
+  </div>
+
+  <div id="a-imprimir"> <!--/// Imprimir-->
+    <!-- HOJA 1 -->
+    <div class="imprimir">
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div class="title-header">
+            <strong>Medellín</strong> Fecha de firma por el propietario
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div style="text-align: left">
+            <strong>Doctora</strong><br>
+            MARIA CLAUDIA DE LA OSSA POSADA<br>
+            Corporación <strong>CUENCAVERDE</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" style="text-align: center; padding-top: 25px; padding-bottom: 25px">
+          <div style="text-align: center">
+            <strong>Asunto</strong><br>
+            Carta de intención de participación a proyectos de la Corporación
+            CuencaVerde.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div class="parag">
+            En calidad de {{datosCarta.propertyCorrelation}}(a) del predio {{datosCarta.propertyName}}, ubicado en márgenes de {{datosCarta.margins}},
+            Municipio de {{datosCarta.municipality}}, vereda {{datosCarta.lane}}, con una extensión aproximada de {{datosCarta.extension}} ratifico mi interés de participar en el
+            proyecto: Proyectos de Conservación y manejo sostenible de cuencas abastecedoras prioritarias del Fondo de Agua del Valle de Aburra. <br><br>
+
+            De acuerdo con el recorrido en campo y la reunión realizada el día
+            {{getDateWithoutHour(datosCarta.createdAt)}}, se identificaron las siguientes estrategias de conservación en
+            el predio:
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <table width="100%">
+            <tr *ngIf="datosCarta.hillSideForest.checked">
+              <td width="25%">Bosque Ladera</td>
+              <td>
+                <tr>
+                    <td width="75%" class="center" *ngIf="datosCarta.hillSideForest.enrichment">Enriquecimiento</td>
+                    <td width="75%" class="center" *ngIf="datosCarta.hillSideForest.insulation">Aislamiento</td>
+                    <td width="75%" class="center" *ngIf="datosCarta.hillSideForest.establishment">Establecimiento</td>
+                    <td width="75%" class="center" *ngIf="datosCarta.hillSideForest.seedlingsInsulation">Aislamiento con Plántulas</td>
+                </tr>
+              </td>
+
+            </tr>
+            <tr *ngIf="datosCarta.riverBankForest.checked">
+              <td width="25%">Bosque de Ribera</td>
+              <td>
+                <tr>
+                    <td width="75%" class="center" *ngIf="datosCarta.riverBankForest.enrichment">Enriquecimiento</td>
+                    <td width="75%" class="center" *ngIf="datosCarta.riverBankForest.insulation">Aislamiento</td>
+                    <td width="75%" class="center" *ngIf="datosCarta.riverBankForest.establishment">Establecimiento</td>
+                    <td width="75%" class="center" *ngIf="datosCarta.riverBankForest.seedlingsInsulation">Aislamiento con Plántulas</td>
+                </tr>
+              </td>
+            </tr>
+            <tr>
+              <td width="25%" *ngIf="datosCarta.originsForest.checked">Bosques de Nacimientos</td>
+              <td>
+                <tr>
+                    <td width="75%" class="center" *ngIf="datosCarta.originsForest.enrichment">Enriquecimiento</td>
+                    <td width="75%" class="center" *ngIf="datosCarta.originsForest.insulation">Aislamiento</td>
+                    <td width="75%" class="center" *ngIf="datosCarta.originsForest.establishment">Establecimiento</td>
+                    <td width="75%" class="center" *ngIf="datosCarta.originsForest.seedlingsInsulation">Aislamiento con Plántulas</td>
+                </tr>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div class="parag">
+            Adicionalmente es de mi interés participar en el proyecto de buenas prácticas de producción sostenible y saneamiento básico integral, dentro de las cuales se encuentran:
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <table width="100%">
+            <tr>
+              <td width="40%" *ngIf="datosCarta.deforestationPrevention.checked">Prevención de la deforestación</td>
+              <td width="60%" *ngIf="datosCarta.deforestationPrevention.efficientStove" class="center">Estufa eficiente</td>
+              <td width="60%" *ngIf="datosCarta.deforestationPrevention.orchardFirewood" class="center">Huerto Leñero</td>
+            </tr>
+            <tr>
+              <td width="40%" *ngIf="datosCarta.sustainableCattleRaisingAndGoodPractices.checked">Ganadería sostenible y buenas prácticas</td>
+              <td width="60%" class="center" *ngIf="datosCarta.sustainableCattleRaisingAndGoodPractices.cattlePass">Paso de Ganado</td>
+              <td width="60%" class="center" *ngIf="datosCarta.sustainableCattleRaisingAndGoodPractices.saverSprue">Bebedero ahorrador</td>
+              <td width="60%" class="center" *ngIf="datosCarta.sustainableCattleRaisingAndGoodPractices.waterTank">Bebedero ahorrador</td>
+              <td width="60%" class="center" *ngIf="datosCarta.sustainableCattleRaisingAndGoodPractices.sparseTrees">Árboles Dispersos</td>
+            </tr>
+            <tr>
+              <td width="40%" *ngIf="datosCarta.integralBasicSanitation.checked">Saneamiento básico integral</td>
+              <td width="60%" class="center" *ngIf="datosCarta.integralBasicSanitation.stardMaintenance">Mantenimiento STARD</td>
+              <td width="60%" class="center" *ngIf="datosCarta.integralBasicSanitation.stardInstallation">Suministro e instalación de STARD</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+<!-- CARTA VIEJA
+      <div><p class="c2"><span
+        style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 225.03px; height: 137.02px;"><img
+        alt="" src="images/image1.png"
+        style="width: 225.03px; height: 137.02px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
+        title=""></span></p></div>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c7"><span class="c9">Medell&iacute;n, </span><span>Fecha de firma por el propietario</span>
+      </p>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c7"><span class="c1">Doctora</span></p>
+      <p class="c7"><span class="c1">MARIA CLAUDIA DE LA OSSA POSADA </span></p>
+      <p class="c7"><span class="c1">Corporaci&oacute;n CUENCAVERDE </span></p>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c7"><span class="c1">Asunto: Carta de intenci&oacute;n de participaci&oacute;n en acciones con la Corporaci&oacute;n CuencaVerde. </span>
+      </p>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c0"><span class="c1"></span></p>
+      <p class="c5"><span class="c9">Como propietario(a)/Representante legal del predio </span><span class="c1">&nbsp;, ubicado en &aacute;rea de influencia del r&iacute;o, quebrada, arroyo de __________________________________________, Municipio de {{cartaIntencion.general_info.municipality}}, vereda {{cartaIntencion.general_info.lane}}, con una extensi&oacute;n total de ___________ ha, ratifico mi inter&eacute;s de participar en el proyecto: Fortalecimiento de mecanismos de conservaci&oacute;n y manejo sostenible de cuencas abastecedoras prioritarias del Fondo de Agua del Valle de Aburra, a trav&eacute;s de acciones de restauraci&oacute;n ecol&oacute;gica de los bosques asociados a las fuentes abastecedoras del embalse&nbsp; ___________________. </span>
+      </p>
+      <p class="c5"><span class="c1">Donde se identifican como posibles acciones:</span></p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5"><span class="c1">De acuerdo con el recorrido en campo y la reuni&oacute;n realizada el d&iacute;a {{cartaIntencion.general_info.visit_date.day + '/' + cartaIntencion.general_info.visit_date.month + '/' + cartaIntencion.general_info.visit_date.year}}, se identificaron las siguientes acciones de conservaci&oacute;n y protecci&oacute;n a realizarse en el predio:</span>
+      </p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <ul class="c3 lst-kix_4dzom62eeevk-0 start" *ngFor="let budget of cartaIntencion.budget">
+        <li class="c5 c6"><span class="c1">{{budget.action.name}}</span></li>
+      </ul>
+    </div>-->
+
+
+    <!-- HOJA 2 -->
+    <div class="imprimir">
+      <div class="row noMostrar page-break">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div class="parag">
+            <br><br>
+            De conformidad con lo anterior manifiesto/manifestamos, que de acuerdo con lo
+            planteado con el equipo de la <strong>Corporación CuencaVerde</strong> y buscando mejorar las
+            condiciones ambientales del predio, es de mi/nuestro interés participar en estos
+            proyectos.<br><br>
+            Las anteriores posibilidades serán analizadas en conjunto con el equipo de la
+            <strong>Corporación CuencaVerde</strong> y será precisado el apoyo a recibir en el respectivo
+            acuerdo de compromiso de las partes.<br><br>
+            Dada mi calidad respecto del predio, me comprometo a gestionar lo
+            correspondiente para hacer posible la celebración del acuerdo respectivo con la
+            <strong>CORPORACIÓN</strong>, entendiendo la necesidad de aportar para ello el certificado de
+            tradición y libertad vigente o el que corresponda y fotocopia de mi cédula de
+            ciudadanía.<br><br>
+            Firmo esta carta de intención para continuar con el proceso de negociación,
+            consiento y autorizo que mis datos personales sean adicionados a la base de
+            datos administrada por la Corporación CuencaVerde y se utilicen única y
+            exclusivamente para los fines que correspondan a los trabajados conjuntos que
+            aquí se consignan, así como lo que se defina de suscribirse el correspondiente
+            acuerdo, esto de conformidad con lo dispuesto en la ley <strong>1581</strong> de <strong>2012</strong> y el decreto
+            <strong>1377</strong> de <strong>2013</strong>.<br><br>
+            Quedo atento(a) a brindar cualquier información adicional.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div class="parag">
+            <br>
+            <br>
+            Cordialmente
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div style="height: 40px; width: 300px; border-bottom: solid 2px black">
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div class="parag">
+            <strong>Cédula de Ciudadanía Nº</strong> {{datosCarta.idCardNumber}}<br>
+            <strong>Correo Electrónico</strong> {{datosCarta.email}}<br>
+            <strong>Celular</strong> {{datosCarta.mobileNumber}}<br>
+          </div>
+        </div>
+      </div>
+
+<!--
+
+
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5"><span class="c9">Queremos manifestar, que de acuerdo con lo conversado con el equipo de la Corporaci&oacute;n CuencaVerde, buscando mejorar las condiciones ambientales del predio, nos interesa participar del(los) programa(s) de Restauraci&oacute;n de Ecosistemas y Buenas Pr&aacute;cticas Sostenibles - Gesti&oacute;n y Conservaci&oacute;n del Recurso H&iacute;drico y la Biodiversidad que incluye la realizaci&oacute;n </span><span
+        class="c9">de las siguientes acciones:</span></p>
+      <p class="c5 c8"><span class="c9 c11"></span></p>
+      <ul class="c3 lst-kix_4dzom62eeevk-0" *ngFor="let budget of cartaIntencion.budget">
+        <li class="c5 c6"><span class="c9">{{budget.action.name}}</span></li>
+      </ul>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5"><span class="c1">Las anteriores posibilidades ser&aacute;n analizadas en conjunto con el equipo de la Corporaci&oacute;n CuencaVerde y ser&aacute; precisado el apoyo a recibir en el respectivo acuerdo de compromiso de las partes. </span>
+      </p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5"><span class="c1">Como propietario del predio me comprometo a hacer entrega del certificado de tradici&oacute;n y libertad vigente y fotocopia de mi c&eacute;dula de ciudadan&iacute;a, en un plazo no mayor a 10 d&iacute;as h&aacute;biles.</span>
+      </p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5"><span class="c1">Firmo esta carta de intenci&oacute;n para continuar con el proceso de negociaci&oacute;n.&nbsp; Quedo atento(a) a brindar cualquier informaci&oacute;n adicional.</span>
+      </p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5"><span class="c1">Cordialmente,</span></p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5 c8"><span class="c1"></span></p>
+      <p class="c5"><span class="c1">______________________________________</span></p>
+      <p class="c10 c8"><span class="c1"></span></p>
+      <p class="c10"><span class="c1">Propietario del predio/Representante legal {{cartaIntencion.general_info.contact.contact_name}}</span></p>
+      <p class="c10"><span class="c1">C&eacute;dula de ciudadan&iacute;a N&deg;{{cartaIntencion.general_info.contact.contact_id_card_number}}</span></p>
+      <p class="c10"><span class="c1">Correo electr&oacute;nico: {{cartaIntencion.general_info.contact.contact_email}}</span></p>
+      <p class="c10"><span class="c1">Celular: {{cartaIntencion.general_info.contact.contact_mobile_number}}</span></p>
+      <p class="c8 c10"><span class="c1"></span></p>
+      <p class="c5 c8" id="h.gjdgxs"><span class="c1"></span></p>-->
+
+    </div>
+
+  </div>
+</div>

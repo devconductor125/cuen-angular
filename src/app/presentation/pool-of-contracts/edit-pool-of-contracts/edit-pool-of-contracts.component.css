@@ -1,0 +1,128 @@
+.actividades-container{
+  width: 100%;
+}
+/*////CHECK BOX STYLE*/
+.boxes > ul {
+  width: 100%;
+  list-style: none;
+}
+.boxes > ul > li {
+  border: dotted 1px #aaa;
+  padding:7px;
+  margin: 5px;
+  background-color: #FFFFFF;
+}
+select:focus{
+  color: #FFFFFF;
+}
+
+/*Checkboxes styles*/
+input[type="checkbox"] { display: none; }
+
+input[type="checkbox"] + label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 20px;
+  font: 14px/20px 'Open Sans', Arial, sans-serif;
+  color: #333;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  font-weight: bold;
+}
+
+input[type="checkbox"] + label:last-child { margin-bottom: 0; }
+
+input[type="checkbox"] + label:before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #FFFFFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: .6;
+  -webkit-transition: all .12s, border-color .08s;
+  transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked + label:before {
+  width: 10px;
+  top: -5px;
+  left: 5px;
+  border-radius: 0;
+  opacity: 1;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.titlechapterAp{
+  margin-top: 20px;
+}
+.bagcontainer{
+  margin: 10px;
+}
+.procediments-container{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  padding: 15px 20px;
+}
+.boxes{
+  display: block;
+  float: left;
+  width: 100%;
+}
+.boxes ul{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+}
+.boxprocediments{
+  border: none !important;
+  margin-bottom: 15px !important;
+  padding: 10px 15px !important;
+}
+.labelform{
+  border: 2px solid #03B2E8 !important;;
+  border-radius: 10px !important;
+  height: auto !important;
+  padding: 5px 10px 4px 40px !important;
+  font-family: 'robotobold' !important;
+  color: #003764 !important;
+  margin: 10px 0px 10px 0px !important;
+  font-size: 1.2em;
+}
+.labelform::before{
+  border: 2px solid #03B2E8 !important;
+  position: absolute !important;
+  left: 13px !important;
+  top: 3px !important;
+  opacity: 1 !important;
+}
+.list-boxes{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+.sublist{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  list-style: none;
+  padding: 7px 20px 0px 35px;
+}
+
+.bluesub{
+  background-color: #eff7ff;
+  border: none !important;
+}

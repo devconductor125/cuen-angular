@@ -1,0 +1,100 @@
+<div class="row subtitleComponent" style="border-radius: 10px; padding: 5px">
+
+  <div class="col-md-1 col-sm-12">
+    Programa<br>
+  </div>
+
+  <div class="col-md col-sm-12" style="text-align: left">
+    Nombre del Programa<br>
+  </div>
+
+</div>
+
+<ng-container *ngIf="listProjects.length>0">
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row subtitleComponent" style="border-radius: 10px; padding: 5px">
+
+    <div class="col-sm-7 col-sm-7">
+      Proyecto<br>
+    </div>
+
+    <div class="col-md-3 col-sm-5" style="text-align: center">
+      Fecha<br>
+    </div>
+
+    <div class="col-md-2 col-sm-12" style="text-align: center">
+      Acciones<br>
+    </div>
+
+  </div>
+
+  <div class="row subtitleComponent" *ngFor="let project of listProjects"
+       style="background-color: #f6f6f6; border-radius: 10px; padding: 5px">
+
+    <div class="col-sm-7 col-sm-7">
+      <h4>{{project.name}}</h4>
+    </div>
+
+    <div class="col-md-3 col-sm-5" style="text-align: center">
+      <div class="btn_style_ap blue-dark" style="cursor: default">{{project.created_at}}</div>
+    </div>
+
+    <div class="col-md-2 col-sm-12" style="text-align: center">
+      <div class="btn-danger" (click)="deleteProject(project.id);">Eliminar</div>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+</ng-container>
+
+<ng-container *ngIf="listProjects.length===0">.
+  <div class="dropdown-divider"></div>
+
+  <div class="row subtitleComponent" style="background-color: #f6f6f6; border-radius: 10px; padding: 5px">
+
+    <div class="col-sm-12 col-md" style="text-align: center">
+      <h4 class="subtitle-item">No se han Registrado Proyectos al Programa Seleccionado</h4>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+</ng-container>
+<div class="generalrow subtitleComponent">
+
+  <div class="col-12 col-sm-12 col-md-12" style="background-color: #f6f6f6; border-radius: 10px; padding: 5px">
+    <label for="selectProgram">Seleccione el programa</label>
+    <select class="form-control"
+            [(ngModel)]="idProgram"
+            id="selectProgram">
+      <option [value]="0" selected>Seleccione un programa</option>
+      <option *ngFor="let program of arrPrograms"
+              [value]="program.id">{{program.name}}</option>
+    </select>
+  </div>
+
+</div>
+<div class="generalrow subtitleComponent">
+
+  <div class="col-12 col-sm-12 col-md-12" style="background-color: #f6f6f6; border-radius: 10px; padding: 5px">
+    <label for="labelselect0" class="subtitle-item">Agregue un nuevo Proyecto</label>
+    <input type="text" id="labelselect0"
+           class="form-control"
+           [(ngModel)]="project.name"
+           placeholder="Nombre del Proyecto"/>
+  </div>
+
+</div>
+
+<div class="generalrow subtitleComponent">
+
+  <div class="offset-md-10 col-md-2 col-sm-12">
+    <div class="btn btn-success" (click)="regProject()">Registrar Proyecto</div>
+  </div>
+
+</div>
+

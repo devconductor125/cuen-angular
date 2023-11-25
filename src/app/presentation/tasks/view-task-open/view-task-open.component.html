@@ -1,0 +1,386 @@
+<div *ngIf="task">
+
+  <div class="contents-app" style="margin-bottom: 25px">
+
+    <!--TASK INFO-->
+    <div class="generalrow">
+      <div class="generalrow">
+        <div class="col-sm">
+          <div class="titlechapter intern">{{task.title}}</div>
+        </div>
+      </div>
+
+      <!--Tarea-->
+      <div class="generalrow">
+        <div class="col-2">
+          <div class="chips_title">Tarea</div>
+        </div>
+        <div class="col-10">
+          <!--Nombre del procedimiento-->
+          <div class="chips">{{task.details.process.name + ' ' + status}}</div>
+        </div>
+      </div>
+
+      <!--Datos de la tarea-->
+      <div class="generalrow nopad">
+        <div class="col-12 col-md-8 col-lg-7 col-xl-7 float-left">
+          <div class="generalrow">
+            <div class="col-sm subtitle">
+              Descripción
+            </div>
+          </div>
+          <div class="generalrow">
+            <div class="col-sm">
+              <p>{{task.description}}</p>
+            </div>
+          </div>
+          <div class="generalrow">
+            <div class="col-sm subtitle">
+              Responsable
+            </div>
+          </div>
+          <div class="generalrow">
+            <div class="col-sm">
+              <p>{{task.users.name}}</p>
+              <p>{{task.users.email}}</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-3 col-lg-4 col-xl-4 float-right">
+          <div>
+            <div class="statustaskcontainer">
+              <div class="statustask greenlight">Fecha</div>
+              <div class="timetask-container">
+                <div class="subtitledate">Desde</div>
+                <div class="datetask">{{task.date_start }}</div>
+                <div class="subtitledate">Hasta</div>
+                <div class="datetask">{{task.date_end}}</div>
+              </div>
+              <div class="statustask bluelight">A tiempo</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalles de la tarea DOCUMENTOS ASOCIADOS-->
+      <div class="generalrow nopad">
+        <!-- DATES TABLE -->
+        <div class="module-box-container" *ngIf="taskData && taskData.length > 0">
+
+          <div class="header-module">
+            <h3 class="title-module">Datos asociados</h3>
+          </div>
+          <div class="maintablecontainer">
+            <table class="table">
+              <thead class="items-table">
+              <tr>
+                <th scope="col">Tipo</th>
+                <th scope="col">Dato</th>
+                <!--<th scope="col">Nombre</th>-->
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let taskDataObject of taskData">
+                <th scope="generalrow">{{taskDataObject.type}}</th>
+                <td>{{taskDataObject.name}}</td>
+                <td>
+                  <div class="generalrow">
+                    <div class="col-sm">
+                      <a *ngIf="taskDataObject.route" class="mainbtn gradblue"
+                         routerLink="{{taskDataObject.route + task.id}}">Ver</a>
+                    </div>
+                    <div class="col-sm" *ngIf="isSig || isCoordinador">
+                      <a class="mainbtn darkgreen" (click)="downloadData(taskDataObject)">Descargar</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div>
+
+        <!--Mensaje cuando no se han cargado los archivos-->
+        <div class="generalrow nopad" style="" *ngIf="documents">
+          <div class="col-sm">
+            <div class="generalrow">
+              <!-- Label -->
+              <div class="col-sm" *ngIf="documents.length === 0">
+                <div class="header-module">
+                  <h3 class="title-module">Archivos asociados</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="generalrow">
+              <!-- Label -->
+              <div class="col-sm" *ngIf="documents.length === 0">
+                <div style="padding: 15px; text-align: center; background-color: #f1dfdd; border-radius: 25px">
+                  No se han cargado archivos
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Listado de documentos-->
+        <div class="generalrow nopad" *ngIf="documents && documents.length > 0">
+          <!-- DOCUMENTS TABLE -->
+          <div class="table-container">
+            <div class="header-module">
+              <h3 class="title-module">Documentos asociados</h3>
+            </div>
+            <table class="table">
+              <thead class="items-table">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha de carga</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let document of documents">
+                <th>{{document.show_name}}</th>
+                <td>{{getDateWithHour(document.created_at)}}</td>
+                <td>
+                  <div class="generalrow">
+
+                    <div class="col-sm">
+                      <a (click)="downloadFileWithToken(this.cuencaService, URL_BASE_FILES, document.name)"
+                         class="mainbtn gradblue" style="text-decoration: none" target="_blank">Descargar</a>
+                    </div>
+
+                    <div class="col-sm" *ngIf="task.sub_type.id  === document.id_sub_type"> <!---->
+                      <a (click)="eliminarDoc(document.id)" class="mainbtn gradRed">Eliminar</a>
+                    </div>
+
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="generalrow nopad" *ngIf="images && images.length > 0">
+          <div class="photo-container">
+            <div class="title-module">Registro fotografico</div>
+            <ul class="list-images">
+              <li class="thumb-image col-lg-3 col-md-3 col-sm-6" *ngFor="let image of images">
+                <a class="link-image-container" data-toggle="modal" data-target="#gallery-modal"
+                   (click)="pickedImageUrl = image">
+                  <img class="imagethumb" [src]="URL_BASE_IMAGES + '/' + image.name">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="gallery-modal" tabindex="-1" role="dialog"
+           aria-hidden="false" aria-labelledby="exLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exLabel">Registro fotográfico</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" style="cursor: pointer;">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid" *ngIf="pickedImageUrl">
+                <img class="imagethumb" [src]="URL_BASE_IMAGES + '/' + pickedImageUrl.name">
+              </div>
+            </div>
+            <div class="modal-footer" *ngIf="pickedImageUrl">
+              <button type="button" class="btn btn-danger" style="float: left; cursor: pointer;"
+                      (click)="downloadFileWithToken(this.cuencaService, IMAGES_URL_CUENCA, pickedImageUrl.name)"
+                      data-dismiss="modal">Descargar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Tarea Abierta en suptipo === 19-->
+      <ng-container *ngIf="task.task_open_sub_type_id.toString() === '19'">
+
+        <ng-container *ngIf="this.possibleSendFinancial">
+
+
+          <div class="generalrow nopad">
+
+            <div class="dropdown-divider"></div>
+
+            <div class="col-sm">
+              <label style="font-weight: bold">Enviar a Financiero</label><br/>
+              <label for="usuario2">Selecciona el Usuario para redirigir la tarea: </label>
+              <select [(ngModel)]="selectedFinanciero" class="custom-select form-control gradblue" name="selected_user"
+                      id="usuario2">
+                <option [value]="0">Seleccione un usuario</option>
+                <option *ngFor="let usuario of userFinanciero" [ngValue]="usuario.id">{{usuario.name}}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="generalrow nopad">
+
+            <div class="dropdown-divider"></div>
+            <div class="col-sm">
+              <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-success" id="sendFinanciero"
+                      (click)="sendFinanciero()">Enviar
+              </button>
+            </div>
+          </div>
+
+        </ng-container>
+
+        <div class="generalrow nopad">
+
+          <div class="dropdown-divider"></div>
+
+          <div class="generalrow" style="font-weight: bold">
+            <div class="col-sm">
+              Cargar Certificado
+            </div>
+          </div>
+          <!-- COMPONENT DRAG -->
+          <cuenca-drag-and-drop-open style="width: 100%" [taskId]="task.id" [typeFile]="1"
+                                     (notify)='refreshFiles($event)'></cuenca-drag-and-drop-open>
+        </div>
+
+        <div class="generalrow nopad">
+
+          <div class="dropdown-divider"></div>
+
+          <div class="generalrow" style="font-weight: bold">
+            <div class="col-sm">
+              Cargar Factura
+            </div>
+          </div>
+          <!-- COMPONENT DRAG -->
+          <cuenca-drag-and-drop-open style="width: 100%" [taskId]="task.id" [typeFile]="2"
+                                     (notify)='refreshFiles($event)'></cuenca-drag-and-drop-open>
+        </div>
+
+        <div class="generalrow nopad">
+
+          <div class="dropdown-divider"></div>
+
+          <div class="generalrow" style="font-weight: bold">
+            <div class="col-sm">
+              Cargar Pago Parafiscal
+            </div>
+          </div>
+          <!-- COMPONENT DRAG -->
+          <cuenca-drag-and-drop-open style="width: 100%" [taskId]="task.id" [typeFile]="3"
+                                     (notify)='refreshFiles($event)'></cuenca-drag-and-drop-open>
+        </div>
+
+      </ng-container>
+
+      <!--Modulo de carga de archivo-->
+      <div class="generalrow nopad" *ngIf="canUploadFiles">
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow" style="font-weight: bold">
+          <div class="col-sm">
+            Cargar archivos varios
+          </div>
+        </div>
+        <!-- COMPONENT DRAG -->
+        <cuenca-drag-and-drop-open style="width: 100%" [taskId]="task.id" [typeFile]="0"
+                                   (notify)='refreshFiles($event)'></cuenca-drag-and-drop-open>
+      </div>
+
+      <!--Container de Comunicaciones-->
+      <div class="generalrow nopad" *ngIf="showActorsForm">
+
+        <div class="dropdown-divider"></div>
+
+        <!-- Formulario de comunicaciones -->
+        <cuenca-form-task-comunication style="width: 100%" [taskId]="task"
+                                       (notify)='messageRegisterForm($event)'></cuenca-form-task-comunication>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+          <div class="header-module">
+            <h3 class="title-module">Comentarios</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="comments-container" *ngFor="let comment of comments">
+        <div class="generalrow">
+          <div class="user-comment col-12 col-md-5 col-lg-4 col-xl-3"> Usuario: {{comment.user_name}}</div>
+          <div class="date-comment col-12 col-md-5 col-lg-4 col-xl-3"> Fecha: {{getDateWithHour(comment.created_at)}}
+          </div>
+          <div class="commentstext col-12">
+            <div>{{comment.description}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="generalrow">
+        <div class="col-sm">
+              <textarea class="form-control simpleinput" rows="3" name="task_comments"
+                        placeholder="Agrega algún comentario a la tarea" [(ngModel)]="comentario"></textarea>
+        </div>
+        <div class="col-sm" *ngIf="!canAssignTask">
+          <button class="mainbtn plaingreenlight right margintop" (click)="insertComment(); $event.stopPropagation();">Enviar</button>
+        </div>
+      </div>
+
+      <!--Enviar Tarea Abierta-->
+      <ng-container>
+
+        <div class="generalrow nopad" *ngIf="requiresUserOnSend">
+
+          <div class="col-sm">
+            <label style="font-weight: bold">Enviar tarea</label><br/>
+            <label for="usuario2">Selecciona el Usuario para redirigir la tarea: </label>
+            <select [(ngModel)]="selectedUser" class="custom-select form-control gradblue" name="selected_user"
+                    id="usuario3">
+              <option [value]="0">Seleccione un usuario</option>
+              <option *ngFor="let usuario of usersOpenTasks" [ngValue]="usuario.id">{{usuario.name}}</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="generalrow nopad" *ngIf="canSendTask && doesntSelectFinancieroUser && isNotSpecialTask">
+
+          <div class="col-sm">
+            <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-success" id="crearTarea"
+                    (click)="sendOpenTask()">{{taskActionButtonText}}
+            </button>
+          </div>
+        </div>
+
+        <div class="generalrow nopad" *ngIf="canSendTask && !isNotSpecialTask">
+
+          <div class="dropdown-divider"></div>
+          <div class="col-sm">
+            <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-success" id="enviar"
+                    (click)="sendOpenSpecialTask()">{{taskActionButtonText}}
+            </button>
+          </div>
+        </div>
+
+      </ng-container>
+
+    </div>
+  </div>
+
+</div>

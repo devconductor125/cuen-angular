@@ -1,0 +1,219 @@
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Presupuesto por bolsa (contratista)
+        </button>
+        <button type="button"
+                class="btn btn-success"
+                (click)="downLoadExcel(1)">Descargar</button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title textCenter">CANTIDADES CONTRATADAS</h5>
+            <table class="table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">ACTIVIDAD</th>
+                <th scope="col">UNIDAD</th>
+                <th scope="col">CANTIDAD</th>
+                <th scope="col">VALOR UNITARIO</th>
+                <th scope="col">VALOR TOTAL</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let dataRow of dataReport?.data">
+                <th scope="row">{{dataRow.action_name}}</th>
+                <td>{{dataRow?.material_unit}}</td>
+                <td>{{dataRow?.budget_quantity}}</td>
+                <td>{{dataRow?.budget_value}}</td>
+                <td>{{dataRow?.budget_value_total}}</td>
+              </tr>
+              <tr>
+                <th colspan="4" class="textCenter">COSTOS DIRECTOS</th>
+                <td>{{dataReport?.budget_total}}</td>
+              </tr>
+              <tr>
+                <th colspan="3" class="textCenter">ADMINISTRACIÓN (A)</th>
+                <td>20%</td>
+                <td>{{dataReport?.budget_adminstration}}</td>
+              </tr>
+              <tr>
+                <th colspan="3" class="textCenter">UTILIDAD (U)</th>
+                <td>5%</td>
+                <td>{{dataReport?.budget_utility}}</td>
+              </tr>
+              <tr>
+                <th colspan="3" class="textCenter">IVA sobre Utilidad  (19%)</th>
+                <td>19%</td>
+                <td>{{dataReport?.budget_iva}}</td>
+              </tr>
+              <tr>
+                <th colspan="4" class="textCenter">ASISTENCIA TÉCNICA CON IVA INCLUIDO</th>
+                <td>{{dataReport?.technical_assistance}}</td>
+              </tr>
+              <tr>
+                <th colspan="4" class="textCenter">VALOR TOTAL</th>
+                <td>{{dataReport?.value_total}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <table class="table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">CUENCA</th>
+                <th scope="col">MUNICIPIO</th>
+                <th scope="col">PREDIO</th>
+                <th scope="col">COSTO TOTAL</th>
+                <th scope="col">PREDIO PONDERADO</th>
+                <th scope="col">20%</th>
+                <th scope="col">5%</th>
+                <th scope="col">19%</th>
+                <th scope="col">Total</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let dataRowPotential of dataReport?.potential">
+                <th scope="row">{{dataRowPotential.micro_basin}}</th>
+                <td>{{dataRowPotential?.municipality}}</td>
+                <td>{{dataRowPotential?.potential}}</td>
+                <td>{{dataRowPotential?.budget_total | number}}</td>
+                <td>{{dataRowPotential?.porcent}}</td>
+                <td>{{dataRowPotential?.budget_adminstration | number}}</td>
+                <td>{{dataRowPotential?.budget_utility | number}}</td>
+                <td>{{dataRowPotential?.budget_iva | number}}</td>
+                <td>{{dataRowPotential?.value_total | number}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Presupuesto por bolsa (tarea de ejecución)
+        </button>
+        <button type="button"
+                class="btn btn-success"
+                (click)="downLoadExcel(2)"
+                [disabled]="!boolExistThirdBudget">Descargar</button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body" *ngIf="boolExistThirdBudget; else dataTaskExecution">
+
+
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title textCenter">CANTIDADES CONTRATADAS</h5>
+            <table class="table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">ACTIVIDAD</th>
+                <th scope="col">UNIDAD</th>
+                <th scope="col">CANTIDAD</th>
+                <th scope="col">VALOR UNITARIO</th>
+                <th scope="col">VALOR TOTAL</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let dataThirdBudget of dataReportThirdBudget?.data">
+                <th scope="row">{{dataThirdBudget.action_name}}</th>
+                <td>{{dataThirdBudget?.material_unit}}</td>
+                <td>{{dataThirdBudget?.budget_quantity}}</td>
+                <td>{{dataThirdBudget?.budget_value}}</td>
+                <td>{{dataThirdBudget?.budget_value_total}}</td>
+              </tr>
+              <tr>
+                <th colspan="4" class="textCenter">COSTOS DIRECTOS</th>
+                <td>{{dataReportThirdBudget?.budget_total}}</td>
+              </tr>
+              <tr>
+                <th colspan="3" class="textCenter">ADMINISTRACIÓN (A)</th>
+                <td>20%</td>
+                <td>{{dataReportThirdBudget?.budget_adminstration}}</td>
+              </tr>
+              <tr>
+                <th colspan="3" class="textCenter">UTILIDAD (U)</th>
+                <td>5%</td>
+                <td>{{dataReportThirdBudget?.budget_utility}}</td>
+              </tr>
+              <tr>
+                <th colspan="3" class="textCenter">IVA sobre Utilidad  (19%)</th>
+                <td>19%</td>
+                <td>{{dataReportThirdBudget?.budget_iva}}</td>
+              </tr>
+              <tr>
+                <th colspan="4" class="textCenter">ASISTENCIA TÉCNICA CON IVA INCLUIDO</th>
+                <td>{{dataReportThirdBudget?.technical_assistance}}</td>
+              </tr>
+              <tr>
+                <th colspan="4" class="textCenter">VALOR TOTAL</th>
+                <td>{{dataReportThirdBudget?.value_total}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <table class="table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">CUENCA</th>
+                <th scope="col">MUNICIPIO</th>
+                <th scope="col">PREDIO</th>
+                <th scope="col">COSTO TOTAL</th>
+                <th scope="col">PREDIO PONDERADO</th>
+                <th scope="col">20%</th>
+                <th scope="col">5%</th>
+                <th scope="col">19%</th>
+                <th scope="col">Total</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let dataRowPotential of dataReportThirdBudget?.potential">
+                <th scope="row">{{dataRowPotential.micro_basin}}</th>
+                <td>{{dataRowPotential?.municipality}}</td>
+                <td>{{dataRowPotential?.potential}}</td>
+                <td>{{dataRowPotential?.budget_total | number}}</td>
+                <td>{{dataRowPotential?.porcent}}</td>
+                <td>{{dataRowPotential?.budget_adminstration | number}}</td>
+                <td>{{dataRowPotential?.budget_utility | number}}</td>
+                <td>{{dataRowPotential?.budget_iva | number}}</td>
+                <td>{{dataRowPotential?.value_total | number}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+      <ng-template #dataTaskExecution>
+        <div class="card-body">
+          No cuenta con tareas de ejecución
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+

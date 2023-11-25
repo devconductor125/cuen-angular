@@ -1,0 +1,39 @@
+<div class="title-section">
+  <div class="task_title"></div>
+  <div class="titlechapterAp">Tareas en ejecución</div>
+  <a class="mainbtn plainbluedark right createbtn" routerLink="/app/create-tarea-ejecucion" *ngIf="isCoordinador">Crear Tarea</a>
+
+</div>
+
+
+<!--CREATE-->
+
+<div class="generalrow">
+  <div class="title-taskmodule gradblue">Listado de Tareas de Ejecución</div>
+
+  <div class="maintablecontainer">
+    <table class="table tabletask table-hover">
+      <thead class="items-table">
+      <tr>
+        <th scope="col">Título</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Fecha</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let tarea of taskForExecution">
+        <td>{{tarea.propertyName ? tarea.propertyName : 'n/a'}}</td>
+        <th scope="row">{{tarea.title}}</th>
+        <td>{{tarea.description}}</td>
+        <td>{{getDateWithoutHour(tarea.created_at)}}</td>
+        <td>
+          <a class="mainbtn bluebtn seemore-module" routerLink="/app/view-tarea-ejecucion/{{tarea.id}}">Ver</a>
+          <!-- <a class="mainbtn bluebtn seemore-module edit-list-item-button" routerLink="/app/edit-tasks/" *ngIf="isCoordinador">Editar</a> -->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

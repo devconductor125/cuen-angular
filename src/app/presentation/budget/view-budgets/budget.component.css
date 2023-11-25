@@ -1,0 +1,163 @@
+/*BUDGET RESUME*/
+.budgetresume-container {
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.vcenter {
+  margin-top: 10px;
+}
+
+.table-hover-ap:hover {
+  background-color: rgba(136, 173, 209, 0.11);
+}
+
+.totalsources {
+  display: block;
+  float: left;
+  width: 100%;
+  background-color: #0073D1;
+  font-family: 'robotobold';
+  font-size: 1.8em;
+  color: #FFFFFF !important;
+  margin: 0px;
+  padding: 10px 0px 10px 20px;
+}
+
+.sourcesdiscrim {
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  background-color: #C5C5C5;
+  margin: 0px;
+}
+
+.sourcesclass {
+  display: block;
+  float: left;
+  height: auto;
+  padding: 10px 0px 20px 0px;
+}
+
+.lineleft {
+  border-left: solid 2px #979797;
+}
+
+.title-sources {
+  display: block;
+  float: left;
+  width: 120px;
+  font-family: 'robotomedium';
+  color: #4A4A4A !important;
+  margin: 10px 30px 0px 10px;
+  font-size: 1.3em;
+  line-height: 1em;
+}
+
+.number-sources {
+  display: block;
+  float: left;
+  width: 250px;
+  font-family: 'robotobold';
+  color: #4A4A4A !important;
+  font-size: 1.7em;
+  margin: 7px 0px 0px 40px;
+}
+
+.statusbudget {
+  display: block;
+  float: left;
+  height: auto;
+  border-radius: 8px 0px 0px 8px;
+}
+
+.statusbud {
+  display: block;
+  float: left;
+  max-width: 200px;
+  padding: 7px 30px 10px 30px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'robotobold';
+  color: #FFFFFF;
+  font-size: 1.4em;
+  line-height: 1em;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+.total-container {
+  display: block;
+  float: right;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  -webkit-border-radius: 8px 0px 0px 8px;
+  -moz-border-radius: 8px 0px 0px 8px;
+  border-radius: 8px 0px 0px 8px;
+}
+
+.total {
+  display: block;
+  float: left;
+  width: 30%;
+  height: auto;
+  padding: 10px 10px 10px 20px;
+  border-right: 2px solid #FFFFFF;
+  font-family: 'robotobold';
+  font-size: 1.5em;
+  color: #FFFFFF;
+}
+
+.numbertotal {
+  display: block;
+  float: left;
+  width: 65%;
+  height: auto;
+  color: #FFFFFF;
+  font-family: 'robotoblack';
+  font-size: 1.7em;
+  padding: 10px 0px 6px 20px;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .totalsources{
+    padding: 10px 15px;
+    text-align: center;
+  }
+  .title-sources{
+    width: 100%;
+    text-align: center;
+    margin: 0px;
+  }
+  .number-sources{
+    width: 100%;
+    text-align: center;
+    margin: 0px;
+  }
+  .sourcesclass{
+    padding: 10px 0px;
+  }
+  .lineleft{
+    border: none;
+  }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}

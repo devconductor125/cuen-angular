@@ -1,0 +1,99 @@
+<div id="contenido" class="contents-app" style="padding: 50px 50px 50px 50px">
+
+  <div class="row" style="margin-bottom: 25px">
+    <div class="col-10 title" style="text-align: center; font-weight: bold">
+      {{strtitle}} CONTRIBUYENTE
+    </div>
+
+    <div class="col-2 title"
+         *ngIf="!boolCreate"
+         style="text-align: center; font-weight: bold">
+      <button type="button"
+              class="btn btn-info"
+              (click)="setVariableBoolEdit()"
+              style="float: right; cursor: pointer;">
+        Editar
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="labelselect0"
+             class="subtitle-item">Nombre</label>
+      <input type="text"
+             id="labelselect0"
+             [(ngModel)]="modelAssociated.name"
+             class="form-control"
+             [disabled]="boolDisable"
+             placeholder="Nombre del contribuyente"/>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <label for="labelselect1"
+             class="subtitle-item">Código</label>
+      <input type="text"
+             id="labelselect1"
+             [disabled]="boolDisable"
+             [(ngModel)]="modelAssociated.code"
+             class="form-control"
+             placeholder="Código"/>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="labelselect3"
+             class="subtitle-item">Nit</label>
+      <input type="text"
+             id="labelselect3"
+             [disabled]="boolDisable"
+             [(ngModel)]="modelAssociated.nit"
+             class="form-control"
+             placeholder="Nit"/>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div class="plain-arrow">
+        <label for="labelselect2"
+               class="subtitle-item">Tipo</label>
+        <select class="custom-select form-control gradblue"
+                name="selected_task_type"
+                [(ngModel)]="modelAssociated.type"
+                [disabled]="boolDisable"
+                id="labelselect2">
+          <option [value]="null">Seleccione el tipo</option>
+          <option *ngFor="let option of arrTipeAssociated"
+                  [ngValue]="option.type">{{option.name}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-sm" *ngIf="boolCreate">
+      <button type="button"
+              class="btn btn-success"
+              (click)="saveAssociated()"
+              style="float: right; cursor: pointer;">
+        Guardar
+      </button>
+    </div>
+    <div class="col-sm" *ngIf="!boolCreate && !boolDisable">
+      <button type="button"
+              class="btn btn-success"
+              (click)="updateAssociated()"
+              style="float: right; cursor: pointer;">
+        Editar
+      </button>
+    </div>
+  </div>
+
+
+</div>

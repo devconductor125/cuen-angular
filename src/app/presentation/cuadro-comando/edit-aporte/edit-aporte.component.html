@@ -1,0 +1,98 @@
+<div id="contenido" class="contents-app"  *ngIf="aporte">
+  <div class="title-section">
+    <div class="title-base detail_title"></div>
+    <div class="titlechapterAp">Detalle de aporte</div>
+  </div>
+
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="labelselect1" class="subtitle-item">Programa seleccionado</label>
+      <input class="form-control custom-control" id="labelselect1" value="{{aporte.program}}" disabled>
+    </div>
+    <div class="col-sm">
+      <label for="labelselect2" class="subtitle-item">Proyecto seleccionado</label>
+      <input class="form-control custom-control" id="labelselect2" value="{{aporte.project}}" disabled>
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="labelselect3" class="subtitle-item">Actividad seleccionada</label>
+      <textarea class="form-control custom-control" id="labelselect3" disabled>{{aporte.activity}}</textarea>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+  <div class="generalrow">
+    <div class="col-sm">
+      <div style="text-align: left; font-size: 14px; font-weight: bold; padding: 15px">Datos del Aporte</div>
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <label for="labelselect4" class="subtitle-item">Asociado seleccionado</label>
+      <input class="form-control custom-control" id="labelselect4" value="{{aporte.associated}}" disabled>
+    </div>
+    <div class="col-sm">
+
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <label for="labelselect50" class="subtitle-item">Tipo de Aporte</label>
+      <input class="form-control custom-control" id="labelselect50" value="{{(aporte.type + '' === '1') ? 'Dinero' : 'Especies'}}" disabled>
+    </div>
+    <div class="col-sm" *ngIf="aporte.type + '' === '1'">
+      <label for="aporteAsociado" class="subtitle-item">Aporte de Asociado ($)</label>
+      <input type="number" class="form-control simpleinput" id="aporteAsociado" aria-describedby="nombreProyecto" placeholder="Aporte del Asociado" [(ngModel)]="aporte.budget">
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <label for="labelselect5" class="subtitle-item">Aporte Comprometido ($)</label>
+      <input class="form-control custom-control" id="labelselect5" value="{{aporte.committed_budget}}" disabled>
+    </div>
+    <div class="col-sm" *ngIf="aporte.type + '' === '1'">
+      <label for="aporteAsociadoP" class="subtitle-item">Pagado ($)</label>
+      <input type="text" class="form-control simpleinput" id="aporteAsociadoP" aria-describedby="nombreProyecto" placeholder="Pagado" [(ngModel)]="aporte.paid_budget">
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" style="margin-bottom: 50px" *ngIf="aporte.type + '' === '2'">
+    <div class="col">
+      <cuenca-especies (notify)='getArrayEspecies($event)' [listadoE]="aporte.species_contribution"></cuenca-especies>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <button type="button" class="mainbtn plainbluedark right margintop marginbuttom" style=" cursor: pointer; margin-bottom: 50px" (click)="updateAporte()">Actualizar Aporte</button>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" style="margin-bottom: 50px">
+    <div class="col">
+      <cuenca-metas [aporteId]="aporteID"></cuenca-metas>
+    </div>
+  </div>
+
+
+
+</div>
+<router-outlet></router-outlet>

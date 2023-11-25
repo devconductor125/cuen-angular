@@ -1,0 +1,71 @@
+<div class="title-section">
+  <div class="col-1 float-left">
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div style="text-align: center" class="listUser_title">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-5 float-left">
+
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div class="titlechapterAp">Listado de Acciones</div>
+      </div>
+    </div>
+
+  </div>
+  <a class="mainbtn darkblue create-new-procedure" routerLink="/app/register-action">Crear Acción</a>
+
+</div>
+
+<!--CREATE-->
+
+<div class="generalrow">
+  <div class="title-taskmodule gradblue">Listado de Acciones Registradas</div>
+
+  <div class="maintablecontainer">
+    <table class="table tabletask table-hover">
+      <thead class="items-table">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Material</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Buenas practicas</th>
+        <th scope="col">Color</th>
+        <th scope="col">Fecha</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let action of listActions">
+        <th scope="row">{{action.name}}</th>
+        <th scope="row">{{action.by_material.budget_price_material.name}}</th>
+        <th scope="row">{{action.type}}</th>
+        <th scope="row" *ngIf="action.good_practicess === 1; else goodPractices">Si</th>
+        <ng-template #goodPractices>
+          <th scope="row">No</th>
+        </ng-template>
+        <th scope="row"
+            *ngIf="action.color; else colorFull">
+          <div class="square" [ngStyle]="{'background-color': action.color}">
+          </div>
+        </th>
+        <ng-template #colorFull>
+          <th scope="row">
+            <div class="square" [ngStyle]="{'background-color': action.color_fill}">
+            </div>
+          </th>
+        </ng-template>
+        <th>{{getDateWithoutHour(action.created_at)}}</th>
+        <th>
+          <a class="mainbtn bluebtn seemore-module" routerLink="/app/edit-action/{{action.id}}">Ver</a>
+        </th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

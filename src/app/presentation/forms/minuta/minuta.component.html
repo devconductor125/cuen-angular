@@ -1,0 +1,753 @@
+<div class="container wrap" style="margin-top: 25px;" *ngIf="formatoMinuta">
+
+  <div class="row">
+    <div class="col-12">
+      <button (click)="printDiv()" class="print_btn"><i class="fas fa-print" style="margin-right: 5px"></i> Imprimir
+        Minuta
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm" style="text-align: left; font-size: 16px; font-weight: bold">
+      <div>Visualización de Minuta</div>
+    </div>
+  </div>
+
+  <div id="a-imprimir"> <!--/// Imprimir-->
+
+    <!-- 1 HOJA -->
+    <div class="imprimir">
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            Los suscritos: DIANA MARÍA MONTOYA VELILLA mayor de edad, identificada con cédula de ciudadanía No
+            32.206.288 de Medellín en su calidad de Representante Legal Suplente de la CORPORACIÓN CUENCAVERDE, con NIT.
+            900.680.466-1, y que en adelante se denominará LA CORPORACIÓN, de una parte, y de la otra,
+            {{(formatoMinuta.owner.owner_name) ? (formatoMinuta.owner.owner_name).toUpperCase() : 'DATO_NO_EXISTENTE'}},
+            identificado con cedula de ciudadanía {{(formatoMinuta.owner.identity_owner) ?
+            formatoMinuta.owner.identity_owner : 'DATO_NO_EXISTENTE'}} que en adelante se denominará EL PROPIETARIO,
+            ambas partes interesadas y con la capacidad legal correspondiente conforme en derecho se requiere, conviene
+            celebrar el presente acuerdo para mejorar las condiciones ambientales del predio
+            {{(formatoMinuta.land_registration) ? (formatoMinuta.land_registration).toUpperCase() :
+            'DATO_NO_EXISTENTE'}}, ubicado en la vereda {{(formatoMinuta.owner.sidewalk) ?
+            (formatoMinuta.owner.sidewalk).toUpperCase() : 'DATO_NO_EXISTENTE'}} donde nace el curso de agua
+            {{(formatoMinuta.hydrological_source) ? (formatoMinuta.hydrological_source).toUpperCase() :
+            'DATO_NO_EXISTENTE'}} y vierte sus aguas al embalse {{(formatoMinuta.embalse) ?
+            (formatoMinuta.embalse).toUpperCase() : 'DATO_NO_EXISTENTE'}}, convención que se regirá por las siguientes
+            clausulas previos antecedentes que a continuación se expone.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ANTECEDENTES
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag" style="margin-left: 40px">
+            <strong>1.</strong> Que <strong>LA CORPORACIÓN</strong> tiene por objeto la consecución, administración,
+            gestión, inversión, asignación y disposición de recursos financieros destinados a proteger, mantener,
+            preservar los servicios ambientales, especialmente el agua, en las cuencas abastecedoras de los embalses que
+            proveen de agua a los municipios del Valle de Aburra.<br>
+            <strong>2.</strong> Que dentro del Plan Estratégico y el Plan de Acción de la Corporación, se han estimado
+            diferentes estrategias para el cumplimiento del objetivo antes planteado, entre otras, la protección y
+            recuperación de bosques, implementación de prácticas de producción sostenibles.<br>
+            <strong>3.</strong> Que <strong>LA CORPORACIÓN</strong> realizará acciones buscando en los predios
+            resultados como la regulación de caudales, barreras para evitar la escorrentía y el arrastre de sedimentos
+            hacia las fuentes de agua, la protección y conservación del suelo, la captura de gases de efecto invernadero
+            y producción de oxígeno, la restauración paisajística, corredores biológicos con relictos de bosque natural,
+            la generación de una cultura forestal y de protección de las cuencas abastecedoras, la utilización de
+            mejores prácticas agropecuarias y, en general, el mejoramiento de la calidad del agua.
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Cierre 1 HOJA -->
+
+    <!-- 2 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="propertyOwnership">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag" style="margin-left: 40px">
+            <strong>4.</strong> Que EL PROPIETARIO manifiesta, así como se encuentra evidenciado en el Certificado de
+            Libertad y Tradición, que posee el derecho real de dominio del Predio denominado
+            {{(formatoMinuta.land_registration) ? (formatoMinuta.land_registration).toUpperCase() :
+            'DATO_NO_EXISTENTE'}}, identificado con folio de matrícula(s) inmobiliaria(s) número
+            {{propertyOwnership.realEstateRegistrationNumber}} (escritura pública {{propertyOwnership.titleDeed.number}}
+            del {{propertyOwnership.titleDeed.day}} de {{propertyOwnership.titleDeed.month}} de
+            {{propertyOwnership.titleDeed.year}}, Notaria {{propertyOwnership.notary.number}} de
+            {{propertyOwnership.notary.city}}). Dicho predio está ubicado en la vereda {{(formatoMinuta.owner.sidewalk)
+            ? (formatoMinuta.owner.sidewalk).toUpperCase() : 'DATO_NO_EXISTENTE'}} del municipio de
+            {{(formatoMinuta.owner.municipality) ? (formatoMinuta.owner.municipality).toUpperCase() :
+            'DATO_NO_EXISTENTE'}} (Antioquia). El predio cuenta con una superficie total de {{(formatoMinuta.total_area)
+            ? formatoMinuta.total_area: 'DATO_NO_EXISTENTE'}} hectáreas.<br>
+            <strong>5.</strong> Que en el predio {{(formatoMinuta.land_registration) ?
+            (formatoMinuta.land_registration).toUpperCase() : 'DATO_NO_EXISTENTE'}}, se identificaron zonas de
+            importancia para conservar el recurso hídrico, esto es, que el predio se encuentra cursos de agua que surte
+            al embalse “{{(formatoMinuta.embalse) ? (formatoMinuta.embalse).toUpperCase() : 'DATO_NO_EXISTENTE'}}”.<br>
+            <strong>6.</strong> Que EL PROPIETARIO manifestó por escrito el día
+            {{getDateWithoutHour(formatoMinuta.date_letter_create)}}, su interés en participar en las diferentes
+            actividades identificadas por LA CORPORACIÓN como estrategias de protección y conservación de los servicios
+            ambientales, especialmente el agua, en la cuenca abastecedora del embalse “{{(formatoMinuta.embalse) ?
+            (formatoMinuta.embalse).toUpperCase() : 'DATO_NO_EXISTENTE'}}”.<br>
+            <strong>7.</strong> Que el presente acuerdo se realiza de conformidad con los parámetros técnicos y
+            paisajísticos definidos y acordados entre la CORPORACIÓN y EL PROPIETARIO, durante la visita de campo
+            realizada el día {{(formatoMinuta.date_day.day) ? formatoMinuta.date_day.day :
+            'DATO_NO_EXISTENTE'}}-{{(formatoMinuta.date_day.month) ? formatoMinuta.date_day.month :
+            'DATO_NO_EXISTENTE'}}-{{(formatoMinuta.date_day.year) ? formatoMinuta.date_day.year : 'DATO_NO_EXISTENTE'}}.<br>
+            <strong>8.</strong> Que de acuerdo con los parámetros técnicos y paisajísticos, el predio cumple con los
+            requisitos para participar en el proyecto y sumado a esto EL PROPIETARIO manifiesta su voluntad de
+            vincularse al mismo.<br>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            Con base en lo anterior las partes intervinientes convienen en suscribir el presente Acuerdo que se regirá
+            por las siguientes cláusulas:<br>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>PRIMERA. OBJETO DEL ACUERDO:</strong> Establecer los compromisos entre <strong>LA
+            CORPORACIÓN</strong> y <strong>EL PROPIETARIO</strong> para implementar estrategias de protección y
+            conservación de los servicios ambientales, especialmente el agua, en la cuenca abastecedora del embalse Rio
+            Grande II.
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Cierre 2 HOJA -->
+
+    <!-- 3 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>SEGUNDA. ACCIONES A DESARROLLAR: LA CORPORACION</strong>, realizará en desarrollo del presente
+            acuerdo las acciones
+            que se relacionan a continuación, las cuales podrán ser modificadas o ajustadas mediante actas que se
+            suscriba(n) con el(os) propietario(s) de haber lugar a ello, de tal manera que garanticen el objetivo de
+            protección y conservación.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <table width="100%">
+            <tr>
+              <th width="50%">ACTIVIDAD PROPUESTA</th>
+              <th width="25%">UNIDAD</th>
+              <th width="25%">CANTIDAD</th>
+            </tr>
+            <tr *ngFor="let activity of formatoMinuta.activities">
+              <td width="50%">{{activity.action_name + ' ' + activity.material_name}}</td>
+              <td width="25%" class="center">{{activity.unit}}</td>
+              <td width="25%" class="center">{{activity.amount}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+    <!-- Cierre 3 HOJA -->
+
+    <!-- 4 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Cierre 4 HOJA -->
+
+    <!-- 5 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>TERCERA. COMPROMISO DE LAS PARTES</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>Compromiso de ambas partes:</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag" style="margin-left: 40px">
+            <strong>1.</strong> Realizar de manera conjunta y con los insumos disponibles, el levantamiento de la línea
+            base de coberturas del predio que corresponde al estado actual de la finca al inicio del proyecto como
+            referencia para medir los cambios que se hagan durante la ejecución del presente acuerdo.<br>
+            <strong>2.</strong> Definir de manera conjunta el plan de adecuación ambiental. Este plan se deriva de las
+            visitas y el diagnóstico realizado.<br>
+            <strong>3.</strong> De forma mancomunada y posterior a la ejecución de las actividades definidas en el
+            presente acuerdo, las partes suscribirán Acta de entrega y recibo a satisfacción, donde se describirán las
+            cantidades reales ejecutadas, incluyendo los costos finales de cada acción.<br>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>Compromisos del PROPIETARIO:</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag" style="margin-left: 40px">
+            <strong>1.</strong> Permitir y facilitar la ejecución de las acciones detalladas en la Cláusula segunda del
+            presente acuerdo.<br>
+            <strong>2.</strong> Suscribir el acta de inicio de las obras que ejecutará LA CORPORACION en el predio, en
+            donde deberá constar las acciones a ejecutar previamente aprobadas por el propietario en este acuerdo.<br>
+            <strong>3.</strong> Permitir y colaborar en la restauración de las áreas intervenidas y propender por la
+            conservación de los relictos boscosos del predio sin realizar cambio de uso del suelo, siembra de especies
+            exóticas, apertura de caminos, quemas u otras actividades que los ponga en riesgo. El propietario tendrá
+            derecho a hacer aprovechamiento moderado de maderables única y exclusivamente con el propósito de
+            mejoramiento de vivienda o de instalaciones dentro de su finca previa información escrita a <strong>LA
+            CORPORACIÓN</strong>.<br>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- Cierre 5 HOJA -->
+
+    <!-- 6 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag" style="margin-left: 40px">
+            <strong>4.</strong> Mantener, proteger, cuidar las áreas y llevar a cabo los mantenimientos necesarios a las
+            acciones intervenidas por <strong>LA CORPORACIÓN</strong>.<br>
+            <strong>5.</strong> No permitir la entrada de animales a las áreas restauradas.<br>
+            <strong>6.</strong> En caso de pactarse en el presente acuerdo la implementación de cercos con alambre liso,
+            <strong>EL PROPIETARIO</strong> garantizará el suministro de energía eléctrica inmediatamente sean
+            establecidos dichos cercos.<br>
+            <strong>7. EL PROPIETARIO</strong> realizará el mantenimiento de los árboles plantados por los incentivos
+            recibidos en virtud del presente acuerdo, tales como árboles dispersos, cercos vivos y huertos leñeros.<br>
+            <strong>8. EL PROPIETARIO</strong> realizará el mantenimiento de los estacones instalados en su predio,
+            entendiendo mantenimiento como toda actividad encaminada a que dichos estacones permanezcas firmes y en
+            estado de aprovechabilidad.<br>
+            <strong>9.</strong> Conservar las áreas de bosque que se encuentran en el predio y hacer un aprovechamiento
+            racional evitando su degradación y de acuerdo a lo especificado por la ley. <br>
+            <strong>10.</strong> Proteger especies de fauna y demás recursos con miras a dar un manejo sostenible al
+            predio. <br>
+            <strong>11.</strong> No realizar talas, quemas ni ninguna otra actividad que implique destrucción de la
+            vegetación; excepto fuego prescrito o quemas controlados, cuando sean una herramienta para mantener el
+            balance entre la cobertura de pastos y la de vegetación leñosa, asegurando que las áreas de conservación
+            intervenidas no sean afectadas. <br>
+            <strong>12.</strong> Permitir en cualquier momento el ingreso al predio de los profesionales y técnicos
+            vinculados al proyecto y en caso de requerirse estar dispuesto a un acompañamiento, esto con el fin de
+            verificar el cumplimiento del presente acuerdo.<br>
+            <strong>13.</strong> Informar oportunamente sobre cualquier circunstancia que afecte o pueda afectar el
+            desarrollo del Proyecto.<br>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Cierre 6 HOJA -->
+
+    <!-- 7 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag" style="margin-left: 40px">
+            <strong>14.</strong> Suministrar a quien designe <strong>LA CORPORACIÓN</strong> la información necesaria
+            para el monitoreo de las actividades de conservación, restauración y ganadería sostenible, en el predio, de
+            conformidad con los protocolos establecidos para este fin.<br>
+            <strong>15.</strong> Participar activamente con su personal de apoyo en las actividades, eventos de
+            capacitación, etc., promovidos por <strong>LA CORPORACIÓN</strong>. <br>
+            <strong>16.</strong> Solicitar los permisos, autorizaciones u otros asociados al uso del agua y sépticos y
+            bebederos, entre otros. En cumplimiento de este compromiso el propietario deberá hacer entrega del
+            comprobante de inicio del trámite de permiso con la autoridad ambiental (Radicado) para la instalación del
+            sistema de tratamiento de aguas residuales dentro de los tres primeros meses siguientes a la suscripción de
+            este acuerdo de conservación, so pena de configurarse un desistimiento tácito de su interés respecto a dicho
+            accionar establecido en la cláusula cuarta y la <strong>CORPORACION</strong> en dicho evento no lo
+            ejecutaría. <br>
+            <strong>17.</strong> Mantener y respetar el uso del suelo acordado en la zonificación elaborada para las
+            áreas de conservación dentro del Plan de Adecuación Ambiental, por el período de duración del presente
+            acuerdo, que hace parte integral del presente mismo y se resume en el siguiente cuadro:<br>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <table width="100%">
+            <tr>
+              <th width="50%">Zonificación propuesta Áreas de Conservación</th>
+              <th width="25%">Área (has)</th>
+              <th width="25%">%</th>
+            </tr>
+            <tr *ngFor="let area of proposedAreas; let i=index">
+              <td width="50%">Zona {{i+1}}. {{area.name}}</td>
+              <td width="25%" class="center">{{area.area | number:'1.2-2'}}</td>
+              <td width="25%" class="center">{{area.percentage | number:'1.2-2'}}%</td>
+            </tr>
+            <tr>
+              <td width="50%" style="font-weight: bold">TOTAL</td>
+              <td width="25%" style="font-weight: bold" class="center">{{totalProposedAreas | number:'1.2-2'}}</td>
+              <td width="25%" style="font-weight: bold" class="center">{{totalProposedAreasPercentage |
+                number:'1.2-2'}}%
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag" style="margin-left: 40px">
+            <strong>18.</strong> Acatar y aplicar las recomendaciones técnicas dadas en pro de la reconversión y manejo
+            sostenible de sus sistemas productivos, siempre y cuando sean previamente convenidas.<br>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Cierre 7 HOJA -->
+
+    <!-- 8 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>Compromisos de la CORPORACIÓN:</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag" style="margin-left: 40px">
+            <strong>1.</strong> Designar el personal técnico que coordine las labores operativas, preste la asistencia
+            técnica y realice periódicamente el monitoreo y seguimiento requerido por el presente Acuerdo.<br>
+            <strong>2.</strong> Realizar seguimiento a las acciones de protección, conservación y buenas prácticas
+            ejecutadas en el predio.<br>
+            <strong>3.</strong> Realizar las labores necesarias y proporcionar los insumos y materiales requeridos para
+            la implementación de las acciones especificadas en la cláusula primera, y para el desarrollo de las demás
+            acciones que se establezcan en el presente convenio, de acuerdo con los proyectos formulados por <strong>LA
+            CORPORACIÓN</strong>. El establecimiento e implementación de las acciones se realizará dentro del año
+            siguiente a
+            partir de la firma del presente acuerdo. Las partes podrán realizar acuerdos de establecimiento e
+            implementación de acciones diferentes al señalado en el número 2.<br>
+            <strong>4.</strong> Realizar cuatro (4) mantenimientos de las plántulas establecidas en las áreas de
+            conservación, además entregar el respectivo certificado de cada manteamiento ejecutado.<br>
+            <strong>5.</strong> Coordinar las actividades operativas con el propietario del predio, de tal manera que no
+            se afecte el desarrollo normal de las labores de la finca. <br>
+            <strong>6.</strong> Consultar a <strong>EL PROPIETARIO</strong> sobre las posibles actividades de
+            investigación, de monitoreo
+            y/o giras que se pretenda desarrollar en el predio. <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>CUARTA: BUENAS PRÁCTICAS AMBIENTALES Y AGROPECUARIAS:</strong> Adicional a los anteriores
+            compromisos, <strong>EL PROPIETARIO</strong>
+            se compromete a ingresar al programa de buenas prácticas ambientales y agropecuarias, que tiene como
+            propósito promover la adopción de sistemas de producción amigables con el ambiente para mejorar la gestión
+            de los recursos naturales e incrementar la prestación de servicios ambientales (biodiversidad, suelos, agua
+            y retención de carbono), por lo que en el predio adicionalmente <strong>LA CORPORACIÓN</strong> realizará el
+            suministro y la
+            instalación de un (1) Sistema de Tratamiento de Aguas Residuales Domesticas, (STARD).
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Cierre 8 HOJA -->
+
+    <!-- 9 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>QUINTA. PLAZO Y DURACIÓN:</strong> En función de las actividades a implementar durante el primer año
+            de duración del
+            presente convenio, de los posteriores mantenimientos que se llevarán a cabo, y del compromiso de
+            preservación ambiental expresado por <strong>EL PROPIETARIO</strong> el presente acuerdo de conservación
+            tendrá una duración
+            de diez (10) años, contados a partir de la fecha de su suscripción. El plazo del presente Acuerdo, podrá
+            prorrogarse de común acuerdo entre las partes, teniendo en cuenta el propósito de sostenibilidad del
+            Programa.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>SEXTA. MONTO.</strong> El monto de las implementaciones para asegurar la conservación y restauración
+            del predio es
+            por la suma de <strong>($ {{formatoMinuta.total_budget | number:'1.2-2'}}) PESOS</strong> con cargo a las
+            diferentes actividades
+            de los proyectos de Gestión Integral del Recurso Hídrico y la Biodiversidad y Restauración de Ecosistemas
+            para la protección de ecosistemas estratégicos.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>SEPTIMA. DOCUMENTOS INTEGRANTES DEL ACUERDO</strong>: Hacen parte integral del presente acuerdo los
+            siguientes
+            documentos: a) Documentos de identificación de <strong>{{propertyOwnerSubjectText}}</strong> del predio. b)
+            Certificado de
+            libertad y
+            tradición c) Mapa del predio; d) justificación; e) actas que se suscriban en ejecución del mismo.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>OCTAVA. SOLUCIÓN DE CONTROVERSIAS:</strong> En caso de controversias originadas en aplicación del
+            presente Acuerdo y
+            el cumplimiento de los compromisos asumidos, las partes acuerdan el siguiente procedimiento de resolución:1)
+            Buscar una solución amigable basada en el diálogo y negociación directa en un plazo no mayor a 30 días luego
+            que una de las partes comunique por escrito a la otra la controversia o diferencia. 2) Si lo anterior no fue
+            posible, las partes acuerdan someter cualquier diferencia que surja entre las partes por la ejecución,
+            interpretación, terminación o liquidación del presente contrato y en general, sobre los derechos y
+            obligaciones que para las mismas emanan, durante su vigencia, así como durante su etapa precontractual, se
+            solucionará por un amigable componedor que será nombrado por un Centro de Conciliación, Arbitraje y Amigable
+            Composición que el convocante elija a su elección, pero con domicilio en la ciudad de Medellín.
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Cierre 9 HOJA -->
+
+    <!-- 10 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            El amigable componedor tendrá la facultad de precisar para nosotros, con fuerza vinculante, todos los
+            asuntos inherentes
+            a las diferencias que le someteremos a su conocimiento.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>NOVENA. INCUMPLIMIENTO:</strong> En caso de incumplimiento de las obligaciones pactadas en el
+            presente acuerdo y
+            agotada las instancias anotadas en la cláusula anterior, <strong>{{propertyOwnerSubjectText}}</strong> se
+            obliga a devolver en sesenta (60)
+            días calendario a <strong>LA CORPORACIÓN CUENCAVERDE</strong> el setenta y cinco por ciento (75%) del valor
+            total de las
+            acciones implementadas en su predio, si dicho incumplimiento se presenta en los primeros cinco (5) años del
+            acuerdo, después de los cinco (5) años iníciales al acuerdo, se reducirá al monto a devolver un cinco por
+            ciento (5%) por año, según lo que conste en las actas de entrega de insumos o materiales, o en las memorias
+            de contratación y pagos desembolsados por LA CORPORACIÓN para el efecto. Si el incumplimiento se diera por
+            razones imputables a fenómenos naturales, casos de fuerza mayor o la ocurrencia de un caso fortuito
+            debidamente comprobado, <strong>{{propertyOwnerSubjectText}}</strong> estará exento de lo expuesto. Si el
+            incumplimiento proviene por parte
+            de <strong>LA CORPORACIÓN</strong>, agotada las instancias mencionadas, el propietario puede dar por
+            terminado el presente
+            Acuerdo.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>DECIMA. RESPETO AL DERECHO DE EL PROPIETARIO.</strong> El presente Acuerdo no otorga ningún derecho
+            real o de
+            usufructo a <strong>LA CORPORACIÓN</strong> sobre la zona de conservación y recuperación; por lo cual los
+            propietarios no
+            pierden ningún derecho sobre las áreas intervenidas en desarrollo de este proyecto.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>DECIMA PRIMERA. OBLIGACIÓN ESPECIAL:</strong> Cuando el propietario realice la transferencia de
+            dominio del predio en
+            forma parcial o total dentro del cual se encuentren las zonas de conservación y de recuperación, deberá
+            comunicar a <strong>LA CORPORACIÓN</strong> con al menos 30 días de anticipación, el nombre completo,
+            teléfono y demás datos
+            de contacto del(os) nuevo(s) propietarios para hacer la respectiva negociación con el posterior dueño.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>DÉCIMA SEGUNDA. DISOLUCIÓN:</strong> Este Acuerdo quedará automáticamente disuelto cuando agotadas
+            las instancias
+            indicadas en la cláusula octava, se verifique que una de las partes ha incumplido los compromisos
+            establecidos en la cláusula cuarta, una vez la cual se efectuarán las liquidaciones correspondientes.
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Cierre 10 HOJA -->
+
+    <!-- 11 HOJA -->
+    <div class="imprimir">
+      <div class="row page-break noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <div class="title-header">
+            ACUERDO DE CONSERVACION ENTRE LA CORPORACIÓN CUENCAVERDE Y {{propertyOwnership.owner ?
+            propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>DÉCIMA TERCERA. DATOS DE CONTACTO Y DOMICILIO DE NOTIFICACIONES:</strong> Para el presente acuerdo,
+            los datos de <strong>LA
+            CORPORACIÓN CUENCAVERDE</strong> son: Carrera 43 A No. 1A SUR 29 Edificio Colmena oficina 811, El Poblado
+            Medellín,
+            Colombia. Teléfono: 2681402. Los datos de <strong>{{propertyOwnerSubjectText}}</strong> son:
+            {{propertyOwnership.owner ? propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}}, Finca:
+            {{(formatoMinuta.owner.name_farm) ? (formatoMinuta.owner.name_farm).toUpperCase() : 'DATO_NO_EXISTENTE'}}
+            Vereda: {{(formatoMinuta.owner.sidewalk) ? (formatoMinuta.owner.sidewalk).toUpperCase() :
+            'DATO_NO_EXISTENTE'}},
+            Municipio {{(formatoMinuta.owner.municipality) ? (formatoMinuta.owner.municipality).toUpperCase() :
+            'DATO_NO_EXISTENTE'}}. Celular: {{(formatoMinuta.owner.owner_mobile) ? formatoMinuta.owner.owner_mobile :
+            'DATO_NO_EXISTENTE'}}.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div class="parag">
+            <strong>DECIMA CUARTA. ACEPTACIÓN Y VALIDEZ DEL DOCUMENTO:</strong> Las partes intervinientes declaramos
+            nuestra conformidad
+            con todas y cada una de las cláusulas y estipulaciones dentro del presente Acuerdo, reconocido para todos
+            los efectos permisibles por ley, comprometiéndonos a su fiel y estricto cumplimiento, a cuyo efecto lo
+            firmamos en dos ejemplares de un mismo tenor y para un solo efecto legal en Medellín el día {{currentTime.getDate()}} del mes
+            de {{month[currentTime.getMonth()]}} del año {{1900 + (currentTime.getYear())}}.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <table width="100%" class="noborder">
+            <tr style="font-weight: bold;">
+              <td width="50%">LA CORPORACIÓN,</td>
+              <td width="25%">EL PROPIETARIO,</td>
+            </tr>
+            <tr style="height: 150px">
+              <td width="50%"></td>
+              <td width="50%"></td>
+            </tr>
+            <tr style="font-weight: bold; font-size: 10px">
+              <td width="50%" class="center">
+                MARIA CLAUDIA DE LA OSSA POSADA <br>
+                Representante Legal
+              </td>
+              <td width="50%" class="center">
+                {{propertyOwnership.owner ? propertyOwnership.owner.toUpperCase() : 'DATO_NO_EXISTENTE'}} <br>
+                Propietario Legal
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+    <!-- Cierre 11 HOJA -->
+
+    <!-- /////// Imprimir-->
+  </div>
+
+
+</div>

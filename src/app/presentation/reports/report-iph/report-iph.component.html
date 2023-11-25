@@ -1,0 +1,26 @@
+<div class="row" style="margin-bottom: 10px;">
+  <div class="col-2">
+    <label for="h3ForTitleFilter"></label>
+    <h3><span id="h3ForTitleFilter" class="badge badge-info">filtro</span></h3>
+  </div>
+
+  <div class="col-5">
+    <label for="selectByYear">Por año</label>
+    <select class="form-control"
+            id="selectByYear">
+      <option *ngFor="let year of arrYear"
+              [value]="year.value">{{year.name}}</option>
+    </select>
+  </div>
+
+  <div class="col-5">
+    <label for="selectByMonth">Por mes</label>
+    <select class="form-control"
+            id="selectByMonth">
+      <option *ngFor="let month of arrMonth"
+              [value]="month.value">{{month.name}}</option>
+    </select>
+  </div>
+</div>
+<app-iph-widget [strId]="'1'"></app-iph-widget>
+<app-iph-widget [strId]="'2'"></app-iph-widget>

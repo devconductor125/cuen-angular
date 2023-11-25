@@ -1,0 +1,57 @@
+<div class="title-section">
+  <div class="task_title"></div>
+  <div class="titlechapterAp">Historial de tareas</div>
+</div>
+
+<!--PROYECTOS-->
+
+<div class="generalrow" *ngIf="tasks">
+  <div class="subtitle-item">Tareas</div>
+
+  <div class="taskprojcontainer">
+    <div class="title-taskmodule gradblue">Listado de Tareas</div>
+    <div class="maintablecontainer">
+      <table class="table tabletask table-hover">
+        <thead class="items-table">
+        <tr>
+          <th scope="col">Tipo</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Fecha INI</th>
+          <th scope="col">Fecha FIN</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ (task.sub_type_name != null && task.sub_type_name != null) ? task.sub_type_name : '' }} </td>
+          <td><div class="status delayed" *ngIf="task.task_status_name != undefined">{{task.task_status_name}}</div></td>
+          <td style="text-align: center">{{ (task.date_start != null) ? getDateWithoutHour(task.date_start) : ''}}</td>
+          <td style="text-align: center">{{ (task.date_end != null) ? getDateWithoutHour(task.date_end) : ''}}</td>
+          <td>
+            <a class="linebtn linebluelight right" routerLink="/app/view-tasks/{{task.id}}">Ver Tarea</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!--<ul class="list-procedures">
+    <li class="proyect-item col-lg-4 col-md-4 col-sm-12" *ngFor="let task of tasks">
+      <div class="title-proymodule gradblue">{{task.title}} {{task.id}}</div>
+      <div class="blockmodule">
+        <div class="titlegraph" style="background-color: #CFD8DC">{{task.sub_type.name}}</div>
+        <div class="chart-container"></div>
+        <div class="dates-chart">
+          <h4 class="descrip-chart">Tiempo de Ejecucion</h4>
+          <h2 class="title-chart">{{task.startdate}}</h2>
+        </div>
+        <a class="mainbtn bluebtn seemore-module" routerLink="/app/view-tasks/{{task.id}}" *ngIf="!isCartaIntencion(task)">Ver</a>
+        <a class="mainbtn bluebtn seemore-module edit-list-item-button" routerLink="/app/edit-tasks/{{task.route}}" *ngIf="isCoordinador">Editar</a>
+      </div>
+    </li>
+  </ul>-->
+
+
+</div>

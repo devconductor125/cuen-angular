@@ -1,0 +1,51 @@
+<div class="title-section">
+  <div class="guarda_title"></div>
+  <div class="titlechapterAp">Cuota Guarda Cuencas</div>
+
+</div>
+
+<div class="listguarda-container">
+  <ul class="list-guarda">
+    <li class="guarda-item col-6 col-md-4 col-lg-4 col-xl-3 fadeInUp animated" *ngFor="let guardaCuenca of users">
+
+      <div class="module-box-container contentpadding">
+        <a class="linkguarda">
+          <div class="profile-guarda"> </div>
+          <div class="name-guarda">{{guardaCuenca.names}} {{guardaCuenca.last_names}}</div>
+        </a>
+        <div class="title-guarda-module">Asignar cuota mensual<br><span>Ingrese la cuota</span> </div>
+        <div class="input-container">
+          <input class="simpleinput cuota linebtn linebluedark " type="number" placeholder="Cuota mensual"
+                 [(ngModel)]="selectedGuardacuenca.monthlyQuota[guardaCuenca.id]" name="monthlyQuota" min="0">
+        </div>
+        <a class="mainbtn plaingreenlight left fullsize marginbuttom" (click)="saveGuardaCuenca(guardaCuenca.id)">Guardar</a>
+      </div>
+
+    </li>
+
+  </ul>
+</div>
+<!--
+<ul class="list-group guarda-cuencas-main-container">
+  <li class="list-group-item guarda-cuenca-item" [class.active]="guardaCuenca === selectedGuardacuenca"
+      *ngFor="let guardaCuenca of users" (click)="guardacuencaClick(guardaCuenca)">{{guardaCuenca.name}}
+  </li>
+</ul>
+<div class="titlechapter intern">Cuota mensual de guardacuenca</div>
+<div class="contents-app">
+  <!--CREATE-->
+<!--
+  <div class="generalrow">
+    <form class="form-gen">
+      <div class="line-inputs">
+        <div class="input-container col-8">
+          <input class="simpleinput" type="number" placeholder="Cuota mensual"
+                 [(ngModel)]="selectedGuardacuenca.monthlyQuota" name="monthlyQuota">
+        </div>
+      </div>
+      <div class="line-inputs">
+        <a class="mainbtn darkred save" (click)="saveGuardaCuenca()">Guardar</a>
+      </div>
+    </form>
+  </div>
+</div>-->

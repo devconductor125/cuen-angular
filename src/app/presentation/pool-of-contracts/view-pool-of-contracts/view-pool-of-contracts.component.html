@@ -1,0 +1,139 @@
+<div id="contenido" class="contents-app" style="padding: 0px 50px 0px 50px">
+  <div class="generalrow">
+    <div class="col-sm">
+      <div style="text-align: center; font-size: 18px; font-weight: bold; padding: 50px">Proceso contractual
+        {{poolOfContracts.name}}
+      </div>
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-md-8">
+      <label for="poolName">Nombre del proceso</label>
+      <input type="text" class="form-control simpleinput" id="poolName" aria-describedby="poolName"
+             placeholder="Nombre del proceso" [(ngModel)]="poolOfContracts.name"
+             name="poolName" disabled>
+    </div>
+
+    <div class="col-md-4">
+      <label for="buttonGoToCost">Costos de contratación</label>
+      <button id="buttonGoToCost"
+              type="button"
+              class="btn btn-primary form-control"
+              aria-describedby="buttonGoToCost"
+              style="cursor: pointer"
+              (click)="goToCost()" [disabled]="!idPool">Ver
+      </button>
+    </div>
+  </div>
+
+  <div class="generalrow">
+    <div class="procediments-container">
+      <div class="subtitle-item">Procedimientos</div>
+      <div class="actividades-container line-inputs">
+        <div class="boxes">
+          <ul>
+            <li class="module-box-container boxprocediments" *ngFor="let procedure of procedures">
+              <div>
+                <input class="procedureinput" type="checkbox" id="{{procedure.id}}" value="{{procedure}}"
+                       name="procedure"
+                       [checked]="procedure.selected" (change)="procedure.selected = !procedure.selected" disabled>
+                <label class="labelform" for="{{procedure.id}}">{{procedure.name}}</label>
+                <div class="generalrow">
+                  <div class="pool-subtitle">Presupuesto</div>
+                  <ul class="sublist">
+                    <li class="list-boxes " *ngFor="let budget of procedure.budget">
+                      <input class="procedureinput" type="checkbox" id="{{budget.id}}" value="{{budget}}" name="budget"
+                             [checked]="budget.selected"
+                             (change)="budget.selected = !budget.selected" disabled>
+                      <label class="labelform bluesub" for="{{budget.id}}">{{budget.action + ' ' +
+                        budget.material}}</label>
+                    </li>
+                    <li class="list-boxes " *ngFor="let openTask of procedure.task_opens">
+                      <input class="procedureinput" type="checkbox" id="{{openTask.id}}" value="{{openTask}}"
+                             name="budget"
+                             [checked]="openTask.selected"
+                             (change)="openTask.selected = !openTask.selected" disabled>
+                      <label class="labelform bluesub" for="{{openTask.id}}">Tarea abierta:
+                        {{openTask.description}}</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="generalrow nopad" *ngIf="listFilesContract.length>0">
+    <!-- DOCUMENTS TABLE -->
+    <div class="table-container">
+      <div class="header-module">
+        <h3 class="title-module">Documentos Asociados</h3>
+      </div>
+      <table class="table">
+        <thead class="items-table">
+        <tr>
+          <th scope="col">Modalidad de contratación</th>
+          <th scope="col">Tipo de Archivo</th>
+          <th scope="col">Fecha de carga</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let contract of listFilesContract">
+          <th>{{contract.type_contract.name}}</th>
+          <td>{{contract.type_file.name}}</td>
+          <td>{{getDateWithHour(contract.created_at)}}</td>
+          <td>
+            <div class="generalrow">
+              <div class="col-sm">
+                <a
+                  class="mainbtn gradblue" style="text-decoration: none"
+                  (click)="getFileContractorDownload(contract.id, contract.type_file.name, contract.extension)">Descargar</a>
+              </div>
+
+              <div class="col-sm"> <!---->
+                <a class="mainbtn gradRed" (click)="deleteFileContract(contract.id)" *ngIf="isJuridico">Eliminar</a>
+              </div>
+
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="generalrow nopad" *ngIf="listFilesContract.length===0">
+    <div class="col-sm">
+      <div class="generalrow">
+        <!-- Label -->
+        <div class="col-sm">
+          <div class="header-module">
+            <h3 class="title-module">Documentos asociados</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="generalrow">
+        <!-- Label -->
+        <div class="col-sm">
+          <div style="padding: 15px; text-align: center; background-color: #f1dfdd; border-radius: 25px">
+            No se han cargado archivos
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="generalrow" *ngIf="poolOfContracts">
+    <div class="col-12">
+      <cuenca-pool-contractor-file [idPool]="idPool" [typeFileId]="poolOfContracts.contract_id"
+                                   (notify)="onFilesUploaded($event)"></cuenca-pool-contractor-file>
+    </div>
+  </div>
+
+</div>

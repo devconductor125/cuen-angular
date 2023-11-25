@@ -1,0 +1,329 @@
+<div class="container wrap" style="margin-top: 25px;">
+
+  <div class="row">
+    <div class="col-12">
+      <button (click)="printDiv()" class="print_btn"><i class="fas fa-print" style="margin-right: 5px"></i> Imprimir
+        Evaluación de Proveedores
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm" style="text-align: left; font-size: 16px; font-weight: bold">
+      <div>Visualización de Evaluación</div>
+    </div>
+  </div>
+
+  <div id="a-imprimir"> <!--/// Imprimir-->
+
+    <!-- 1 HOJA -->
+    <div class="imprimir">
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img src="../../../../src/assets/images/logo_doc.JPG" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div class="title-header">
+            EVALUACION DE PROVEEDORES
+          </div>
+        </div>
+      </div>
+
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-5 title_form bordertable" style="text-align: center">
+          PROCESO DE PRESTACIÓN DE SERVICIOS Y ADQUISICION DE BIENES
+        </div>
+        <div class="col-2 title_form bordertable">
+          VIGENCIA
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          DD/MM/YYY
+        </div>
+        <div class="col-2 title_form bordertable">
+          VERSIÓN
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          I
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-12 title_form bordertable" style="text-align: center">
+          EVALUACION DE PROVEEDORES
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-2 title_form bordertable" style="text-align: center">
+          NÚMERO DE CONTRATO
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          NÚMERO
+        </div>
+        <div class="col-2 title_form bordertable">
+          NIT DEL PROVEEDOR
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          NIT
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-2 title_form bordertable" style="text-align: center">
+          NOMBRE DEL PROVEEDOR
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          NOMBRE
+        </div>
+        <div class="col-2 title_form bordertable">
+          PERIODO DE EVALUACIÓN
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          PERIODO
+        </div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+      <!--Divisor-->
+      <div class="row" STYLE="text-align: center">
+        <div class="col-6 title_form bordertable">
+          CARACTERÍSTICAS
+        </div>
+        <div class="col-4 title_form bordertable">
+          CRITERIOS
+        </div>
+        <div class="col-2 title_form bordertable">
+          CALIFICACIÓN
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-4 title_form_label bordertable" style="text-align: left">
+          Cumplimiento en bienes<br>
+          (Para contrato de servicios marcar No Aplica)
+        </div>
+        <div class="col-8 title_form_label">
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              Entrega de Bienes según fecha
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              Entrega de Bienes según cantidad
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 title_form_label bordertable" style="text-align: left">
+          Cumplimiento en servicio<br>
+          (Para contrato de bienes marcar No Aplica)
+        </div>
+        <div class="col-8 title_form_label">
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              Entrega servicios según fecha
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              Entrega servicios según cantidad
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 title_form_label bordertable" style="text-align: left">
+          Calidad
+        </div>
+        <div class="col-8 title_form_label">
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              Conformidad
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              Capacidad de Respuesta
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 title_form_label bordertable" style="text-align: left">
+          Gestión
+        </div>
+        <div class="col-8 title_form_label">
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              Seguridad Social
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              Facturación
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 title_form_label bordertable" style="text-align: left">
+          Post Contractual
+        </div>
+        <div class="col-8 title_form_label">
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              PQR'S
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+
+          <div class="row table-inner">
+            <div class="col-3 bordertable">
+              Servicio Post Venta
+            </div>
+            <div class="col-6 bordertable">
+            </div>
+            <div class="col-3 bordertable">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="dropdown-divider"></div>
+
+      <!--//////// HEAD-->
+      <div class="row">
+        <div class="col-12 title_form bordertable" STYLE="text-align: center">
+          CRITERIOS DE CALIFICACIÓN DEFINIDA
+        </div>
+      </div>
+
+      <!--//////// FIELDS-->
+      <div class="row">
+        <div class="col-2 title_form bordertable">
+          PUNTAJE
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          PUNTAJE
+        </div>
+        <div class="col-2 title_form bordertable">
+          RESULTADO
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          RESULTADO
+        </div>
+      </div>
+
+      <!--//////// HEAD-->
+      <div class="row">
+        <div class="col-12 title_form bordertable" STYLE="text-align: center">
+          CALIFICACIÓN OBTENIDA
+        </div>
+      </div>
+
+      <!--//////// FIELDS-->
+      <div class="row">
+        <div class="col-2 title_form bordertable">
+          PUNTAJE
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          PUNTAJE
+        </div>
+        <div class="col-2 title_form bordertable">
+          PROVEEDOR ACEPTADO
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          PROVEEDOR
+        </div>
+        <div class="col-2 title_form bordertable">
+          CATEGORÍA
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          VALOR
+        </div>
+      </div>
+
+      <!--//////// HEAD-->
+      <div class="row">
+        <div class="col-12 title_form bordertable">
+          OBSERVACIONES
+        </div>
+      </div>
+
+      <!--//////// FIELDS-->
+      <div class="row" style="height: 100px;">
+        <div class="col-12 title_form_label bordertable">
+          OBSERVACIONES
+        </div>
+      </div>
+
+
+    </div>
+    <!-- /////// Imprimir-->
+  </div>
+
+
+</div>

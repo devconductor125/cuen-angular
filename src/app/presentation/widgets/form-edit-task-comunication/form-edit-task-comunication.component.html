@@ -1,0 +1,186 @@
+<div>
+
+  <div class="row hoverClass" style="margin-bottom: 10px">
+    <div class="col-sm-12 col-md">
+      <div class="subtitle-item">{{(formData.event_name) ? formData.event_name : 'Sin Nombre'}}</div>
+    </div>
+    <div class="col-sm-12 col-md" style="font-size: 10px; font-weight: lighter">
+      <div class="subtitle-item">{{formData.date}}</div>
+    </div>
+    <div class="col-sm-12 col-md">
+      <button class="btn btn-warning" type="button" data-toggle="collapse"
+              [attr.data-target]="'#' + 'collapseExample' + formData.id" aria-expanded="false"
+              aria-controls="collapseExample" style="float: right; cursor: pointer">
+        <i class="fas fa-edit" aria-hidden="true"></i> Visualizar
+      </button>
+    </div>
+  </div>
+
+  <div class="collapse" [id]="'collapseExample' + formData.id" style="padding: 25px; background-color: white">
+
+    <!--<div class="row">
+
+      <div class="col-sm">
+        <label for="basin" class="subtitle-item">Cuenca</label>
+        <input class="form-control" id="basin" type="text" [(ngModel)]="formData.basin"/>
+      </div>
+
+      <div class="col-sm">
+        <label for="minicipality" class="subtitle-item">Municipio</label>
+        <input class="form-control" id="minicipality" type="text" [(ngModel)]="formData.municipality"/>
+      </div>
+
+    </div>-->
+
+    <div class="row">
+
+      <div class="col-sm">
+        <label for="sidewalk" class="subtitle-item">Vereda</label>
+        <input class="form-control" id="sidewalk" type="text" [(ngModel)]="formData.sidewalk"/>
+      </div>
+
+      <div class="col-sm plain-arrow">
+        <label for="objetive_group" class="subtitle-item">Grupo Objetivo</label>
+        <select [(ngModel)]="formData.objective_group" class="custom-select form-control gradblue" name="objetive_group"
+                id="objetive_group">
+          <option [value]="0">Seleccione</option>
+          <option>Adultos</option>
+          <option>Adultos - Jóvenes</option>
+          <option>Adultos - Estudiantes</option>
+          <option>Estudiantes</option>
+          <option>Estudiantes - Niños</option>
+          <option>Jóvenes</option>
+          <option>Niños</option>
+          <option>Tercera Edad</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm">
+        <label for="fInicio">Fecha</label>
+        <input [(ngModel)]="formData.date" id="fInicio" aria-describedby="fInicio" class="form-control simpleinput"
+               type="date" name="task_starting_date">
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm">
+        <label for="number_attendees" class="subtitle-item">Numero de Asistentes</label>
+        <input [(ngModel)]="formData.number_attendees" id="number_attendees" min="0" class="form-control simpleinput"
+               type="number" name="number_attendees">
+      </div>
+
+      <div class="col-sm">
+        <label for="number_trees" class="subtitle-item">Numero de Árboles</label>
+        <input [(ngModel)]="formData.number_trees" id="number_trees" min="0" class="form-control simpleinput"
+               type="number" name="number_trees">
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm plain-arrow">
+        <label for="experence_consolidated" class="subtitle-item">Tipo de Experiencia</label>
+        <select [(ngModel)]="formData.experence_consolidated" class="custom-select form-control gradblue"
+                name="experence_consolidated" id="experence_consolidated">
+          <option [value]="0">Seleccione</option>
+          <option>Experiencia</option>
+          <option>Taller</option>
+          <option>Siembra</option>
+          <option>Entrenamiento</option>
+          <option>Socialización</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm">
+        <label for="event_name" class="subtitle-item">Descripción del evento</label>
+        <input [(ngModel)]="formData.event_name" id="event_name" class="form-control simpleinput"
+               type="text" name="event_name">
+      </div>
+
+      <div class="col-sm plain-arrow">
+        <label for="asistent_list" class="subtitle-item">Lista de Asistencia</label>
+        <select [(ngModel)]="formData.asistent_list" class="custom-select form-control gradblue" name="asistent_list"
+                id="asistent_list">
+          <option [value]="0">Seleccione</option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+      </div>
+    </div>
+
+    <!--<div class="row">
+      <div class="col-sm plain-arrow">
+        <label for="registry_photographic" class="subtitle-item">Registro Fotográfico</label>
+        <select [(ngModel)]="formData.registry_photographic" class="custom-select form-control gradblue"
+                name="registry_photographic" id="registry_photographic">
+          <option [value]="0">Seleccione</option>
+          <option>Sí</option>
+          <option>No</option>
+        </select>
+      </div>
+    </div>-->
+
+    <div class="dropdown-divider"></div>
+
+    <cuenca-drag-and-drop-form-comunication (notify)='getListImages($event)'></cuenca-drag-and-drop-form-comunication>
+
+    <div class="generalrow nopad" *ngIf="formData.images && formData.images.length > 0">
+      <div class="photo-container">
+        <div class="title-module">Registro fotografico</div>
+        <ul class="list-images">
+          <li class="thumb-image col-lg-3 col-md-3 col-sm-6" *ngFor="let image of formData.images">
+            <a class="link-image-container" (click)="pickedImageUrl = image" data-toggle="modal" data-target="#gallery-modal-edit">
+              <img class="imagethumb" [src]="URL_BASE_IMAGES + '/' + image.name" (error)="image.hidden = true" [hidden]="image.hidden">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px">
+      <div class="col-sm">
+        <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" (click)="editForm()"
+                [disabled]="isDisabled">
+          Editar
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Photo Modal -->
+<div class="modal fade" id="gallery-modal-edit" tabindex="-1" role="dialog"
+     aria-hidden="false" aria-labelledby="exLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exLabel">Registro fotográfico</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="cursor: pointer;">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid" *ngIf="pickedImageUrl">
+          <img class="imagethumb" [src]="URL_BASE_IMAGES + '/' + pickedImageUrl.name">
+        </div>
+      </div>
+      <div class="modal-footer" *ngIf="pickedImageUrl">
+        <button type="button" class="btn btn-danger" style="float: left; cursor: pointer;"
+                (click)="downloadFileWithToken(this.cuencaService, IMAGES_URL_CUENCA, pickedImageUrl.name)"
+                data-dismiss="modal">Descargar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

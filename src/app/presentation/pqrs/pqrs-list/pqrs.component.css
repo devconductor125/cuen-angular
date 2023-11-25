@@ -1,0 +1,23 @@
+.tasks-container {
+  width: 50%;
+}
+
+.selected {
+  background-color: #CFD8DC !important;
+}
+
+.list-item {
+  cursor: pointer;
+  cursor: hand;
+}
+.taskprojcontainer{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  margin: 10px 0px 20px 0px;
+  padding: 0px 15px;
+}
+.tabletask{
+  background-color: #FFFFFF;
+}

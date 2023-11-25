@@ -1,0 +1,81 @@
+<div id="contenido" class="contents-app">
+  <div class="generalrow">
+    <div class="col-sm">
+      <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 10px">Registrar Meta</div>
+    </div>
+  </div>
+
+  <div class="generalrow">
+    <div class="module-box-container contentpadding padding-button">
+      <div class="col-sm marginbuttom">
+        <label for="cantidadMeta">Cantidad</label>
+        <input type="number" class="form-control simpleinput" id="cantidadMeta" aria-describedby="cantidadMeta" placeholder="Cantidad" [(ngModel)]="metas.quantity">
+      </div>
+      <div class="col-sm marginbuttom">
+        <label for="unidadMeta">Unidad</label>
+        <input type="text" class="form-control simpleinput" id="unidadMeta" aria-describedby="unidadMeta" placeholder="Unidad" [(ngModel)]="metas.unit">
+      </div>
+      <div class="col-sm marginbuttom">
+        <label for="descripcionMeta">Descripción</label>
+        <input type="text" class="form-control simpleinput" id="descripcionMeta" aria-describedby="descripcionMeta" placeholder="Descripción" [(ngModel)]="metas.description">
+      </div>
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-top: 10px">
+    <div class="col-sm">
+      <button type="button" class="mainbtn plaingreenlight right margintop marginbuttom" style="float: right; cursor: pointer;" (click)="insertarMeta()">Registrar Meta</button>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow">
+    <div class="col-12">
+      <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 10px">Listado de Metas Registradas</div>
+    </div>
+  </div>
+
+  <div *ngIf="listadoMetas.length === 0">
+    <div class="generalrow">
+      <div class="lineredlight fullsize margintop margintop" >No se han Registrado Metas
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="listadoMetas.length > 0">
+    <div class="generalrow" style="background-color: rgba(255,255,255,0.51); border-radius: 15px">
+      <div class="col-3 left">
+        <div style="font-size: 14px; font-weight: bold; padding: 10px">Cantidad</div>
+      </div>
+      <div class="col-3 left">
+        <div style="font-size: 14px; font-weight: bold; padding: 10px">Unidad</div>
+      </div>
+      <div class="col-3 left">
+        <div style="font-size: 14px; font-weight: bold; padding: 10px">Descripción</div>
+      </div>
+    </div>
+
+    <div class="generalrow" *ngFor="let meta of listadoMetas; let i = index">
+      <div class="col-3 left">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">{{meta.quantity}}</div>
+      </div>
+      <div class="col-3 left">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">{{meta.unit}}</div>
+      </div>
+      <div class="col-3 left">
+        <div style="font-size: 14px; font-weight: bold; padding: 20px 10px">{{meta.description}}</div>
+      </div>
+      <div class="col-3 left">
+        <div>
+          <button type="button" class="mainbtn plainredlight right margintop" style=" cursor: pointer; " (click)="removeItem(i, meta.id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>
+<router-outlet></router-outlet>

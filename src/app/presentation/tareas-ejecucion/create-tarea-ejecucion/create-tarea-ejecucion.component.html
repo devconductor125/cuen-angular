@@ -1,0 +1,101 @@
+<div id="contenido" class="contents-app">
+  <div class="title-section">
+    <div class="task_title"></div>
+    <div class="titlechapterAp">Registrar tarea de ejecución</div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="labelselect0" class="subtitle-item">Titulo</label>
+      <input type="text" id="labelselect0" class="form-control" [(ngModel)]="task.title"
+             placeholder="Título de la Tarea de Ejecución"/>
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="fInicio" class="subtitle-item">Fecha de Inicio</label>
+      <input id="fInicio" aria-describedby="fInicio" class="form-control simpleinput"
+             type="date" name="task_starting_date" [(ngModel)]="task.startdate">
+    </div>
+
+    <div class="col-sm">
+      <label for="fFin" class="subtitle-item">Fecha de Culminación</label>
+      <input id="fFin" class="form-control simpleinput" type="date" name="task_deadline" [(ngModel)]="task.deadline">
+    </div>
+
+  </div>
+
+  <div class="generalrow">
+
+    <div class="col-sm">
+      <label for="descrip">Descripción</label>
+      <textarea class="form-control simpleinput" rows="3" name="task_description" id="descrip"
+                placeholder="Ingresa la Descripción de la Tarea"
+                [(ngModel)]="task.description">Ingrese la descripcion</textarea>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow">
+    <div class="title-taskmodule gradblue">Listado de Tareas por Ejecutar. Seleccione la Tarea a ejecutar</div>
+    <table class="table tabletask table-hover">
+      <thead class="items-table">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Nombre de la Bolsa</th>
+        <th scope="col">Contratista Asignado</th>
+        <th scope="col">Acción</th>
+        <th scope="col">Predio</th>
+        <th scope="col"># de poligono</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let list of listTask">
+        <th scope="col">
+          <input name="options" type="radio" [value]="list.id" [(ngModel)]="task.pool_contractor_id">
+        </th>
+        <th scope="col">{{list.pool_name}}</th>
+        <th scope="col">{{list.user_name}}</th>
+        <th scope="col">{{list.action_name}}</th>
+        <th scope="col">{{list.propertyName}}</th>
+        <th scope="col">{{list.numPolygon}}</th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="generalrow">
+    <div class="row" style="margin-bottom: 10px">
+      <div class="col-sm-12 col-md-12">
+        <div *ngIf="users.length>0">
+          <div class="subtitle-item">Usuarios</div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 10px">
+      <div class="col-sm-12 col-md-12">
+        <div *ngIf="users.length > 0">
+          <div *ngFor="let usuario of users; let i = index">
+            <input type="checkbox" [id]="'usuario' + usuario.id" [(ngModel)]="usersSelected[i]"
+                   (ngModelChange)="editUserArray(usersSelected[i], i, usuario.id)">
+            <label [for]="'usuario' + usuario.id">{{usuario.name}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow">
+    <button type="button" style="cursor: pointer" class="mainbtn plaingreenlight right margintop" (click)="guardar()">Guardar</button>
+  </div>
+
+</div>

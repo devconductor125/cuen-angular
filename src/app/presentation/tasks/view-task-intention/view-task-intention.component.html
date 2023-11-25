@@ -1,0 +1,114 @@
+<div *ngIf="task">
+
+  <div class="contents-app" style="margin-bottom: 25px">
+
+    <!--PROYECT INFO-->
+    <div class="generalrow">
+      <div class="row">
+        <div class="col-sm">
+          <div class="titlechapter intern">{{task.title}}</div>
+        </div>
+      </div>
+
+      <!--  <div class="row" *ngIf="!isSig">
+          <div class="col-2">
+            <div class="chips_title">Tarea</div>
+          </div>
+          <div class="col-10">
+            <div class="chips_two">{{task.details.type.name}}</div>
+          </div>
+        </div>-->
+
+      <div class="row">
+        <div class="col-2">
+          <div class="chips_title">Tarea</div>
+        </div>
+        <div class="col-10">
+          <div class="chips">{{task.task_type_name}}</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+          <div class="row">
+            <div class="col-sm subtitle">
+              Descripción
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <p>{{task.procedure.description}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm subtitle">
+              Responsable
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <p>{{task.user.email}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm subtitle">
+              Procedimiento
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <p>{{task.procedure.name}}</p>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+      <div class="row">
+        <!-- DATES TABLE -->
+        <div class="table-container">
+          <div class="header-module">
+            <h3 class="title-module">Documentos asociados</h3>
+          </div>
+          <table class="table">
+            <thead class="items-table">
+            <tr>
+              <th scope="col">Tipo</th>
+              <th scope="col">Nombre</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <!--AGREGAR DOCUMENTOS A LA LISTA-->
+            <!-- CARTA DE INTENCION -->
+                  <tr *ngIf="task.validation">
+                    <th scope="row">Carta de Intención</th>
+                    <td>Carta de Intención</td>
+                    <td>
+                      <div class="row">
+                        <div class="col-sm">
+                          <a class="mainbtn gradblue" routerLink="/app/ver-carta-intencion/{{task.id}}">Ver</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="!task.validation">
+
+                    <td>No se ha cargado la Carta de Intención</td>
+
+                  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

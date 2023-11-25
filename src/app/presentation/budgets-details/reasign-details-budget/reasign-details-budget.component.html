@@ -1,0 +1,65 @@
+<div class="generalrow">
+
+
+  <div class="title-section">
+    <div class="col-10 float-left">
+
+      <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+        <div style="display: table-cell; vertical-align: middle">
+          <div style="text-align: center" class="task_title"></div>
+          <div class="titlechapterAp">Editar valor del Presupuesto</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="contents-app">
+    <div class="row">
+
+      <div class="col-sm-10 col-md-10">
+        <h4>Valor del Detalle</h4>
+      </div>
+
+      <div class="col-sm col-md">
+        <button type="button"
+                class="btn btn-primary btn-sm" (click)="setVariableEdit()">Editar
+        </button>
+      </div>
+
+    </div>
+
+    <ng-container *ngIf="detailData">
+
+      <div class="row">
+
+        <div class="col-sm col-md">
+          <label for="valueIngreso">Ingrese el valor ($)</label>
+          <input class="form-control"
+                 id="valueIngreso"
+                 [(ngModel)]="detailData.inversion"
+                 (ngModelChange)="formatSpecific2($event, 1)"
+                 [disabled]="!boolEdit"/>
+        </div>
+
+      </div>
+
+    </ng-container>
+
+    <hr/>
+
+  </div>
+
+
+  <div class="generalrow" *ngIf="boolEdit">
+
+    <div class="col-sm col-md">
+      <button type="button"
+              class="btn btn-success btn-sm" (click)="updateBudget()">Guardar
+      </button>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,82 @@
+
+.procedure-title, .procedure-name{
+  display: block;
+  float: left;
+  height: auto;
+
+}
+.procedure-title{
+  display: block;
+  float: left;
+  height: auto;
+  font-family: 'robotobold';
+  font-size: 1.1em;
+  background-color: #0073D1;
+  color: #ffffff;
+  padding: 7px;
+}
+.procedure-name{
+  font-family: 'robotomedium';
+  font-size: 1em;
+  line-height: 1.3em;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.description-procedure{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  font-family: 'robotobold';
+  font-size: 1.1em;
+  color: #0073D1;
+  margin-bottom: 10px;
+}
+.activitiesbox{
+  display: block;
+  float: left;
+  height: auto;
+  padding: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background-color: white;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0px 2px 0px 0px #cccccc;
+  -moz-box-shadow: 0px 2px 0px 0px #cccccc;
+  box-shadow: 0px 2px 0px 0px #cccccc;
+}
+.infoact{
+  min-height: 35px;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .infoproyect{
+    padding: 0px;
+  }
+  .statusproyect {
+    padding: 0px;
+  }
+  .predioproyect{
+    padding: 0px;
+  }
+  .linebtn{
+    margin: 0px;
+    min-width: 90px;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
+/*TODOS LOS DERECHOS RESERVADOS CORPORACION CUENCA VERDE - DISENADO DESARROLLADO E IMPLEMENTADO POR B1G DIGITAL - MARCA DE RORLO SAS*/

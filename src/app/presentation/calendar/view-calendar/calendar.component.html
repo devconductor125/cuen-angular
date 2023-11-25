@@ -1,0 +1,50 @@
+<div class="title-section">
+  <div class="calendar_title"></div>
+  <div class="titlechapterAp">Calendario de Monitoreos - Mantenimiento</div>
+  <a class="mainbtn plainbluedark createbtn right" routerLink="/app/create-calendar/1" *ngIf="isCoordinador">Crear Evento</a>
+
+</div>
+
+
+
+<div class="generalrow">
+
+  <div class="generalrow" style="padding: 20px" *ngIf="isCoordinador">
+
+    <div class="col-6 col-md-6 col-sm-12 plain-arrow">
+      <label for="labelselect1" class="subtitle-item">Filtro por Rol</label>
+      <select [(ngModel)]="selectedFilter" class="custom-select form-control gradblue" name="roles" id="labelselect1">
+        <option *ngFor="let filtro of filters" [ngValue]="filtro.id">{{filtro.name}}</option>
+      </select>
+    </div>
+
+    <ng-container *ngIf="selectedFilter === '1'">
+        <div class="col-6 col-md-6 col-sm-12 plain-arrow">
+          <label for="labelselect1" class="subtitle-item">Seleccione el Procedimiento</label>
+          <select [(ngModel)]="selectedProcedure" class="custom-select form-control gradblue" name="roles" id="labelselect2process">
+            <option [value]="0">Seleccione un Procedimiento</option>
+            <option *ngFor="let process of procedures" [ngValue]="process.id">{{process.name}}</option>
+          </select>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="selectedFilter === '2'">
+        <div class="col-6 col-md-6 col-sm-12 plain-arrow">
+          <label for="labelselect1" class="subtitle-item">Seleccione el Predio</label>
+          <select [(ngModel)]="selectedPredio" class="custom-select form-control gradblue" name="roles" id="labelselect2predio">
+            <option [value]="0">Seleccione un Predio</option>
+            <option *ngFor="let predio of predios" [ngValue]="predio.id">{{predio.property_name}}</option>
+          </select>
+        </div>
+    </ng-container>
+
+  </div>
+
+  <div class="calendar-container">
+    <div *ngIf="calendarOptions">
+      <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail.event)" (eventDrop)="eventDrop($event.detail)"
+                       (dayClick)="clickInDay($event.detail.date)"></ng-fullcalendar>
+    </div>
+  </div>
+
+</div>

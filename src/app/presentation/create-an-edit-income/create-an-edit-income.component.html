@@ -1,0 +1,90 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Información Completa</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div *ngIf="!disableFields">
+      <div class="row">
+
+        <div class="col-sm col-md">
+          <label for="dateCreate">Fecha creación</label>
+          <input class="form-control"
+                 type="text"
+                 id="dateCreate"
+                 [(ngModel)]="objDataEdit.created_at"
+                 disabled/>
+        </div>
+
+        <div class="col-sm col-md">
+          <label for="dateEdition">Fecha edición</label>
+          <input class="form-control"
+                 type="text"
+                 id="dateEdition"
+                 [(ngModel)]="objDataEdit.updated_at"
+                 disabled/>
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-sm col-md">
+          <label for="valueOriginModal">Valor inicial</label>
+          <input class="form-control"
+                 type="text"
+                 id="valueOriginModal"
+                 [(ngModel)]="objDataEdit.valueOrigin"
+                 disabled/>
+        </div>
+
+      </div>
+    </div>
+    <hr>
+    <div class="row" >
+
+      <div class="col-sm col-md">
+        <label for="code">Código centro</label>
+        <input class="form-control"
+               id="code"
+               type="text"
+               [(ngModel)]="objDataEdit.code"/>
+      </div>
+
+      <div class="col-sm col-md">
+        <label for="name">Nombre</label>
+        <input class="form-control"
+               type="text"
+               id="name"
+               [(ngModel)]="objDataEdit.name"/>
+      </div>
+
+    </div>
+
+    <div class="row" >
+
+      <div class="col-sm col-md">
+        <label for="value">Valor</label>
+        <input class="form-control"
+               type="text"
+               id="value"
+               (ngModelChange)="formatSpecific($event, 1)"
+               [(ngModel)]="objDataEdit.value"/>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-secondary"
+            (click)="getAllIncomes()"
+            data-dismiss="modal">Cerrar</button>
+    <button type="button"
+            class="btn btn-primary"
+            (click)="saveData()"
+            data-dismiss="modal">Guardar</button>
+  </div>
+</div>

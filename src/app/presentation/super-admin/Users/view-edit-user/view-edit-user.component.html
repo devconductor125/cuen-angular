@@ -1,0 +1,84 @@
+<div id="contenido" class="contents-app" style="padding: 50px 50px 50px 50px">
+
+  <div class="row" style="margin-bottom: 25px">
+    <div class="col-10 title" style="text-align: center; font-weight: bold">
+      REGISTRAR USUARIO
+    </div>
+
+    <div class="col-2">
+      <div class="col-sm" *ngIf="!boolEdit">
+        <button type="button" class="btn btn-primary" style="float: right; cursor: pointer;" (click)="setVarEdit()">
+          Editar
+        </button>
+      </div>
+
+      <div class="col-sm" *ngIf="boolEdit">
+        <button type="button" class="btn btn-danger" style="float: right; cursor: pointer;" (click)="setVarEdit()">
+          cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="labelselect0" class="subtitle-item">Nombres</label>
+      <input type="text"
+             id="labelselect0"
+             class="form-control"
+             [(ngModel)]="dataUser.names"
+             placeholder="Nombres del Usuario"
+             [disabled]="!boolEdit"/>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <label for="labelselect1" class="subtitle-item">Apellidos</label>
+      <input type="text"
+             id="labelselect1"
+             class="form-control"
+             [(ngModel)]="dataUser.last_names"
+             [disabled]="!boolEdit"
+             placeholder="Apellidos del Usuario"/>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="labelselect3" class="subtitle-item">Correo Electrónico</label>
+      <input type="text"
+             id="labelselect3"
+             class="form-control"
+             [(ngModel)]="dataUser.email"
+             placeholder="Correo Electrónico del Usuario"
+             [disabled]="!boolEdit"/>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div class="plain-arrow">
+        <label for="labelselect2" class="subtitle-item">Selecciona el Rol</label>
+        <select [(ngModel)]="dataUser.rol_id"
+                class="custom-select form-control gradblue"
+                name="selected_task_type"
+                [disabled]="!boolEdit"
+                id="labelselect2">
+          <option *ngFor="let option of listRoles" [ngValue]="option.id">{{option.name}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="dropdown-divider"></div>
+  <div class="row" *ngIf="boolEdit">
+    <div class="col-sm">
+      <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" (click)="update()">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+</div>

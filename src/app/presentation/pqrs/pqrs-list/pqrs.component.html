@@ -1,0 +1,85 @@
+<div class="title-section">
+  <div class="col-1 float-left">
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div style="text-align: center" class="pqrs_title">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 float-left">
+
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div class="titlechapterAp">PQRS</div>
+      </div>
+    </div>
+
+  </div>
+  <a class="mainbtn darkblue create-new-procedure" routerLink="/app/create-pqrs">Crear nuevo PQRS</a>
+
+</div>
+
+
+<div class="contents-app">
+  <!--PROYECTOS-->
+
+  <div class="generalrow" *ngIf="pqrsList">
+    <div class="subtitle-item">PQRS</div>
+
+
+    <div class="taskprojcontainer">
+      <div class="title-taskmodule gradblue">Listado de PQRS</div>
+      <div class="maintablecontainer">
+        <table class="table tabletask table-hover">
+          <thead class="items-table">
+          <tr>
+            <th scope="col">Nombre de Contacto</th>
+            <th scope="col">Cédula de Ciudadanía</th>
+            <th scope="col">Email</th>
+            <th scope="col">Fecha Creación</th>
+            <th scope="col">Estado</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let pqrs of pqrsList">
+            <th scope="row">{{pqrs.name}}</th>
+            <td>{{pqrs.id_card}}</td>
+            <td>{{pqrs.email}}</td>
+            <td>{{ (pqrs.created_at != null) ? getDateWithoutHour(pqrs.created_at) : ''}}</td>
+            <td>
+              <div class="status ontime" *ngIf="pqrs.pqrs_state != undefined && pqrs.pqrs_state === 'Resuelto'">{{pqrs.pqrs_state}}</div>
+              <div class="status pending" *ngIf="pqrs.pqrs_state != undefined && pqrs.pqrs_state === 'Sin Resolver'">{{pqrs.pqrs_state}}</div>
+            </td>
+            <td>
+              <a class="mainbtn bluebtn seemore-module" routerLink="/app/view-pqrs/{{pqrs.id}}">Ver</a>
+            </td>
+          </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+
+
+   <!-- <ul class="list-procedures">
+      <li class="proyect-item col-lg-4 col-md-4 col-sm-12" *ngFor="let pqrs of pqrsList">
+        <div class="title-proymodule gradblue">{{pqrs.name}}</div>
+        <div class="blockmodule">
+          <div class="titlegraph" style="background-color: #CFD8DC">{{pqrs.name}}</div>
+          <div class="chart-container"></div>
+          <div class="dates-chart">
+            <h4 class="descrip-chart">Tiempo de Ejecucion</h4>
+            <h2 class="title-chart"></h2>
+          </div>
+          <a class="mainbtn bluebtn seemore-module" routerLink="/app/view-pqrs/{{pqrs.id}}">Ver</a>
+        </div>
+      </li>
+    </ul>-->
+
+  </div>
+
+</div>

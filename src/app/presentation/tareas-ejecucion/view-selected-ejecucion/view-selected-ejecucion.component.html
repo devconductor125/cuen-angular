@@ -1,0 +1,398 @@
+<div *ngIf="taskForExecution">
+
+  <div class="contents-app" style="margin-bottom: 25px">
+
+    <div class="generalrow">
+
+      <div class="generalrow typetask">
+        <div class="col-12 col-md-4 col-lg-4 col-xl-3 float-left">
+          <div class="chips_title">Estado de la Tarea</div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 col-xl-6 float-left">
+          <div class="chips">{{taskForExecution.sub_type_name}}</div>
+        </div>
+      </div>
+
+      <!--PROYECT INFO-->
+      <div class="generalrow nopad">
+        <div class="col-12 col-md-8 col-lg-7 col-xl-7 float-left">
+          <div class="generalrow">
+            <div class="col-sm">
+              <div class="titlechapter intern">{{taskForExecution.title}}</div>
+            </div>
+          </div>
+          <div class="generalrow">
+            <div class="col-sm">
+              <div class="generalrow">
+                <div class="col-sm subtitle">
+                  Descripción
+                </div>
+              </div>
+              <div class="generalrow">
+                <div class="col-sm">
+                  <p>{{taskForExecution.description}}</p>
+                </div>
+              </div>
+
+              <ng-container>
+                <div class="generalrow">
+                  <div class="col-sm subtitle">
+                    Contratista Asignado
+                  </div>
+                </div>
+                <div class="generalrow">
+                  <div class="col-sm">
+                    <p>{{taskForExecution.contractor_name}}</p>
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="taskForExecution.sub_type_id.toString() !== '14'">
+                <div class="generalrow">
+                  <div class="col-sm subtitle">
+                    Responsable
+                  </div>
+                </div>
+                <div class="generalrow">
+                  <div class="col-sm">
+                    <p>{{taskForExecution.user_name}}</p>
+                  </div>
+                </div>
+              </ng-container>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-3 col-lg-4 col-xl-4 float-right">
+          <div>
+            <div class="statustaskcontainer">
+              <div class="statustask greenlight">Asignada</div>
+              <div class="timetask-container">
+                <div class="subtitledate">Desde</div>
+                <div class="datetask">{{taskForExecution.date_start}}</div>
+                <div class="subtitledate">Hasta</div>
+                <div class="datetask">{{taskForExecution.date_end}}</div>
+              </div>
+              <div class="statustask bluelight">A tiempo</div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="generalrow" *ngIf="taskForExecution.sub_type_id.toString() !== '14'">
+
+      <div class="dropdown-divider"></div>
+
+      <ng-container *ngIf="taskForExecution">
+        <div class="generalrow" style="font-size: 14px; font-weight: bold">
+          <div class="col-sm">
+            Mapa Cargado
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="dropdown-divider"></div>
+
+      <ng-container *ngIf="taskForExecution">
+        <div class="generalrow">
+          <div class="col-sm">
+            Mapa de Medición
+          </div>
+          <div class="col-1">
+            <button type="button" class="btn btn-primary" style="float: right; cursor: pointer;"
+                    routerLink="/app/map-sig-task-execution/{{taskForExecution.id}}">
+              Ver
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+
+    <div *ngIf="canReassignTask">
+      <div class="row" style="padding-top: 10px" *ngIf="users.length > 0">
+        <div class="col-sm" style="text-transform: uppercase; font-weight: bold">
+          <label for="select_ruser" style="text-transform: capitalize">Rol</label>
+          <select [(ngModel)]="task.user" class="form-control" name="selected_user"
+                  [disabled]="users.length === 0" id="select_ruser">
+            <option *ngFor="let option of users" [ngValue]="option">{{option.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+                  (click)="sendTaskFlowExecution()">
+            Enviar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <ng-container *ngIf="taskForExecution"> <!--georgi fix 71-->
+      <label style="font-weight: bold">Sig</label><br/>
+      <label for="usuarioSig">Selecciona el Usuario para redirigir la tarea: </label>
+      <select [(ngModel)]="taskForExecution.user_id" class="custom-select form-control gradblue" name="selected_user"
+              id="usuarioSig">
+        <option [value]="0">Seleccione un usuario</option>
+        <option *ngFor="let usuario of userSig" [ngValue]="usuario.id">{{usuario.name}}</option>
+      </select>
+    </ng-container>
+
+    <div class="generalrow" *ngIf="taskForExecution.sub_type_id.toString() === '10' && isCoordinador">
+
+      <div class="dropdown-divider"></div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" (click)="reassignTask()">
+            Enviar
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="generalrow" *ngIf="taskForExecution.sub_type_id.toString() === '12' && isCoordinador">
+
+      <ng-container *ngIf="taskForExecution">
+        <label style="font-weight: bold">Equipo de Seguimiento</label><br/>
+        <label for="usuarioSeguimiento2">Selecciona el Usuario para redirigir la tarea: </label>
+        <select [(ngModel)]="taskForExecution.user_id" class="custom-select form-control gradblue" name="selected_user"
+                id="usuarioSeguimiento2">
+          <option [value]="0">Seleccione un usuario</option>
+          <option *ngFor="let usuario of userSeguimiento" [ngValue]="usuario.id">{{usuario.name}}</option>
+        </select>
+      </ng-container>
+
+      <div class="dropdown-divider"></div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" (click)="reassignTask()">
+            Enviar
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px" *ngIf="canSendTask">
+      <div class="col-sm">
+        <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+                (click)="sendTaskFlowExecution()">
+          Aprobar tarea
+        </button>
+      </div>
+    </div>
+
+    <div class="generalrow" *ngIf="taskForExecution.sub_type_id.toString() === '13' && isSeguimiento">
+
+      <div class="dropdown-divider"></div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm" style="font-weight: bold">
+          Enviar a Coordinación
+        </div>
+        <div class="col-sm">
+          <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+                  (click)="sendTaskFlowExecution()">
+            Enviar
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="generalrow"
+         *ngIf="taskForExecution.sub_type_id.toString() === '15' && isCoordinador || taskForExecution.sub_type_id.toString() === '16' && isCoordinador">
+
+      <ng-container *ngIf="taskForExecution.sub_type_id.toString() === '15' && isCoordinador">
+
+        <div class="row" style="margin-bottom: 10px">
+          <div class="col-sm-12 col-md-12">
+            <div *ngIf="users.length>0">
+              <div class="subtitle-item">Usuarios</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 10px">
+          <div class="col-sm-12 col-md-12">
+            <div *ngIf="users.length > 0">
+              <div *ngFor="let usuario of users; let i = index">
+                <input type="checkbox" [id]="'usuario' + usuario.id" [(ngModel)]="usersSelected[i]"
+                       (ngModelChange)="editUserArray(usersSelected[i], i, usuario.id)">
+                <label [for]="'usuario' + usuario.id">{{usuario.name}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow" style="margin-bottom: 10px">
+          <div class="col-sm">
+            <button type="button" class="btn btn-success" style="float: right; cursor: pointer;"
+                    (click)="sendTaskFlowExecution()">
+              Reenviar
+            </button>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <div class="dropdown-divider"></div>
+
+      <!--CREAR TAREA ABIERTA-->
+      <ng-container *ngIf="taskForExecution && possibleCreateOpenTask">
+
+        <ng-container *ngIf="taskForExecution">
+          <div class="generalrow" style="font-size: 14px; font-weight: bold">
+            <div class="col-sm">
+              Crear Tarea De Contratista
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="generalrow" style="margin-bottom: 10px">
+
+          <div class="col-sm">
+            <label for="fInicio">Fecha de Inicio</label>
+            <input [(ngModel)]="taskForExecution.startdate" id="fInicio" aria-describedby="fInicio"
+                   class="form-control simpleinput"
+                   type="date" name="task_starting_date">
+          </div>
+
+          <div class="col-sm" *ngIf="!taskForExecution.option_date">
+            <label for="fFin">Fecha de entrega</label>
+            <input [(ngModel)]="taskForExecution.deadline" id="fFin" class="form-control simpleinput" type="date"
+                   name="task_deadline">
+          </div>
+
+          <div class="col-sm" style=" display: flex; align-items: center; align-items: center">
+            <label class="custom-control custom-checkbox" id="noTiene" style="margin-top: 35px">
+              <input type="checkbox" class="custom-control-input" [(ngModel)]="taskForExecution.option_date"
+                     name="has_deadline">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">No tiene fecha de finalización</span>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="generalrow" style="margin-bottom: 10px">
+
+          <div class="col-sm">
+            <label for="descrip">Descripción</label>
+            <textarea class="form-control simpleinput" [(ngModel)]="taskForExecution.description" rows="3"
+                      name="task_description"
+                      id="descrip" placeholder="Ingresa la Descripción de la Tarea">Ingrese la descripcion</textarea>
+          </div>
+
+        </div>
+
+
+        <div class="dropdown-divider"></div>
+
+        <ng-container *ngIf="taskForExecution">
+          <label for="usuario3">Selecciona el Contratista: </label>
+          <select [(ngModel)]="taskForExecution.user_id_contractor" class="custom-select form-control gradblue"
+                  name="selected_user" id="usuario3">
+            <option [value]="0">Seleccione un usuario</option>
+            <option *ngFor="let usuario of userContratista" [ngValue]="usuario.id">{{usuario.name}}</option>
+          </select>
+        </ng-container>
+
+        <div class="dropdown-divider"></div>
+
+
+        <div class="generalrow">
+          <div class="col-sm">
+            <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-success" id="crearTarea"
+                    (click)="createOpenTask()"> Crear Tarea De Contratista
+            </button>
+          </div>
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow" *ngIf="taskForExecution.sub_type_id.toString() === '15' && isCoordinador">
+          <div class="col-sm">
+            <button type="button" style="width: 100%; cursor: pointer;" class="btn btn-warning" id="cerrarTarea"
+                    (click)="closeTask()"> Cerrar Tarea
+            </button>
+          </div>
+        </div>
+
+
+      </ng-container>
+
+
+    </div>
+
+    <!--COMENTARIOS-->
+    <ng-container>
+
+      <div class="generalrow nopad">
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow">
+          <div class="col-sm">
+            <div class="header-module">
+              <h3 class="title-module">Comentarios</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="comments-container" *ngFor="let comment of comments">
+          <div class="generalrow">
+            <div class="user-comment col-12 col-md-5 col-lg-4 col-xl-3"> Usuario: {{comment.user_name}}</div>
+            <div class="date-comment col-12 col-md-5 col-lg-4 col-xl-3"> Fecha:
+              {{getDateWithHour(comment.created_at)}}
+            </div>
+            <div class="commentstext col-12">
+              <div>{{comment.description}}</div>
+            </div>
+          </div>
+
+          <div class="dropdown-divider"></div>
+
+          <div class="generalrow">
+
+          </div>
+
+        </div>
+
+        <div class="generalrow">
+
+          <div class="col-sm">
+                    <textarea class="form-control simpleinput" rows="3" name="task_comments"
+                              placeholder="Agrega algún comentario a la tarea" [(ngModel)]="comentario"></textarea>
+          </div>
+
+        </div>
+
+        <div class="generalrow">
+
+          <div class="col-sm">
+            <button class="send" (click)="insertComment(); $event.stopPropagation();">Enviar</button>
+          </div>
+
+        </div>
+
+      </div>
+    </ng-container>
+
+  </div>
+</div>

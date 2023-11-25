@@ -1,0 +1,129 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+
+      <div class="col-1">
+        <label for="idRecord">id</label>
+        <input type="number"
+               class="form-control"
+               id="idRecord"
+               [(ngModel)]="objFilter['id']"
+               placeholder="id">
+      </div>
+
+      <div class="col-2">
+        <label for="name">Nombre</label>
+        <input type="text"
+               class="form-control"
+               id="name"
+               [(ngModel)]="objFilter['name']"
+               placeholder="nombre">
+      </div>
+
+      <div class="col-2">
+        <div class="form-group">
+          <label for="selectTipo">Tipo</label>
+          <select class="form-control"
+                  id="selectTipo">
+            <option [ngValue]= "0" >Seleccione un tipo</option>
+            <option [ngValue]= "0" >gestión</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Estado</label>
+          <select class="form-control"
+                  id="exampleFormControlSelect1" [(ngModel)]="objFilter['status']">
+            <option *ngFor="let status of objStatus"
+                    [ngValue]= "status.value" >{{status.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <label for="embalse">Embalse</label>
+        <input type="text"
+               class="form-control"
+               id="embalse"
+               placeholder="embalse">
+      </div>
+
+      <div class="col-2">
+        <label for="municipio">municipio</label>
+        <input type="text"
+               class="form-control"
+               id="municipio"
+               placeholder="Municipio">
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-6 text-center">
+        <button type="button"
+                class="btn btn-info" (click)="getDataWhitFilter()">Filtrar</button>
+      </div>
+
+      <div class="col-6 text-center">
+        <button type="button"
+                class="btn btn-info" (click)="downloadExcel()">Ver reporte de seguimiento</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="maintablecontainer">
+  <div class="title-taskmodule gradblue">Listado de Predios</div>
+  <table class="table tabletask table-hover">
+    <thead class="items-table">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Tipo proceso</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Embalse</th>
+      <th scope="col">Municipio</th>
+      <th scope="col">Fecha creación</th>
+      <th scope="col">Fecha firma acuerdo</th>
+      <th scope="col">Fecha firma carta de intención</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let property of arrProperties">
+      <th scope="row">{{property.id}}</th>
+      <th scope="row">{{property.property_name}}</th>
+      <th scope="row">{{property.type_process}}</th>
+      <th scope="row">{{property.status}}</th>
+      <th scope="row">{{property.propertyReservoir}}</th>
+      <th scope="row">{{property.municipality}}</th>
+      <td scope="row">{{property.created_at}}</td>
+      <td scope="row">{{property.signMinuta?.date}}</td>
+      <td scope="row">{{property.signLetterIntention}}</td>
+      <td scope="row">
+        <a class="linebtn linebluelight right" routerLink="/app/view-potencial/{{property.potential_property_id}}">Ver</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+<table class="table table-hover">
+  <thead class="thead-light">
+  <tr>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let property of arrProperties">
+  </tr>
+  </tbody>
+</table>

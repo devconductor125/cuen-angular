@@ -1,0 +1,86 @@
+<div class="title-section">
+  <div class="predio_title"></div>
+  <div class="titlechapterAp">Cargar Base de Predios PSA</div>
+</div>
+
+
+<div class="contents-app">
+  <!--ALERTS MODULE-->
+  <div id="contenido" class="contents-app">
+
+    <h3 class="subtitle-item">Base de Predios Cargada</h3>
+
+
+    <ng-container>
+
+      <ng-container *ngIf="psaBase">
+
+        <div class="generalrow" style="font-weight: bold; font-size: 12px">
+          <div class="col-sm">
+
+            Fecha de Carga
+
+          </div>
+          <div class="col-sm">
+
+          </div>
+        </div>
+
+        <div class="generalrow">
+          <div class="col-sm-10">
+
+            {{getDateWithHour(psaBase.created_at)}}
+
+          </div>
+          <div class="col-sm-1">
+
+            <a type="button" class="btn btn-primary" style="float: right; cursor: pointer;"
+               href="{{URL_BASE_FILES}}/{{psaBase.name}}" target="_blank" download>
+              Descargar
+            </a>
+
+          </div>
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngIf="!psaBase">
+
+        <div class="generalrow">
+          <div class="col-sm-12">
+
+            No se ha cargado la base de predios PSA
+
+          </div>
+        </div>
+
+      </ng-container>
+
+    </ng-container>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="generalrow">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+
+        <div class="header-module">
+          <h3 class="title-module">Cargar Base de Predio</h3>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="generalrow">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+
+        <div class="header-module">
+          <cuenca-drag-and-drop-base-predios (notify)='onFilesUploaded($event)'></cuenca-drag-and-drop-base-predios>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

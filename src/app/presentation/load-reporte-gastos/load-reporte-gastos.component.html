@@ -1,0 +1,341 @@
+ <div class="generalrow">
+
+      <div class="title-section">
+        <div class="col-1 float-left">
+          <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+            <div style="display: table-cell; vertical-align: middle">
+              <div style="text-align: center" class="task_title">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-10 float-left">
+
+          <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+            <div style="display: table-cell; vertical-align: middle">
+              <div class="titlechapterAp">Cargar Reporte Centro de Costos</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!--ALERTS MODULE-->
+      <div id="contenido" class="contents-app">
+
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+
+                  <div class="header-module">
+                    <h3 class="title-module">Último Reporte Cargado</h3>
+                  </div>
+
+                </div>
+              </div>
+
+              <ng-container>
+
+                <ng-container *ngIf="lastReport?.length > 0">
+
+                    <div class="row" style="font-weight: bold; font-size: 12px">
+                      <div class="col-sm">
+
+                        Fecha de Carga
+
+                      </div>
+                      <div class="col-sm">
+
+                      </div>
+                    </div>
+
+                  <div class="row"  *ngFor="let centro of lastReport">
+                      <div class="col-sm-10">
+
+                        {{getDateWithHour(centro.create_at)}}
+
+                      </div>
+                      <div class="col-sm-1">
+
+                        <a type="button" class="btn btn-primary" style="float: right; cursor: pointer;" (click)="getFileContractorDownload()">
+                          Descargar
+                        </a>
+
+                      </div>
+                  </div>
+
+                </ng-container>
+
+                <ng-container *ngIf="lastReport.length === 0">
+
+                    <div class="row">
+                      <div class="col-sm-12">
+
+                        No se ha cargado reporte de Costos
+
+                      </div>
+                    </div>
+
+                </ng-container>
+
+              </ng-container>
+
+              <div class="dropdown-divider"></div>
+
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+
+                  <div class="header-module">
+                    <h3 class="title-module">Cargar Centro de Costos</h3>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+
+                  <div class="header-module">
+                    <cuenca-drag-and-drop-centro-costos (notify)='onFilesUploaded($event)'></cuenca-drag-and-drop-centro-costos>
+                  </div>
+
+                </div>
+              </div>
+
+        <div class="row">
+          <div class="header-module">
+            <h3 class="title-module">Selecione las fechas para listar el reporte de costos</h3>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-sm">
+            <label for="fInicio">Fecha de Inicio</label>
+            <input [(ngModel)]="objetoFechas.from" id="fInicio" aria-describedby="fInicio" class="form-control simpleinput"
+                   type="date" name="task_starting_date">
+          </div>
+          <div class="col-sm">
+            <label for="fFinal">Fecha Fin</label>
+            <input [(ngModel)]="objetoFechas.to" id="fFinal" aria-describedby="fFinal" class="form-control simpleinput"
+                   type="date" name="task_finish_date">
+          </div>
+
+        </div>
+
+        <hr/>
+
+        <div class="row">
+          <div class="col-12">
+            <button type="button" class="btn btn-success" style="width: 100%; cursor: pointer;" (click)="getCentroDeCostos()">
+              Buscar
+            </button>
+          </div>
+        </div>
+
+
+        <ng-container *ngIf="responseCentros">
+          <hr/>
+
+          <div class="row">
+            <div class="col-sm">
+              Filtrar Resultados
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-sm">
+              <button type="button" class="btn btn-outline-dark" style="width: 100%; cursor: pointer;" (click)="setData('1')">
+                Registrados Satisfactoriamente: {{centroCostosType1.length}}
+              </button>
+            </div>
+
+            <div class="col-sm">
+              <button type="button" class="btn btn-outline-dark" style="width: 100%; cursor: pointer;" (click)="setData('2')">
+                Saldo No Disponible: {{centroCostosType2.length}}
+              </button>
+            </div>
+
+            <div class="col-sm">
+              <button type="button" class="btn btn-outline-dark" style="width: 100%; cursor: pointer;" (click)="setData('3')">
+                Código No Encontrado: {{centroCostosType3.length}}
+              </button>
+            </div>
+
+          </div>
+
+          <hr/>
+
+          <div class="row">
+            <div class="col-sm">
+              <button type="button" class="btn btn-outline-dark" style="width: 100%; cursor: pointer;" (click)="setData('4')">
+                Códigos Especiales: {{centroCostosType4.length}}
+              </button>
+            </div>
+
+            <div class="col-sm">
+              <button type="button" class="btn btn-outline-dark" style="width: 100%; cursor: pointer;" (click)="setData('5')">
+                Registros con datos No Válidos: {{centroCostosType5.length}}
+              </button>
+            </div>
+
+            <div class="col-sm col-sm-offset">
+            </div>
+
+          </div>
+        </ng-container>
+
+      <hr/>
+
+        <div class="taskprojcontainer" *ngIf="responseCentros">
+
+          <div class="title-taskmodule gradblue" *ngIf="typeResponseData !== '0'">Listado de Centro de Costos</div>
+
+          <table class="table tabletask table-hover">
+
+            <!--TIPO 1-->
+            <ng-container *ngIf="centroCostosType1.length > 0  && typeResponseData === '1'">
+
+                <thead class="items-table">
+                <tr style="background-color: #0c5593; color: white;">
+                  <th scope="col" colspan="3">Registrados Satisfactoriamente</th>
+                </tr>
+                </thead>
+
+                <thead class="items-table">
+                  <tr>
+                    <th scope="col">CC</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Valor</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let type_1 of centroCostosType1">
+                      <th scope="row">{{type_1.code}}</th>
+                      <th scope="row">{{type_1.description_ter}}</th>
+                      <th scope="row">$ {{type_1.value | number: '1.2-2'}}</th>
+                    </tr>
+                </tbody>
+
+            </ng-container>
+
+            <!--TIPO 2-->
+            <ng-container *ngIf="centroCostosType2.length > 0  && typeResponseData === '2'">
+
+              <thead class="items-table">
+              <tr style="background-color: #933204; color: white;">
+                <th scope="col" colspan="3">Saldo No Disponible</th>
+              </tr>
+              </thead>
+
+              <thead class="items-table">
+              <tr>
+                <th scope="col">CC</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Valor</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr *ngFor="let type_2 of centroCostosType2">
+                <th scope="row">{{type_2.code}}</th>
+                <th scope="row">{{type_2.description_ter}}</th>
+                <th scope="row">$ {{type_2.value | number: '1.2-2'}}</th>
+              </tr>
+              </tbody>
+
+            </ng-container>
+
+            <!--TIPO 3-->
+            <ng-container *ngIf="centroCostosType3.length > 0  && typeResponseData === '3'">
+
+              <thead class="items-table">
+              <tr style="background-color: #937a00; color: white;">
+                <th scope="col" colspan="3">Código No Encontrado</th>
+              </tr>
+              </thead>
+
+              <thead class="items-table">
+              <tr>
+                <th scope="col">CC</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Valor</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr *ngFor="let type_3 of centroCostosType3">
+                <th scope="row">{{type_3.code}}</th>
+                <th scope="row">{{type_3.description_ter}}</th>
+                <th scope="row">$ {{type_3.value | number: '1.2-2'}}</th>
+              </tr>
+              </tbody>
+
+            </ng-container>
+
+            <!--TIPO 4-->
+            <ng-container *ngIf="centroCostosType4.length > 0  && typeResponseData === '4'">
+
+              <thead class="items-table">
+              <tr style="background-color: #893c91; color: white;">
+                <th scope="col" colspan="3">Códigos Especiales</th>
+              </tr>
+              </thead>
+
+              <thead class="items-table">
+              <tr>
+                <th scope="col">CC</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Valor</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <tr *ngFor="let type_4 of centroCostosType4">
+                <th scope="row">{{type_4.code}}</th>
+                <th scope="row">{{type_4.description_ter}}</th>
+                <th scope="row">$ {{type_4.value | number: '1.2-2'}}</th>
+              </tr>
+              </tbody>
+
+            </ng-container>
+
+
+            <!--TIPO 5-->
+            <ng-container *ngIf="centroCostosType5.length > 0 && typeResponseData === '5'">
+
+              <thead class="items-table">
+                <tr style="background-color: #781c31; color: white;">
+                  <th scope="col" colspan="3">Registros con datos No Válidos</th>
+                </tr>
+              </thead>
+
+              <thead class="items-table">
+                <tr>
+                  <th scope="col">CC</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Valor</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let type_5 of centroCostosType5">
+                  <th scope="row">{{type_5.code}}</th>
+                  <th scope="row">{{type_5.description_ter}}</th>
+                  <th scope="row">$ {{type_5.value | number: '1.2-2'}}</th>
+                </tr>
+              </tbody>
+
+            </ng-container>
+
+
+          </table>
+        </div>
+
+        <hr *ngIf="responseCentros"/>
+
+    </div>
+
+ </div>

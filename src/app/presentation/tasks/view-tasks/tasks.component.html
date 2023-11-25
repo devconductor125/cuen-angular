@@ -1,0 +1,172 @@
+<div class="title-section">
+  <div class="task_title"></div>
+  <div class="titlechapterAp">Tareas</div>
+  <a class="mainbtn plainbluedark right createbtn" routerLink="/app/create-tasks"
+     *ngIf="isCoordinador || isCoordinadorGuardacuenca">Crear nueva tarea</a>
+</div>
+
+
+<div class="generalrow">
+
+  <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow">
+
+    <label for="labelselect1" class="subtitle-item">Filtro por</label>
+    <select [(ngModel)]="selectedFilter"
+            class="custom-select form-control gradblue"
+            name="roles"
+            id="labelselectFiltro">
+      <option value="0">Seleccione un filtro</option>
+      <option value="1">Rol</option>
+      <option value="2">Predio</option>
+      <option value="3">Tipo</option>
+      <option value="4">Procedimiento</option>
+      <option value="5">Estado</option>
+      <option value="6">Fecha</option>
+    </select>
+
+  </div>
+
+</div>
+
+<div class="generalrow">
+
+  <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 1">
+
+    <label for="labelselect1" class="subtitle-item">Filtro por Rol</label>
+    <select [(ngModel)]="selectedRole" class="custom-select form-control gradblue" name="roles"
+            (change)="filterTasksByRole(selectedRole)" id="labelselect1">
+      <option *ngFor="let role of rolesList" [ngValue]="role">{{role.name}}</option>
+    </select>
+
+  </div>
+  <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 2">
+
+      <label for="idCardNumber">Por predio</label>
+      <input type="text"
+             class="form-control simpleinput"
+             id="idCardNumber"
+             aria-describedby="idCardNumber"
+             placeholder="nombre predio"
+             name="idCardNumber">
+
+  </div>
+  <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 3">
+
+    <label for="labelselect1">Por tipo</label>
+    <select class="custom-select form-control gradblue"
+            name="selected_property"
+            id="labelselectTipe">
+      <option value ="0">Seleccione</option>
+      <option value ="null">Sin predio</option>
+    </select>
+
+  </div>
+  <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 4">
+
+    <label for="procediName">Por procedimineto</label>
+    <input type="text"
+           class="form-control simpleinput"
+           id="procediName"
+           placeholder="Procedimiento"
+           name="procedimiento">
+
+  </div>
+  <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 5">
+
+    <label for="labelselect1">Por estado</label>
+    <select class="custom-select form-control gradblue"
+            name="selected_property"
+            id="labelselectState">
+      <option [value]="0">Seleccione un estado</option>
+      <option [ngValue]="null">Atrasada</option>
+    </select>
+
+  </div>
+  <div class="col-12 col-md-6 col-lg-7 col-xl-5 plain-arrow" *ngIf="selectedFilter == 6">
+
+    <label for="procediName">Fecha inicial</label>
+    <input type="date"
+           class="form-control simpleinput"
+           id="idDateInitFilter"
+           aria-describedby="idCardNumber"
+           placeholder="Fecha inicio"
+           name="idCardNumber">
+    <label for="procediName">Fecha final</label>
+    <input type="date"
+           class="form-control simpleinput"
+           id="idDateEndFilter"
+           aria-describedby="idCardNumber"
+           placeholder="Fecha fin"
+           name="idCardNumber">
+
+  </div>
+
+</div>
+
+<div class="generalrow btnFiltro" *ngIf="selectedFilter != 0">
+  <div class="col-sm-4">
+    <button type="button" class="btn btn-info">
+      Filtrar
+    </button>
+  </div>
+</div>
+
+<!--PROYECTOS-->
+
+<div class="generalrow" *ngIf="tasks">
+  <div class="subtitle-item">Tareas</div>
+
+  <div class="taskprojcontainer">
+    <div class="title-taskmodule gradblue">Listado de Tareas</div>
+    <div class="maintablecontainer">
+      <table class="table tabletask table-hover">
+        <thead class="items-table">
+        <tr>
+          <th scope="col">Predio</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Procedimiento</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Fecha Inicial</th>
+          <th scope="col">Fecha Fin</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let task of tasks">
+
+          <td>{{task.propertyName ? task.propertyName : 'n/a'}}</td>
+          <td>{{ (task.property != null && task.sub_type.name != null) ? task.sub_type.name : 'n/a' }}</td>
+          <th>{{task.process.name}}</th>
+          <td>
+            <div class="status delayed"
+                 *ngIf="task.task_status_name != undefined && task.task_status_name === 'Atrasada'">
+              {{task.task_status_name}}
+            </div>
+            <div class="status ontime"
+                 *ngIf="task.task_status_name != undefined && task.task_status_name === 'En proceso'">
+              {{task.task_status_name}}
+            </div>
+            <div class="status pending"
+                 *ngIf="task.task_status_name != undefined && task.task_status_name === 'Asignada'">
+              {{task.task_status_name}}
+            </div>
+          </td>
+          <td>{{ (task.date_start != null) ? getDateWithoutHour(task.date_start) : ''}}</td>
+          <td>{{ (task.date_end != null) ? getDateWithoutHour(task.date_end) : ''}}</td>
+
+          <td>
+            <a class="linebtn linebluelight right" routerLink="/app/view-tasks/{{task.id}}" *ngIf="!task.open">Ver</a>
+            <!--<a class="mainbtn bluebtn seemore-module" routerLink="/app/tarea-carta-intencion/{{task.id}}" *ngIf="task.sub_type.name === 'Carta de intención'">Ver</a>-->
+            <a class="linebtn linebluelight right" routerLink="/app/tarea-open/{{task.id}}" *ngIf="task.open">Ver</a>
+            <a class="linebtn linegreenlight right" routerLink="/app/edit-tasks/{{task.route}}"
+               *ngIf="isCoordinadorGuardacuenca">Editar</a>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

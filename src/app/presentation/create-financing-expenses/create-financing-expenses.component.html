@@ -1,0 +1,88 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Información Completa</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <div *ngIf="!boolCreate">
+      <div class="row">
+        <div class="col-sm col-md">
+          <label for="dateCrate">Fecha creación</label>
+          <input class="form-control"
+                 type="text"
+                 [(ngModel)]="objModelFinancingExpenses.created_at"
+                 id="dateCrate" disabled/>
+        </div>
+
+        <div class="col-sm col-md">
+          <label for="dateEdit">Fecha Edición</label>
+          <input class="form-control"
+                 type="text"
+                 [(ngModel)]="objModelFinancingExpenses.updated_at"
+                 disabled
+                 id="dateEdit"/>
+        </div>
+      </div>
+
+      <div class="row" >
+
+        <div class="col-sm col-md">
+          <label for="valueOrigin">Valor inicial</label>
+          <input class="form-control"
+                 type="text"
+                 id="valueOrigin"
+                 disabled
+                 [(ngModel)]="objModelFinancingExpenses.valueOrigin"/>
+        </div>
+
+      </div>
+    </div>
+
+    <hr *ngIf="!boolCreate">
+    <div class="row" >
+
+      <div class="col-sm col-md">
+        <label for="code">Código centro</label>
+        <input class="form-control"
+               id="code"
+               type="text"
+               [(ngModel)]="objModelFinancingExpenses.codeCenter"/>
+      </div>
+
+      <div class="col-sm col-md">
+        <label for="strExpense">Nombre de gasto</label>
+        <input class="form-control"
+               type="text"
+               id="strExpense"
+               [(ngModel)]="objModelFinancingExpenses.name"/>
+      </div>
+
+    </div>
+
+    <div class="row" >
+
+      <div class="col-sm col-md">
+        <label for="value">Valor</label>
+        <input class="form-control"
+               type="text"
+               id="value"
+               (ngModelChange)="formatSpecific($event, 1)"
+               [(ngModel)]="objModelFinancingExpenses.value"/>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal">Cerrar</button>
+    <button type="button"
+            class="btn btn-primary"
+            (click)="saveExpense()"
+            data-dismiss="modal">Guardar</button>
+  </div>
+</div>

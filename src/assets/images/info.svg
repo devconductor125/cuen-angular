@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>info</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0.0276923077 24 24 24 24 0.0184615385 0.0276923077 0.0184615385"></polygon>
+    </defs>
+    <g id="TAREAS-HOME" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-316.000000, -87.000000)">
+        <g id="info" transform="translate(316.000000, 87.000000)">
+            <g id="Group-3">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M12,0 C5.38338462,0 0,5.38338462 0,12 C0,18.6166154 5.38338462,24 12,24 C18.6166154,24 24,18.6166154 24,12 C24,5.38338462 18.6166154,0 12,0 Z M12,22.5235385 C6.19846154,22.5235385 1.47646154,17.8015385 1.47646154,12 C1.47646154,6.19846154 6.19846154,1.47646154 12,1.47646154 C17.8015385,1.47646154 22.5235385,6.19846154 22.5235385,12 C22.5235385,17.8015385 17.8015385,22.5235385 12,22.5235385 Z" id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)"></path>
+            </g>
+            <path d="M13,7 C13,7.55156951 12.5519432,8 12,8 C11.4484305,8 11,7.55156951 11,7 C11,6.4480568 11.4484305,6 12,6 C12.5519432,6 13,6.4480568 13,7 Z" id="Fill-4" fill="#FFFFFF"></path>
+            <path d="M11.500625,11 C11.2246875,11 11,11.3423606 11,11.7623356 L11,18.2390929 C11,18.6595441 11.2246875,19 11.500625,19 C11.7765625,19 12,18.6595441 12,18.2390929 L12,11.7623356 C12,11.3423606 11.7765625,11 11.500625,11 Z" id="Fill-5" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

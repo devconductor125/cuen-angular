@@ -1,0 +1,132 @@
+<div style="padding: 50px">
+  <div class="row" style="margin-bottom: 25px">
+    <div class="col-12 title" style="text-align: center">
+      MONITOREO O MANTENIMIENTO
+    </div>
+  </div>
+
+  <div *ngIf="monitoreoDetail">
+    <div class="row">
+      <div class="col-sm">
+        <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 25px">Información general</div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 25px;">
+      <div class="col-sm">
+        <label for="nameTitle">Título</label>
+        <input type="text" class="form-control simpleinput" id="nameTitle" aria-describedby="nombreTask"
+               [(ngModel)]="monitoreoDetail.title"
+               name="taskName" disabled>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 25px">Acción</div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 25px;">
+      <div class="col-sm">
+        <label for="nameAction">Nombre</label>
+        <input type="text" class="form-control simpleinput" id="nameAction" aria-describedby="nombreTask"
+               [(ngModel)]="monitoreoDetail.budget.action_name"
+               name="taskName" disabled>
+      </div>
+
+      <div class="col-sm">
+        <label for="materialAction">Material</label>
+        <input type="text" class="form-control simpleinput" id="materialAction" aria-describedby="nombreTask"
+               [(ngModel)]="monitoreoDetail.budget.material_type + ' ' + monitoreoDetail.budget.material_name"
+               name="taskName" disabled>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+        <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 25px">Usuario</div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 25px;">
+      <div class="col-sm">
+        <label for="userUser">Nombre</label>
+        <input type="text" class="form-control simpleinput" id="userUser" aria-describedby="nombreTask"
+               [(ngModel)]="monitoreoDetail.user.name"
+               name="taskName" disabled>
+      </div>
+
+      <div class="col-sm">
+        <label for="userEmail">Email</label>
+        <input type="text" class="form-control simpleinput" id="userEmail" aria-describedby="nombreTask"
+               [(ngModel)]="monitoreoDetail.user.email"
+               name="taskName" disabled>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="map" class="mapcontainer"></div>
+  </div>
+
+  <div class="row">
+    <div class="photo-container" *ngIf="images">
+      <div class="title-module">Registro fotografico</div>
+      <ul class="list-images">
+        <li class="thumb-image col-lg-3 col-md-3 col-sm-6" *ngFor="let image of images">
+          <a class="link-image-container">
+            <img class="imagethumb"
+                 [src]="'https://b1gdigital.com/cuenca/public/files/images/img-thumbnails/' + image.name">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background-color: #f1f1f1; padding: 25px; border-radius: 20px" *ngIf="monitoreoDetail">
+    <div class="row">
+      <div class="col-sm">
+        <div class="header-module">
+          <h3 class="title-module">Comentarios</h3>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let comment of monitoreoDetail.comment_by_monitoring;" style="background-color: #FFF; margin: 10px; padding: 10px">
+      <div class="row" style="margin-left: 10px; margin-right: 10px; font-size: 12px">
+        <div class="col-sm"> Fecha: {{getDateWithHour(comment.created_at)}}</div>
+        <div class="col-sm"> Usuario: {{comment.user_id}}</div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+      <div class="row">
+        <div class="col-sm">
+          <div style="text-align: center; font-size: 14px; font-weight: bold;">{{comment.description}}</div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-sm">
+              <textarea class="form-control simpleinput" rows="3" name="task_comments"
+                        placeholder="Agrega algún comentario al monitoreo" [(ngModel)]="comentario"></textarea>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm">
+        <button class="send" (click)="insertComment(); $event.stopPropagation();">Enviar</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

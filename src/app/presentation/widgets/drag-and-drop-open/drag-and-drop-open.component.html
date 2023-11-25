@@ -1,0 +1,48 @@
+<div class="file-selector-container">
+  <div class="dropzone" appDnd (filesChangedEmitter)="onFilesChange($event)"
+       (filesInvalidEmitter)="onFileInvalids($event)"
+       [allowedExtensions]="['png', 'jpg', 'jpeg', 'bmp', 'pdf', 'xls', 'xlsx']">
+    <div class="text-wrapper">
+      <div class="centered">Arrastre sus archivos hasta aquí</div>
+    </div>
+  </div>
+  <div class="dropzone-list" *ngIf="filesList.length>0">
+    <a> <strong>Listado de Archivos a Cargar</strong></a>
+    <ul class="valid">
+      <li *ngFor="let file of filesList; let i = index">
+        <a style="font-weight: bold">{{i+1}}.</a> {{ file.name }}
+        <button class="btn_eliminar" (click)="removeItem(i)"> Remover</button>
+      </li>
+    </ul>
+
+    <a *ngIf="filesRepetidos.length>0"> <strong>De la última carga éstos son los archivos que no fueron tomados en
+      cuenta</strong></a>
+    <ul class="valid" *ngIf="filesRepetidos.length>0">
+      <li *ngFor="let file of filesRepetidos; let i = index" style="background-color: rgb(255,233,230)">
+        <a style="font-weight: bold; color: red;">x</a> {{ file.name }}
+        <button class="btn_repetido"> Repetido</button>
+      </li>
+    </ul>
+
+    <ul class="invalid">
+      <li *ngFor="let file of invalidFiles">
+        {{ file.name }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="progress-container" *ngIf="loadFilesButtom">
+    <a>Progreso de Carga</a>
+    <div class="progress-bar" role="progressbar" [style.width.%]="progress" aria-valuenow="25"
+         aria-valuemin="0" aria-valuemax="100">{{progress}}%
+    </div>
+  </div>
+
+  <div *ngIf="filesList.length > 0">
+    <button *ngIf="!loadFilesButtom" class="upload-button btn-success upload-files-button" type="button"
+            (click)="uploadFiles()">Cargar
+      Archivos
+    </button>
+  </div>
+
+</div>

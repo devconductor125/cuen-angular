@@ -1,0 +1,15 @@
+<div class="generalrow" *ngIf="mapError" style="margin-bottom: 10px">
+  <div class="col-sm">
+    <div style="text-align: center; border: dashed 2px #ffb6c0; padding: 20px; border-radius: 20px"> Ha ocurrido un
+      error al inicializar el mapa o no permitida la geolocalización.
+      Por favor verifique, realice los cambios pertinentes e intente nuevamente.
+    </div>
+  </div>
+</div>
+
+<div class="generalrow" style="margin-bottom: 10px">
+  <div class="col-sm">
+    <label for="map">Con el cursor selecciona la acción</label>
+    <div id="map" class="mapcontainer"></div>
+  </div>
+</div>

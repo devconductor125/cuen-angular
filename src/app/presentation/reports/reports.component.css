@@ -1,0 +1,167 @@
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+path.slice{
+  stroke-width:2px;
+}
+
+polyline{
+  opacity: .3;
+  stroke: black;
+  stroke-width: 2px;
+  fill: none;
+}
+
+.datacontainer{
+  display: block;
+  float: left;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+.databox{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 2px rgba(0,0,0, 0.5);
+}
+.title-databox{
+  display: block;
+  float: left;
+  width: 100%;
+  background-image: linear-gradient(42deg, #003764 0%, #0265B4 100%);
+  padding: 4px 7px;
+  font-family: 'robotobold';
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 1.2em;
+  -webkit-border-radius: 10px 10px 0px 0px;
+  -moz-border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
+}
+.graph-container{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+  padding: 7px;
+}
+.title-datablue{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  font-family: 'robotobold';
+  font-size: 1.3em;
+  padding: 10px 20px 0px 20px;
+  margin-bottom: 0px;
+  color: #FFFFFF;
+  line-height: 1em;
+}
+.number-datablue{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  font-family: 'robotobold';
+  font-size: 2.5em;
+  padding: 10px 10px;
+  text-shadow: 0px 2px rgba(0,0,0,0.5);
+}
+.databox-long{
+}
+.table-container{
+  padding: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.convention-container{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+}
+.list-convens{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  list-style: none;
+  padding: 10px;
+  margin: 0px;
+}
+.convent-item{
+  display: block;
+  float: left;
+  margin: 3px 4px;
+  background-color: #0261af;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  padding: 5px 15px;
+  width: auto;
+}
+.bullet-convention{
+  display: block;
+  float: left;
+  width: 15px;
+  height: 15px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin: 3px 7px 3px 0px;
+}
+.green{
+  background-color: #B0DF50;
+}
+.blue{
+  background-color: #03B2E8;
+}
+.orange{
+  background-color: #F5A623;
+}
+.darkblue{
+  background-color: #0083B6;
+}
+.light-blue{
+  background-color: #79b9e6;
+}
+.name-convention{
+  display: block;
+  float: left;
+  width: auto;
+  font-family: 'robotomedium';
+  color: #FFFFFF;
+  font-size: 0.9em;
+  margin: 2px 0px 0px 0px;
+}
+.smalltitle{
+  font-size: 1em;
+  min-height: 50px;
+}
+.datamin{
+  min-height: 137px;
+}
+.numberleft{
+  text-align: left;
+  padding-left: 30px;
+  font-size: 3.3em;
+}
+.titleleft{
+  text-align: left;
+  font-size: 1.5em;
+  padding-top: 25px;
+}
+
+/*BACKGROUNDS MODULES*/

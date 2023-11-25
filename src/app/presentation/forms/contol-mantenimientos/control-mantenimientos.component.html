@@ -1,0 +1,302 @@
+<div class="container wrap" style="margin-top: 25px;">
+
+  <div class="row">
+    <div class="col-12">
+      <button (click)="printDiv()" class="print_btn"><i class="fas fa-print" style="margin-right: 5px"></i> Imprimir Control de Mantenimientos</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm" style="text-align: left; font-size: 16px; font-weight: bold">
+      <div>Visualización de Formato</div>
+    </div>
+  </div>
+
+  <div id="a-imprimir"> <!--/// Imprimir-->
+
+    <!-- 1 HOJA -->
+    <div class="imprimir">
+
+      <div class="row noMostrar">
+        <div class="col-sm" style="text-align: center">
+          <img src="../../../../src/assets/images/logo_doc.JPG" height="auto" width="250px">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12" style="text-align: center">
+          <div class="title-header">
+            FORMATO DE CONTROL DE MANTENIMIENTOS
+          </div>
+        </div>
+      </div>
+
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-2 title_form bordertable">
+          EJECUTOR
+        </div>
+        <div class="col-3 title_form_label bordertable">
+          NOMBRE
+        </div>
+        <div class="col-2 title_form bordertable">
+          CONTRATO No
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          CONTRATO
+        </div>
+        <div class="col-2 title_form bordertable">
+          AÑO
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          AÑO
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-5 title_form bordertable">
+          RESTAURACIÓN ACTIVA
+        </div>
+        <div class="col-3 title_form_label bordertable">
+          CONTROL DE MANTENIMIENTOS
+        </div>
+        <div class="col-2 title_form bordertable">
+          MANTENIMIENTO No
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          No
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-2 title_form bordertable">
+          FECHA DE INICIO
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          DD/MM/YYYY
+        </div>
+        <div class="col-2 title_form bordertable">
+          FECHA DE TERMINACIÓN
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          DD/MM/YYYY
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-2 title_form bordertable">
+          PREDIO
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          PREDIO
+        </div>
+        <div class="col-2 title_form bordertable">
+          MUNICIPIO
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          MUNICIPIO
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row">
+        <div class="col-2 title_form bordertable">
+          VEREDA / CORREGIMIENTO
+        </div>
+        <div class="col-4 title_form_label bordertable">
+          VEREDA / CORREGIMIENTO
+        </div>
+      </div>
+
+
+      <div class="dropdown-divider"></div>
+
+      <!--Divisor-->
+      <div class="row" STYLE="text-align: center">
+        <div class="col-2 title_form bordertable">
+          POLÍGONO NO.
+        </div>
+        <div class="col-2 title_form bordertable">
+          ACCION
+        </div>
+        <div class="col-3 title_form bordertable">
+          MANTENIMIENTOS
+        </div>
+        <div class="col-3 title_form bordertable">
+          RESIEMBRAS
+        </div>
+        <div class="col-2 title_form bordertable">
+          OBSERVACIONES
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row" STYLE="text-align: center">
+        <div class="col-2 title_form_label">
+
+        </div>
+        <div class="col-2 title_form_label">
+
+        </div>
+        <div class="col-1 title_form bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form bordertable">
+          ESPECIES
+        </div>
+        <div class="col-1 title_form bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form bordertable">
+          ESPECIES
+        </div>
+        <div class="col-2 title_form_label">
+
+        </div>
+      </div>
+
+      <!--Divisor-->
+      <div class="row" STYLE="text-align: center">
+        <div class="col-2 title_form_label bordertable">
+          POLÍGONO NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ACCION
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          OBSERVACIONES
+        </div>
+      </div>
+
+      <!--DATOS-->
+      <div class="row" STYLE="text-align: center">
+        <div class="col-2 title_form_label bordertable">
+          POLÍGONO NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ACCION
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          OBSERVACIONES
+        </div>
+      </div>
+      <div class="row" STYLE="text-align: center">
+        <div class="col-2 title_form_label bordertable">
+          POLÍGONO NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ACCION
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          OBSERVACIONES
+        </div>
+      </div>
+      <div class="row" STYLE="text-align: center">
+        <div class="col-2 title_form_label bordertable">
+          POLÍGONO NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ACCION
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          OBSERVACIONES
+        </div>
+      </div>
+      <div class="row" STYLE="text-align: center">
+        <div class="col-2 title_form_label bordertable">
+          POLÍGONO NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ACCION
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-1 title_form_label bordertable">
+          NO.
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          ESPECIES
+        </div>
+        <div class="col-2 title_form_label bordertable">
+          OBSERVACIONES
+        </div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+      <!--//////// INF GENERAL-->
+      <div class="row">
+          <div class="col-12 title_form_label">
+
+            El poligono corresponde al definido por Cuenca Verde en el plano del predio
+
+          </div>
+      </div>
+
+
+
+
+
+
+    </div>
+    <!-- /////// Imprimir-->
+  </div>
+
+
+</div>

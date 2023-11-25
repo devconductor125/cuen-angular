@@ -1,0 +1,24 @@
+.title{
+  font-size: 20px;
+  font-weight: bold;
+}
+select:focus{
+  color: #FFFFFF;
+}
+
+.table_title_gray {
+  background-color: #c1d0dd;
+  color: #333;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 15px;
+}
+.calendar-container{
+  display: block;
+  float: left;
+  width: 100%;
+  margin-top: 20px;
+}
+.fc-state-default{
+  background-color: linear-gradient(-42deg, #003764 0%, #014c89 46%, #0265b4 100%) !important;
+}

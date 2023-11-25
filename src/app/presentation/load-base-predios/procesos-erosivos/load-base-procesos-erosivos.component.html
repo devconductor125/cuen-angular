@@ -1,0 +1,107 @@
+<div class="title-section">
+  <div class="col-1 float-left">
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div style="text-align: center" class="predio_title">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-10 float-left">
+
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div class="titlechapterAp">Cargar Base de Procesos de Erosión</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="contents-app">
+  <!--ALERTS MODULE-->
+  <div id="contenido" class="contents-app">
+
+    <div class="generalrow">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+
+        <div class="header-module">
+          <h3 class="title-module">Base de Procesos de Erosión Cargada</h3>
+        </div>
+
+      </div>
+    </div>
+
+    <ng-container>
+
+      <ng-container *ngIf="erosionBase">
+
+          <div class="generalrow" style="font-weight: bold; font-size: 12px">
+            <div class="col-sm">
+
+              Fecha de Carga
+
+            </div>
+            <div class="col-sm">
+
+            </div>
+          </div>
+
+        <div class="generalrow">
+            <div class="col-sm-10">
+
+              {{getDateWithHour(erosionBase.created_at)}}
+
+            </div>
+            <div class="col-sm-1">
+
+              <a type="button" class="btn btn-primary" style="float: right; cursor: pointer;" href="{{URL_BASE_FILES}}/{{erosionBase.name}}" target="_blank" download>
+                Descargar
+              </a>
+
+            </div>
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngIf="!erosionBase">
+
+          <div class="generalrow">
+            <div class="col-sm-12">
+
+              No se ha cargado la base de procesos de erosión
+
+            </div>
+          </div>
+
+      </ng-container>
+
+    </ng-container>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="generalrow">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+
+        <div class="header-module">
+          <h3 class="title-module">Cargar Base de Procesos de Erosión</h3>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="generalrow">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+
+        <div class="header-module">
+          <cuenca-drag-and-drop-procesos-erosivos (notify)='onFilesUploaded($event)'></cuenca-drag-and-drop-procesos-erosivos>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

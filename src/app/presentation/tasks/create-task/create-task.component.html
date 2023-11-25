@@ -1,0 +1,453 @@
+<div class="contents-app">
+  <div class="title-section">
+    <div class="title-base newitem"></div>
+    <div class="titlechapterAp">Nueva tarea {{procedureTypeTitle}}</div>
+  </div>
+
+  <div class="generalrow">
+    <div class="col-12 col-md-6 col-lg-6 plain-arrow">
+      <label for="labelselect1" class="subtitle-item">Selecciona un Procedimiento</label>
+      <select [(ngModel)]="task.procedure" class="custom-select form-control gradblue" name="selected_project"
+              (change)="changeProcedure(); getTaskTypes(); getProcedurePredios()" id="labelselect1"
+              [disabled]="!canSwitchProcedure">
+        <option *ngFor="let option of procedures" [ngValue]="option">{{option.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="generalrow" *ngIf="task.procedure && !canShowSpecialCheckbox">
+    <div class="col-sm" style=" display: flex; align-items: center; align-items: center">
+      <label class="custom-control custom-checkbox" id="openTask" style="margin-top: 10px">
+        <input type="checkbox" class="custom-control-input" [(ngModel)]="task.open" name="isOpen"
+               (change)="getRolesOnOpenStateChanged(); resetSelectors()"
+               [checked]="isOpenTaskChecked"
+               [disabled]="canShowSpecialCheckbox">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">¿Es de tipo abierta?</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="generalrow" *ngIf="canShowSpecialCheckbox">
+    <div class="col-sm" style=" display: flex; align-items: center; align-items: center">
+      <label class="custom-control custom-checkbox" id="speciatTask" style="margin-top: 10px">
+        <input type="checkbox" class="custom-control-input" [(ngModel)]="task.special" name="isSpecial"
+               [disabled]="isDisabledSpecialCheckbox" (change)="getRolesOnOpenStateChanged(); resetSelectors()">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">¿Es de tipo abierta?</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="generalrow">
+    <div class="col-12 col-md-6 col-lg-6 plain-arrow"
+         *ngIf="isComunicaciones && communicationsTaskTypes && task.procedure && task.procedure.type_process === 'comunicacion'">
+      <label for="communicationsTaskType" class="subtitle-item">Selecciona el Tipo de Tarea de Comunicación</label>
+      <select [(ngModel)]="communicationsTaskType" class="custom-select form-control gradblue" name="taskType"
+              id="communicationsTaskType" (change)="setCanShowAporteSelection()">
+        <option [ngValue]="null">Seleccione el tipo de tarea</option>
+        <option *ngFor="let taskType of communicationsTaskTypes" [ngValue]="taskType.name">{{taskType.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <ng-container *ngIf="task.procedure">
+    <div *ngIf="canShowAporteSelection">
+
+      <div class="generalrow selected-predio-container"
+           *ngIf="task.procedure && (task.open || task.special)">
+
+        <div class="col-sm">
+          <label for="typeAporte" class="subtitle-item">Tipo de Aporte</label>
+          <select [(ngModel)]="typeAporte" class="custom-select form-control gradblue" name="person_type"
+                  (change)="getActivitiesByContribution(typeAporte)"
+                  id="typeAporte">
+            <option [value]="0">Seleccione</option>
+            <option [value]="1">Dinero</option>
+            <option [value]="2">Especie</option>
+          </select>
+        </div>
+
+        <div class="col-sm"
+             *ngIf="typeAporte.toString() !== '0' && procedureActivities.length > 0 && (this.task.open || this.task.special) && canShowActivitySelection">
+          <label class="subtitle-item">Actividad</label>
+          <select [(ngModel)]="activity" class="custom-select form-control gradblue" name="activity"
+                  id="activity" (change)="getAssociatedTask()">
+            <option [value]="0">Seleccione</option>
+            <option *ngFor="let procedureActivity of procedureActivities" [ngValue]="procedureActivity.id">
+              {{procedureActivity.name}}
+            </option>
+          </select>
+        </div>
+
+        <div class="col"
+             *ngIf="hasContributions && typeAporte.toString() !== '0' && listAssociated.length > 0 && (this.task.canSkipActivitySelection() || activity.toString() !== '0')">
+          <li class="list-boxes " *ngFor="let associated of listAssociated">
+            <input class="procedureinput" type="checkbox" id="{{associated.budget + '_' + associated.id}}" value="{{associated.id}}"
+                   name="budget"
+                   [checked]="associated.selected"
+                   (change)="associated.selected = !associated.selected;" style="cursor: pointer">
+            <label class="labelform bluesub" for="{{associated.budget + '_' + associated.id}}">{{associated.associated_name}}</label>
+            <input class="form-control form-control-sm margintop marginbuttom" [(ngModel)]="associated.value" type="number"
+                   placeholder="Valor" *ngIf="associated.selected && typeAporte.toString() === '1'">
+            <div class="procediments-container" *ngIf="typeAporte.toString() === '2'">
+              <div class="subtitle-item">Aportes en Especie</div>
+              <div class="actividades-container line-inputs">
+                <div class="boxes">
+                  <ul>
+                    <li class="module-box-container boxprocediments">
+                      <div>
+                        <div class="generalrow">
+                          <ul class="sublist" *ngFor="let species of associated.species">
+                            <li class="list-boxes ">
+                              <input class="procedureinput" type="checkbox" id="species_{{species.id}}" value="{{species.id}}"
+                                     name="species" [(ngModel)]="species.selected">
+                              <label class="labelform bluesub" for="{{species.id}}">{{species.description}}, disponible:
+                                {{species.balance - species.newBalance}}</label>
+                            </li>
+                            <input type="number" class="form-control" id="species"
+                                   (ngModelChange)="validateNewBalance(species)" [(ngModel)]="species.newBalance"/>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="generalrow"
+         *ngIf="speciesList.length > 0 && typeAporte.toString() === '2' && (canShowActivitySelection ? activity.toString() !== '0' : true)">
+      <div class="procediments-container">
+        <div class="subtitle-item">Aportes en Especie</div>
+        <div class="actividades-container line-inputs">
+          <div class="boxes">
+            <ul>
+              <li class="module-box-container boxprocediments" *ngFor="let associated of speciesList">
+                <div>
+                  <div class="generalrow">
+                    <ul class="sublist" *ngFor="let species of associated.species">
+                      <li class="list-boxes ">
+                        <input class="procedureinput" type="checkbox" id="{{species.id}}" value="{{species.id}}"
+                               name="species" [(ngModel)]="species.selected">
+                        <label class="labelform bluesub" for="{{species.id}}">{{species.description}}, disponible:
+                          {{species.balance - species.newBalance}}</label>
+                      </li>
+                      <input type="number" class="form-control" id="balance"
+                             (ngModelChange)="validateNewBalance(species)" [(ngModel)]="species.newBalance"/>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!--PSA-->
+    <div class="generalrow selected-predio-container" *ngIf="task.open && task.procedure.type_process ==='psa'">
+      <div class="col-sm">
+        <label for="labelselect02" class="subtitle-item">Número de Meses</label>
+
+        <input class="form-control" id="labelselect02" type="number" min="0" [(ngModel)]="numberMonth"/>
+
+      </div>
+
+      <div class="col-sm">
+        <label for="labelselect001" class="subtitle-item">Valor por Mes</label>
+
+        <input type="text" class="form-control" id="labelselect001" [(ngModel)]="valuePerMonth"
+               (ngModelChange)="formatSpecific($event, 2)"/>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <div class="generalrow selected-predio-container" *ngIf="existPredio && !task.open">
+
+    <div class="col-sm">
+      <label for="labelselect0" class="subtitle-item">Predio Seleccionado</label>
+      <div class="form-control" id="labelselect0">
+        <input type="text" style="width: 100%; text-align: left; padding: 5px; border-radius: 5px; font-weight: bold"
+               value="{{labelPredio}}" disabled/>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="canShowPredioSection">
+    <div class="generalrow" *ngIf="!existPredio && !noSelect && !task.open">
+
+      <div class="col-sm predio-select-button">
+        <label class="subtitle-item" for="labelselect00">Selecciona un Predio</label>
+        <div class="form-control" id="labelselect00">
+          <button type="button" class="btn btn-primary gradblue" style="width: 100%" data-toggle="modal"
+                  data-target="#exampleModal">
+            Selecciona un Predio {{labelPredio+'' !== '' ? ': ' + labelPredio : ''}}
+          </button>
+        </div>
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+
+        <div class="col-sm" *ngIf="!task.open">
+          <div *ngIf="taskTypes" class="plain-arrow">
+            <label for="labelselect2" class="subtitle-item">Selecciona Tipo de Tarea</label>
+            <select [(ngModel)]="task.taskType" class="custom-select form-control gradblue" name="selected_task_type"
+                    id="labelselect2" (change)="showExtraFields = task.taskType.id !== 5">
+              <option *ngFor="let option of taskTypes" [ngValue]="option">{{option.name}}</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Selecciona un Predio</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid" *ngFor="let predio of predios">
+            <div class="generalrow table-hover" style="padding-top: 10px">
+
+
+              <div class="col-sm" style="text-transform: uppercase; font-weight: bold">
+                <label class="custom-control custom-radio">
+                  <input id="radioStacked1" name="radio-stacked" type="radio" class="custom-control-input"
+                         (click)="selectPredio(predio.property_name)" [(ngModel)]="task.property" value="{{predio.id}}">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{predio.property_name}}</span>
+                </label>
+              </div>
+
+            </div>
+            <div class="dropdown-divider"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showExtraFields">
+
+    <div class="generalrow">
+
+      <div class="col-12 col-md-6 col-lg-6 left">
+        <label for="fInicio">Fecha de Inicio</label>
+        <input [(ngModel)]="task.startdate" id="fInicio" aria-describedby="fInicio" class="form-control simpleinput"
+               type="date" name="task_starting_date">
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-6 left" *ngIf="!task.option_date">
+        <label for="fFin">Fecha de entrega</label>
+        <input [(ngModel)]="task.deadline" id="fFin" class="form-control simpleinput" type="date" name="task_deadline">
+      </div>
+
+      <div class="generalrow">
+        <label class="custom-control custom-checkbox" id="noTiene" style="margin-top: 35px">
+          <input type="checkbox" class="custom-control-input" [(ngModel)]="task.option_date" name="has_deadline">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">No tiene fecha de finalización</span>
+        </label>
+      </div>
+
+    </div>
+
+    <div class="generalrow">
+
+      <div class="col-sm">
+        <label for="descrip">Descripción</label>
+        <textarea class="form-control simpleinput" [(ngModel)]="task.description" rows="3" name="task_description"
+                  id="descrip" placeholder="Ingresa la Descripción de la Tarea">Ingrese la descripcion</textarea>
+      </div>
+      <div class="dropdown-divider"></div>
+    </div>
+
+
+    <div class="generalrow">
+
+      <div class="col-sm plain-arrow">
+        <label for="descrip">Comentario</label>
+        <textarea class="form-control simpleinput" [(ngModel)]="task.comments" rows="3" name="task_comments"
+                  id="comment" placeholder="Agrega algún comentario a la tarea">Agrege un comentario</textarea>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="roles.length > 0" class="generalrow">
+    <div class="dropdown-divider"></div>
+    <div class="generalrow" style="margin-bottom: 10px">
+      <div class="col-md-12 col-sm-12 plain-arrow">
+        <label for="rol" class="subtitle-item">Rol</label>
+        <select [(ngModel)]="task.role"
+                class="custom-select form-control gradblue" name="selected_role"
+                (change)="getUsers()" id="rol">
+          <option *ngFor="let option of roles" [ngValue]="option">{{option.name}}</option>
+        </select>
+      </div>
+    </div>
+    <hr/>
+
+    <div class="generalrow">
+      <div class="col-sm-12 col-md-12">
+        <div *ngIf="users.length>0">
+
+          <div class="subtitle-item">Usuarios</div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="col-sm-12 col-md-12">
+        <div *ngIf="users.length>0">
+
+          <ng-container *ngIf="!task.open">
+            <div style="text-align: left; font-weight: bold; color: white; padding: 5px; border-radius: 10px;"
+                 *ngFor="let usuario of users; let i = index" class="custom-select form-control gradblue">
+              <input [(ngModel)]="usersSelected[i]" type="checkbox"
+                     (ngModelChange)="addUserArray(usersSelected[i], i, usuario.id)" class="checkbox"
+                     [id]="'usuario' + usuario.id">
+              <label class="form-check-label" [for]="'usuario' + usuario.id">{{usuario.name}} -
+                {{usuario.email}}</label>
+            </div>
+          </ng-container>
+          Anidar a otro Procedimiento
+          <ng-container *ngIf="task.open">
+            <select [(ngModel)]="task.user" class="custom-select form-control gradblue" name="selected_user"
+                    (ngModelChange)="addUserArrayOption($event)" id="usuario">
+              <option [value]="0">Seleccione un usuario</option>
+              <option *ngFor="let usuario of users" [ngValue]="usuario">{{usuario.name}}</option>
+            </select>
+          </ng-container>
+
+        </div>
+
+      </div>
+      <div class="dropdown-divider"></div>
+    </div>
+
+    <div *ngIf="task.isHidrico() && !task.special">
+      <div class="generalrow">
+        <div class="col-sm">
+          <div class="header-module">
+            <h3 class="title-module">PLAN DE MUESTREO Y REGISTRO DE DATOS DE CAMPO</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <label for="muestreoPlace">Lugar del muestreo</label>
+          <input class="form-control simpleinput" id="muestreoPlace" placeholder="Lugar del muestreo"
+                 name="muestreoPlace" [(ngModel)]="muestreoHidricoExtraInfo.place">
+        </div>
+
+        <div class="col-sm">
+          <label for="date">Fecha y hora</label>
+          <input type="date" class="form-control simpleinput" id="date" placeholder="Fecha"
+                 name="muestreoDateAndTime" [(ngModel)]="muestreoHidricoExtraInfo.date">
+        </div>
+
+        <div class="col-sm">
+          <label for="time">Fecha y hora</label>
+          <input class="form-control simpleinput" id="time" placeholder="Hore"
+                 name="muestreoDateAndTime" [(ngModel)]="muestreoHidricoExtraInfo.time">
+        </div>
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <label for="muestreoUser">Profesional del muestreo</label>
+          <input class="form-control simpleinput" id="muestreoUser" placeholder="Profesional del muestreo"
+                 name="muestreoUser" [(ngModel)]="muestreoHidricoExtraInfo.user">
+        </div>
+
+        <div class="col-sm">
+          <label for="muestreoType">Tipo de muestreo</label>
+          <input class="form-control simpleinput" id="muestreoType" placeholder="Tipo de muestreo"
+                 name="muestreoType" [(ngModel)]="muestreoHidricoExtraInfo.type">
+        </div>
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <label for="sampleType">Tipo de muestra</label>
+          <input class="form-control simpleinput" id="sampleType" placeholder="Tipo de muestra"
+                 name="sampleType" [(ngModel)]="muestreoHidricoExtraInfo.sampleType">
+        </div>
+
+        <div class="col-sm">
+          <label for="estimatedTimeFrame">Tiempo estimado del muestreo</label>
+          <input class="form-control simpleinput" id="estimatedTimeFrame" placeholder="Tiempo estimado del muestreo"
+                 name="estimatedTimeFrame" [(ngModel)]="muestreoHidricoExtraInfo.estimatedTimeFrame">
+        </div>
+      </div>
+
+      <div class="generalrow" style="margin-bottom: 10px">
+        <div class="col-sm">
+          <label for="sampleQuantity">Número de muestras</label>
+          <input class="form-control simpleinput" id="sampleQuantity" placeholder="Número de muestras"
+                 name="sampleQuantity" [(ngModel)]="muestreoHidricoExtraInfo.sampleQuantity">
+        </div>
+
+        <div class="col-sm">
+          <label for="basin">Cuenca</label>
+          <input class="form-control simpleinput" id="basin" placeholder="Cuenca"
+                 name="basin" [(ngModel)]="muestreoHidricoExtraInfo.basin">
+        </div>
+
+        <div class="col-sm">
+          <label for="stream">Nombre de corriente</label>
+          <input class="form-control simpleinput" id="stream" placeholder="Nombre de corriente"
+                 name="stream" [(ngModel)]="muestreoHidricoExtraInfo.stream">
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown-divider" *ngIf="users.length>0"></div>
+  </div>
+
+  <!--Modulo de carga de archivo-->
+  <div class="generalrow nopad" *ngIf="task.special">
+    <div class="dropdown-divider"></div>
+    <div class="generalrow" style="font-weight: bold">
+      <div class="col-sm">
+        Cargar archivos varios
+      </div>
+    </div>
+    <cuenca-drag-and-drop-open-task-creation style="width: 100%" [taskId]="task.id" [typeFile]="0" #fileUploader></cuenca-drag-and-drop-open-task-creation>
+  </div>
+
+  <div class="generalrow">
+    <div class="col-sm">
+      <button type="button" class="mainbtn plainbluedark right margintop" style="cursor: pointer;"
+              (click)="createTask()">
+        Crear tarea
+      </button>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="26px" viewBox="0 0 15 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>arrow-point-to-right</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 15 0 15 26 0 26"></polygon>
+    </defs>
+    <g id="PREDIO-PAGE-COORDINA" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-1245.000000, -160.000000)">
+        <g id="arrow-point-to-right" transform="translate(1245.000000, 160.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Clip-2"></g>
+            <path d="M14.4611029,14.2871029 L3.14602657,25.466809 C2.42470643,26.1777303 1.25746326,26.1777303 0.538346295,25.466809 C-0.179448765,24.7558876 -0.179448765,23.6026539 0.538346295,22.8921679 L10.5504638,12.9997823 L0.540108837,3.1091381 C-0.179448765,2.39821675 -0.179448765,1.24541839 0.540108837,0.534497049 C1.2592258,-0.178165683 2.42646897,-0.178165683 3.14602657,0.534497049 L14.4611029,11.7142032 C14.821102,12.0694462 15,12.5339612 15,12.9997823 C15,13.4656034 14.821102,13.9336012 14.4611029,14.2871029 Z" id="Fill-1" fill="#B0DF50" mask="url(#mask-2)"></path>
+        </g>
+    </g>
+</svg>

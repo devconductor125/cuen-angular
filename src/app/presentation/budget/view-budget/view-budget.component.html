@@ -1,0 +1,553 @@
+<div id="contenido" class="contents-app" style="padding: 0px 50px 0px 50px; margin-top: 25px;"
+     *ngIf="budgets && listAsociadosPerProcess && listOriginResources">
+
+  <div>
+
+    <ng-container>
+      <div class="title-section">
+        <div class="add_title"></div>
+        <div class="titlechapterAp">Agregar Acciones de Buenas Prácticas</div>
+        <button (click)="printDiv()" class="mainbtn plainbluedark left marginbuttom"><i class="fas fa-print"
+                                                                                        style="margin-right: 5px"></i>
+          Imprimir Presupuesto
+        </button>
+      </div>
+
+      <cuenca-add-good-practices-budget [idTask]="task_id_task"
+                                        (notify)="messageCreateTask($event)"></cuenca-add-good-practices-budget>
+      <hr/>
+    </ng-container>
+
+  </div>
+
+
+  <div id="a-imprimir"> <!--/// Imprimir-->
+
+    <!-- 1 HOJA -->
+    <div class="imprimir">
+
+      <div class="generalrow Mostrar">
+        <div class="subtitle-item">Detalle del Presupuesto</div>
+      </div>
+
+      <!-- ACTIVIDADES DE RESTAURACIÓN -->
+
+      <ng-container *ngIf="budgets.activities_restoration">
+
+        <div class="subtitle-item">Actividades de Restauración</div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow" *ngIf="budgets.activities_restoration.length > 0">
+          <div>
+
+          </div>
+          <div class="col-3 title-bud left">Actividad Propuesta</div>
+          <div class="col-3 title-bud left" style="text-align: left">Unidad</div>
+          <div class="col-2 title-bud left" style="text-align: left">Unidad ($)</div>
+          <div class="col-2 title-bud left" style="text-align: left">Cantidad</div>
+          <div class="col-2 title-bud left" style="text-align: right">Valor</div>
+        </div>
+
+        <div *ngFor="let record of budgets.activities_restoration">
+          <div class="generalrow table-hover-ap" style="padding: 5px">
+            <div class="col-3 content-bud-normal left">{{record.action_name}}</div>
+            <div class="col-3 content-bud-normal left" style="text-align: left">{{record.units}}</div>
+            <div class="col-2 content-bud-normal left" style="text-align: left">$ {{record.value_unit |
+              number:'1.2-2'}}
+            </div>
+            <div class="col-2 content-bud-normal left" style="text-align: left">{{record.length | number:'1.2-2'}}</div>
+            <div class="col-2 content-bud left" style="text-align: right">$ {{record.value | number:'1.2-2'}}</div>
+          </div>
+
+          <app-select-associate-amount
+            [record]="record"
+            (senData)="addSelectAssociated($event)"></app-select-associate-amount>
+        </div>
+
+        <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+          <div class="col-7 content-bud-foot left">VALOR ACTIVIDADES DE RESTAURACIÓN</div>
+          <div class="col-5 content-bud-foot left" style="text-align: right; font-size: 18px">$
+            {{budgets.value_total_restoration | number:'1.2-2'}}
+          </div>
+        </div>
+
+      </ng-container>
+
+
+      <!-- MANTENIMIENTOS DE ACCIONES DE CONSERVACION -->
+
+
+      <ng-container *ngIf="budgets.activities_manteniment">
+
+
+        <div class="subtitle-item">Mantenimiento de Acciones de Conservación</div>
+        <div class="generalrow" *ngIf="budgets.activities_manteniment.length > 0">
+          <div class="col-3 title-bud left">Actividad Propuesta</div>
+          <div class="col-3 title-bud left" style="text-align: left">Unidad</div>
+          <div class="col-2 title-bud left" style="text-align: left">Unidad ($)</div>
+          <div class="col-2 title-bud left" style="text-align: left">Cantidad</div>
+          <div class="col-2 title-bud left" style="text-align: right">Valor</div>
+        </div>
+
+        <div *ngFor="let record of budgets.activities_manteniment">
+
+          <div class="row table-hover-ap" style="padding: 5px">
+            <div class="col-3 content-bud-normal left">{{record.action_name}}</div>
+            <div class="col-3 content-bud-normal left" style="text-align: left">{{record.units}}</div>
+            <div class="col-2 content-bud-normal left" style="text-align: left">$ {{record.value_unit |
+              number:'1.2-2'}}
+            </div>
+            <div class="col-2 content-bud-normal left" style="text-align: left">{{record.length | number:'1.2-2'}}</div>
+            <div class="col-2 content-bud left" style="text-align: right">$ {{record.value | number:'1.2-2'}}</div>
+          </div>
+          <app-select-associate-amount
+            [record]="record"
+            (senData)="addSelectAssociated($event)"></app-select-associate-amount>
+        </div>
+
+        <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+          <div class="col-8 content-bud-foot">VALOR ACTIVIDADES DE MANTENIMIENTO DE ACCIONES DE CONSERVACIÓN</div>
+          <div class="col-4 content-bud-foot" style="text-align: right; font-size: 18px">$
+            {{budgets.value_total_manteniment | number:'1.2-2'}}
+          </div>
+        </div>
+
+      </ng-container>
+
+      <!-- ACTIVIDADES DE BUENAS PRACTICAS -->
+
+      <ng-container *ngIf="budgets.activities_practices">
+
+        <div class="dropdown-divider"></div>
+
+        <div class="subtitle-item">Actividades de Buenas Prácticas</div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow" *ngIf="budgets.activities_practices.length > 0">
+          <div class="col-3 title-bud left">Actividad Propuesta</div>
+          <div class="col-3 title-bud left" style="text-align: left">Unidad</div>
+          <div class="col-2 title-bud left" style="text-align: left">Unidad ($)</div>
+          <div class="col-2 title-bud left" style="text-align: left">Cantidad</div>
+          <div class="col-2 title-bud left" style="text-align: right">Valor</div>
+        </div>
+
+        <div *ngFor="let record of budgets.activities_practices">
+          <div class="generalrow table-hover-ap" style="padding: 5px">
+            <div class="col-3 content-bud-normal left">{{record.action_name}}</div>
+            <div class="col-3 content-bud-normal left" style="text-align: left">{{record.units}}</div>
+            <div class="col-2 content-bud-normal  left" style="text-align: left">$ {{record.value_unit |
+              number:'1.2-2'}}
+            </div>
+            <div class="col-2 content-bud-normal left" style="text-align: left">{{record.length | number:'1.2-2'}}</div>
+            <div class="col-2 content-bud left" style="text-align: right">$ {{record.value | number:'1.2-2'}}</div>
+          </div>
+
+          <app-select-associate-amount
+            [record]="record"
+            (senData)="addSelectAssociated($event)"></app-select-associate-amount>
+        </div>
+
+        <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+          <div class="col-8 content-bud-foot">VALOR ACTIVIDADES DE BUENAS PRÁCTICAS</div>
+          <div class="col-4 content-bud-foot" style="text-align: right; font-size: 18px">$
+            {{budgets.value_total_practices | number:'1.2-2'}}
+          </div>
+        </div>
+
+      </ng-container>
+
+
+      <div class="dropdown-divider"></div>
+
+      <ng-container>
+
+        <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #CFD8DC">
+          <div class="col-8 content-bud-foot">SUBTOTAL ACUERDO</div>
+          <div class="col-4 content-bud-foot" style="text-align: right">$ {{budgets.agreement_subtotal |
+            number:'1.2-2'}}
+          </div>
+        </div>
+
+        <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #e7f0f4">
+          <div class="col-8 content-bud-foot">ADMINISTRACIÓN 20%</div>
+          <div class="col-4 content-bud-foot" style="text-align: right">$ {{budgets.agreement_administration |
+            number:'1.2-2'}}
+          </div>
+        </div>
+
+        <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #CFD8DC">
+          <div class="col-8 content-bud-foot">UTILIDAD 5%</div>
+          <div class="col-4 content-bud-foot" style="text-align: right">$ {{budgets.agreement_utility |
+            number:'1.2-2'}}
+          </div>
+        </div>
+
+        <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #e7f0f4">
+          <div class="col-8 content-bud-foot">IVA 19% SOBRE EL 5% DE UTILIDAD</div>
+          <div class="col-4 content-bud-foot" style="text-align: right">$ {{budgets.agreement_iva | number:'1.2-2'}}
+          </div>
+        </div>
+
+        <div class="generalrow"
+             style="padding: 5px; font-weight: bold; background-color: #bddcce; margin-top: 10px; border: solid 1px #333">
+          <div class="col-8 total-foot">TOTAL ACUERDO</div>
+          <div class="col-4 total-foot" style="text-align: right">$ {{budgets.agreement_total | number:'1.2-2'}}</div>
+        </div>
+
+      </ng-container>
+
+
+      <!-- MUNICIPIO -->
+
+      <ng-container *ngIf="budgets.activities_restoration">
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow">
+          <div class="col-sm title-bud">Municipio: {{budgets.municipality}}</div>
+
+          <div class="col-sm title-bud">Prioridad: {{budgets.property_priority}}</div>
+        </div>
+
+        <div class="generalrow">
+          <div class="col-sm title-bud">Fuente Hídrica Cerca: {{budgets.basin_name}}</div>
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow">
+          <div class="col-7 title-bud left">Acciones</div>
+          <div class="col-3 title-bud left">Cerco (Metros Lineales)</div>
+          <div class="col-2 title-bud left">Tipo de Aislamiento</div>
+        </div>
+
+        <div class="generalrow table-hover-ap" style="padding: 5px"
+             *ngFor="let record of budgets.activities_restoration">
+          <div class="col-7 content-bud-normal left">{{record.action_name}}</div>
+          <div class="col-3 content-bud-normal left">{{record.length | number:'1.2-2'}}</div>
+          <div class="col-2 content-bud-normal left">{{record.aislament.length > 0 ? record.aislament.length : 'n/a'}}
+          </div>
+        </div>
+
+      </ng-container>
+
+
+      <!-- ZONIFICACIÓN PROPUESTA -->
+
+      <ng-container *ngIf="budgets.activities_restoration">
+
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow">
+          <div class="col-7 title-bud left">Zonificación propuesta Áreas de Conservación</div>
+          <div class="col-3 title-bud left">Areas</div>
+          <div class="col-2 title-bud left">%</div>
+        </div>
+
+        <div class="generalrow table-hover-ap" style="padding: 5px" *ngFor="let record of proposedAreas">
+          <div class="col-7 content-bud-normal left">{{record.name}}</div>
+          <div class="col-3 content-bud-normal left">{{record.area | number:'1.2-2'}}</div>
+          <div class="col-2 content-bud-normal left">{{record.percentage | number:'1.2-2'}}</div>
+        </div>
+
+        <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+          <div class="col-7 content-bud-foot left">TOTAL</div>
+          <div class="col-3 content-bud-foot left" style="font-size: 18px">{{totalProposedAreas |
+            number:'1.2-2'}}
+          </div>
+          <div class="col-2 content-bud-foot left" style="font-size: 18px">{{totalProposedAreasPercentage
+            | number:'1.2-2'}} %
+          </div>
+        </div>
+
+
+      </ng-container>
+
+
+      <!-- ORIGEN DE LOS RFECURSOS -->
+
+      <ng-container>
+
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow">
+          <div class="col-7 title-bud">Origen de los Recursos</div>
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        <div class="generalrow">
+          <div class="col-7 title-bud">Descripción</div>
+          <div class="col-5 title-bud" style="text-align: right">Valor</div>
+        </div>
+
+        <!--ACTIVA-->
+        <ng-container *ngIf="listOriginResources.origin_restoration">
+
+          <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+            <div class="col-7 content-bud-foot">ACCIONES DE RESTAURACIÓN ACTIVA (establecimiento y enriquecimiento)
+            </div>
+
+            <div class="col-5 content-bud-foot Mostrar" style="text-align: right">$ {{totalAccionesDeRestauracionActiva |
+              number:'1.2-2'}}
+            </div>
+          </div>
+
+          <div class="generalrow" style="border: solid 1px gray"
+               *ngIf="listOriginResources.origin_restoration && listOriginResources.origin_restoration.length > 0">
+            <div class="col-2 title-bud left" style="text-align: left">Entidad</div>
+            <div class="col-2 title-bud left" style="text-align: left">Monto</div>
+            <div class="col-2 title-bud left" style="text-align: left">20%</div>
+            <div class="col-2 title-bud left" style="text-align: left">5%</div>
+            <div class="col-2 title-bud left" style="text-align: left">19%</div>
+            <div class="col-2 title-bud left" style="text-align: left"></div>
+          </div>
+
+          <div class="generalrow" style="background-color: #8d9ba8" *ngIf="totalAccionesDeRestauracionActiva <= 0">
+            <div class="col-12 title-bud" style="text-align: left">No se han registrado acciones</div>
+          </div>
+
+          <div class="generalrow" style="background-color: #e0effd; border-bottom: solid 1px gray;"
+               *ngFor="let origin of listOriginResources.origin_restoration">
+            <div class="col-2 title-bud left" style="text-align: left">
+              <small *ngFor="let associated of origin.contributions">{{associated.associated_name}},</small>
+            </div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value_20 | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value_5 | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value_19 | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: right">$ {{origin.value_total | number:'1.2-2'}}</div>
+          </div>
+
+
+          <!--/// APORTE-->
+          <!-- <ng-container *ngIf="budgets.value_total_restoration > 0">
+
+            <div style="padding: 15px" class="Mostrar">
+
+                <div class="row">
+                  <div class="col-12 title-bud" style="font-size: 12px">
+                    Agregar Aportante
+                  </div>
+                </div>
+
+                <div class="row" style="border: solid 1px gray; padding: 15px">
+                  <div class="col-4 title-bud" style="text-align: left">
+                    <label style="font-size: 12px">Seleccione el Asociado</label>
+
+                    <select [(ngModel)]="selectAssociatedUno" class="custom-select form-control gradblue" name="asociadoSeleccionado">
+                      <option [value]="0" >Seleccione</option>
+                      <option *ngFor="let associated of listAsociadosPerProcess.associate_restoration" [ngValue]="associated">{{associated.name}}</option>
+                    </select>
+
+                  </div>
+                  <div class="col-6 title-bud" style="text-align: left">
+                    <label style="font-size: 12px">Monto a Aportar</label>
+                    <input class="form-control" [(ngModel)]="montoUno" id="montoUno" (ngModelChange)="formatSpecific($event, 1)">
+                  </div>
+
+                  <div class="col-2 title-bud" style="text-align: left">
+                    <button type="button" class="btn btn-success" style="float: right; cursor: pointer; margin-top: 10px;" (click)="addAporteUno()">Agregar
+                    </button>
+                  </div>
+
+                </div>
+
+            </div>
+
+          </ng-container> -->
+
+        </ng-container>
+
+        <div class="dropdown-divider"></div>
+
+        <!--PASIVA-->
+        <ng-container *ngIf="listOriginResources.origin_manteniment">
+          <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+            <div class="col-7 content-bud-foot">
+              ACCIONES DE RESTAURACIÓN PASIVA
+            </div>
+            <div class="col-5 content-bud-foot Mostrar" style="text-align: right">
+              $ {{totalAccionesDeRestauracionPasiva | number:'1.2-2'}}
+            </div>
+          </div>
+
+
+          <div class="generalrow" style="border: solid 1px gray"
+               *ngIf="listOriginResources.origin_manteniment.length > 0">
+            <div class="col-2 title-bud left" style="text-align: left">Entidad</div>
+            <div class="col-2 title-bud left" style="text-align: left">Monto</div>
+            <div class="col-2 title-bud left" style="text-align: left">20%</div>
+            <div class="col-2 title-bud left" style="text-align: left">5%</div>
+            <div class="col-2 title-bud left" style="text-align: left">19%</div>
+            <div class="col-2 title-bud left" style="text-align: left"></div>
+          </div>
+
+          <div class="generalrow" style="background-color: #8d9ba8" *ngIf="totalAccionesDeRestauracionPasiva === 0">
+            <div class="col-12 title-bud" style="text-align: left">
+              No se han registrado acciones
+            </div>
+          </div>
+
+          <div class="generalrow" style="background-color: #e0effd; border-bottom: solid 1px gray;"
+               *ngFor="let origin of listOriginResources.origin_manteniment;">
+            <div class="col-2 title-bud left" style="text-align: left">
+              <small *ngFor="let associated of origin.contributions">{{associated.associated_name}},</small>
+            </div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value_20 | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value_5 | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value_19 | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: right">$ {{origin.value_total | number:'1.2-2'}}</div>
+          </div>
+
+
+          <!--/// APORTE-->
+          <!-- <ng-container *ngIf="listAsociadosPerProcess && listAsociadosPerProcess.associate_manteniment && budgets.value_total_manteniment > 0">
+
+            <div style="padding: 15px" class="Mostrar">
+
+              <div class="row">
+                <div class="col-12 title-bud" style="font-size: 12px">
+                  Agregar Aportante
+                </div>
+              </div>
+
+              <div class="row" style="border: solid 1px gray; padding: 15px">
+                <div class="col-4 title-bud" style="text-align: left">
+                  <label style="font-size: 12px">Seleccione el Asociado</label>
+
+                  <select [(ngModel)]="selectAssociatedDos" class="custom-select form-control gradblue" name="asociadoSeleccionado">
+                    <option [value]="0" >Seleccione</option>
+                    <option *ngFor="let associated of listAsociadosPerProcess.associate_manteniment" [ngValue]="associated">{{associated.name}}</option>
+                  </select>
+
+                </div>
+                <div class="col-6 title-bud" style="text-align: left">
+                  <label style="font-size: 12px">Monto a Aportar</label>
+                  <input class="form-control" [(ngModel)]="montoDos" id="montoDos" (ngModelChange)="formatSpecific($event, 2)">
+                </div>
+
+                <div class="col-2 title-bud" style="text-align: left">
+                  <button type="button" class="btn btn-success" style="float: right; cursor: pointer; margin-top: 10px;" (click)="addAporteDos()">Agregar
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+
+          </ng-container> -->
+
+
+        </ng-container>
+
+        <div class="dropdown-divider"></div>
+
+        <!--BUENAS PRACTICAS-->
+        <ng-container *ngIf="listOriginResources.origin_practices">
+          <div class="generalrow" style="padding: 5px; font-weight: bold; background-color: #CFD8DC;">
+            <div class="col-7 content-bud-foot">
+              BUENAS PRACTICAS Y SANEAMIENTO
+            </div>
+            <div class="col-5 content-bud-foot Mostrar" style="text-align: right">
+              $ {{totalBuenasPracticasYSaneamiento | number:'1.2-2'}}
+            </div>
+          </div>
+
+          <div class="generalrow" style="border: solid 1px gray"
+               *ngIf="listOriginResources.origin_practices.length > 0">
+            <div class="col-2 title-bud left" style="text-align: left">Entidad</div>
+            <div class="col-2 title-bud left" style="text-align: left">Monto</div>
+            <div class="col-2 title-bud left" style="text-align: left">20%</div>
+            <div class="col-2 title-bud left" style="text-align: left">5%</div>
+            <div class="col-2 title-bud left" style="text-align: left">19%</div>
+            <div class="col-2 title-bud left" style="text-align: left">
+            </div>
+          </div>
+
+          <div class="generalrow" style="background-color: #e0effd; border-bottom: solid 1px gray;"
+               *ngFor="let origin of listOriginResources.origin_practices">
+            <div class="col-2 title-bud  left" style="text-align: left">
+              <small *ngFor="let associated of origin.contributions">{{associated.associated_name}},</small>
+            </div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value_20 | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value_5 | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: left">$ {{origin.value_19 | number:'1.2-2'}}</div>
+            <div class="col-2 title-bud left" style="text-align: right">$ {{origin.value_total | number:'1.2-2'}}</div>
+          </div>
+
+          <div class="generalrow" style="background-color: #8d9ba8" *ngIf="totalBuenasPracticasYSaneamiento === 0">
+            <div class="col-12 title-bud" style="text-align: left">
+              No se han registrado acciones
+            </div>
+          </div>
+
+
+          <!--/// APORTE-->
+          <!-- <ng-container *ngIf="listAsociadosPerProcess &&  listAsociadosPerProcess.associate_practices && budgets.value_total_practices > 0">
+
+            <div style="padding: 15px" class="Mostrar">
+
+              <div class="row">
+                <div class="col-12 title-bud" style="font-size: 12px">
+                  Agregar Aportante
+                </div>
+              </div>
+
+              <div class="row" style="border: solid 1px gray; padding: 15px">
+                <div class="col-4 title-bud" style="text-align: left">
+                  <label style="font-size: 12px">Seleccione el Asociado</label>
+
+                  <select [(ngModel)]="selectAssociatedTres" class="custom-select form-control gradblue" name="asociadoSeleccionado">
+                    <option [value]="0" >Seleccione</option>
+                    <option *ngFor="let associated of listAsociadosPerProcess.associate_practices" [ngValue]="associated">{{associated.name}}</option>
+                  </select>
+
+                </div>
+                <div class="col-6 title-bud" style="text-align: left">
+                  <label style="font-size: 12px">Monto a Aportar</label>
+                  <input class="form-control" [(ngModel)]="montoTres" id="montoUTres" (ngModelChange)="formatSpecific($event, 3)">
+                </div>
+
+                <div class="col-2 title-bud" style="text-align: left">
+                  <button type="button" class="btn btn-success" style="float: right; cursor: pointer; margin-top: 10px;" (click)="addAporteTres()">Agregar
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+
+          </ng-container> -->
+
+
+        </ng-container>
+
+
+        <!--TOTAL-->
+        <div class="generalrow"
+             style="padding: 5px; font-weight: bold; background-color: #bddcce; margin-top: 10px; border: solid 1px #333">
+          <div class="col-8 total-foot">
+            TOTAL
+          </div>
+          <div class="col-4 total-foot" style="text-align: right">
+            $ {{listOriginResources.origin_value_total | number:'1.2-2'}}
+          </div>
+        </div>
+
+
+      </ng-container>
+
+    </div>
+
+    <!-- 1 HOJA-->
+  </div>
+  <!--IMPRIMIR-->
+
+</div>

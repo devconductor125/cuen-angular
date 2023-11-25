@@ -1,0 +1,187 @@
+<div id="contenido" class="contents-app" style="padding: 50px 50px 50px 50px" *ngIf="monitoreo">
+
+  <div *ngIf="!showGrid">
+
+    <div class="generalrow" style="margin-bottom: 25px">
+      <div class="col-12" style="text-align: center">
+        MONITOREO O MANTENIMIENTO SELECCIONADO
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <div class="generalrow">
+      <div class="col-sm">
+        <label for="labelselect00">Titulo</label>
+        <div class="form-control" id="labelselect00">
+          <input type="text" style="width: 100%; padding: 5px; border-radius: 5px; font-weight: bold"
+                 [(ngModel)]="monitoreo.title" placeholder="Título del Monitoreo o Mantenimiento"/>
+        </div>
+      </div>
+
+      <div class="col-sm plain-arrow">
+        <label for="type0" class="label_encuesta">Tipo</label>
+        <select id="type0" class="form-control custom-select gradblue" [(ngModel)]="monitoreo.type">
+          <option [value]="0">Seleccione</option>
+          <option *ngFor="let type of types_monitoreos" [ngValue]="type.id + ''">{{type.name}}</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="generalrow">
+      <div class="col-sm plain-arrow">
+        <label for="labelselect100">Selecciona un Procedimiento</label>
+        <select [(ngModel)]="monitoreo.procedure" class="custom-select form-control gradblue" name="selected_project"
+                id="labelselect100" (change)="getGeoJsonView()">
+          <option [value]="'0'">Seleccione el Procedimiento</option>
+          <option *ngFor="let option of procedures" [ngValue]="option.id + ''">{{option.name}}</option>
+        </select>
+      </div>
+    </div>
+
+
+    <cuenca-mapa-calendar (notify)='clickInMap($event)'
+                          *ngIf="monitoreo.procedure && monitoreo.procedure !== '0'"></cuenca-mapa-calendar>
+
+    <div style="margin-bottom: 10px" *ngIf="acciones.length > 0">
+      <div class="generalrow table_title_gray">
+        <div class="col-sm">
+          Acciones
+        </div>
+        <div class="col-sm">
+          Materiales
+        </div>
+      </div>
+
+      <div class="generalrow"
+           style="background-color: #dcedfb; color: #333; padding: 10px; border-radius: 15px"
+           *ngFor="let accion of acciones" id="selected">
+        <div class="col-sm">
+          {{accion.action_name}}
+        </div>
+        <div class="col-sm">
+          {{accion.material_name}}
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-sm-12 col-md-12">
+          <div *ngIf="users.length>0">
+            <div class="subtitle-item">Usuarios</div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 10px">
+        <div class="col-sm-12 col-md-12">
+          <div *ngIf="users.length > 0">
+            <div *ngFor="let usuario of users; let i = index">
+              <input type="checkbox" [id]="'usuario' + usuario.id" [(ngModel)]="usersSelected[i]"
+                     (ngModelChange)="editUserArray(usersSelected[i], i, usuario.id)">
+              <label [for]="'usuario' + usuario.id">{{usuario.name}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="col-sm">
+        <label for="labelselect1">Fecha Inicio</label>
+        <div class="form-control" id="labelselect1">
+          <input type="date"
+                 style="width: 100%; text-align: center; padding: 5px; border-radius: 5px; font-weight: bold"
+                 [(ngModel)]="monitoreo.start" disabled/>
+        </div>
+      </div>
+      <div class="col-sm">
+        <label for="labelselect2">Fecha Fin</label>
+        <div class="form-control" id="labelselect2">
+          <input type="date"
+                 style="width: 100%; text-align: center; padding: 5px; border-radius: 5px; font-weight: bold"
+                 [(ngModel)]="monitoreo.end"/>
+        </div>
+      </div>
+      <div class="col-sm">
+        <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" (click)="updateMonitor()">
+          Actualizar
+        </button>
+      </div>
+    </div>
+
+    <!-- CERRAR CUADRO DE MONITOREOS -->
+
+    <div class="generalrow">
+      <div class="col-sm">
+        <div class="header-module">
+          <h3 class="title-module">Comentarios</h3>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let comment of comments;" style="background-color: #FFF; margin: 10px; padding: 10px">
+      <div class="generalrow" style="margin-left: 10px; margin-right: 10px; font-size: 12px">
+        <div class="col-sm"> Fecha: {{getDateWithHour(comment.created_at)}}</div>
+        <!--<div class="col-sm"> Usuario: {{comment.user_name}}</div>-->
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+      <div class="generalrow">
+        <div class="col-sm">
+          <div style="text-align: center; font-size: 14px; font-weight: bold;">{{comment.description}}</div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="generalrow">
+
+      <div class="col-sm">
+                          <textarea class="form-control simpleinput" rows="3" name="task_comments"
+                                    placeholder="Agrega algún comentario al Monitoreo o Mantenimiento"
+                                    [(ngModel)]="comentario"></textarea>
+      </div>
+
+    </div>
+
+    <div class="generalrow">
+
+      <div class="col-sm">
+        <button class="send" (click)="insertComment(); $event.stopPropagation();">Enviar</button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- GRILLA DE FOTOS-->
+
+
+  <div *ngIf="showGrid">
+
+    <div class="generalrow" style="margin-bottom: 25px">
+      <div class="col-12 title" style="text-align: center">
+        NOVEDADES REGISTRADAS EN EL PUNTO SELECCIONADO
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin: 10px">
+      <div class="col-sm">
+        <button type="button" class="btn btn-danger" style="float: left; cursor: pointer;" (click)="backGrilla()">
+          Regresar
+        </button>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+
+    <cuenca-point-detail-monitoring [point]="pointSelected"></cuenca-point-detail-monitoring>
+
+  </div>
+
+</div>

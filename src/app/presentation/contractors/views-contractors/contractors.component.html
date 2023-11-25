@@ -1,0 +1,49 @@
+<div class="title-section">
+  <div class="col-1 float-left">
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div style="text-align: center" class="contratista_title">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 float-left">
+
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div class="titlechapterAp">Contratistas</div>
+      </div>
+    </div>
+
+  </div>
+  <a class="mainbtn darkblue create-new-procedure" routerLink="/app/create-contractors" *ngIf="isJuridico" style="margin-bottom: 20px">Crear contratista</a>
+</div>
+
+<!--CONTRATISTAS-->
+
+<div class="generalrow">
+  <div class="title-taskmodule gradblue">Listado de Tareas</div>
+  <div class="maintablecontainer">
+    <table class="table tabletask table-hover">
+      <thead class="items-table">
+      <tr>
+        <th scope="col">Nombre del Contratista</th>
+        <th scope="col">Email</th>
+        <th scope="col">Fecha Creación</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let contratista of contratistas">
+        <th scope="row">{{ contratista.name }}</th>
+        <td>{{ contratista.email }} </td>
+        <td>{{ (contratista.created_at != null) ? getDateWithoutHour(contratista.created_at) : '' }}</td>
+        <td>
+          <a class="mainbtn bluebtn seemore-module" routerLink="/app/view-contractor/{{contratista.id}}">Ver</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

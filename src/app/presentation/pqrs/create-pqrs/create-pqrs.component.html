@@ -1,0 +1,98 @@
+<div class="generalrow">
+  <div class="row">
+    <div class="col-sm">
+      <div class="titlechapterAp">Crear PQRS</div>
+    </div>
+  </div>
+
+  <div class="row" >
+
+    <div class="col-sm">
+      <label for="idCardNumber">Cédula de ciudadanía</label>
+      <input type="text" class="form-control simpleinput" id="idCardNumber" aria-describedby="idCardNumber"
+             placeholder="Cédula de ciudadanía" [(ngModel)]="pqrs.id_card"
+             name="idCardNumber">
+    </div>
+
+    <div class="col-sm">
+      <label for="contactName">Nombre contacto</label>
+      <input type="text" class="form-control simpleinput" id="contactName" aria-describedby="contactName"
+             placeholder="Nombre contacto" [(ngModel)]="pqrs.name"
+             name="contactName">
+    </div>
+
+    <div class="col-sm">
+      <label for="contactName">Email</label>
+      <input type="text" class="form-control simpleinput" id="email" aria-describedby="email"
+             placeholder="Email" [(ngModel)]="pqrs.email"
+             name="email">
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm" style=" display: flex; align-items: center; align-items: center">
+      <label class="custom-control custom-checkbox" id="hasAgreementWithTheCorporation" style="margin-top: 35px">
+        <input type="checkbox" class="custom-control-input" [(ngModel)]="pqrs.conservation_agreement_corporation"
+               name="hasAgreementWithTheCorporation" style="cursor: pointer;" (change)="pqrs.subscribe_agreement = false">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Tiene algún acuerdo de conservación con la corporación?</span>
+      </label>
+    </div>
+
+  </div>
+
+  <div class="row" style="margin-bottom: 10px" *ngIf="!pqrs.conservation_agreement_corporation">
+
+    <div class="col-sm" style=" display: flex; align-items: center; align-items: center">
+      <label class="custom-control custom-checkbox" id="wantsToSubscribeAgreement" style="margin-top: 15px">
+        <input type="checkbox" class="custom-control-input" [(ngModel)]="pqrs.subscribe_agreement"
+               name="wantsToSubscribeAgreement" style="cursor: pointer;">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Está interesado en suscribir un acuerdo con la corporación?</span>
+      </label>
+    </div>
+
+  </div>
+
+  <div class="row" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <label for="pqrsDescription">Descripción del PQRS</label>
+      <textarea class="form-control simpleinput" id="pqrsDescription" rows="3" [(ngModel)]="pqrs.description"
+                placeholder="Ingresa la descripción del PQRS" name="pqrsDescription"></textarea>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+
+    <div class="col-sm plain-arrow">
+      <label for="dependency" class="subtitle-item">Dependencia</label>
+      <select [(ngModel)]="pqrs.dependency" class="custom-select form-control gradblue" name="dependency"
+              (change)="getPqrsTypes()" id="dependency">
+        <option *ngFor="let dependency of dependencies" [ngValue]="dependency">{{dependency.name}}</option>
+      </select>
+    </div>
+
+    <div class="col-sm">
+      <div class="plain-arrow" *ngIf="pqrsTypes.length>0">
+        <label for="pqrsType" class="subtitle-item">Tipo de PQR</label>
+        <select [(ngModel)]="pqrs.pqrsType" class="custom-select form-control gradblue" name="pqrsType"
+                [disabled]="pqrsTypes.length === 0" id="pqrsType">
+          <option *ngFor="let pqrsType of pqrsTypes" [ngValue]="pqrsType">{{pqrsType.name}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" (click)="createPqrs()">Crear PQRS
+      </button>
+    </div>
+  </div>
+
+</div>

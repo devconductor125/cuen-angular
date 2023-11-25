@@ -1,0 +1,168 @@
+/*CALENDAR*/
+.calendar-container{
+  display: block;
+  float: left;
+  width: 100%;
+  height: 500px;
+  background-color: #0c5460;
+}
+.taskprojcontainer{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  margin: 10px 0px 20px 0px;
+}
+.tabletask{
+  background-color: #FFFFFF;
+}
+.statustaskcontainer{
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.statustask{
+  display: block;
+  float: left;
+  width: 100%;
+  height: 45px;
+  text-align: center;
+  font-size: 1.5em;
+  border-radius: 8px;
+  font-family: 'robotobold';
+  margin-bottom: 10px;
+  color: #FFFFFF !important;
+  padding: 7px 10px 10px 10px;
+}
+.subtitledate{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  margin-bottom: 5px;
+  font-family: 1.2em;
+}
+.datetask{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  font-size: 1.7em;
+  font-family: 'robotobold';
+  border-bottom: 7px;
+}
+
+.responsible {
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+}
+
+.listresponsible {
+  display: block;
+  float: left;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+.responsibleitem {
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+.response {
+  display: block;
+  float: left;
+  width: 100%;
+  font-family: 'robotomedium';
+  font-size: 1.3em;
+}
+
+.btntaskcontainer {
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.taskbtn {
+  float: left;
+  font-family: 'robotobold';
+  text-align: center;
+  margin: 0px 5px;
+  cursor: pointer;
+}
+.send{
+  float: right;
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px;
+  margin: 10px;
+  background-color: #1ba054;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+.send:hover{
+  background-color: #156c36;
+}
+.typetask{
+  padding: 20px 0px;
+}
+.comments-container{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  padding: 7px 10px;
+  background-color: #FFFFFF;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-bottom: 7px;
+}
+.date-comment, .user-comment{
+  display: block;
+  float: left;
+  height: auto;
+  font-family: 'robotomedium';
+  margin-bottom: 7px;
+}
+.date-comment{
+  font-size: 0.7em;
+  text-align: center;
+  float: right;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  background-color: #0B5CC6;
+  color: #FFFFFF;
+  padding: 5px 7px;
+}
+.user-comment{
+  font-family: 'robotobold';
+  font-size: 1.2em;
+  padding: 9px 0px 0px 0px;
+}
+.commentstext{
+  display: block;
+  float: left;
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  font-family: 'robotoregular';
+  font-size: 1em;
+}
+
+.etiqueta a {
+  background: #222;
+  color: #fff;
+  display: inline-block;
+  /* float:left;  remove */
+  margin: 10px 10px 0 0;
+  padding: 5px 10px
+}

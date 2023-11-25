@@ -1,0 +1,158 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <dvi class="col-10 text-center">
+        Acción
+      </dvi>
+      <div class="col-2">
+        <button class="mainbtn bluebtn seemore-module"
+                *ngIf="!boolEditData; else buttonCancel"
+                (click)="editData()">
+          Editar
+        </button>
+        <ng-template #buttonCancel>
+          <button class="mainbtn redbtn seemore-module"
+                  (click)="editData()">
+            Cancelar
+          </button>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table tabletask table-hover">
+      <thead class="items-table">
+      <tr>
+        <th scope="col" class="text-center">Nombre</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">
+          <input
+            type="text"
+            value="01 Encuentros con actores - Realización de 20 actividades"
+            class="form-control"
+            aria-describedby="emailHelp"
+            [disabled] = "!boolEditData"
+            placeholder="Acción">
+        </th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="card-header">
+    <div class="row">
+      <div class="col-10 text-center">
+        Detalle
+      </div>
+    </div>
+  </div>
+  <div>
+  </div>
+  <div class="card-body">
+    <table class="table tabletask table-hover">
+      <thead class="items-table">
+      <tr>
+        <th scope="col" class="text-center">Nombre</th>
+        <th scope="col" class="text-center">Cóodigo</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">
+          <input
+            type="text"
+            value="001-Transporte Profesionales en transporte Publico (Ida y regreso)"
+            class="form-control"
+            aria-describedby="emailHelp"
+            [disabled] = "!boolEditData"
+            placeholder="Detalle">
+        </th>
+        <td>
+          <input
+            type="text"
+            value="05AAA01001"
+            class="form-control"
+            aria-describedby="emailHelp"
+            [disabled] = "!boolEditData"
+            placeholder="Código">
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <input
+            type="text"
+            value="002-Refrigerio  (Aprox. 23 Personas por Taller o reunion) 20 reuniones talleres"
+            class="form-control"
+            aria-describedby="emailHelp"
+            [disabled] = "!boolEditData"
+            placeholder="Detalle">
+        </th>
+        <td>
+          <input
+            type="text"
+            value="05AAA01002"
+            class="form-control"
+            aria-describedby="emailHelp"
+            [disabled] = "!boolEditData"
+            placeholder="Código">
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <input
+            type="text"
+            value="003-Alquiler lugares de reunion"
+            class="form-control"
+            aria-describedby="emailHelp"
+            [disabled] = "!boolEditData"
+            placeholder="Detalle">
+        </th>
+        <td>
+          <input
+            type="text"
+            value="05AAA01003"
+            class="form-control"
+            aria-describedby="emailHelp"
+            [disabled] = "!boolEditData"
+            placeholder="Código">
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <input
+            type="text"
+            value="004-Alquiler Equipos para ferias o eventos (stand, telepronter, video bold, entre otros)"
+            class="form-control"
+            aria-describedby="emailHelp"
+            [disabled] = "!boolEditData"
+            placeholder="Detalle">
+        </th>
+        <td>
+          <input
+            type="text"
+            value="05AAA01004"
+            class="form-control"
+            aria-describedby="emailHelp"
+            [disabled] = "!boolEditData"
+            placeholder="Código">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row" *ngIf="boolEditData">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <button type="button" (click)="gotoActions()"
+                class="btn btn-success btn-lg btn-block">
+          Guardar
+        </button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+</div>

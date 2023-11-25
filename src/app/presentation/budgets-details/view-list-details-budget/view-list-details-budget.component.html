@@ -1,0 +1,127 @@
+<div *ngIf="listDetails">
+
+      <div class="title-section">
+        <div class="col-1 float-left">
+          <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+            <div style="display: table-cell; vertical-align: middle">
+              <div style="text-align: center" class="task_title">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-5 float-left">
+
+          <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+            <div style="display: table-cell; vertical-align: middle">
+              <div class="titlechapterAp">Detalles de Presupuesto</div>
+            </div>
+          </div>
+
+        </div>
+        <a class="mainbtn darkblue create-new-procedure" routerLink="/app/create-details-budgets" *ngIf="isFinanciero">Crear nuevo detalle</a>
+      </div>
+
+      <div class="contents-app">
+        <!--CONTRATISTAS-->
+
+        <div class="taskprojcontainer">
+          <div class="title-taskmodule gradblue">Listado de Detalles del Presupuesto Registrados</div>
+          <table class="table tabletask table-hover">
+            <thead class="items-table">
+            <tr>
+              <th scope="col">CC</th>
+              <th scope="col">Actividad</th>
+              <th scope="col">Acción</th>
+              <th scope="col">Detalle</th>
+              <th scope="col">Valor</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+              <ng-container *ngFor="let list of listDetails">
+
+
+                <ng-container *ngFor="let financierAction of list.project_activity.financer_action">
+
+                  <ng-container *ngIf="financierAction.financier_detail.length > 0">
+
+                    <ng-container *ngFor="let financierDetail of financierAction.financier_detail">
+
+                      <ng-container *ngIf="financierDetail.detail_command_financier.length > 0">
+
+                        <ng-container *ngFor="let detail of financierDetail.detail_command_financier">
+
+                          <tr data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <th scope="col">{{detail.code}}</th>
+                            <th scope="col">{{list.project_activity.name}}</th>
+                            <th scope="col">{{financierAction.name}}</th>
+                            <th scope="col">{{financierDetail.name}}</th>
+                            <th scope="col">${{detail.inversion | number}}</th>
+                            <th>
+                              <a routerLink="/app/edit-budget/{{detail.id}}">
+                                <button type="button"
+                                        class="btn btn-primary">Ediat</button>
+                              </a>
+                            </th>
+                            <th scope="col">
+                              <button type="button"
+                                      class="btn btn-info"
+                                      style="cursor:pointer;"
+                                      data-toggle="modal"
+                                      [attr.data-target]="'#' + 'modalDetails' + detail.id"
+                                      aria-expanded="false"
+                                      (click)="setIdDeatil(detail.id, detail.year)"
+                                      aria-controls="modalDetails">
+                                <i class="fas fa-info-circle" style="color: white"></i>
+                              </button>
+
+                            </th>
+                          </tr>
+
+
+                          <div class="modal fade" tabindex="-1" role="dialog" [id]="'modalDetails' + detail.id" aria-labelledby="modalDetailsLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Reasignar detalle de presupuesto</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <span>Seleccione la información del detalle destino</span>
+                                  <app-create-details-component [boolInModal]="'true'" (sendReasindData)="reasignData($event)"></app-create-details-component>
+                                </div>
+                                <!--<div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                </div>-->
+                              </div>
+                            </div>
+                          </div>
+
+
+
+                        </ng-container>
+
+                      </ng-container>
+
+                    </ng-container>
+
+                  </ng-container>
+
+                </ng-container>
+
+              </ng-container>
+
+            </tbody>
+
+
+          </table>
+        </div>
+
+      </div>
+
+</div>

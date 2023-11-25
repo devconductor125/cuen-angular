@@ -1,0 +1,56 @@
+<div class="title-section">
+  <div class="col-1 float-left">
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div style="text-align: center" class="listUser_title">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-5 float-left">
+
+    <div style="display: table; height: 100px; overflow: hidden; width: 100%">
+      <div style="display: table-cell; vertical-align: middle">
+        <div class="titlechapterAp">Listado de Usuarios</div>
+      </div>
+    </div>
+
+  </div>
+  <a class="mainbtn darkblue create-new-procedure" routerLink="/app/register-user" *ngIf="isSuperAdmin">Crear Usuario</a>
+
+</div>
+
+<!--CREATE-->
+
+<div class="generalrow">
+  <div class="title-taskmodule gradblue">Listado de Usuarios Registrados</div>
+
+  <div class="maintablecontainer">
+    <table class="table tabletask table-hover">
+      <thead class="items-table">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Email</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Fecha de creacion</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of listUser">
+        <th scope="row">{{user.names}}</th>
+        <td>{{user.last_names}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role.name}}</td>
+        <td>{{getDateWithoutHour(user.created_at)}}</td>
+        <td>
+          <a class="mainbtn bluebtn seemore-module" routerLink="/app/view-edit-user/{{user.id}}">Ver</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -1,0 +1,219 @@
+<div id="contenido" class="contents-app" style="padding: 50px 50px 50px 50px">
+
+  <div class="row" style="margin-bottom: 25px">
+    <div class="col-10 title" style="text-align: center; font-weight: bold">
+      EDITAR ACCIÓN
+    </div>
+    <div class="col-2" *ngIf="!boolEdit">
+      <button type="button"
+              (click)="setVariableEdit()"
+              class="btn btn-success"
+              style="float: right; cursor: pointer;">
+        Editar
+      </button>
+    </div>
+    <div class="col-2" *ngIf="boolEdit">
+      <button type="button"
+              (click)="setVariableEdit()"
+              class="btn btn-danger"
+              style="float: right; cursor: pointer;">
+        Cancelar
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="labelselect0" class="subtitle-item">Nombre</label>
+      <input type="text" id="labelselect0"
+             class="form-control"
+             [(ngModel)]="actionRegister.name"
+             [disabled]="!boolEdit"
+             placeholder="Nombre de la Acción"/>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div class="plain-arrow">
+        <label for="labelselect2" class="subtitle-item">Buenas practicas</label>
+        <select [(ngModel)]="actionRegister.good_practicess"
+                class="custom-select form-control gradblue"
+                [disabled]="!boolEdit"
+                name="selected_task_type"
+                id="labelselect2">
+          <option [value]="null">Seleccione la practica</option>
+          <option value="1">Si</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-sm-6">
+      <label for="labelselect0" class="subtitle-item">Color</label>
+      <input [value]="actionRegister.color"
+             placeholder="Seleccione el Color"
+             [disabled]="!boolEdit"
+             class="form-control"
+             style="color: white; left: 0px;"
+             [style.background]="actionRegister.color"
+             [(colorPicker)]="actionRegister.color"/>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div class="plain-arrow">
+        <label for="selectTypeAction"
+               class="subtitle-item">Tipo de geometría</label>
+        <select [(ngModel)]="actionRegister.type"
+                class="custom-select form-control gradblue"
+                [disabled]="!boolEdit"
+                name="selected_task_type"
+                id="selectTypeAction">
+          <option [value]="null">Seleccione el tipo</option>
+          <option value="area">Area</option>
+          <option value="accion">Acción</option>
+          <option value="punto">Punto</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="materialName"
+             class="subtitle-item">Nombre del material</label>
+      <input type="text"
+             id="materialName"
+             class="form-control"
+             [disabled]="!boolEdit"
+             [(ngModel)]="actionRegister.material.name"
+             placeholder="Nombre de la Acción"/>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div class="plain-arrow">
+        <label for="selectUnidMaterial"
+               class="subtitle-item">Unidad de material</label>
+        <select [(ngModel)]="actionRegister.material.unit_id"
+                class="custom-select form-control gradblue"
+                name="selected_unid_id_material"
+                [disabled]="!boolEdit"
+                id="selectUnidMaterial">
+          <option [value]="null">Seleccione la unidad</option>
+          <option *ngFor="let unit of listUnitsMeasure" [value]="unit.id">{{unit.name}} - ({{unit.symbol}})</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="measurement"
+             class="subtitle-item">Medición</label>
+      <input type="number"
+             id="measurement"
+             min="0"
+             [disabled]="!boolEdit"
+             class="form-control"
+             [(ngModel)]="actionRegister.material.measurement"
+             placeholder="Medición del material"/>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div class="plain-arrow">
+        <label for="selectTypeMaterial"
+               class="subtitle-item">Tipo de material</label>
+        <select [(ngModel)]="actionRegister.material.type"
+                [disabled]="!boolEdit"
+                class="custom-select form-control gradblue"
+                name="selected_task_type_material"
+                id="selectTypeMaterial">
+          <option [value]="null">Seleccione el tipo</option>
+          <option value="restauracion">Restauración</option>
+          <option value="alambre">Alambre</option>
+          <option value="broches">Broches</option>
+          <option value="cerca viva">Cerca viva</option>
+          <option value="STARD">Stard</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <label for="materialPrice"
+             class="subtitle-item">Precio</label>
+      <input type="number"
+             id="materialPrice"
+             min="0"
+             [disabled]="!boolEdit"
+             class="form-control"
+             [(ngModel)]="actionRegister.material.price"
+             placeholder="Precio de la acción"/>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div class="plain-arrow">
+        <label for="selectActivity"
+               class="subtitle-item">Actividad</label>
+        <select [(ngModel)]="actionRegister.activityId"
+                class="custom-select form-control gradblue"
+                [disabled]="!boolEdit"
+                name="selected_unid_id_material"
+                id="selectActivity">
+          <option [value]="null">Seleccione la actividad</option>
+          <option *ngFor="let activity of listActivities"
+                  [value]="activity.id">{{activity.name}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md col-sm-12">
+      <div class="plain-arrow">
+        <label for="selecttype"
+               class="subtitle-item">Tipo de acción</label>
+        <select [(ngModel)]="actionRegister.type_id"
+                class="custom-select form-control gradblue"
+                name="selected_unid_id_material"
+                [disabled]="!boolEdit"
+                id="selecttype">
+          <option [value]="null">Seleccione el tipo</option>
+          <option *ngFor="let tipe of listTypes"
+                  [value]="tipe.id">{{tipe.name}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-sm">
+      <button type="button"
+              [disabled]="!boolEdit"
+              (click)="updateAction()"
+              class="btn btn-success"
+              style="float: right; cursor: pointer;">
+        Guardar
+      </button>
+    </div>
+  </div>
+
+
+</div>

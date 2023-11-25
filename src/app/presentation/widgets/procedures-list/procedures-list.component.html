@@ -1,0 +1,17 @@
+<div class="generalrow">
+  <div class="subtitle-item">Procedimientos</div>
+  <ul class="list-procedures">
+    <li class="proyect-item col-lg-4 col-md-4 col-sm-12" *ngFor="let procedure of procedures">
+      <div class="title-proymodule gradblue">{{procedure.name}}</div>
+      <div class="blockmodule">
+        <div class="titlegraph">{{procedure.status}}</div>
+        <div class="chart-container"></div>
+        <div class="dates-chart">
+          <h4 class="descrip-chart">Pasos Ejecutados</h4>
+          <h2 class="title-chart">{{procedure.execution_time}}</h2>
+        </div>
+        <a class="mainbtn bluebtn seemore-module" routerLink="/app/view-procedures/{{procedure.id}}">Ver mas</a>
+      </div>
+    </li>
+  </ul>
+</div>

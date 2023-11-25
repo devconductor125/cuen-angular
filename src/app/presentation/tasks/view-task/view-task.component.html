@@ -1,0 +1,762 @@
+<div *ngIf="task">
+
+  <!--PROYECT INFO-->
+  <div class="generalrow">
+    <div class="titlechapterInt">{{task.title}}</div>
+
+    <!--  <div class="row" *ngIf="!isSig">
+        <div class="col-2">
+          <div class="chips_title">Tarea</div>
+        </div>
+        <div class="col-10">
+          <div class="chips_two">{{task.details.type.name}}</div>
+        </div>
+      </div>-->
+
+    <div class="generalrow typetask">
+      <div class="col-12 col-md-4 col-lg-4 col-xl-3 float-left">
+        <div class="chips_title">Tarea</div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6 col-xl-6 float-left">
+        <div class="chips">{{task.sub_type.name}}</div>
+      </div>
+    </div>
+
+    <div class="generalrow nopad">
+      <div class="col-12 col-md-8 col-lg-8 col-xl-8 float-left">
+        <div class="col-12 col-md-6 col-lg-6 left">
+          <div class="module-box-container box-info ">
+            <div class="task-title">Procedimiento</div>
+            <div class="task-name">{{task.details.process.name}}</div>
+            <div class="task-title">Proyectos</div>
+            <div class="task-name" *ngFor="let proyecto of task.project">{{proyecto.name}}</div>
+            <div class="task-title">Predio</div>
+            <div class="task-name">{{task.potential_detail.name}}</div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 left">
+          <div class="module-box-container box-info">
+            <div class="task-title">Descripción</div>
+            <div class="task-name">{{task.description}}</div>
+            <div class="task-title">Responsable</div>
+            <div class="task-name">{{task.user ? task.user.email : 'N/A'}}</div>
+            <div class="task-title">Rol</div>
+            <div class="task-name">{{task.details && task.details.role ? task.details.role.name : 'N/A'}}</div>
+          </div>
+        </div>
+
+
+        <div class="main-container">
+          <!--BOTONES DE ACCION -->
+
+          <button *ngIf="isSig && task.sub_type.id + '' === '15'" class="mainbtn plainbluedark left marginright"
+                  (click)="approveTaskSigGeneracion()"> <!--15 = Cargar Mapa de Verificación y Seguimiento-->
+            Enviar a Coordinación
+          </button>
+
+          <button *ngIf="isCoordinador && task.sub_type.id + '' === '27'"
+                  class="mainbtn plaingreenlight left marginright"
+                  (click)="approveTaskConceptoCoordinacion()"> <!--Boton para estado 27-->
+            Aprobar
+          </button>
+
+          <button *ngIf="isDireccion && task.sub_type.id + '' === '16'" class="mainbtn plaingreenlight left marginright"
+                  (click)="approveTaskMinutaDireccion()"><!--Boton para estado 16-->
+            Aprobar Minuta Firmada
+          </button>
+
+          <button *ngIf="isJuridico && task.sub_type.id + '' === '28'" class="mainbtn plaingreenlight left marginright"
+                  (click)="approveTaskConceptoJuridico()"><!--Boton para estado 28-->
+            Aprobar
+          </button>
+
+
+          <button class="mainbtn plainbluedark left marginright" (click)="approveTaskProgrammer()"
+                  *ngIf="isCoordinador && task.sub_type.id + '' === '24'">
+            <!--24 = Registrar MONITOREOS Y MANTENIMIENTO-->
+            Enviar a Dirección
+          </button>
+
+          <button class="mainbtn plainbluedark left marginright" (click)="approvePropietarioFirma()"
+                  *ngIf="isSeguimiento && task.sub_type.id + '' === '32' || isGuardaCuenca && task.sub_type.id + '' === '32'">
+            <!-- minuta propietario -->
+            <!-- Aprobar Firma de Propietario --> Enviar Minuta Firmada
+          </button>
+
+          <button
+            *ngIf="isFinanciero || isSeguimiento && task.sub_type.id + '' === '13' || isSeguimiento && task.sub_type.id + '' === '6' || isDireccion && task.sub_type.id + '' === '25' || isCoordinadorGuardacuenca && task.sub_type.id + '' === '14' || isJuridico && task.sub_type.id + '' === '22' || isAdministrativo && task.sub_type.id + '' === '20'"
+            class="mainbtn plaingreenlight left marginright" (click)="approveTaskOtros()">
+            <!--6 = EDICION DE MAPA -- 13 Actualizacion de mapa -->
+            Aprobar
+          </button>
+          <!--//////ASIGNAR TAREA FIRMA A -->
+          <button *ngIf="isCoordinadorGuardacuenca && task.sub_type.id + '' === '21'"
+                  class="mainbtn plaingreenlight left marginright"
+                  data-toggle="modal" data-target="#exampleModalFirmaPropietario"> <!--21 = aprobar minuta -->
+            Aprobar Minuta y reasignar
+          </button>
+
+          <button *ngIf="isDireccion || isCoordinador" type="button" class="mainbtn plainredlight left marginright"
+                  (click)="cancelarTarea()" style="cursor: pointer;">
+            <!-- terminar procedimiento -->
+            Terminar Procedimiento
+          </button>
+
+          <button
+            *ngIf="isAdministrativo && task.sub_type.id + '' === '2' || isJuridico && task.sub_type.id + '' === '9' || isAdministrativo && task.sub_type.id + '' === '10' || isSig && task.sub_type.id + '' === '5' || isSig && task.sub_type.id + '' === '11' || isSig && task.sub_type.id + '' === '29'"
+            class="mainbtn plaingreenlight left marginright" (click)="approveTask()">
+            Aprobar
+          </button>
+
+          <button *ngIf="isGuardaCuenca && task.sub_type.id + '' === '8'" class="mainbtn plainbluedark left marginright"
+                  (click)="enviarCertificado()" style="outline: none">
+            Enviar Certificado de Tradición <!-- Crear tarea para guarda cuenca y cambiar estado a la tarea -->
+          </button>
+
+          <button *ngIf="isAdministrativo && dataType.name==='Encuesta' && task.sub_type.id + '' === '2'" type="button"
+                  class="mainbtn plainbluedark left marginright" (click)="solicitarCertificado()"
+                  style="cursor: pointer; margin-left: 5px; color: #333">
+            Solicitar Certificado de Tradición
+          </button>
+
+          <button
+            *ngIf="isSig && task.sub_type.id + '' === '5'
+            || isAdministrativo && dataType.name==='Encuesta'
+            && task.sub_type.id + '' === '2'
+            || isJuridico && task.sub_type.id + '' === '9'
+            || isSeguimiento && task.sub_type.id + '' === '6'
+            || isSeguimiento && task.sub_type.id + '' === '13'
+            || isJuridico && task.sub_type.id + '' === '22'
+            || isAdministrativo && task.sub_type.id + '' === '20'
+            || isDireccion && task.sub_type.id + '' === '25' "
+            type="button"
+            class="mainbtn plainredlight left marginright"
+            style="float: left; cursor: pointer;"
+            data-toggle="modal"
+            data-target="#exampleModal">
+            Rechazar
+          </button>
+        </div>
+
+        <!-- Modal Rechazo -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Razón de Rechazo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row" style="padding-top: 10px">
+                    <div class="col-sm" style="color:#90989c; font-weight: lighter; text-align: center">
+                      Es necesario describir el motivo de rechazo
+                    </div>
+                  </div>
+                  <div class="row" style="padding-top: 10px">
+                    <div class="col-sm" style="text-transform: uppercase; font-weight: bold">
+                        <textarea class="form-control" placeholder="Agrega algún comentario"
+                                  [(ngModel)]="comentarioRechazo"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="mainbtn plainredlight left" style="cursor: pointer;" (click)="decline();"
+                        data-dismiss="modal">Enviar Motivo
+                </button>
+                <button type="button" class="mainbtn plainreddark left" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Reasignacion-->
+        <div class="modal fade" id="exampleModalFirmaPropietario" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabelP"
+             aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelP">Enviar Tarea a:</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row" style="padding-top: 10px">
+                    <div class="col-sm" style="color:#90989c; font-weight: lighter; text-align: center">
+                      Es necesario asignar la tarea de "Firma de Propietario en Minuta" a algún usuario:
+                    </div>
+                  </div>
+                  <div class="row" style="padding-top: 10px">
+                    <div class="col-sm" style="text-transform: uppercase; font-weight: bold">
+                      <label for="select_rol" style="text-transform: capitalize">Rol</label>
+                      <select id="select_rol" [(ngModel)]="task.role" class="form-control" (change)="getUsers()">
+                        <option *ngFor="let option of roles" [ngValue]="option">{{option.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" style="padding-top: 10px" *ngIf="users.length>0">
+                    <div class="col-sm" style="text-transform: uppercase; font-weight: bold">
+                      <label for="select_ruser" style="text-transform: capitalize">Rol</label>
+                      <select [(ngModel)]="task.user" class="form-control" name="selected_user"
+                              [disabled]="users.length === 0" id="select_ruser">
+                        <option *ngFor="let option of users" [ngValue]="option">{{option.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" style="float: left; cursor: pointer;"
+                        (click)="enviarTareaCoordinadorA()" data-dismiss="modal">
+                  Enviar Tarea
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- Detalles de la tarea -->
+      <div class="col-12 col-md-3 col-lg-4 col-xl-4 float-right">
+        <div>
+          <div class="statustaskcontainer">
+            <div class="statustask plainbluelight">{{task.details.status.name}}</div>
+            <div class="timetask-container">
+              <div class="subtitledate">Desde</div>
+              <div class="datetask">{{task.startdate}}</div>
+              <div class="subtitledate">Hasta</div>
+              <div class="datetask">{{task.deadline}}</div>
+            </div>
+            <div class="statustask plainbluelight">A tiempo</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detalles de la tarea LISTADO DE DOCUMENTOS -->
+    <div class="generalrow nopad">
+      <!-- DATES DOCUMENTS -->
+      <ng-container>
+
+        <div class="main-container">
+          <div class="subtitle-item">Documentos cargados del predio</div>
+        </div>
+
+        <ng-container *ngIf="listDocuments" style="margin-bottom: 25px">
+
+
+          <div class="generalrow">
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-end">
+                <!-- <button type="button" class="btn btn-success" style="fursor: pointer;">
+                   Guardar
+                 </button>-->
+
+                Carta de Intención
+                <div class="linebtn linebluelight right" *ngIf="listDocuments.letter"
+                     routerLink="../../../app/ver-carta-intencion/{{listDocuments.potential_id}}">Ver
+                </div>
+                <!--
+                <div class="badge">
+
+                    <span
+                          class="badge-primary badge-pill" style="cursor: pointer"><i class="fa fa-eye"
+                                                                                      aria-hidden="true"></i> Ver </span>
+
+                </div>-->
+
+
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Encuesta
+                <div class="linebtn linebluelight right" *ngIf="listDocuments.poll"
+                     routerLink="../../../app/survey/{{listDocuments.potential_id}}">Ver
+                </div>
+
+                <!--<div class="badge">
+                    <span  class="badge-primary badge-pill" style="cursor: pointer"><i class="fa fa-eye" aria-hidden="true"></i> Ver </span>
+
+                </div>-->
+
+              </li>
+
+            </ul>
+          </div>
+
+        </ng-container>
+
+      </ng-container>
+    </div>
+
+    <!-- Detalles de la tarea DOCUMENTOS ASOCIADOS-->
+    <div class="generalrow ">
+      <!-- DATES TABLE -->
+      <div class="module-box-container" *ngIf="taskData">
+        <div class="header-module">
+          <h3 class="title-module">Datos asociados</h3>
+        </div>
+        <div class="maintablecontainer">
+          <table class="table">
+            <thead class="items-table">
+            <tr>
+              <th scope="col">Tipo</th>
+              <th scope="col">Dato</th>
+              <!--<th scope="col">Nombre</th>-->
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of taskData">
+              <th scope="row">{{dataType.type}}</th>
+              <td>{{dataType.name}}</td>
+              <td>
+                <div class="row">
+                  <div class="col-sm">
+                    <a class="linebtn linebluelight right" routerLink="{{dataType.route + task.id}}">Ver</a>
+                  </div>
+                  <div class="col-sm" *ngIf="isSig">
+                    <a class="mainbtn plaingreenlight right" (click)="downloadData(data)">Descargar</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!--AGREGAR DOCUMENTOS A LA LISTA-->
+            <!-- MINUTA -->
+            <tr
+              *ngIf="hasMinuta && (isCoordinadorGuardacuenca && task.sub_type.id + '' === '14' || isJuridico && task.sub_type.id + '' === '22' || isAdministrativo && task.sub_type.id + '' === '20' || isDireccion && task.sub_type.id + '' === '16' || isCoordinadorGuardacuenca && task.sub_type.id + '' === '21' || isCoordinadorGuardacuenca && task.sub_type.id + '' === '33' || isCoordinador)">
+              <th scope="row">Minuta</th>
+              <td>Minuta</td>
+              <td>
+                <a class="linebtn linebluelight right" routerLink="/app/ver-minuta/{{task.id}}">Ver</a>
+              </td>
+            </tr>
+            <!--CERRAR AGREGAR DOCUMENTOS A LA LISTA-->
+            <!--AGREGAR DOCUMENTOS A LA LISTA-->
+            <!-- Presupuesto -->
+            <tr
+              *ngIf="isBudget && (isCoordinador && task.sub_type.id + '' === '14' || isCoordinador && task.sub_type.id + '' === '24' || isDireccion && task.sub_type.id + '' === '25' || isFinanciero && task.sub_type.id + '' === '26' || isCoordinador && task.sub_type.id + '' === '27' || isJuridico && task.sub_type.id + '' === '28' || isSig && task.sub_type.id + '' === '29' || isJuridico && task.sub_type.id + '' === '22' || isAdministrativo && task.sub_type.id + '' === '20' || isDireccion && task.sub_type.id + '' === '16' || isCoordinadorGuardacuenca && task.sub_type.id + '' === '21' || isCoordinadorGuardacuenca && task.sub_type.id + '' === '33'  || isCoordinador)">
+              <th scope="row">Presupuesto</th>
+              <td>Presupuesto</td>
+              <td>
+                <a class="linebtn linebluelight right" routerLink="/app/budgets/{{task.process.id}}/{{task.id}}">Ver</a>
+              </td>
+            </tr>
+
+            <!--PRESUPUESTO DE CONTRATISTA-->
+            <tr *ngIf="isBudgetContratista">
+              <th scope="row">Presupuesto Contratista</th>
+              <td>Presupuesto Contratista</td>
+              <td>
+                <a class="linebtn linebluelight right"
+                   routerLink="/app/budgetsContractor/{{task.process.id}}/{{task.id}}">Ver</a>
+              </td>
+            </tr>
+
+            <!--PRESUPUESTO FINAL-->
+            <tr *ngIf="isBudgetExecution">
+              <th scope="row">Presupuesto Final</th>
+              <td>Presupuesto de Ejecución</td>
+              <td>
+                <a class="linebtn linebluelight right" routerLink="/app/budgetsFinal/{{task.process.id}}/{{task.id}}">Ver</a>
+              </td>
+            </tr>
+
+            <!--CERRAR AGREGAR DOCUMENTOS A LA LISTA-->
+            <tr *ngIf="budget">
+              <th scope="row">{{budget.type}}</th>
+              <td>{{budget.name}}</td>
+              <td>
+                <div class="row">
+                  <div class="col-sm">
+                    <a class="linebtn linebluelight right" routerLink="{{budget.route + task.id}}">Ver</a>
+                  </div>
+                  <div class="col-sm"
+                       *ngIf="isSig && task.sub_type.id + '' === '5' || isSig && task.sub_type.id + '' === '7'">
+                    <a class="linebtn linegreenlight rightn">Descargar</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!--FORMULARIO STARD-->
+            <tr *ngIf="hasStardForm">
+              <th scope="row">Formulario STARD</th>
+              <td>STARD</td>
+              <td>
+                <div class="row">
+                  <div class="col-sm">
+                    <a class="linebtn linebluelight right" routerLink="/app/formato-stard/{{task.id}}">Ver</a>
+                  </div>
+                </div>
+              </td>
+            </tr><!--FORMULARIO STARD-->
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- cargar ficha predial -->
+    <div class="generalrow nopad" *ngIf="isSig && task.sub_type.id + '' === '5'">
+      <div class="col-sm">
+        <div class="title-module">Cargar Ficha Predial</div>
+      </div>
+    </div>
+
+    <!-- cargar cedula del propietario -->
+    <div class="generalrow nopad" *ngIf="isAdministrativo && task.sub_type.id + '' === '2'">
+      <div class="col-sm">
+        <div class="title-module">Cargar Cédula de Ciudadanía del Propietario</div>
+      </div>
+    </div>
+
+    <!-- certificado de tradicion -->
+    <div class="generalrow nopad" *ngIf="isGuardaCuenca && task.sub_type.id + '' === '8'">
+      <div class="col-sm">
+        <div class="title-module">Cargar Certificado de Tradición</div>
+      </div>
+    </div>
+
+    <!-- cargar mapa de verificacion y seguimiento  -->
+    <div class="generalrow nopad" *ngIf="isSig && task.sub_type.id + '' === '15'">
+      <div class="col-sm">
+        <div class="title-module">Cargar Mapa de Verificación y Seguimiento</div>
+      </div>
+    </div>
+
+    <!-- Cargar concepto juridico -->
+    <div class="generalrow nopad" *ngIf="isJuridico && task.sub_type.id + '' === '28'">
+      <div class="col-sm">
+        <div class="title-module">Cargar Concepto Jurídico</div>
+      </div>
+    </div>
+
+    <!-- Cargar concepto coordinacion -->
+    <div class="generalrow nopad" *ngIf="isCoordinador && task.sub_type.id + '' === '27'">
+      <div class="col-sm">
+        <div class="title-module">Cargar Concepto de Coordinación</div>
+      </div>
+    </div>
+
+    <!-- Cargar minuta firmada -->
+    <div class="generalrow nopad" *ngIf="isDireccion && task.sub_type.id + '' === '16'">
+      <div class="col-sm">
+        <div class="title-module">Cargar Minuta Firmada</div>
+      </div>
+    </div>
+
+    <!-- Cargar minurta firmada por propietario -->
+    <div class="generalrow nopad"
+         *ngIf="isSeguimiento && task.sub_type.id + '' === '32' || isGuardaCuenca && task.sub_type.id + '' === '32' || isAdministrativo && task.sub_type.id + '' === '33'">
+      <div class="col-sm">
+        <div class="title-module">Cargar Minuta Firmada por Propietario</div>
+      </div>
+    </div>
+
+    <!-- Cargar mapa de buenas prácticas -->
+    <div class="generalrow nopad"
+         *ngIf="isSig && task.sub_type.id + '' === '29'">
+      <div class="col-sm">
+        <div class="title-module">Cargar mapa de buenas prácticas</div>
+      </div>
+    </div>
+
+    <div class="generalrow nopad"
+         *ngIf="isAdministrativo && task.sub_type.id + '' === '2' || isSig && task.sub_type.id + '' === '5'  || isGuardaCuenca && task.sub_type.id + '' === '8' || isSig && task.sub_type.id + '' === '15' || isCoordinador && task.sub_type.id + '' === '27' || isJuridico && task.sub_type.id + '' === '28' || isDireccion && task.sub_type.id + '' === '16'  || isGuardaCuenca && task.sub_type.id + '' === '32'  || isSeguimiento && task.sub_type.id + '' === '32' || isAdministrativo && task.sub_type.id + '' === '33' || isSig && task.sub_type.id + '' === '29'">
+      <div class="col-sm">
+        <!-- UPLOAD FILE 15 = Cargar Pdf mapa de verificacion y seguimiento -->
+        <cuenca-drag-and-drop style="width: 100%" [taskId]="task"
+                              (notify)='refreshFiles($event)'></cuenca-drag-and-drop>
+      </div>
+    </div>
+
+    <!-- Administrativo / Carga de Documento Ofac -->
+    <div class="generalrow nopad" *ngIf="isAdministrativo && task.sub_type.id + '' === '2'">
+      <div class="col-sm">
+        <div class="title-module">Cargar Documento OFAC</div>
+      </div>
+    </div>
+
+    <div class="generalrow nopad" *ngIf="isAdministrativo && task.sub_type.id + '' === '2'">
+      <div class="col-sm">
+        <!-- UPLOAD FILE OFAC-->
+        <cuenca-drag-and-drop-ofac style="width: 100%" [taskId]="task"
+                                   (notify)='refreshFiles($event)'></cuenca-drag-and-drop-ofac>
+      </div>
+    </div>
+
+    <div class="generalrow nopad">
+      <div class="col-sm">
+        <div class="row">
+          <!-- Archoivos asociados -->
+          <div class="col-sm" *ngIf="!documents">
+            <div class="header-module">
+              <h3 class="title-module">Archivos asociados</h3>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <!-- Label -->
+          <div class="col-sm" *ngIf="!documents">
+            <div style="padding: 15px; text-align: center; background-color: #f1dfdd; border-radius: 25px">
+              No se han cargado archivos
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="generalrow nopad">
+      <!-- DOCUMENTS TABLE -->
+      <div class="table-container" *ngIf="documents">
+        <div class="header-module">
+          <h3 class="title-module">Documentos asociados</h3>
+        </div>
+        <table class="table">
+          <thead class="items-table">
+          <tr>
+            <th scope="col">Tipo</th>
+            <th scope="col">Fecha de carga</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let document of documents">
+            <th scope="row">{{document.sub_type}}</th>
+            <td>{{getDateWithHour(document.created_at)}}</td>
+            <td>
+              <div class="main-container">
+                <button type="button" style="cursor: pointer" class="mainbtn plainorange left marginbuttom marginright"
+                        (click)="selectAnexoFile(document, document.sub_type)">Agregar Anexos
+                </button>
+                <button type="button" style="cursor: pointer"
+                        class="mainbtn plainbluelight left marginbuttom marginright"
+                        (click)="getDocumentAttachment(document)">Ver anexos
+                </button>
+                <a (click)="downloadFileWithToken(this.cuencaService, URL_BASE_FILES, document)"
+                   class="mainbtn plaingreenlight left marginright marginbuttom" style="text-decoration: none" download>Descargar</a>
+
+                <div class="col-sm" *ngIf="task.sub_type.id  === document.id_sub_type"> <!---->
+                  <a (click)="eliminarDoc(document.id, 'doc')"
+                     class="mainbtn plainredlight left marginbuttom marginleft">Eliminar</a>
+                </div>
+
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="generalrow nopad">
+      <!-- DOCUMENTS TABLE -->
+      <div class="table-container" *ngIf="anexos">
+        <div class="header-module">
+          <h3 class="title-module">Documentos anexos de: {{selectedDocument.sub_type}}</h3>
+        </div>
+        <table class="table">
+          <thead class="items-table">
+          <tr>
+            <th scope="col">Tipo</th>
+            <th scope="col">Comentario</th>
+            <th scope="col">Fecha de carga</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let anexo of anexos">
+            <th scope="row">{{anexo.image.substring(anexo.image.indexOf('_') + 1, anexo.image.length)}}</th>
+            <td>{{anexo.comment === 'undefined' ? 'N/A' : anexo.comment}}</td>
+            <td>{{getDateWithHour(anexo.create_ad)}}</td>
+            <td>
+              <a (click)="downloadFileWithToken(this.cuencaService, URL_BASE_FILES, anexo.image)"
+                 class="mainbtn plaingreenlight left" style="text-decoration: none" download>Descargar</a>
+              <div class="col-sm" *ngIf="isCoordinador"> <!----><a (click)="deleteAttachedFile(anexo)"
+                                                                   class="mainbtn gradRed">Eliminar</a></div>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="subirAnexo">
+      <div class="generalrow nopad">
+        <div class="col-sm">
+          <div class="header-module">
+            <h3 class="title-module">Subir Anexos para: {{selectNameAnexo}}</h3>
+          </div>
+        </div>
+
+        <div class="col-sm">
+          <button type="button" class="mainbtn plainredlight right" (click)="cancelAnexoFile()">Cancelar</button>
+        </div>
+
+      </div>
+
+      <div class="generalrow nopad">
+        <div class="col-sm">
+          <cuenca-drag-and-drop-anexos [idFile]="subirAnexo"
+                                       (notify)="messageUploadFile($event)"></cuenca-drag-and-drop-anexos>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="generalrow nopad" *ngIf="images.length > 0">
+      <div class="photo-container" *ngIf="images">
+        <div class="title-module">Registro fotografico</div>
+        <ul class="list-images">
+          <li class="thumb-image col-lg-3 col-md-3 col-sm-6" *ngFor="let image of images">
+            <a class="link-image-container">
+              <img class="imagethumb" [src]="IMAGES_URL_CUENCA+ 'img-thumbnails/' + image.name">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CUADRO DE MONITOREOS -->
+
+    <div *ngIf="isCoordinador && task.sub_type.id + '' === '24'">
+      <!-- 24 = Programación de Monitoreos y Mantenimientos -->
+      <h3 class="title-module">Programación de Monitoreos y Mantenimientos</h3>
+
+      <div class="generalrow nopad">
+        <div class="col-sm">
+          <cuenca-monitoreos-component [task]="task" (notify)='eventoProgramar($event)'></cuenca-monitoreos-component>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CERRAR CUADRO DE MONITOREOS -->
+
+    <div class="generalrow nopad">
+      <div class="row">
+        <div class="col-sm">
+          <div class="header-module">
+            <h3 class="title-module">Comentarios</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="comments-container" *ngFor="let comment of comments">
+        <div class="generalrow">
+          <div class="user-comment col-12 col-md-5 col-lg-4 col-xl-3"> Usuario: {{comment.user_name}}</div>
+          <div class="date-comment col-12 col-md-5 col-lg-4 col-xl-3"> Fecha: {{getDateWithHour(comment.created_at)}}
+          </div>
+          <div class="commentstext col-12">
+            <div>{{comment.description}}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="generalrow">
+        <div class="col-sm">
+              <textarea class="form-control simpleinput" rows="3" name="task_comments"
+                        placeholder="Agrega algún comentario a la tarea" [(ngModel)]="comentario"></textarea>
+        </div>
+        <div class="col-sm" *ngIf="!canAssignTask">
+          <button class="mainbtn plaingreenlight right margintop" (click)="insertComment(); $event.stopPropagation();">
+            Enviar
+          </button>
+        </div>
+      </div>
+
+      <div class="generalrow" *ngIf="task && roles.length > 0 && canAssignTask">
+
+        <div *ngIf="task.sub_type.id + '' === '4'">
+          <div class="row" style="margin-bottom: 10px">
+
+            <div class="col-md-12 col-sm-12 plain-arrow">
+              <label for="rol" class="subtitle-item">Rol</label>
+              <select [(ngModel)]="task.role.id" class="custom-select form-control gradblue" name="selected_role"
+                      (change)="getUserRoles()" id="rol"> <!--[disabled]="task.sub_type.id + '' === '4'"-->
+                <option *ngFor="let option of roles" [ngValue]="option.id">{{option.name}}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-bottom: 10px">
+            <div class="col-sm-12 col-md-12">
+              <div *ngIf="users.length>0">
+                <div class="subtitle-item">Usuarios</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-bottom: 10px">
+            <div class="col-sm-12 col-md-12">
+              <div *ngIf="users.length > 0">
+                <div *ngFor="let usuario of users; let i = index">
+                  <input type="checkbox" [id]="'usuario' + usuario.id" [(ngModel)]="usersSelected[i]"
+                         (ngModelChange)="editUserArray(usersSelected[i], i, usuario.id)">
+                  <label [for]="'usuario' + usuario.id">{{usuario.name}}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="generalrow nopad" *ngIf="roles.length > 0 && canAssignTask">
+        <div class="row" style="margin-bottom: 10px; margin-top: 15px;">
+          <div class="col-sm">
+            <button type="button" class="btn btn-success" style="float: right; cursor: pointer;" data-toggle="modal"
+                    data-target="#cModal">
+              Guardar
+            </button>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="cModal" tabindex="-1" role="dialog" aria-labelledby="exLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exLabel">Está Seguro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                En caso de modificar el listado de los usuarios, la tarea de aquellos usuarios sacados de la lista de
+                incluidos será removida del sistema.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="linebtn lineredlight right" style="cursor: pointer" data-dismiss="modal">
+                  Cancelar
+                </button>
+                <button type="button" class="linebtn linegreenlight right" style="cursor: pointer"
+                        (click)="updateTask()">Continuar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

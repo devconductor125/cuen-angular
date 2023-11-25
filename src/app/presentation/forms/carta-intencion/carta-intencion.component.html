@@ -1,0 +1,592 @@
+<div class="container wrap" style="margin-top: 25px;" *ngIf="datosCarta">
+
+  <div class="row">
+    <div class="col-12">
+
+      <button (click)="printDiv()" class="print_btn"><i class="fas fa-print" style="margin-right: 5px"></i>
+        Imprimir Carta
+      </button>
+
+      <button type="button" class="print_btn" style="float: right; cursor: pointer; background-color: green; margin-right: 10px" (click)="updateCarta()" *ngIf="isAdministrativo">
+        Actualizar
+      </button>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12">
+      <div style="text-align: left; font-size: 14px; font-weight: bold; padding: 50px">Carta de Intención</div>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+      <div class="col-12">
+        <div>
+          <label for="nombre_predio" class="label_encuesta">Nombre del Predio</label>
+          <input type="text" class="form-control" [(ngModel)]="datosCarta.property_name" id="nombre_predio"
+                 [disabled]="!isAdministrativo">
+        </div>
+      </div>
+    </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div>
+        <label for="predioCorrelacion" class="label_encuesta">Vinculación con el Predio</label>
+        <select class="form-control" [(ngModel)]="datosCarta.property_correlation_id" id="predioCorrelacion" [disabled]="!isAdministrativo">
+          <option [value]="0">Selecciona una opción</option>
+          <option [value]="1">Propietario</option>
+          <option [value]="2">Poseedor</option>
+          <option [value]="3">Representante Legal</option>
+          <option [value]="4">Arrendatario</option>
+          <option [value]="5">Tenedor</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-12">
+      <div>
+        <label class="label_encuesta"><strong>Estrategias de Conservación en el Predio</strong></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-12">
+      <div style="text-align: left; font-weight: bold; background-color: #0B5CC6; color: whitesmoke; padding: 5px; border-radius: 10px">
+        <input [(ngModel)]="datosCarta.hill_side_forest.checked" type="checkbox" class="checkbox" id="exampleCheck20" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck20">Bosque de Ladera</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="datosCarta.hill_side_forest.checked" style="background-color: white; margin: 5px; padding: 5px; border-radius: 10px">
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.hill_side_forest.enrichment" type="checkbox" class="checkbox" id="exampleCheck21" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck21">Enriquecimiento</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.hill_side_forest.insulation" type="checkbox" class="checkbox" id="exampleCheck22" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck22">Aislamiento</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.hill_side_forest.establishment" type="checkbox" class="checkbox" id="exampleCheck23" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck23">Establecimiento</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.hill_side_forest.seedlings_insulation" type="checkbox" class="checkbox" id="exampleCheck24" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck24">Aislamiento con Plántulas</label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-12">
+      <div style="text-align: left; font-weight: bold; background-color: #0B5CC6; color: whitesmoke; padding: 5px; border-radius: 10px">
+        <input [(ngModel)]="datosCarta.river_bank_forest.checked" type="checkbox" class="checkbox" id="exampleCheck30" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck30">Bosque de Ribera</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="datosCarta.river_bank_forest.checked" style="background-color: white; margin: 5px; padding: 5px; border-radius: 10px">
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.river_bank_forest.enrichment" type="checkbox" class="checkbox" id="exampleCheck31" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck31">Enriquecimiento</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.river_bank_forest.insulation" type="checkbox" class="checkbox" id="exampleCheck32" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck32">Aislamiento</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.river_bank_forest.establishment" type="checkbox" class="checkbox" id="exampleCheck33" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck33">Establecimiento</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.river_bank_forest.seedlingsInsulation" type="checkbox" class="checkbox" id="exampleCheck34" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck34">Aislamiento con Plántulas</label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-12">
+      <div style="text-align: left; font-weight: bold; background-color: #0B5CC6; color: whitesmoke; padding: 5px; border-radius: 10px">
+        <input [(ngModel)]="datosCarta.origins_forest.checked" type="checkbox" class="checkbox" id="exampleCheck40" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck40">Bosques de Nacimientos</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="datosCarta.origins_forest.checked" style="background-color: white; margin: 5px; padding: 5px; border-radius: 10px">
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.origins_forest.enrichment" type="checkbox" class="checkbox" id="exampleCheck41" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck41">Enriquecimiento</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.origins_forest.insulation" type="checkbox" class="checkbox" id="exampleCheck42" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck42">Aislamiento</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.origins_forest.establishmen" type="checkbox" class="checkbox" id="exampleCheck43" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck43">Establecimiento</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.origins_forest.seedlingsInsulation" type="checkbox" class="checkbox" id="exampleCheck44" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck44">Aislamiento con Plántulas</label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-12">
+      <div style="text-align: left; font-weight: bold; background-color: #0B5CC6; color: whitesmoke; padding: 5px; border-radius: 10px">
+        <input [(ngModel)]="datosCarta.deforestation_prevention.checked" type="checkbox" class="checkbox" id="exampleCheck50" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck50">Prevención de la deforestación</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="datosCarta.deforestation_prevention.checked" style="background-color: white; margin: 5px; padding: 5px; border-radius: 10px">
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.deforestation_prevention.efficient_stove" type="checkbox" class="checkbox" id="exampleCheck51" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck51">Estufa Eficiente</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.deforestation_prevention.orchard_firewood" type="checkbox" class="checkbox" id="exampleCheck52" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck52">Huerto Leñero</label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-12">
+      <div style="text-align: left; font-weight: bold; background-color: #0B5CC6; color: whitesmoke; padding: 5px; border-radius: 10px">
+        <input [(ngModel)]="datosCarta.sustainable_cattle_raising_and_good_practices.checked" type="checkbox" class="checkbox" id="exampleCheck60" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck60">Ganadería sostenible y buenas prácticas</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="datosCarta.sustainable_cattle_raising_and_good_practices.checked" style="background-color: white; margin: 5px; padding: 5px; border-radius: 10px">
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.sustainable_cattle_raising_and_good_practices.cattle_pass" type="checkbox" class="checkbox" id="exampleCheck61" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck61">Paso de Ganado</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.sustainable_cattle_raising_and_good_practices.saver_sprue" type="checkbox" class="checkbox" id="exampleCheck62" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck62">Bebedero Ahorrador</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.sustainable_cattle_raising_and_good_practices.water_tank" type="checkbox" class="checkbox" id="exampleCheck63" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck63">Tanque de Agua</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.sustainable_cattle_raising_and_good_practices.sparse_trees" type="checkbox" class="checkbox" id="exampleCheck64" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck64">Árboles Dispersos</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.sustainable_cattle_raising_and_good_practices.electric_fence" type="checkbox" class="checkbox" id="exampleCheck65" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck64">Cercos vivos</label>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="row">
+    <div class="col-12">
+      <div style="text-align: left; font-weight: bold; background-color: #0B5CC6; color: whitesmoke; padding: 5px; border-radius: 10px">
+        <input [(ngModel)]="datosCarta.integral_basic_sanitation.checked" type="checkbox" class="checkbox" id="exampleCheck70" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck70">Saneamiento Básico Integral</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="datosCarta.integral_basic_sanitation.checked" style="background-color: white; margin: 5px; padding: 5px; border-radius: 10px">
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.integral_basic_sanitation.stard_maintenance" type="checkbox" class="checkbox" id="exampleCheck71" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck71">Mantenimiento STARD</label>
+      </div>
+    </div>
+
+    <div class="col-md col-sm-12">
+      <div>
+        <input [(ngModel)]="datosCarta.integral_basic_sanitation.stard_installation" type="checkbox" class="checkbox" id="exampleCheck72" [disabled]="!isAdministrativo">
+        <label class="form-check-label" for="exampleCheck72">Suministro e instalación de STARD</label>
+      </div>
+    </div>
+
+  </div>
+
+
+  <hr/>
+
+
+  <div style="display: none">
+
+    <div class="row">
+      <div class="col-sm" style="text-align: left; font-size: 16px; font-weight: bold">
+        <div>Visualización de Carta de intención</div>
+      </div>
+    </div>
+    <div id="a-imprimir"> <!--/// Imprimir-->
+      <!-- HOJA 1 -->
+      <div class="imprimir">
+
+        <div class="row noMostrar">
+          <div class="col-sm col-12 col-md" style="text-align: center">
+            <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm col-md " style="text-align: center">
+            <div class="title-header">
+              <strong>Medellín</strong> {{propertyVisitDay}}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm col-md " style="text-align: center">
+            <div style="text-align: left">
+              <strong>Doctora</strong><br>
+              MARIA CLAUDIA DE LA OSSA POSADA<br>
+              Corporación <strong>CUENCAVERDE</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm col-md " style="text-align: center; padding-top: 25px; padding-bottom: 25px">
+            <div style="text-align: center">
+              <strong>Asunto</strong><br>
+              Carta de intención de participación a proyectos de la Corporación
+              CuencaVerde.
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm col-md " style="text-align: center">
+            <div class="parag">
+              En calidad de {{datosCarta.property_correlation}}(a) del predio {{datosCarta.property_name}}, ubicado en márgenes de {{datosCarta.margins}},
+              Municipio de {{datosCarta.municipality}}, vereda {{datosCarta.lane}}, con una extensión aproximada de {{datosCarta.extension}} ratifico mi interés de participar en el
+              proyecto: Proyectos de Conservación y manejo sostenible de cuencas abastecedoras prioritarias del Fondo de Agua del Valle de Aburra. <br><br>
+
+              De acuerdo con el recorrido en campo y la reunión realizada el día {{(datosCarta.created_at) ? convertirFechaD(datosCarta.created_at) : ''}}, se identificaron las siguientes estrategias de conservación en el predio:
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md col-sm" style="text-align: center">
+            <table width="100%">
+              <tr *ngIf="datosCarta.hill_side_forest && datosCarta.hill_side_forest.checked">
+                <td width="25%" style="border: none; font-weight: bold">▼  Bosque Ladera</td>
+                <td style="border: none">
+                  <tr>
+                    <td class="center" style="padding: 0px 15px;" *ngIf="datosCarta.hill_side_forest.enrichment">Enriquecimiento</td>
+                    <td class="center" style="padding: 0px 15px;" *ngIf="datosCarta.hill_side_forest.insulation">Aislamiento</td>
+                    <td class="center" style="padding: 0px 15px;" *ngIf="datosCarta.hill_side_forest.establishment">Establecimiento</td>
+                    <td class="center" style="padding: 0px 15px;" *ngIf="datosCarta.hill_side_forest.seedlings_insulation">Aislamiento con Plántulas</td>
+                  </tr>
+                </td>
+              </tr>
+
+              <tr *ngIf="datosCarta.river_bank_forest && datosCarta.river_bank_forest.checked">
+                <td width="25%" style="border: none; font-weight: bold">▼ Bosque de Ribera</td>
+                <td style="border: none">
+                  <tr>
+                    <td class="center" style="padding: 0px 15px;" *ngIf="datosCarta.river_bank_forest.enrichment">Enriquecimiento</td>
+                    <td class="center" style="padding: 0px 15px;" *ngIf="datosCarta.river_bank_forest.insulation">Aislamiento</td>
+                    <td class="center" style="padding: 0px 15px;" *ngIf="datosCarta.river_bank_forest.establishment">Establecimiento</td>
+                    <td class="center" style="padding: 0px 15px;" *ngIf="datosCarta.river_bank_forest.seedlingsInsulation">Aislamiento con Plántulas</td>
+                  </tr>
+                </td>
+              </tr>
+
+              <tr *ngIf="datosCarta.origins_forest.checked">
+                <td width="25%" style="border: none; font-weight: bold">▼ Bosques de Nacimientos</td>
+                <td style="border: none">
+                  <tr>
+                    <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.origins_forest.enrichment">Enriquecimiento</td>
+                    <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.origins_forest.insulation">Aislamiento</td>
+                    <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.origins_forest.establishment">Establecimiento</td>
+                    <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.origins_forest.seedlingsInsulation">Aislamiento con Plántulas</td>
+                  </tr>
+                 </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md col-sm" style="text-align: center">
+            <div class="parag">
+              Adicionalmente es de mi interés participar en el proyecto de buenas prácticas de producción sostenible y saneamiento básico integral, dentro de las cuales se encuentran:
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md col-sm" style="text-align: center">
+            <table width="100%">
+
+              <tr *ngIf="datosCarta.deforestation_prevention.checked">
+                <td width="40%" style="border: none; font-weight: bold">▼ Prevención de la deforestación</td>
+                <td style="border: none">
+                    <tr>
+                      <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.deforestation_prevention.efficient_stove">Estufa eficiente</td>
+                      <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.deforestation_prevention.orchard_firewood">Huerto Leñero</td>
+                    </tr>
+                </td>
+              </tr>
+
+              <tr *ngIf="datosCarta.sustainable_cattle_raising_and_good_practices.checked">
+                <td width="40%" style="border: none; font-weight: bold">▼ Ganadería sostenible y buenas prácticas</td>
+                <td style="border: none">
+                    <tr>
+                      <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.sustainable_cattle_raising_and_good_practices.cattle_pass">Paso de Ganado</td>
+                      <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.sustainable_cattle_raising_and_good_practices.saver_sprue">Bebedero ahorrador</td>
+                      <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.sustainable_cattle_raising_and_good_practices.water_tank">Tanque de Agua</td>
+                      <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.sustainable_cattle_raising_and_good_practices.sparse_trees">Árboles Dispersos</td>
+                    </tr>
+                </td>
+              </tr>
+
+
+              <tr *ngIf="datosCarta.integral_basic_sanitation.checked">
+                <td width="40%" style="border: none; font-weight: bold">▼ Saneamiento Básico Integral</td>
+                <td style="border: none">
+                  <tr>
+                    <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.integral_basic_sanitation.stard_maintenance">Mantenimiento STARD</td>
+                    <td style="padding: 0px 15px;" class="center" *ngIf="datosCarta.integral_basic_sanitation.stard_installation">Suministro e instalación de STARD</td>
+                  </tr>
+                </td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARTA VIEJA
+            <div><p class="c2"><span
+              style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 225.03px; height: 137.02px;"><img
+              alt="" src="images/image1.png"
+              style="width: 225.03px; height: 137.02px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
+              title=""></span></p></div>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c7"><span class="c9">Medell&iacute;n, </span><span>Fecha de firma por el propietario</span>
+            </p>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c7"><span class="c1">Doctora</span></p>
+            <p class="c7"><span class="c1">MARIA CLAUDIA DE LA OSSA POSADA </span></p>
+            <p class="c7"><span class="c1">Corporaci&oacute;n CUENCAVERDE </span></p>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c7"><span class="c1">Asunto: Carta de intenci&oacute;n de participaci&oacute;n en acciones con la Corporaci&oacute;n CuencaVerde. </span>
+            </p>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c0"><span class="c1"></span></p>
+            <p class="c5"><span class="c9">Como propietario(a)/Representante legal del predio </span><span class="c1">&nbsp;, ubicado en &aacute;rea de influencia del r&iacute;o, quebrada, arroyo de __________________________________________, Municipio de {{cartaIntencion.general_info.municipality}}, vereda {{cartaIntencion.general_info.lane}}, con una extensi&oacute;n total de ___________ ha, ratifico mi inter&eacute;s de participar en el proyecto: Fortalecimiento de mecanismos de conservaci&oacute;n y manejo sostenible de cuencas abastecedoras prioritarias del Fondo de Agua del Valle de Aburra, a trav&eacute;s de acciones de restauraci&oacute;n ecol&oacute;gica de los bosques asociados a las fuentes abastecedoras del embalse&nbsp; ___________________. </span>
+            </p>
+            <p class="c5"><span class="c1">Donde se identifican como posibles acciones:</span></p>
+            <p class="c5 c8"><span class="c1"></span></p>
+            <p class="c5"><span class="c1">De acuerdo con el recorrido en campo y la reuni&oacute;n realizada el d&iacute;a {{cartaIntencion.general_info.visit_date.day + '/' + cartaIntencion.general_info.visit_date.month + '/' + cartaIntencion.general_info.visit_date.year}}, se identificaron las siguientes acciones de conservaci&oacute;n y protecci&oacute;n a realizarse en el predio:</span>
+            </p>
+            <p class="c5 c8"><span class="c1"></span></p>
+            <ul class="c3 lst-kix_4dzom62eeevk-0 start" *ngFor="let budget of cartaIntencion.budget">
+              <li class="c5 c6"><span class="c1">{{budget.action.name}}</span></li>
+            </ul>
+          </div>-->
+
+
+      <!-- HOJA 2 -->
+      <div class="imprimir">
+        <div class="row noMostrar page-break">
+          <div class="col-sm col-12 col-md " style="text-align: center">
+            <img [src]="URL_IMG + 'Logo_cuenca.png'" height="auto" width="250px">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md col-sm" style="text-align: center">
+            <div class="parag">
+              <br><br>
+              De conformidad con lo anterior manifiesto/manifestamos, que de acuerdo con lo
+              planteado con el equipo de la <strong>Corporación CuencaVerde</strong> y buscando mejorar las
+              condiciones ambientales del predio, es de mi/nuestro interés participar en estos
+              proyectos.<br><br>
+              Las anteriores posibilidades serán analizadas en conjunto con el equipo de la
+              <strong>Corporación CuencaVerde</strong> y será precisado el apoyo a recibir en el respectivo
+              acuerdo de compromiso de las partes.<br><br>
+              Dada mi calidad respecto del predio, me comprometo a gestionar lo
+              correspondiente para hacer posible la celebración del acuerdo respectivo con la
+              <strong>CORPORACIÓN</strong>, entendiendo la necesidad de aportar para ello el certificado de
+              tradición y libertad vigente o el que corresponda y fotocopia de mi cédula de
+              ciudadanía.<br><br>
+              Firmo esta carta de intención para continuar con el proceso de negociación,
+              consiento y autorizo que mis datos personales sean adicionados a la base de
+              datos administrada por la Corporación CuencaVerde y se utilicen única y
+              exclusivamente para los fines que correspondan a los trabajados conjuntos que
+              aquí se consignan, así como lo que se defina de suscribirse el correspondiente
+              acuerdo, esto de conformidad con lo dispuesto en la ley <strong>1581</strong> de <strong>2012</strong> y el decreto
+              <strong>1377</strong> de <strong>2013</strong>.<br><br>
+              Quedo atento(a) a brindar cualquier información adicional.
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-sm col-md " style="text-align: center">
+            <div class="parag">
+              <br>
+              <br>
+              Cordialmente
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm col-md " style="text-align: center">
+            <div style="height: 40px; width: 300px; border-bottom: solid 2px black">
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm col-md " style="text-align: center">
+            <div class="parag">
+              <strong>Propietario del predio/Representante legal</strong> {{datosCarta.contact_name}}<br>
+              <strong>Cédula de Ciudadanía Nº</strong> {{datosCarta.id_card_number}}<br>
+              <strong>Correo Electrónico</strong> {{datosCarta.email}}<br>
+              <strong>Celular</strong> {{datosCarta.mobile_number}}<br>
+            </div>
+          </div>
+        </div>
+
+        <!--
+
+
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5"><span class="c9">Queremos manifestar, que de acuerdo con lo conversado con el equipo de la Corporaci&oacute;n CuencaVerde, buscando mejorar las condiciones ambientales del predio, nos interesa participar del(los) programa(s) de Restauraci&oacute;n de Ecosistemas y Buenas Pr&aacute;cticas Sostenibles - Gesti&oacute;n y Conservaci&oacute;n del Recurso H&iacute;drico y la Biodiversidad que incluye la realizaci&oacute;n </span><span
+                class="c9">de las siguientes acciones:</span></p>
+              <p class="c5 c8"><span class="c9 c11"></span></p>
+              <ul class="c3 lst-kix_4dzom62eeevk-0" *ngFor="let budget of cartaIntencion.budget">
+                <li class="c5 c6"><span class="c9">{{budget.action.name}}</span></li>
+              </ul>
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5"><span class="c1">Las anteriores posibilidades ser&aacute;n analizadas en conjunto con el equipo de la Corporaci&oacute;n CuencaVerde y ser&aacute; precisado el apoyo a recibir en el respectivo acuerdo de compromiso de las partes. </span>
+              </p>
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5"><span class="c1">Como propietario del predio me comprometo a hacer entrega del certificado de tradici&oacute;n y libertad vigente y fotocopia de mi c&eacute;dula de ciudadan&iacute;a, en un plazo no mayor a 10 d&iacute;as h&aacute;biles.</span>
+              </p>
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5"><span class="c1">Firmo esta carta de intenci&oacute;n para continuar con el proceso de negociaci&oacute;n.&nbsp; Quedo atento(a) a brindar cualquier informaci&oacute;n adicional.</span>
+              </p>
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5"><span class="c1">Cordialmente,</span></p>
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5 c8"><span class="c1"></span></p>
+              <p class="c5"><span class="c1">______________________________________</span></p>
+              <p class="c10 c8"><span class="c1"></span></p>
+              <p class="c10"><span class="c1">Propietario del predio/Representante legal {{cartaIntencion.general_info.contact.contact_name}}</span></p>
+              <p class="c10"><span class="c1">C&eacute;dula de ciudadan&iacute;a N&deg;{{cartaIntencion.general_info.contact.contact_id_card_number}}</span></p>
+              <p class="c10"><span class="c1">Correo electr&oacute;nico: {{cartaIntencion.general_info.contact.contact_email}}</span></p>
+              <p class="c10"><span class="c1">Celular: {{cartaIntencion.general_info.contact.contact_mobile_number}}</span></p>
+              <p class="c8 c10"><span class="c1"></span></p>
+              <p class="c5 c8" id="h.gjdgxs"><span class="c1"></span></p>-->
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

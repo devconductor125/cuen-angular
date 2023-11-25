@@ -1,0 +1,98 @@
+<ng-ais-instantsearch #instantSearch [componentId]="instantSearch"
+                      [config]="{
+        appId: 'T50415WVTI',
+        apiKey: 'a4e4fa4c426ac3ca50328b6d195259b6',
+        indexName: 'cv_search_cuenca_algolia',
+        routing: false
+      }">
+  <!--<div style="height: 0">
+    <p class="text-center" style="visibility: collapse">-->
+  <div style="visibility: collapse">
+    <p class="text-center">
+      <ng-ais-search-box #searchBox [componentId]="searchBox" placeholder="Buscar..."></ng-ais-search-box>
+    </p>
+
+    <div class="row">
+
+      <!--<div class="col-4">
+        <ng-ais-panel header="Colors">
+          <ng-ais-refinement-list
+            attribute="colors"
+            operator="or"
+            limit="10">
+          </ng-ais-refinement-list>
+        </ng-ais-panel>
+      </div>-->
+
+      <!--<div class="col-4">
+        <ng-ais-panel header="Sort by">
+          <ng-ais-sort-by [items]="
+                  [
+                    {name: 'ikea', label: 'Populares'},
+                    {name: 'ikea_price_asc', label: 'Price asc.'},
+                    {name: 'ikea_price_desc', label: 'Price desc.'}
+                  ]
+                ">
+          </ng-ais-sort-by>
+        </ng-ais-panel>
+        <hr/>
+        <ais-menu-select>
+        </ais-menu-select>
+      </div>-->
+
+    </div>
+  </div>
+
+  <div class="section group" *ngIf="!hasResults">
+    <span>No hay resultados por </span>
+    <span style="font-weight: bold">{{searchTerm}}</span>
+  </div>
+  <div class="section group" *ngIf="hasResults && searchTerm.length > 0">
+    <div class="col span_1_of_2">
+
+      <ng-ais-panel header="Filtrar por">
+        <ng-ais-hierarchical-menu
+          [attributes]="['type']"
+          [sortBy]="['type:asc']">
+        </ng-ais-hierarchical-menu>
+      </ng-ais-panel>
+
+    </div>
+    <div class="col span_2_of_2">
+
+      <div id="results-hits-container">
+        <ng-ais-hits>
+          <ng-template let-hits="hits">
+            <div *ngFor="let hit of hits"
+                 class="hit hit-row"
+                 id="hit-{{hit.objectID}}">
+              <div>
+                <!--<div class="hit-picture">
+                  <img class="hit-image" [src]="hit.image"/>
+                </div>-->
+                <div class="hit-content">
+                  <div>
+                    <ng-ais-highlight [hit]="hit" attribute="name" class="hit-type hit-title"
+                                      (click)="openResult(hit)"></ng-ais-highlight>
+                    <span> - </span>
+                    <ng-ais-highlight [hit]="hit" attribute="type" class="hit-type hit-type-custom"></ng-ais-highlight>
+                  </div>
+                  <div class="hit-description">
+                    <ng-ais-highlight
+                      [hit]="hit"
+                      attribute="description_short">
+                    </ng-ais-highlight>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ng-ais-hits>
+      </div>
+      <div id="results-pagination-container">
+        <ng-ais-pagination></ng-ais-pagination>
+      </div>
+
+    </div>
+  </div>
+</ng-ais-instantsearch>

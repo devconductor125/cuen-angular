@@ -1,0 +1,34 @@
+<div>
+  <!-- LISTADO DE ACCIONES-->
+  <div class="generalrow" style="font-weight: bold; font-size: 14px">
+    <div class="subtitle-item">Registra una Nueva Acción</div>
+    <hr/>
+
+    <div class="col-sm">
+
+      <label for="usuario3">Selecciona la acción: </label>
+      <select [(ngModel)]="addAction.id" class="custom-select form-control gradblue" name="selected_user" id="usuario3">
+        <option [value]="0">Seleccione una Acción</option>
+        <option *ngFor="let action of listActionsGoodPractices" [ngValue]="action.id">{{action.name}}</option>
+      </select>
+
+    </div>
+
+    <div class="col-sm">
+      <label for="usuario3">Selecciona la cantidad: </label>
+      <input type="number" class="form-control" min="0" [(ngModel)]="addAction.length">
+    </div>
+
+  </div>
+
+  <hr/>
+
+  <div class="generalrow">
+    <div class="col-sm">
+      <button type="button"  class="mainbtn plainorange right margintop" id="addAction" (click)="addActionValid()"> Agregar Acción</button>
+    </div>
+  </div>
+
+
+
+</div>

@@ -1,0 +1,36 @@
+<div class="outer">
+
+  <div class="middle">
+
+    <div class="container inner">
+
+      <div class="row">
+        <div class="col-sm" style="text-align: center">
+          <div><img class="logo-cuenca"></div>
+        </div>
+      </div>
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Bienvenido a nuestra plataforma. Por favor ingrese su usuario y contraseña</h2>
+        <label for="inputEmail" class="sr-only">Dirección Email</label>
+        <input [(ngModel)]="logIn.username" type="email" id="inputEmail" class="form-control form-login user" placeholder="Dirección Email" name="username" required autofocus>
+        <label for="inputPassword" class="sr-only">Clave</label>
+        <input [(ngModel)]="logIn.password" type="password" id="inputPassword" class="form-control form-login passw" placeholder="Clave" name="password" required>
+        <div class="checkbox" *ngIf="true">
+          <label>
+            <input type="checkbox" value="remember-me"> Recordarme
+          </label>
+          
+          <label style="float: right;">
+            <a routerLink="/forgot-password">Olvidó su contraseña?</a>
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block btnlogin" style="cursor: pointer" type="submit" (click)="logInClick()">Iniciar Sesión</button>
+      </form>
+
+      <a class="logo-footer-login"> </a>
+    </div> <!-- /container -->
+
+  </div>
+
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="11px" height="21px" viewBox="0 0 11 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.1 (47250) - http://www.bohemiancoding.com/sketch -->
+    <title>right-arrow copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 3.21579243e-15 0 21 11 21 11 0"></polygon>
+    </defs>
+    <g id="PROYECTO-HOME" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-311.000000, -483.000000)">
+        <g id="right-arrow-copy" transform="translate(311.000000, 483.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Clip-2"></g>
+            <path d="M1.24033555,20.7825341 C1.09840578,20.9273605 0.921048924,21 0.726421361,21 C0.530908121,21 0.35465836,20.9273605 0.21272859,20.7825341 C-0.0709095301,20.492655 -0.0709095301,20.0221954 0.21272859,19.7323163 L9.24685736,10.499406 L0.21272859,1.26762715 C-0.0709095301,0.977521733 -0.0709095301,0.5063833 0.21272859,0.217409342 C0.495481033,-0.0724697807 0.956476011,-0.0724697807 1.24033555,0.217409342 L10.7872714,9.97441023 C11.0709095,10.2642894 11.0709095,10.7354278 10.7872714,11.024628 L1.24033555,20.7825341 Z" id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)"></path>
+        </g>
+    </g>
+</svg>

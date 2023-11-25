@@ -1,0 +1,157 @@
+<div id="contenido" class="contents-app" style="padding: 0px 50px 0px 50px" *ngIf="contractor && contractor.user">
+  <div class="generalrow">
+    <div class="col-sm">
+      <div style="text-align: center; font-size: 18px; font-weight: bold; padding: 50px">Nuevo contratista</div>
+    </div>
+  </div>
+
+  <div class="generalrow">
+    <div class="col-sm">
+      <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 50px">Datos de Acceso</div>
+    </div>
+  </div>
+
+  <div class="generalrow" style="margin-bottom: 10px">
+    <div class="col-sm">
+      <label for="user">Usuario de Acceso</label>
+      <input type="text" class="form-control simpleinput" id="user" aria-describedby="user"
+             placeholder="Usuario" [(ngModel)]="contractor.user.name"
+             name="user" disabled="disabled">
+    </div>
+    <div class="col-sm">
+      <label for="pass">Clave de Acceso</label>
+      <input type="password" class="form-control simpleinput" id="pass" aria-describedby="pass"
+             placeholder="Clave" [(ngModel)]="contractor.user.pass"
+             name="pass" disabled="disabled">
+    </div>
+    <div class="col-sm">
+      <label for="pass">Repita la Clave</label>
+      <input type="password" class="form-control simpleinput" id="repeat" aria-describedby="repeat"
+             placeholder="Repita Clave" [(ngModel)]="repeatpass"
+             name="repeat" disabled="disabled">
+    </div>
+  </div>
+
+  <div class="generalrow">
+    <div class="col-sm">
+      <label for="email">Email del contratista</label>
+      <input type="email" class="form-control simpleinput" id="email" aria-describedby="email"
+             placeholder="Correo Electrónico" [(ngModel)]="contractor.user.email"
+             name="email" disabled="disabled">
+    </div>
+  </div>
+
+
+
+  <div class="dropdown-divider"></div>
+
+    <div class="generalrow">
+      <div class="col-sm">
+        <div style="text-align: left; font-size: 18px; font-weight: bold; padding: 50px">Datos del Contratista</div>
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 15px">
+
+      <div class="col-sm" style="border: solid 2px #1177CA; border-radius: 10px; padding: 20px 20px; background-color: white">
+
+        <label for="IDCAT">Asigna categorías al Contratista</label>
+        <ng-select
+          placeholder="Escoge la Categoría"
+          [options]="categories"
+          [multiple]="true"
+          id="IDCAT"
+          [(ngModel)]="contractor.categories"
+          disabled="disabled">
+        </ng-select>
+
+      </div>
+
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px">
+      <div class="col-sm">
+        <label for="poolName">Nombres del contratista</label>
+        <input type="text" class="form-control simpleinput" id="poolName" aria-describedby="poolName"
+               placeholder="Nombres del contratista" [(ngModel)]="contractor.user.names"
+               name="poolName" disabled="disabled">
+      </div>
+      <div class="col-sm">
+        <label for="poolLast">Apellidos del contratista</label>
+        <input type="text" class="form-control simpleinput" id="poolLast" aria-describedby="poolLast"
+               placeholder="Apellidos del contratista" [(ngModel)]="contractor.user.last_names"
+               name="poolLast" disabled="disabled">
+      </div>
+    </div>
+
+    <div class="generalrow" style="margin-bottom: 10px">
+
+      <div class="col-sm">
+        <label for="poolName">Número de Modalidad</label>
+        <input type="text" class="form-control simpleinput" id="id_num_mod" aria-describedby="id_num_mod"
+               placeholder="Número de Modalidad" [(ngModel)]="contractor.number_modality"
+               name="id_num_mod" disabled="disabled">
+      </div>
+      <div class="col-sm plain-arrowd">
+        <label for="poolName">Tipo de Persona</label>
+        <select [(ngModel)]="contractor.type_person" class="custom-select form-control gradblue" name="person_type"
+                id="person_type" disabled="disabled">
+          <option [value]="0">Seleccione</option>
+          <option *ngFor="let tipoPersona of typePerson" [ngValue]="tipoPersona.id">{{tipoPersona.type}}</option>
+        </select>
+
+      </div>
+
+      <div class="col-sm plain-arrowd">
+        <label for="poolName">Tipo de documento</label>
+        <select [(ngModel)]="contractor.type_indentity" class="custom-select form-control gradblue" name="person_type"
+                id="identity_type" disabled="disabled">
+          <option [value]="0">Seleccione</option>
+          <option *ngFor="let tipoPersona of typeIdentity" [ngValue]="tipoPersona.id">{{tipoPersona.type}}</option>
+        </select>
+
+      </div>
+      <div class="col-sm">
+        <label for="poolName">Número de Identificación</label>
+        <input type="text" class="form-control simpleinput" id="id_num" aria-describedby="id_num"
+               placeholder="Número de Identificación" [(ngModel)]="contractor.number_identity"
+               name="id_num" disabled="disabled">
+      </div>
+    </div>
+
+    <div class="generalrow">
+      <div class="col-sm">
+        <!-- UPLOAD FILE -->
+        <cuenca-drag-and-drop-contractor style="width: 100%" (notify)='refreshFiles($event)' [userId]="idUser"></cuenca-drag-and-drop-contractor>
+      </div>
+    </div>
+
+
+<div class="dropdown-divider"></div>
+
+  <div class="generalrow" style="">
+    <div class="col-sm">
+      <div class="generalrow">
+        <!-- Label -->
+        <div class="col-sm" *ngIf="!documents">
+          <div class="header-module">
+            <h3 class="title-module">Documentos asociados</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="generalrow">
+        <!-- Label -->
+        <div class="col-sm" *ngIf="!documents">
+          <div style="padding: 15px; text-align: center; background-color: #f1dfdd; border-radius: 25px">
+            No se han cargado archivos
+          </div>
+        </div>
+      </div>
+
+      <div class="dropdown-divider"></div>
+
+    </div>
+  </div>
+
+</div>

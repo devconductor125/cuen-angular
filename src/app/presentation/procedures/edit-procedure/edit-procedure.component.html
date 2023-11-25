@@ -1,0 +1,72 @@
+<div id="contenido" class="contents-app contentpadding">
+  <div class="title-section">
+    <div class="title-base edit"></div>
+    <div class="titlechapterAp">Editar procedimiento</div>
+  </div>
+  <div class="generalrow">
+    <div class="subtitle-item">Procedimiento a editar:{{procedure.name}}</div>
+  </div>
+
+  <div class="generalrow" *ngIf="programs">
+    <div class="subtitle-item">Selecciona los programas</div>
+    <div class="actividades-container line-inputs">
+      <div class="boxes">
+        <ul>
+          <li *ngFor="let program of programs">
+            <input type="checkbox" id="{{program.id}}" value="{{program}}" name="program" [checked]="program.selected"
+                   (change)="getProjects(program)">
+            <label for="{{program.id}}">{{program.name}}</label>
+            <div class="row" *ngIf="program.projects" style="margin-left: 50px;">
+              <div class="pool-subtitle">Selecciona los proyectos</div>
+              <ul class="sublist">
+                <li class="list-boxes " *ngFor="let project of program.projects">
+                  <input type="checkbox" id="{{'project_' + project.id}}" value="{{project}}" name="project"
+                         [checked]="project.selected"
+                         (change)="getActivities(project)">
+                  <label for="{{'project_' + project.id}}">{{project.name}}</label>
+                  <div class="row" *ngIf="project.activities" style="margin-left: 50px;">
+                    <div class="pool-subtitle">Selecciona las actividades</div>
+                    <ul class="sublist">
+                      <li class="list-boxes " *ngFor="let activity of project.activities">
+                        <input type="checkbox" id="{{'activity_' + activity.id}}" value="{{activity}}" name="activity"
+                               [checked]="activity.selected"
+                               (change)="setObjectActive(activity)">
+                        <label for="{{'activity_' + activity.id}}">{{activity.name}}</label>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="generalrow">
+      <div class="subtitle-item">Datos del Procedimiento</div>
+  </div>
+
+  <div class="generalrow">
+    <div class="main-container">
+      <label for="nombreProyecto">Nombre del Procedimiento</label>
+      <input type="text" class="form-control simpleinput" id="nombreProyecto" aria-describedby="nombreProyecto" placeholder="Nombre del Proyecto" [(ngModel)]="procedure.name"
+             name="projectName">
+    </div>
+  </div>
+
+  <div class="generalrow">
+    <div class="main-container">
+      <label for="descProyecto">Descripción del Procedimiento</label>
+      <textarea class="form-control simpleinput" id="descProyecto" rows="3" [(ngModel)]="procedure.description" placeholder="Ingresa la Descripción del Proyecto" name="projectDescription"></textarea>
+    </div>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="generalrow" >
+    <button type="button" class="mainbtn plainbluedark right margintop" style="cursor: pointer;" (click)="updateProcedure()">Guardar</button>
+  </div>
+
+</div>
